@@ -1,5 +1,6 @@
 export interface IConfig {
 	IS_PROD: boolean;
+	HOST: string;
 	PORT: number;
 	WS_PORT: number;
 	MONGO_URI: string;
