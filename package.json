@@ -1,0 +1,35 @@
+{
+  "name": "fullstack-bun",
+  "module": "src/server/index.ts",
+  "type": "module",
+  "scripts": {
+    "lint": "bunx eslint --ext .js,.jsx,.ts,.tsx . && bunx prettier --check .",
+    "fix": "bunx eslint --fix --ext .js,.jsx,.ts,.tsx . && bunx prettier --write .",
+    "dbinit": "docker compose -f \".fullstack-bun-dev-container/docker-compose.yml\" up -d --build",
+    "build": "bun scripts/build.ts",
+    "dev": "bun --hot src/server/index.ts",
+    "start": "bun src/server/index.ts"
+  },
+  "devDependencies": {
+    "@types/react": "^18.2.22",
+    "@types/react-dom": "^18.2.7",
+    "@typescript-eslint/eslint-plugin": "^6.7.2",
+    "@typescript-eslint/parser": "^6.7.2",
+    "bun-types": "latest",
+    "eslint": "^8.49.0",
+    "eslint-config-prettier": "^9.0.0",
+    "eslint-plugin-prettier": "^5.0.0",
+    "prettier": "^3.0.3",
+    "typescript": "^5.2.2"
+  },
+  "peerDependencies": {
+    "typescript": "^5.2.2"
+  },
+  "dependencies": {
+    "hono": "^3.6.3",
+    "mongodb": "^6.1.0",
+    "mongoose": "^7.5.2",
+    "react": "^18.2.0",
+    "react-dom": "^18.2.0"
+  }
+}

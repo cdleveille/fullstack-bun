@@ -1,0 +1,15 @@
+{
+  "version": "2.0.0",
+  "tasks": [
+    {
+      "label": "build",
+      "command": "bun run build",
+      "type": "shell",
+      "args": [],
+      "presentation": {
+        "reveal": "silent"
+      },
+      "group": "build"
+    }
+  ]
+}

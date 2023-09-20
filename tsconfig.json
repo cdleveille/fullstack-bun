@@ -1,0 +1,31 @@
+{
+  "compilerOptions": {
+    "lib": ["esnext"],
+    "module": "esnext",
+    "target": "esnext",
+    "types": ["bun-types"],
+    "moduleResolution": "bundler",
+    "moduleDetection": "force",
+    "noEmit": true,
+    "composite": true,
+    "allowImportingTsExtensions": true,
+    "allowJs": true,
+    "esModuleInterop": true,
+    "allowSyntheticDefaultImports": true,
+    "forceConsistentCasingInFileNames": true,
+    "downlevelIteration": true,
+    "skipLibCheck": true,
+    "jsx": "react-jsx",
+    "baseUrl": ".",
+    "paths": {
+      "@components": ["src/client/components"],
+      "@controllers": ["src/server/controllers"],
+      "@helpers": ["src/server/helpers"],
+      "@models": ["src/server/models"],
+      "@plugins": ["src/server/plugins"],
+      "@scripts": ["scripts"],
+      "@services": ["src/server/services"],
+      "@types": ["src/server/types"]
+    }
+  }
+}

@@ -1,0 +1,22 @@
+version: "3.6"
+
+services:
+  fullstack-bun-mongodb-local:
+    image: mongo:latest
+    container_name: fullstack-bun-mongodb-local
+    command: mongod --port 27017
+    ports:
+      - 27017:27017
+    expose:
+      - 27017
+    volumes:
+      - mongo-data:/data/db
+    networks:
+      - mongo_net
+
+volumes:
+  mongo-data:
+
+networks:
+  mongo_net:
+    driver: bridge

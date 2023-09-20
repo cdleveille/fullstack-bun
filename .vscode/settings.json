@@ -1,0 +1,23 @@
+{
+  "editor.detectIndentation": false,
+  "editor.tabSize": 4,
+  "editor.insertSpaces": false,
+  "editor.defaultFormatter": "esbenp.prettier-vscode",
+  "editor.formatOnPaste": true,
+  "editor.formatOnSave": true,
+  "editor.codeActionsOnSave": {
+    "source.fixAll.eslint": true
+  },
+  "files.exclude": {
+    "**/.git": true,
+    "**/.svn": true,
+    "**/.hg": true,
+    "**/CVS": true,
+    "**/.DS_Store": true,
+    "node_modules": true
+  },
+  "eslint.validate": ["javascript", "typescript"],
+  "triggerTaskOnSave.tasks": {
+    "build": ["src/client/**/*", "scripts/build.ts", "tsconfig.json"]
+  }
+}
