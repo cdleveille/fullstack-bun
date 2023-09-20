@@ -7,6 +7,7 @@ export const build = async () => {
 	const OUT_DIR = "public";
 
 	if (!fs.existsSync(OUT_DIR)) fs.mkdirSync(OUT_DIR);
+	else fs.readdirSync(OUT_DIR).forEach(f => fs.rmSync(`${OUT_DIR}/${f}`, { recursive: true }));
 
 	const copyFiles = async (filenames: string[]) => {
 		const ops = filenames.reduce((acc, filename) => {

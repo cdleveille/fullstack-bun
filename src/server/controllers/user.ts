@@ -5,8 +5,12 @@ import { User } from "@models";
 
 export const initUserRoutes = (app: Hono) => {
 	app.get("/user", async c => {
-		const users = await User.find({}, { password: 0 });
-		return successResponse(c, users);
+		try {
+			const users = await User.find({}, { password: 0 });
+			return successResponse(c, users);
+		} catch (error) {
+			return errorResponse(c, error);
+		}
 	});
 
 	app.get("/user/:id", async c => {

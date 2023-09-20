@@ -23,12 +23,9 @@ Bun.serve({
 		return new Response("WebSocket upgrade failed", { status: 500 });
 	},
 	websocket: {
-		async open(ws) {
-			ws.subscribe("ws");
-		},
 		async message(ws, message) {
 			log.info(message);
-			ws.send("Hello from server!");
+			ws.send("hello from server!");
 		}
 	}
 });
