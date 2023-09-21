@@ -1,27 +1,18 @@
 import { Hono } from "hono";
-import { Server, Socket } from "socket.io";
 
 import { initRoutes } from "@controllers";
 import { Config } from "@helpers";
-import { initPlugins } from "@plugins";
+import { initMiddleware } from "@middleware";
 import { buildClient } from "@scripts";
-import { connectToDatabase, log } from "@services";
+import { connectToDatabase, initSocket, log } from "@services";
 
 await Promise.all([buildClient(), connectToDatabase()]);
 
 log.info(`Starting server in ${Config.IS_PROD ? "production" : "development"} mode...`);
 
 const app = new Hono();
-initPlugins(app);
+initMiddleware(app);
 initRoutes(app);
-
-// @ts-ignore
-const io = new Server(Config.WS_PORT, { cors: { origin: `${Config.HOST}:${Config.PORT}` } });
-io.on("connect", (socket: Socket) => {
-	socket.on("hello", () => {
-		log.info("hello from client!");
-		socket.emit("hello");
-	});
-});
+initSocket();
 
 export default app;

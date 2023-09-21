@@ -1,8 +1,8 @@
 import { Hono } from "hono";
 
-import { useCors, useSecureHeaders } from "@plugins";
+import { useCors, useSecureHeaders } from "@middleware";
 
-export const initPlugins = (app: Hono) => {
+export const initMiddleware = (app: Hono) => {
 	useCors(app);
 	useSecureHeaders(app);
 };

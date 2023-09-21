@@ -1,11 +1,14 @@
 {
   "name": "fullstack-bun",
+  "description": "Monorepo template using Bun and TypeScript.",
+  "author": "Chris Leveille <cdleveille@gmail.com",
+  "license": "MIT",
   "module": "src/server/index.ts",
   "type": "module",
   "scripts": {
     "lint": "bunx eslint --ext .js,.jsx,.ts,.tsx . && bunx prettier --check .",
     "fix": "bunx eslint --fix --ext .js,.jsx,.ts,.tsx . && bunx prettier --write .",
-    "dbinit": "docker compose -f \".fullstack-bun-dev-container/docker-compose.yml\" up -d --build",
+    "db:up": "docker compose -f \".fullstack-bun-dev-container/docker-compose.yml\" up -d --build",
     "build": "bun scripts/build.ts",
     "dev": "bun --hot src/server/index.ts",
     "start": "bun src/server/index.ts"

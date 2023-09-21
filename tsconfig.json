@@ -22,7 +22,7 @@
       "@controllers": ["src/server/controllers"],
       "@helpers": ["src/server/helpers"],
       "@models": ["src/server/models"],
-      "@plugins": ["src/server/plugins"],
+      "@middleware": ["src/server/middleware"],
       "@scripts": ["scripts"],
       "@services": ["src/server/services"],
       "@types": ["src/server/types"]
