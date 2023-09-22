@@ -14,16 +14,16 @@ const registerServiceWorker = async () => {
 
 (async () => {
 	const res = await fetch("/config");
-	const { HOST, WS_PORT } = (await res.json()) as IConfig;
+	const { IS_PROD, HOST, WS_PORT } = (await res.json()) as IConfig;
 	const socket = io(`${HOST}:${WS_PORT}`);
 	socket.on("hello", () => console.log("socket.io: hello from server!"));
 	socket.emit("hello");
-	await registerServiceWorker();
+	if (IS_PROD) await registerServiceWorker();
 })();
 
 const root = ReactDOM.createRoot(document.getElementById("root"));
 root.render(
 	<React.StrictMode>
-		<Header text="hello from bun!!!" />
+		<Header text="hello from bun!" />
 	</React.StrictMode>
 );
