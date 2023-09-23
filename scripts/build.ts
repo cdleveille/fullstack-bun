@@ -9,8 +9,7 @@ export const buildClient = async () => {
 		minify: Config.IS_PROD,
 		root: SRC_DIR,
 		sourcemap: Config.IS_PROD ? "none" : "inline",
-		target: "browser",
-		plugins: []
+		target: "browser"
 	});
 };
 

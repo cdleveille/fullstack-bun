@@ -1,4 +1,5 @@
 import { Hono } from "hono";
+import { serveStatic } from "hono/bun";
 
 import { initRoutes } from "@controllers";
 import { Config } from "@helpers";
@@ -13,6 +14,7 @@ log.info(`Starting server in ${Config.IS_PROD ? "production" : "development"} mo
 const app = new Hono();
 initMiddleware(app);
 initRoutes(app);
+app.use("/*", serveStatic({ root: "public" }));
 initSocket();
 
 export default app;
