@@ -20,6 +20,9 @@ RUN apt-get update -qq && \
 COPY --link bun.lockb package.json ./
 COPY --link . .
 
+RUN bun i --frozen-lockfile && \
+    bun run build
+
 # Install production dependencies only
 RUN rm -rf node_modules && \
     bun i --frozen-lockfile --production

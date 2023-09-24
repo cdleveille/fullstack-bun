@@ -5,6 +5,7 @@
       "type": "bun",
       "request": "launch",
       "name": "debug",
+      "preLaunchTask": "build",
 
       // The path to a JavaScript or TypeScript file to run.
       "program": "src/server/index.ts",

@@ -14,6 +14,7 @@
     "start": "bun src/server/index.ts"
   },
   "devDependencies": {
+    "@types/minify": "^9.1.1",
     "@types/react": "^18.2.22",
     "@types/react-dom": "^18.2.7",
     "@typescript-eslint/eslint-plugin": "^6.7.2",
@@ -22,7 +23,9 @@
     "eslint": "^8.49.0",
     "eslint-config-prettier": "^9.0.0",
     "eslint-plugin-prettier": "^5.0.0",
+    "minify": "^10.5.2",
     "prettier": "^3.0.3",
+    "rimraf": "^5.0.1",
     "typescript": "^5.2.2",
     "workbox-routing": "^7.0.0",
     "workbox-strategies": "^7.0.0"
@@ -36,7 +39,6 @@
     "mongoose": "^7.5.2",
     "react": "^18.2.0",
     "react-dom": "^18.2.0",
-    "rimraf": "^5.0.1",
     "socket.io": "^4.7.2",
     "socket.io-client": "^4.7.2"
   }

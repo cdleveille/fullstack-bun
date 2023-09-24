@@ -24,7 +24,6 @@
       "@helpers": ["src/server/helpers"],
       "@middleware": ["src/server/middleware"],
       "@models": ["src/server/models"],
-      "@scripts": ["scripts"],
       "@services": ["src/server/services"],
       "@types": ["src/server/types"]
     }
