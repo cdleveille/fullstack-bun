@@ -23,7 +23,9 @@ const registerServiceWorker = async () => {
 	if (IS_PROD) await registerServiceWorker();
 })();
 
-const root = ReactDOM.createRoot(document.getElementById("root"));
+const rootDiv = document.createElement("div");
+document.body.appendChild(rootDiv);
+const root = ReactDOM.createRoot(rootDiv);
 root.render(
 	<React.StrictMode>
 		<Hello width={200} height={200} />

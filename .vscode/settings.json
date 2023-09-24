@@ -18,6 +18,6 @@
   },
   "eslint.validate": ["javascript", "typescript"],
   "triggerTaskOnSave.tasks": {
-    "build": ["src/client/**/*", "scripts/build.ts", "tsconfig.json"]
+    "build": ["src/client/**/*", "scripts/build.ts", "src/server/helpers/build.ts", "tsconfig.json", ".env"]
   }
 }

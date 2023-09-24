@@ -1,52 +1,74 @@
-import { BuildConfig } from "bun";
+import { BuildArtifact, BuildConfig } from "bun";
 import fs from "fs";
 import { rimraf } from "rimraf";
 
 import { Config } from "@helpers";
+import { log } from "@services";
 
 export const buildClient = async () => {
-	const SRC_DIR = "src/client";
-	const OUT_DIR = "public";
+	try {
+		const ROOT_DIR = "src/client";
+		const SRC_DIR = "src/client";
+		const OUT_DIR = "public";
 
-	const copyFiles = async (filenames: string[]) => {
-		const ops = filenames.reduce((acc, filename) => {
-			acc.push(Bun.write(`${OUT_DIR}/${filename}`, Bun.file(`${SRC_DIR}/${filename}`)));
-			return acc;
-		}, [] as Promise<number>[]);
-		await Promise.all(ops);
-	};
+		const filesToCopy = ["index.html"];
 
-	await rimraf(OUT_DIR);
-	fs.mkdirSync(OUT_DIR);
+		await rimraf(OUT_DIR);
+		fs.mkdirSync(OUT_DIR);
 
-	const buildCommon = {
-		root: SRC_DIR,
-		outdir: OUT_DIR,
-		minify: Config.IS_PROD,
-		target: "browser",
-		sourcemap: Config.IS_PROD ? "none" : "inline"
-	} as Partial<BuildConfig>;
+		const buildCommon = {
+			root: ROOT_DIR,
+			outdir: OUT_DIR,
+			minify: Config.IS_PROD,
+			target: "browser",
+			sourcemap: Config.IS_PROD ? "none" : "inline"
+		} as Partial<BuildConfig>;
 
-	const buildMain = Bun.build({
-		...buildCommon,
-		entrypoints: [`${SRC_DIR}/main.tsx`],
-		naming: {
-			entry: "[dir]/[name]~[hash].[ext]",
-			asset: `${SRC_DIR}/assets/[name].[ext]`
-		}
-	});
+		const buildMain = Bun.build({
+			...buildCommon,
+			entrypoints: [`${SRC_DIR}/main.tsx`],
+			naming: {
+				entry: `${ROOT_DIR}/[dir]/[name]~[hash].[ext]`,
+				asset: "[dir]/[name].[ext]"
+			}
+		});
 
-	const buildSw = Bun.build({
-		...buildCommon,
-		entrypoints: [`${SRC_DIR}/sw.ts`]
-	});
+		const buildSw = Bun.build({
+			...buildCommon,
+			entrypoints: [`${SRC_DIR}/sw.ts`]
+		});
 
-	const filesToCopy = ["index.html"];
+		const [{ outputs }] = await Promise.all([buildMain, buildSw, copyFiles(SRC_DIR, OUT_DIR, filesToCopy)]);
+		await postBuildOperations(outputs, OUT_DIR);
+	} catch (error) {
+		log.error(error);
+		throw error;
+	}
+};
 
-	const [build] = await Promise.all([buildMain, buildSw, copyFiles(filesToCopy)]);
+const copyFiles = async (srcDir: string, outDir: string, filenames: string[]) => {
+	const ops = filenames.reduce((acc, filename) => {
+		acc.push(Bun.write(`${outDir}/${filename}`, Bun.file(`${srcDir}/${filename}`)));
+		return acc;
+	}, [] as Promise<number>[]);
+	await Promise.all(ops);
+};
 
-	const jsHash = build.outputs.find(output => output.path.endsWith(".js"))?.hash;
-	const indexHtmlContents = await Bun.file(`${OUT_DIR}/index.html`).text();
-	const indexHtmlContentsWithHashes = indexHtmlContents.replace("{js-hash}", jsHash);
-	await Bun.write(`${OUT_DIR}/index.html`, indexHtmlContentsWithHashes);
+const postBuildOperations = async (outputs: BuildArtifact[], outDir: string) => {
+	const jsFile = outputs.find(output => output.path.endsWith(".js"));
+	const jsFilePathSplit = jsFile.path.split("/");
+	const jsFileName = jsFilePathSplit[jsFilePathSplit.length - 1];
+
+	const cssFile = outputs.find(output => output.path.endsWith(".css"));
+	const cssFilePathSplit = cssFile.path.split("/");
+	const cssFileName = cssFilePathSplit[cssFilePathSplit.length - 1];
+
+	const indexHtmlContents = await Bun.file(`${outDir}/index.html`).text();
+	const indexHtmlContentsWithHashes = indexHtmlContents.replace("{js}", jsFileName).replace("{css}", cssFileName);
+
+	const writeIndexHtml = Bun.write(`${outDir}/index.html`, indexHtmlContentsWithHashes);
+	const copyJsFileToRootDir = Bun.write(`${outDir}/${jsFileName}`, Bun.file(jsFile.path));
+
+	await Promise.all([writeIndexHtml, copyJsFileToRootDir]);
+	await rimraf(`${outDir}/src`);
 };

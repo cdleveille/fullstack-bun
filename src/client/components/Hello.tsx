@@ -10,8 +10,8 @@ interface IHelloProps {
 export const Hello = ({ width, height }: IHelloProps) => {
 	return (
 		<div className="hello centered">
-			<Header text="hello from bun!!!" />
-			<img src={hello} width={width} height={height}></img>
+			<Header text="hello&nbsp;from&nbsp;bun!" />
+			<img src={hello} width={width} height={height} alt="hello"></img>
 		</div>
 	);
 };
