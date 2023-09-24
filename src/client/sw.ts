@@ -19,11 +19,12 @@ const trimCache = (url: URL) => {
 	const urlSuffix = urlSuffixSplit[urlSuffixSplit.length - 1];
 	(async () => {
 		const cache = await caches.open(cacheName);
-		(await cache.keys()).forEach(async request => {
+		const requests = await cache.keys();
+		for (const request of requests) {
 			const cacheHash = request.url.split("~")[1];
 			if (request.url.startsWith(urlPrefix) && request.url.endsWith(urlSuffix) && hash !== cacheHash)
 				return await cache.delete(request);
-		});
+		}
 	})();
 	return true;
 };
