@@ -5,6 +5,9 @@ import { CacheFirst, NetworkFirst } from "workbox-strategies";
 
 declare const self: ServiceWorkerGlobalScope;
 
+// @ts-ignore
+self.__WB_DISABLE_DEV_LOGS = true;
+
 const cacheName = "sw-cache";
 
 const isCacheFirstRequest = (filename: string) => filename.includes("~");

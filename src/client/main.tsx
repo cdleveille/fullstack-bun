@@ -1,6 +1,7 @@
 /// <reference lib="dom" />
 
 import "./style.css";
+import "./index.html";
 
 import React from "react";
 import ReactDOM from "react-dom/client";
