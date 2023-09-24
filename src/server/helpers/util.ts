@@ -19,3 +19,5 @@ export const successResponse = (c: Context, data: any, code?: number) => c.json(
 
 export const errorResponse = (c: Context, error: IError) =>
 	c.text(error?.data ?? "Internal server error.", error?.code ?? 500);
+
+export const isCacheFirstRequest = (filename: string) => filename.includes("~");

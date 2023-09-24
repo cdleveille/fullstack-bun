@@ -1,10 +1,12 @@
 /// <reference lib="dom" />
 
+import "./style.css";
+
 import React from "react";
 import ReactDOM from "react-dom/client";
 import { io } from "socket.io-client";
 
-import { Header } from "@components";
+import { Hello } from "@components";
 import { IConfig } from "@types";
 
 const registerServiceWorker = async () => {
@@ -24,6 +26,6 @@ const registerServiceWorker = async () => {
 const root = ReactDOM.createRoot(document.getElementById("root"));
 root.render(
 	<React.StrictMode>
-		<Header text="hello from bun!" />
+		<Hello width={200} height={200} />
 	</React.StrictMode>
 );
