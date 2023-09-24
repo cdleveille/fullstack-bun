@@ -1,6 +1,6 @@
 {
   "name": "fullstack-bun",
-  "description": "Monorepo template using Bun and TypeScript.",
+  "description": "Bun/TypeScript monorepo template.",
   "author": "Chris Leveille <cdleveille@gmail.com",
   "license": "MIT",
   "module": "src/server/index.ts",

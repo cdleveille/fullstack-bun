@@ -64,9 +64,9 @@ const postBuildOperations = async (outputs: BuildArtifact[], outDir: string) => 
 	const cssFileName = cssFilePathSplit[cssFilePathSplit.length - 1];
 
 	const indexHtmlContents = await Bun.file(`${outDir}/index.html`).text();
-	const indexHtmlContentsWithHashes = indexHtmlContents.replace("{js}", jsFileName).replace("{css}", cssFileName);
+	const indexHtmlContentsReplaced = indexHtmlContents.replace("{js}", jsFileName).replace("{css}", cssFileName);
 
-	const writeIndexHtml = Bun.write(`${outDir}/index.html`, indexHtmlContentsWithHashes);
+	const writeIndexHtml = Bun.write(`${outDir}/index.html`, indexHtmlContentsReplaced);
 	const copyJsFileToRootDir = Bun.write(`${outDir}/${jsFileName}`, Bun.file(jsFile.path));
 
 	await Promise.all([writeIndexHtml, copyJsFileToRootDir]);

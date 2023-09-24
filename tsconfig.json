@@ -18,11 +18,12 @@
     "jsx": "react-jsx",
     "baseUrl": ".",
     "paths": {
+      "@assets": ["src/client/assets"],
       "@components": ["src/client/components"],
       "@controllers": ["src/server/controllers"],
       "@helpers": ["src/server/helpers"],
-      "@models": ["src/server/models"],
       "@middleware": ["src/server/middleware"],
+      "@models": ["src/server/models"],
       "@scripts": ["scripts"],
       "@services": ["src/server/services"],
       "@types": ["src/server/types"]
