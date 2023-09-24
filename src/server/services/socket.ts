@@ -4,8 +4,10 @@ import { Config } from "@helpers";
 import { log } from "@services";
 
 export const initSocket = () => {
-	// @ts-ignore
-	const io = new Server(Config.WS_PORT, { cors: { origin: `${Config.HOST}:${Config.PORT}` } });
+	const io = new Server(Config.WS_PORT, {
+		// @ts-ignore
+		cors: { origin: Config.IS_PROD ? Config.HOST : `${Config.HOST}:${Config.PORT}` }
+	});
 	io.on("connect", socket => {
 		socket.on("hello", () => {
 			log.info("socket.io: hello from client!");

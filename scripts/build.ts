@@ -3,8 +3,8 @@ import fs from "fs";
 import { minify } from "minify";
 import { rimraf } from "rimraf";
 
-import { Config } from "@helpers";
-import { log } from "@services";
+const BUN_ENV = Bun.argv.find(arg => arg.startsWith("BUN_ENV"))?.split("=")[1];
+const IS_PROD = BUN_ENV === "production" || Bun.env.BUN_ENV === "production";
 
 const copyFiles = async (srcDir: string, outDir: string, filenames: string[]) => {
 	const ops = filenames.reduce((acc, filename) => {
@@ -32,7 +32,7 @@ const postBuildOperations = async (outputs: BuildArtifact[], outDir: string) => 
 	await Promise.all([writeIndexHtml, copyJsFileToRootDir]);
 	await rimraf(`${outDir}/src`);
 
-	if (Config.IS_PROD) {
+	if (IS_PROD) {
 		const [minifiedHtml, minifiedCss] = await Promise.all([minify(`${outDir}/index.html`), minify(cssFile.path)]);
 		await Promise.all([Bun.write(`${outDir}/index.html`, minifiedHtml), Bun.write(cssFile.path, minifiedCss)]);
 	}
@@ -51,9 +51,9 @@ try {
 	const buildCommon = {
 		root: ROOT_DIR,
 		outdir: OUT_DIR,
-		minify: Config.IS_PROD,
+		minify: IS_PROD,
 		target: "browser",
-		sourcemap: Config.IS_PROD ? "none" : "inline"
+		sourcemap: IS_PROD ? "none" : "inline"
 	} as Partial<BuildConfig>;
 
 	const buildMain = Bun.build({
@@ -73,6 +73,6 @@ try {
 	const [{ outputs }] = await Promise.all([buildMain, buildSw, copyFiles(SRC_DIR, OUT_DIR, filesToCopy)]);
 	await postBuildOperations(outputs, OUT_DIR);
 } catch (error) {
-	log.error(error);
+	console.error(error);
 	throw error;
 }

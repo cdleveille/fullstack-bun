@@ -10,6 +10,7 @@
     "fix": "bunx eslint --fix --ext .js,.jsx,.ts,.tsx . && bunx prettier --write .",
     "db:up": "docker compose -f \".fullstack-bun-dev-container/docker-compose.yml\" up -d --build",
     "build": "bun scripts/build.ts",
+    "build:prod": "bun scripts/build.ts BUN_ENV=production",
     "dev": "bun --hot src/server/index.ts",
     "start": "bun src/server/index.ts"
   },

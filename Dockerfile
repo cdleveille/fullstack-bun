@@ -21,7 +21,7 @@ COPY --link bun.lockb package.json ./
 COPY --link . .
 
 RUN bun i --frozen-lockfile && \
-    bun run build
+    bun run build:prod
 
 # Install production dependencies only
 RUN rm -rf node_modules && \
