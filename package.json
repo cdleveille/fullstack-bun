@@ -23,7 +23,6 @@
     "bun-types": "latest",
     "eslint": "^8.49.0",
     "eslint-config-prettier": "^9.0.0",
-    "eslint-plugin-prettier": "^5.0.0",
     "minify": "^10.5.2",
     "prettier": "^3.0.3",
     "rimraf": "^5.0.1",
@@ -35,7 +34,7 @@
     "typescript": "^5.2.2"
   },
   "dependencies": {
-    "hono": "^3.7.1",
+    "hono": "^3.7.2",
     "mongodb": "^6.1.0",
     "mongoose": "^7.5.2",
     "react": "^18.2.0",
