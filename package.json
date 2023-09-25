@@ -6,6 +6,7 @@
   "module": "src/server/index.ts",
   "type": "module",
   "scripts": {
+    "prepare": "husky install",
     "lint": "bunx eslint --ext .js,.jsx,.ts,.tsx . && bunx prettier --check .",
     "fix": "bunx eslint --fix --ext .js,.jsx,.ts,.tsx . && bunx prettier --write .",
     "db:up": "docker compose -f \".fullstack-bun-dev-container/docker-compose.yml\" up -d --build",
@@ -23,6 +24,7 @@
     "bun-types": "latest",
     "eslint": "^8.49.0",
     "eslint-config-prettier": "^9.0.0",
+    "husky": "^8.0.3",
     "minify": "^10.5.2",
     "prettier": "^3.0.3",
     "rimraf": "^5.0.1",

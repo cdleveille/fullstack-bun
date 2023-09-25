@@ -16,5 +16,5 @@ jobs:
         with:
           version: 1.0.3
 
-      - run: bun i --frozen-lockfile
+      - run: bun i --ignore-scripts --frozen-lockfile
       - run: bun lint
