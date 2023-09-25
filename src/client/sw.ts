@@ -13,17 +13,17 @@ const cacheName = "sw-cache";
 
 const cacheFirstChar = "~";
 
+const urlsToPrecache = ["/", "/config"];
+
 const isCacheFirstRequest = (filename: string) => filename.includes(cacheFirstChar);
 
 self.addEventListener("install", async () => {
 	await self.skipWaiting();
-	(async () => {
-		const cache = await caches.open(cacheName);
-		const toFetch = [...manifest.map(({ url }) => fetch(url)), fetch("/"), fetch("/config")];
-		const responses = await Promise.all(toFetch);
-		const toPrecache = responses.map(res => cache.put(res.url, res.clone()));
-		await Promise.all(toPrecache);
-	})();
+	const cache = await caches.open(cacheName);
+	const toFetch = [...manifest.map(({ url }) => fetch(url)), ...urlsToPrecache.map(url => fetch(url))];
+	const responses = await Promise.all(toFetch);
+	const toPrecache = responses.map(res => cache.put(res.url, res.clone()));
+	await Promise.all(toPrecache);
 });
 
 const trimCache = (url: URL) => {
