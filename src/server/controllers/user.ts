@@ -13,10 +13,10 @@ export const initUserRoutes = (app: Hono) => {
 		}
 	});
 
-	app.get("/user/:id", async c => {
+	app.get("/user/:username", async c => {
 		try {
-			const id = c.req.param("id");
-			const user = await User.findOne({ id }, { password: 0 });
+			const username = c.req.param("username");
+			const user = await User.findOne({ username }, { password: 0 });
 			if (!user) throw { code: 404, message: "User not found." };
 			return successResponse(c, user);
 		} catch (error) {

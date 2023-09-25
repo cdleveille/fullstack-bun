@@ -10,7 +10,7 @@
     "lint": "bunx eslint --ext .js,.jsx,.ts,.tsx . && bunx prettier --check .",
     "fix": "bunx eslint --fix --ext .js,.jsx,.ts,.tsx . && bunx prettier --write .",
     "db:up": "docker compose -f \".fullstack-bun-dev-container/docker-compose.yml\" up -d --build",
-    "build": "bun scripts/build.ts",
+    "build": "bun scripts/build.ts && workbox injectManifest workbox-config.json",
     "build:prod": "bun scripts/build.ts BUN_ENV=production",
     "dev": "bun --hot src/server/index.ts",
     "start": "bun src/server/index.ts"
@@ -29,6 +29,7 @@
     "prettier": "^3.0.3",
     "rimraf": "^5.0.1",
     "typescript": "^5.2.2",
+    "workbox-cli": "^7.0.0",
     "workbox-routing": "^7.0.0",
     "workbox-strategies": "^7.0.0"
   },
@@ -37,7 +38,6 @@
   },
   "dependencies": {
     "hono": "^3.7.2",
-    "mongodb": "^6.1.0",
     "mongoose": "^7.5.2",
     "react": "^18.2.0",
     "react-dom": "^18.2.0",

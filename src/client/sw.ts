@@ -3,7 +3,9 @@
 import { registerRoute } from "workbox-routing";
 import { CacheFirst, NetworkFirst } from "workbox-strategies";
 
-declare const self: ServiceWorkerGlobalScope & { __WB_DISABLE_DEV_LOGS: boolean };
+declare const self: ServiceWorkerGlobalScope & { __WB_DISABLE_DEV_LOGS: boolean; __WB_MANIFEST: { url: string }[] };
+
+const manifest = self.__WB_MANIFEST;
 
 self.__WB_DISABLE_DEV_LOGS = true;
 
@@ -13,7 +15,16 @@ const cacheFirstChar = "~";
 
 const isCacheFirstRequest = (filename: string) => filename.includes(cacheFirstChar);
 
-self.addEventListener("install", async () => await self.skipWaiting());
+self.addEventListener("install", async () => {
+	await self.skipWaiting();
+	(async () => {
+		const cache = await caches.open(cacheName);
+		const toFetch = [...manifest.map(({ url }) => fetch(url)), fetch("/"), fetch("/config")];
+		const responses = await Promise.all(toFetch);
+		const toPrecache = responses.map(res => cache.put(res.url, res.clone()));
+		await Promise.all(toPrecache);
+	})();
+});
 
 const trimCache = (url: URL) => {
 	if (!isCacheFirstRequest(url.href)) return false;

@@ -17,9 +17,9 @@ try {
 	const buildCommon = {
 		root: ROOT_DIR,
 		outdir: OUT_DIR,
-		minify: IS_PROD,
 		target: "browser",
-		sourcemap: IS_PROD ? "none" : "inline"
+		sourcemap: IS_PROD ? "none" : "inline",
+		minify: IS_PROD
 	} as Partial<BuildConfig>;
 
 	const buildMain = Bun.build({
@@ -42,10 +42,12 @@ try {
 	const [{ outputs }] = await Promise.all([buildMain, buildSw]);
 
 	const jsFile = outputs.find(output => output.path.endsWith(".js"));
+	if (!jsFile) throw "no .js file found in build output";
 	const jsFilePathSplit = jsFile.path.split("/");
 	const jsFileName = jsFilePathSplit[jsFilePathSplit.length - 1];
 
 	const cssFile = outputs.find(output => output.path.endsWith(".css"));
+	if (!cssFile) throw "no .css file found in build output";
 	const cssFilePathSplit = cssFile.path.split("/");
 	const cssFileName = cssFilePathSplit[cssFilePathSplit.length - 1];
 
