@@ -15,9 +15,11 @@ export const BaseSchema = new Schema<IBase>({
 	}
 });
 
-export const successResponse = (c: Context, data: any, code?: number) => c.json(data, code ?? 200);
+export const successResponse = (c: Context, data: unknown, code?: number) => c.json(data, code ?? 200);
 
-export const errorResponse = (c: Context, error: IError) =>
-	c.text(error?.data ?? "Internal server error.", error?.code ?? 500);
+export const errorResponse = (c: Context, error: IError | unknown) => {
+	const e = error as IError;
+	return c.text(e?.message ?? "Internal server error.", e?.code ?? 500);
+};
 
 export const isCacheFirstRequest = (filename: string) => filename.includes("~");

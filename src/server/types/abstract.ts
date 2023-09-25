@@ -18,5 +18,5 @@ export interface IUser {
 
 export interface IError {
 	code: number;
-	data: any;
+	message: string;
 }

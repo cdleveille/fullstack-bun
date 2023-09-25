@@ -9,6 +9,7 @@
     "noEmit": true,
     "composite": true,
     "allowImportingTsExtensions": true,
+    "resolveJsonModule": true,
     "allowJs": true,
     "esModuleInterop": true,
     "allowSyntheticDefaultImports": true,
@@ -16,6 +17,7 @@
     "downlevelIteration": true,
     "skipLibCheck": true,
     "jsx": "react-jsx",
+    "strict": true,
     "baseUrl": ".",
     "paths": {
       "@assets": ["src/client/assets"],
@@ -27,5 +29,6 @@
       "@services": ["src/server/services"],
       "@types": ["src/server/types"]
     }
-  }
+  },
+  "include": ["./**/*.ts", "./**/*.tsx", "./**/*.json"]
 }

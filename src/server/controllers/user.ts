@@ -17,7 +17,7 @@ export const initUserRoutes = (app: Hono) => {
 		try {
 			const id = c.req.param("id");
 			const user = await User.findOne({ id }, { password: 0 });
-			if (!user) throw { code: 404, data: "User not found." };
+			if (!user) throw { code: 404, message: "User not found." };
 			return successResponse(c, user);
 		} catch (error) {
 			return errorResponse(c, error);

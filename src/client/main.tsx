@@ -1,6 +1,5 @@
 /// <reference lib="dom" />
 
-//@ts-ignore
 import "./manifest.json";
 import "./index.html";
 import "./style.css";
