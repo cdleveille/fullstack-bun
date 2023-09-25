@@ -1,7 +1,11 @@
 /// <reference lib="dom" />
 
-import "./style.css";
+//@ts-ignore
+import "./manifest.json";
 import "./index.html";
+import "./style.css";
+import "./favicon.ico";
+import "./browserconfig.xml";
 
 import React from "react";
 import ReactDOM from "react-dom/client";

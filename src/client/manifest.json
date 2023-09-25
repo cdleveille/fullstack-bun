@@ -1,0 +1,41 @@
+{
+  "name": "hello from bun!",
+  "short_name": "hello!",
+  "description": "👋",
+  "id": "/",
+  "start_url": "/",
+  "display": "fullscreen",
+  "orientation": "portrait",
+  "background_color": "#333333",
+  "theme_color": "#333333",
+  "dir": "ltr",
+  "categories": [],
+  "lang": "en-US",
+  "scope": "/",
+  "icons": [
+    {
+      "src": "assets/icon_512x512.png",
+      "sizes": "512x512",
+      "type": "image/png",
+      "purpose": "any"
+    },
+    {
+      "src": "assets/icon_512x512_maskable.png",
+      "sizes": "512x512",
+      "type": "image/png",
+      "purpose": "maskable"
+    },
+    {
+      "src": "assets/icon_192x192.png",
+      "sizes": "192x192",
+      "type": "image/png",
+      "purpose": "any"
+    },
+    {
+      "src": "assets/icon_192x192_maskable.png",
+      "sizes": "192x192",
+      "type": "image/png",
+      "purpose": "maskable"
+    }
+  ]
+}

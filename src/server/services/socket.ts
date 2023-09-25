@@ -6,7 +6,7 @@ import { log } from "@services";
 export const initSocket = () => {
 	const io = new Server(Config.WS_PORT, {
 		// @ts-ignore
-		cors: { origin: Config.IS_PROD ? Config.HOST : `${Config.HOST}:${Config.PORT}` }
+		cors: { origin: [Config.HOST, `${Config.HOST}:${Config.PORT}`] }
 	});
 	io.on("connect", socket => {
 		socket.on("hello", () => {

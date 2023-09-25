@@ -28,6 +28,9 @@ try {
 		naming: {
 			entry: `${ROOT_DIR}/[dir]/[name]~[hash].[ext]`,
 			asset: "[dir]/[name].[ext]"
+		},
+		loader: {
+			".json": "file"
 		}
 	});
 
