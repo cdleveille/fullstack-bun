@@ -19,6 +19,7 @@ const isCacheFirstRequest = (filename: string) => filename.includes(cacheFirstCh
 
 self.addEventListener("install", async () => {
 	await self.skipWaiting();
+	if (!manifest) return;
 	const cache = await caches.open(cacheName);
 	const toFetch = [...manifest.map(({ url }) => fetch(url)), ...urlsToPrecache.map(url => fetch(url))];
 	const responses = await Promise.all(toFetch);
