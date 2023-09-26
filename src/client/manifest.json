@@ -4,7 +4,7 @@
   "description": "👋",
   "id": "/",
   "start_url": "/",
-  "display": "fullscreen",
+  "display": "minimal-ui",
   "orientation": "portrait",
   "background_color": "#333333",
   "theme_color": "#333333",

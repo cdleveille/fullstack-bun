@@ -9,7 +9,7 @@ const manifest = self.__WB_MANIFEST;
 
 self.__WB_DISABLE_DEV_LOGS = true;
 
-const cacheName = "sw-cache";
+const cacheName = `sw-cache-${new Date().toISOString()}`;
 
 const cacheFirstChar = "~";
 
@@ -17,14 +17,30 @@ const urlsToPrecache = ["/", "/config"];
 
 const isCacheFirstRequest = (filename: string) => filename.includes(cacheFirstChar);
 
-self.addEventListener("install", async () => {
-	await self.skipWaiting();
-	if (!manifest) return;
-	const cache = await caches.open(cacheName);
-	const toFetch = [...manifest.map(({ url }) => fetch(url)), ...urlsToPrecache.map(url => fetch(url))];
-	const responses = await Promise.all(toFetch);
-	const toPrecache = responses.map(res => cache.put(res.url, res.clone()));
-	await Promise.all(toPrecache);
+self.addEventListener("install", event => {
+	event.waitUntil(
+		(async () => {
+			if (manifest && urlsToPrecache?.length > 0) {
+				const cache = await caches.open(cacheName);
+				await cache.addAll([...manifest.map(({ url }) => url), ...urlsToPrecache.map(url => url)]);
+			}
+			await self.skipWaiting();
+		})()
+	);
+});
+
+self.addEventListener("activate", event => {
+	event.waitUntil(
+		(async () => {
+			const existingCacheNames = await caches.keys();
+			await Promise.all(
+				existingCacheNames.reduce((acc, existingCacheName) => {
+					if (existingCacheName !== cacheName) acc.push(caches.delete(existingCacheName));
+					return acc;
+				}, [] as Promise<boolean>[])
+			);
+		})()
+	);
 });
 
 const trimCache = (url: URL) => {

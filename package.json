@@ -33,9 +33,6 @@
     "workbox-routing": "^7.0.0",
     "workbox-strategies": "^7.0.0"
   },
-  "peerDependencies": {
-    "typescript": "^5.2.2"
-  },
   "dependencies": {
     "hono": "^3.7.2",
     "mongoose": "^7.5.2",
