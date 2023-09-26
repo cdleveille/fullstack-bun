@@ -1,6 +1,6 @@
 {
   "globDirectory": "public",
-  "globPatterns": ["**/*.{svg,png,xml,ico,html,js,json,css}"],
-  "swDest": "public/sw.js",
-  "swSrc": "public/sw.js"
+  "globPatterns": ["**/*.*"],
+  "swSrc": "public/sw.js",
+  "swDest": "public/sw.js"
 }
