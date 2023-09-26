@@ -1,13 +1,7 @@
 /// <reference lib="dom" />
 
-import "./manifest.json";
-import "./index.html";
-import "./style.css";
-import "./favicon.ico";
-import "./browserconfig.xml";
-
-import React from "react";
-import ReactDOM from "react-dom/client";
+import { StrictMode } from "react";
+import { createRoot } from "react-dom/client";
 import { io } from "socket.io-client";
 
 import { Hello } from "@components";
@@ -29,9 +23,9 @@ window.addEventListener("load", async () => {
 
 const rootDiv = document.createElement("div");
 document.body.appendChild(rootDiv);
-const root = ReactDOM.createRoot(rootDiv);
+const root = createRoot(rootDiv);
 root.render(
-	<React.StrictMode>
+	<StrictMode>
 		<Hello width={200} height={200} />
-	</React.StrictMode>
+	</StrictMode>
 );
