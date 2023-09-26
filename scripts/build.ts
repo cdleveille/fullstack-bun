@@ -61,10 +61,9 @@ const indexHtmlContentsReplaced = indexHtmlContents.replace("{js}", jsFileName).
 
 await Promise.all([
 	Bun.write(`${OUT_DIR}/index.html`, indexHtmlContentsReplaced),
-	Bun.write(`${OUT_DIR}/${jsFileName}`, Bun.file(jsFile.path))
+	Bun.write(`${OUT_DIR}/${jsFileName}`, Bun.file(jsFile.path)),
+	rimraf([`${OUT_DIR}/src`, `${OUT_DIR}/copy.js`])
 ]);
-
-await rimraf([`${OUT_DIR}/src`, `${OUT_DIR}/copy.js`]);
 
 if (IS_PROD) {
 	const [minifiedHtml, minifiedCss] = await Promise.all([minify(`${OUT_DIR}/index.html`), minify(cssFile.path)]);
