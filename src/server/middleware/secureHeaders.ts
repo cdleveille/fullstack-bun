@@ -24,8 +24,6 @@ export const useSecureHeaders = (app: Hono) =>
 				manifestSrc: ["'self'"],
 				mediaSrc: ["'self'"],
 				objectSrc: ["'none'"],
-				reportTo: "endpoint-1",
-				sandbox: ["allow-same-origin", "allow-scripts"],
 				scriptSrc: ["'self'"],
 				scriptSrcAttr: ["'none'"],
 				scriptSrcElem: ["'self'"],
