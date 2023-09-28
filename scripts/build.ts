@@ -74,4 +74,5 @@ try {
 	console.log("Build complete");
 } catch (error) {
 	console.error(`Build error: ${error}`);
+	throw error;
 }
