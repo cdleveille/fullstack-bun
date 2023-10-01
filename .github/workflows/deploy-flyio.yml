@@ -23,6 +23,7 @@ jobs:
 
       - run: bun i --ignore-scripts --frozen-lockfile
       - run: bun lint
+      - run: bun build:prod
 
       - uses: superfly/flyctl-actions/setup-flyctl@master
       - run: flyctl deploy --remote-only --detach --no-cache
