@@ -3,6 +3,8 @@ import { minify } from "minify";
 import { rimraf } from "rimraf";
 
 try {
+	const start = Date.now();
+
 	const BUN_ENV = Bun.argv.find(arg => arg.startsWith("BUN_ENV"))?.split("=")[1];
 	const IS_PROD = BUN_ENV === "production" || Bun.env.BUN_ENV === "production";
 
@@ -71,7 +73,7 @@ try {
 		await Promise.all([Bun.write(`${OUT_DIR}/index.html`, minifiedHtml), Bun.write(cssFile.path, minifiedCss)]);
 	}
 
-	console.log("Build complete");
+	console.log(`Build complete in ${Date.now() - start}ms`);
 } catch (error) {
 	console.error(`Build error: ${error}`);
 	throw error;
