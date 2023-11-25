@@ -24,6 +24,7 @@
       "@components": ["src/client/components"],
       "@controllers": ["src/server/controllers"],
       "@helpers": ["src/server/helpers"],
+      "@hooks": ["src/client/hooks"],
       "@middleware": ["src/server/middleware"],
       "@models": ["src/server/models"],
       "@services": ["src/server/services"],

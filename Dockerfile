@@ -1,7 +1,7 @@
 # syntax = docker/dockerfile:1
 
 # Adjust BUN_VERSION as desired
-ARG BUN_VERSION=1.0.3
+ARG BUN_VERSION=1.0.14
 FROM oven/bun:${BUN_VERSION} as base
 
 LABEL fly_launch_runtime="Bun"
@@ -20,12 +20,12 @@ RUN apt-get update -qq && \
 COPY --link bun.lockb package.json ./
 COPY --link . .
 
-RUN bun i --ignore-scripts --frozen-lockfile && \
-    bun run build:prod
+RUN bun i --ignore-scripts && \
+    bun build:prod
 
 # Install production dependencies only
 RUN rm -rf node_modules && \
-    bun i --ignore-scripts --frozen-lockfile --production
+    bun i --ignore-scripts --production
 
 # Final stage for app image
 FROM base

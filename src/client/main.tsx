@@ -1,11 +1,9 @@
 /// <reference lib="dom" />
 
-import { StrictMode } from "react";
 import { createRoot } from "react-dom/client";
-import { io } from "socket.io-client";
 
 import { Hello } from "@components";
-import { IConfig } from "@types";
+import { useConfig, useSocket } from "@hooks";
 
 const registerServiceWorker = async () => {
 	if (!navigator.serviceWorker) return;
@@ -13,9 +11,10 @@ const registerServiceWorker = async () => {
 };
 
 window.addEventListener("load", async () => {
-	const res = await fetch("/config");
-	const { IS_PROD, HOST, WS_PORT } = (await res.json()) as IConfig;
-	const socket = io(`${HOST}:${WS_PORT}`);
+	const {
+		Config: { IS_PROD }
+	} = useConfig();
+	const { socket } = useSocket();
 	socket.on("hello", () => console.log("socket.io: hello from server!"));
 	socket.emit("hello");
 	if (IS_PROD) await registerServiceWorker();
@@ -24,8 +23,4 @@ window.addEventListener("load", async () => {
 const rootDiv = document.createElement("div");
 document.body.appendChild(rootDiv);
 const root = createRoot(rootDiv);
-root.render(
-	<StrictMode>
-		<Hello width={200} height={200} />
-	</StrictMode>
-);
+root.render(<Hello width={200} height={200} />);

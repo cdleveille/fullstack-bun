@@ -1,13 +1,11 @@
-import { Server, ServerOptions } from "socket.io";
+import { Server as HttpServer } from "http";
+import { Server } from "socket.io";
 
-import { Config } from "@helpers";
 import { log } from "@services";
 
-export const initSocket = () => {
-	const io = new Server(Config.WS_PORT, {
-		cors: { origin: [Config.HOST, `${Config.HOST}:${Config.PORT}`] },
-		serveClient: false
-	} as Partial<ServerOptions>);
+export const initSocket = (httpServer: HttpServer) => {
+	const io = new Server(httpServer);
+
 	io.on("connect", socket => {
 		socket.on("hello", () => {
 			log.info("socket.io: hello from client!");
