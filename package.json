@@ -44,11 +44,11 @@
     "cors": "^2.8.5",
     "express": "^4.18.2",
     "helmet": "^7.1.0",
-    "mongoose": "^8.0.1",
+    "mongoose": "^8.1.1",
     "nocache": "^4.0.0",
     "react": "^18.2.0",
     "react-dom": "^18.2.0",
-    "socket.io": "^4.7.2",
-    "socket.io-client": "^4.7.2"
+    "socket.io": "^4.7.4",
+    "socket.io-client": "^4.7.4"
   }
 }

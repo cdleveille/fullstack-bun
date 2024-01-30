@@ -11,7 +11,7 @@
 ## Stack
 
 -   [Bun](https://bun.sh)
--   [Hono](https://hono.dev)
+-   [Express](https://expressjs.com)
 -   [MongoDB](https://www.mongodb.com)
 -   [React](https://react.dev)
 -   [Socket.io](https://socket.io)
