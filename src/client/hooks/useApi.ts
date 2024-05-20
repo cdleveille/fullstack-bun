@@ -1,44 +1,46 @@
-import { io } from "socket.io-client";
-
 import { SocketEvent } from "@constants";
+import { useSocket } from "@hooks";
 
 import type { SocketEventName } from "@types";
 
-const socket = io();
+const TIMEOUT_MS = 5000;
 
-const TIMEOUT_MS = 1000;
+interface IReqParams<T = unknown> {
+	event: SocketEventName;
+	data?: unknown;
+	callback?: ((res: T) => void) | (() => void);
+}
 
 export const useApi = () => {
-	/**
-	 * Synchronously emit an event to the server, expecting no response.
-	 */
-	const to = (eventName: SocketEventName, data?: unknown) => {
-		socket.emit(eventName, data);
+	const { socket } = useSocket();
+
+	const to = ({ event, data, callback }: IReqParams) => {
+		socket.emit(event, data);
+		callback?.(null);
 	};
 
-	/**
-	 * Asynchronously make a request to the server and return a Promise of the expected response.
-	 * @param eventName The event name to emit to the server.
-	 * @param data The data to send to the server.
-	 * @param callback A callback to run when the server responds.
-	 */
-	const toAndFrom = async <T>(eventName: SocketEventName, data?: unknown, callback?: (result: T) => void) => {
+	const toAndFrom = async <T>({ event, data, callback }: IReqParams<T>) => {
 		return new Promise<T>((resolve, reject) => {
 			const timeout = setTimeout(() => reject("Request timed out."), TIMEOUT_MS);
-			socket.once(eventName, result => {
-				socket.off(eventName);
+			socket.once(event, res => {
+				socket.off(event);
 				clearTimeout(timeout);
-				callback?.(result);
-				resolve(result);
+				callback?.(res);
+				resolve(res);
 			});
-			to(eventName, data);
+			to({ event, data });
 		});
 	};
 
-	const helloTo = (message: string) => to(SocketEvent.HELLO, message);
+	const helloTo = (message: string, callback?: () => void) =>
+		to({
+			event: SocketEvent.HELLO,
+			data: message,
+			callback
+		});
 
-	const helloToAndFrom = (message: string, callback?: (result: string) => void) =>
-		toAndFrom<string>(SocketEvent.HELLO, message, callback);
+	const helloToAndFrom = (message: string, callback?: (res: string) => void) =>
+		toAndFrom({ event: SocketEvent.HELLO, data: message, callback });
 
 	return { helloTo, helloToAndFrom };
 };
