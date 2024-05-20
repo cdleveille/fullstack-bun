@@ -1,5 +1,7 @@
 /// <reference lib="dom" />
 
+import "./style.css";
+
 import { createRoot } from "react-dom/client";
 
 import { Hello } from "@components";
@@ -17,6 +19,7 @@ window.addEventListener("load", async () => {
 	const { socket } = useSocket();
 	socket.on("hello", () => console.log("socket.io: hello from server!"));
 	socket.emit("hello");
+	console.log("IS_PROD:", IS_PROD);
 	if (IS_PROD) await registerServiceWorker();
 });
 

@@ -8,19 +8,13 @@ import nocache from "nocache";
 import path from "path";
 
 import { Config } from "@helpers";
-import { connectToDatabase, initSocket, log } from "@services";
+import { build, connectToDatabase, initSocket, log } from "@services";
 
 const { IS_PROD, HOST, PORT, RELOAD_PORT } = Config;
 
 const PUBLIC_DIR = path.join(process.cwd(), "public");
 
-if (!IS_PROD && !fs.existsSync(PUBLIC_DIR)) {
-	try {
-		require("../../scripts/build");
-	} catch (error) {
-		// catch and ignore expected error
-	}
-}
+if (!IS_PROD && !fs.existsSync(PUBLIC_DIR)) await build();
 
 await connectToDatabase();
 const app = express();
