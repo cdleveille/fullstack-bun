@@ -1,4 +1,4 @@
-import { IConfig } from "@types";
+import type { IConfig } from "@types";
 
 export const Config = {
 	IS_PROD: Bun.env.BUN_ENV === "production" || Bun.env.NODE_ENV === "production",

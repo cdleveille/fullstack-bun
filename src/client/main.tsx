@@ -5,7 +5,7 @@ import "./style.css";
 import { createRoot } from "react-dom/client";
 
 import { Hello } from "@components";
-import { useConfig, useSocket } from "@hooks";
+import { useApi, useConfig } from "@hooks";
 
 const registerServiceWorker = async () => {
 	if (!navigator.serviceWorker) return;
@@ -16,9 +16,8 @@ window.addEventListener("load", async () => {
 	const {
 		Config: { IS_PROD }
 	} = useConfig();
-	const { socket } = useSocket();
-	socket.on("hello", () => console.log("socket.io: hello from server!"));
-	socket.emit("hello");
+	const { helloToAndFrom } = useApi();
+	helloToAndFrom("socket.io: hello from client!", result => console.log(result));
 	if (IS_PROD) await registerServiceWorker();
 });
 

@@ -1,6 +1,6 @@
 import { Schema } from "mongoose";
 
-import { IBase } from "@types";
+import type { IBase } from "@types";
 
 export const BaseSchema = new Schema<IBase>({
 	created_at: {
