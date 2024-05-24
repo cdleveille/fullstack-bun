@@ -17,7 +17,7 @@ window.addEventListener("load", async () => {
 		Config: { IS_PROD }
 	} = useConfig();
 	const { helloToAndFrom } = useApi();
-	helloToAndFrom("socket.io: hello from client!", result => console.log(result));
+	await helloToAndFrom("socket.io: hello from client!", result => console.log(result));
 	if (IS_PROD) await registerServiceWorker();
 });
 

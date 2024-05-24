@@ -17,6 +17,7 @@ const PUBLIC_DIR = path.join(process.cwd(), "public");
 if (!IS_PROD && !fs.existsSync(PUBLIC_DIR)) await build();
 
 await connectToDatabase();
+
 const app = express();
 app.use(nocache());
 app.use(
