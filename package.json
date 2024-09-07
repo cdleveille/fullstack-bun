@@ -6,7 +6,6 @@
   "module": "src/server/index.ts",
   "type": "module",
   "scripts": {
-    "prepare": "husky",
     "lint": "bunx eslint . && bunx prettier --check .",
     "fix": "bunx eslint --fix . && bunx prettier --write .",
     "db:up": "docker compose -f \".fullstack-bun-dev-container/docker-compose.yml\" up -d --build",
@@ -27,7 +26,6 @@
     "bun-copy-plugin": "^0.2.1",
     "bun-types": "latest",
     "eslint": "^9.3.0",
-    "husky": "^9.0.11",
     "minify": "^11.1.1",
     "prettier": "^3.2.5",
     "reload": "^3.2.1",
