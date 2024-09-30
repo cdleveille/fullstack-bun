@@ -4,7 +4,7 @@ import tseslint from "typescript-eslint";
 
 export default [
 	{
-		ignores: ["node_modules/", "public/"]
+		ignores: ["./node_modules/", "./public/"]
 	},
 	...tseslint.config(eslint.configs.recommended, ...tseslint.configs.recommended, {
 		languageOptions: {

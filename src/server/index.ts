@@ -11,7 +11,7 @@ import { connectToDatabase, initSocket, log } from "@services";
 
 const { IS_PROD, HOST, PORT, RELOAD_PORT } = Config;
 
-const PUBLIC_DIR = path.join(process.cwd(), "public");
+const PUBLIC_DIR = path.join(process.cwd(), "./public");
 
 await connectToDatabase();
 
