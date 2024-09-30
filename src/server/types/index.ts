@@ -1,27 +1,22 @@
 import { SocketEvent } from "@constants";
 
-export interface IConfig {
+export type TConfig = {
 	IS_PROD: boolean;
 	HOST: string;
 	PORT: number;
 	RELOAD_PORT: number;
 	MONGO_URI: string;
-}
+};
 
-export interface IBase {
+export type TBase = {
 	created_at: Date;
 	updated_at: Date;
-}
+};
 
-export interface IUser {
+export type TUser = {
 	username: string;
 	password: string;
-}
-
-export interface IError {
-	code: number;
-	message: string;
-}
+};
 
 type ReverseMap<T> = T[keyof T];
-export type SocketEventName = ReverseMap<typeof SocketEvent>;
+export type TSocketEvent = ReverseMap<typeof SocketEvent>;

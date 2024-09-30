@@ -3,17 +3,17 @@
   "description": "Bun/TypeScript monorepo template.",
   "author": "Chris Leveille <cdleveille@gmail.com",
   "license": "MIT",
-  "module": "src/server/index.ts",
+  "module": "./src/server/index.ts",
   "type": "module",
   "scripts": {
     "lint": "bunx eslint . && bunx prettier --check .",
     "fix": "bunx eslint --fix . && bunx prettier --write .",
-    "db:up": "docker compose -f \".fullstack-bun-dev-container/docker-compose.yml\" up -d --build",
-    "build": "bun scripts/build.ts",
-    "build:prod": "bun scripts/build.ts BUN_ENV=production && workbox injectManifest workbox-config.json",
+    "db:up": "docker compose -f \"./.fullstack-bun-dev-container/docker-compose.yml\" up -d --build",
+    "build": "bun ./scripts/build.ts",
+    "build:prod": "bun ./scripts/build.ts BUN_ENV=production && workbox injectManifest workbox-config.json",
     "deploy": "flyctl deploy --remote-only --detach --no-cache",
-    "dev": "bun --watch src/server/index.ts",
-    "start": "bun src/server/index.ts"
+    "dev": "bun --watch ./src/server/index.ts",
+    "start": "bun ./src/server/index.ts"
   },
   "devDependencies": {
     "@types/compression": "^1.7.5",

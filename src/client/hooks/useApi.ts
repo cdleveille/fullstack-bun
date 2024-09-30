@@ -1,12 +1,12 @@
 import { SocketEvent } from "@constants";
 import { useSocket } from "@hooks";
 
-import type { SocketEventName } from "@types";
+import type { TSocketEvent } from "@types";
 
 const TIMEOUT_MS = 5000;
 
 interface IReqParams<T = unknown> {
-	event: SocketEventName;
+	event: TSocketEvent;
 	data?: unknown;
 	callback?: ((res: T) => void) | (() => void);
 }

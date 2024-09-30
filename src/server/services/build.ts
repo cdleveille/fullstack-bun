@@ -72,7 +72,7 @@ export const build = async () => {
 
 		// remove script tag for 'reload' package in production
 		const indexHtmlContentsReplacedFinal = IS_PROD
-			? indexHtmlContentsReplaced.replace('<script type="text/javascript" src="/reload/reload.js"></script>', "")
+			? indexHtmlContentsReplaced.replace('<script type="text/javascript" src="./reload/reload.js"></script>', "")
 			: indexHtmlContentsReplaced;
 
 		await Promise.all([

@@ -1,8 +1,8 @@
 import { Schema } from "mongoose";
 
-import type { IBase } from "@types";
+import type { TBase } from "@types";
 
-export const BaseSchema = new Schema<IBase>({
+export const BaseSchema = new Schema<TBase>({
 	created_at: {
 		type: Date,
 		default: () => Date.now(),

@@ -2,9 +2,9 @@ import { model, Schema } from "mongoose";
 
 import { BaseSchema } from "@helpers";
 
-import type { IUser } from "@types";
+import type { TUser } from "@types";
 
-const UserSchema = new Schema<IUser>(
+const UserSchema = new Schema<TUser>(
 	{
 		username: {
 			type: String,
@@ -18,4 +18,4 @@ const UserSchema = new Schema<IUser>(
 	{ collection: "bun_user" }
 ).add(BaseSchema);
 
-export const User = model<IUser>("User", UserSchema);
+export const User = model<TUser>("User", UserSchema);
