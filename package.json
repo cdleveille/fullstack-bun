@@ -12,7 +12,7 @@
     "build": "bun ./scripts/build.ts",
     "build:prod": "bun ./scripts/build.ts BUN_ENV=production && workbox injectManifest workbox-config.json",
     "deploy": "flyctl deploy --remote-only --detach --no-cache",
-    "dev": "bun --watch ./src/server/index.ts",
+    "dev": "bun run build && bun --watch ./src/server/index.ts",
     "start": "bun ./src/server/index.ts"
   },
   "devDependencies": {

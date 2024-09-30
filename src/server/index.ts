@@ -1,20 +1,17 @@
 import compression from "compression";
 import cors from "cors";
 import express from "express";
-import fs from "fs";
 import helmet from "helmet";
 import { createServer } from "http";
 import nocache from "nocache";
 import path from "path";
 
 import { Config } from "@helpers";
-import { build, connectToDatabase, initSocket, log } from "@services";
+import { connectToDatabase, initSocket, log } from "@services";
 
 const { IS_PROD, HOST, PORT, RELOAD_PORT } = Config;
 
 const PUBLIC_DIR = path.join(process.cwd(), "public");
-
-if (!IS_PROD && !fs.existsSync(PUBLIC_DIR)) await build();
 
 await connectToDatabase();
 
