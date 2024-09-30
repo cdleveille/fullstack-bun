@@ -1,6 +1,7 @@
 import { BuildConfig } from "bun";
 import copy from "bun-copy-plugin";
 import { minify } from "minify";
+import path from "path";
 import { rimrafSync } from "rimraf";
 
 export const build = async () => {
@@ -60,12 +61,10 @@ export const build = async () => {
 		const { outputs: mainOutputs } = results[0];
 		const jsFile = mainOutputs.find(output => output.path.endsWith(".js"));
 		if (!jsFile) throw "No .js file found in build output";
-		const jsFilePathSplit = jsFile.path.split("/");
-		const jsFileName = jsFilePathSplit[jsFilePathSplit.length - 1];
+		const jsFileName = path.parse(jsFile.path).base;
 		const cssFile = mainOutputs.find(output => output.path.endsWith(".css"));
 		if (!cssFile) throw "No .css file found in build output";
-		const cssFilePathSplit = cssFile.path.split("/");
-		const cssFileName = cssFilePathSplit[cssFilePathSplit.length - 1];
+		const cssFileName = path.parse(cssFile.path).base;
 
 		// inject .js and .css filenames into index.html
 		const indexHtmlContents = await Bun.file(`${OUT_DIR}/index.html`).text();
