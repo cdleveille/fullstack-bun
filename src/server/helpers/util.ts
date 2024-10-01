@@ -15,3 +15,5 @@ export const BaseSchema = new Schema<TBase>({
 });
 
 export const isCacheFirstRequest = (filename: string) => filename.includes("~");
+
+export const parseArg = (arg: string) => Bun.argv.find(a => a.startsWith(arg))?.split("=")[1];

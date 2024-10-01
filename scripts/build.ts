@@ -4,7 +4,8 @@ import { minify } from "minify";
 import path from "path";
 import { rimrafSync } from "rimraf";
 
-const parseArg = (arg: string) => Bun.argv.find(a => a.startsWith(arg))?.split("=")[1];
+import { parseArg } from "@helpers";
+import { log } from "@services";
 
 try {
 	const start = Date.now();
@@ -92,7 +93,7 @@ try {
 		await Bun.write("./src/server/index.ts", index);
 	}
 
-	console.log(`Build completed in ${IS_PROD ? "production" : "development"} mode (${Date.now() - start}ms)`);
+	log.info(`Build completed in ${IS_PROD ? "production" : "development"} mode (${Date.now() - start}ms)`);
 } catch (error) {
-	console.error(error);
+	throw new AggregateError(error instanceof Array ? error : [error]);
 }

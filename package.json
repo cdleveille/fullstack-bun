@@ -1,17 +1,16 @@
 {
   "name": "fullstack-bun",
-  "description": "Bun/TypeScript monorepo template.",
+  "description": "\"MERB\" stack monorepo project template written in TypeScript. Bun/Express/Mongo on the backend, React on the frontend, with Socket.IO bridging the gap.",
   "author": "Chris Leveille <cdleveille@gmail.com",
   "license": "MIT",
   "module": "./src/server/index.ts",
   "type": "module",
   "scripts": {
+    "compose": "docker compose -f \"./.fullstack-bun-dev-container/docker-compose.yml\" up -d --build",
     "lint": "bunx eslint . && bunx prettier --check .",
     "fix": "bunx eslint --fix . && bunx prettier --write .",
-    "db:up": "docker compose -f \"./.fullstack-bun-dev-container/docker-compose.yml\" up -d --build",
     "build": "bun ./scripts/build.ts",
     "build:prod": "bun ./scripts/build.ts BUN_ENV=production && workbox injectManifest workbox-config.json",
-    "deploy": "flyctl deploy --remote-only --detach --no-cache",
     "dev": "bun run build && bun --watch ./src/server/index.ts",
     "start": "bun ./src/server/index.ts"
   },
