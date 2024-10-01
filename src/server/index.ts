@@ -9,11 +9,11 @@ import path from "path";
 import { Config } from "@helpers";
 import { connectToDatabase, initSocket, log } from "@services";
 
-const { IS_PROD, HOST, PORT, RELOAD_PORT } = Config;
+const { IS_PROD, HOST, PORT, RELOAD_PORT, SKIP_DB } = Config;
 
 const PUBLIC_DIR = path.join(process.cwd(), "./public");
 
-await connectToDatabase();
+if (!SKIP_DB) await connectToDatabase();
 
 const app = express();
 app.use(nocache());

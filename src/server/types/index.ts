@@ -6,6 +6,7 @@ export type TConfig = {
 	PORT: number;
 	RELOAD_PORT: number;
 	MONGO_URI: string;
+	SKIP_DB: boolean;
 };
 
 export type TBase = {
