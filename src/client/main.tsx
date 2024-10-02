@@ -3,6 +3,7 @@
 import "./style.css";
 
 import { createRoot } from "react-dom/client";
+import { QueryClient, QueryClientProvider } from "react-query";
 
 import { Hello } from "@components";
 import { useConfig } from "@hooks";
@@ -22,4 +23,8 @@ window.addEventListener("load", async () => {
 const rootDiv = document.createElement("div");
 document.body.appendChild(rootDiv);
 const root = createRoot(rootDiv);
-root.render(<Hello />);
+root.render(
+	<QueryClientProvider client={new QueryClient()}>
+		<Hello />
+	</QueryClientProvider>
+);
