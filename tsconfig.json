@@ -29,7 +29,8 @@
       "@middleware": ["./src/server/middleware"],
       "@models": ["./src/server/models"],
       "@services": ["./src/server/services"],
-      "@types": ["./src/server/types"]
+      "@types": ["./src/server/types"],
+      "@util": ["./src/client/util"]
     }
   },
   "include": ["./**/*.ts", "./**/*.tsx", "./**/*.json"]

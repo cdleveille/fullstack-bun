@@ -1,5 +1,5 @@
 import { SocketEvent } from "@constants";
-import { useSocket } from "@hooks";
+import { socket } from "@util";
 
 import type { TSocketEvent } from "@types";
 
@@ -12,8 +12,6 @@ type TReqParams<T = unknown> = {
 };
 
 export const useApi = () => {
-	const { socket } = useSocket();
-
 	const to = ({ event, data, callback }: TReqParams) => {
 		socket.emit(event, data);
 		callback?.(null);
@@ -42,5 +40,5 @@ export const useApi = () => {
 	const helloToAndFrom = (message: string, callback?: (res: string) => void) =>
 		toAndFrom({ event: SocketEvent.HELLO, data: message, callback });
 
-	return { helloTo, helloToAndFrom };
+	return { socket, helloTo, helloToAndFrom };
 };
