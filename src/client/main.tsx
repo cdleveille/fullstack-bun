@@ -3,10 +3,10 @@
 import "./style.css";
 
 import { createRoot } from "react-dom/client";
-import { QueryClient, QueryClientProvider } from "react-query";
 
 import { Hello } from "@components";
 import { useConfig } from "@hooks";
+import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
 
 const registerServiceWorker = async () => {
 	if (!navigator.serviceWorker) return;
