@@ -10,7 +10,7 @@ export const initSocket = (httpServer: HttpServer) => {
 	io.on("connect", socket => {
 		socket.on(SocketEvent.HELLO, (message: string) => {
 			log.info(message);
-			socket.emit(SocketEvent.HELLO, "socket.io: hello from server!");
+			socket.emit(SocketEvent.HELLO, "hello from bun!");
 		});
 	});
 };
