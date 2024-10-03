@@ -1,5 +1,5 @@
 {
-  "endOfLine": "crlf",
+  "endOfLine": "lf",
   "printWidth": 120,
   "tabWidth": 4,
   "trailingComma": "none",
