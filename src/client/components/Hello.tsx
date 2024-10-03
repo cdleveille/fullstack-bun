@@ -1,10 +1,9 @@
 import { useApi } from "@hooks";
-import { useQuery } from "@tanstack/react-query";
 
 export const Hello = () => {
 	const { helloToAndFrom } = useApi();
 
-	const { data } = useQuery({ queryKey: ["hello"], queryFn: () => helloToAndFrom("hello from client!") });
+	const { data } = helloToAndFrom("hello from client!", res => console.log(res));
 
 	if (!data) return null;
 

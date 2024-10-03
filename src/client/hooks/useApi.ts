@@ -1,4 +1,5 @@
 import { SocketEvent } from "@constants";
+import { useQuery } from "@tanstack/react-query";
 import { socket } from "@util";
 
 import type { TSocketEvent } from "@types";
@@ -30,15 +31,11 @@ export const useApi = () => {
 		});
 	};
 
-	const helloTo = (message: string, callback?: () => void) =>
-		to({
-			event: SocketEvent.HELLO,
-			data: message,
-			callback
+	const helloToAndFrom = (message: string, callback?: (res: string) => void) =>
+		useQuery({
+			queryKey: ["helloToAndFrom"],
+			queryFn: () => toAndFrom({ event: SocketEvent.HELLO, data: message, callback })
 		});
 
-	const helloToAndFrom = (message: string, callback?: (res: string) => void) =>
-		toAndFrom({ event: SocketEvent.HELLO, data: message, callback });
-
-	return { socket, helloTo, helloToAndFrom };
+	return { socket, helloToAndFrom };
 };
