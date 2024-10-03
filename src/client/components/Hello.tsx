@@ -10,7 +10,7 @@ export const Hello = () => {
 	return (
 		<div className="hello">
 			<h1>{data}</h1>
-			<img src="./assets/hello.svg" width={200} height={200} alt="hello"></img>
+			<img src="./assets/bun.svg" width={300} height={300} alt="hello"></img>
 		</div>
 	);
 };
