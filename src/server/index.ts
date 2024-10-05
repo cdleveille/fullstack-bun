@@ -6,7 +6,9 @@ import { createServer } from "http";
 import nocache from "nocache";
 import path from "path";
 
+import { helloRouter } from "@controllers";
 import { Config } from "@helpers";
+import { errorHandler, notFound } from "@middleware";
 import { connectToDatabase, initSocket, log } from "@services";
 
 const { IS_PROD, HOST, PORT, RELOAD_PORT, SKIP_DB } = Config;
@@ -47,12 +49,15 @@ app.use(compression());
 app.use(
 	cors({
 		origin: "*",
-		methods: ["GET"]
+		methods: ["GET", "HEAD", "PUT", "PATCH", "POST", "DELETE"]
 	})
 );
 app.use(express.static(PUBLIC_DIR));
 app.set("json spaces", 2);
 app.disable("x-powered-by");
+app.use(helloRouter);
+app.use(notFound);
+app.use(errorHandler);
 const httpServer = createServer(app);
 initSocket(httpServer);
 httpServer.listen(PORT, () => {
