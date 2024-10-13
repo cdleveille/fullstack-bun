@@ -21,12 +21,13 @@ export const useApi = () => {
 	const toAndFrom = async <T>({ event, data, callback }: TReqParams<T>) => {
 		return new Promise<T>((resolve, reject) => {
 			const timeout = setTimeout(() => reject(`Request timed out after ${TIMEOUT_MS}ms.`), TIMEOUT_MS);
-			socket.once(event, res => {
-				socket.off(event);
+			const onRes = (res: T) => {
+				socket.off(event, onRes);
 				clearTimeout(timeout);
 				callback?.(res);
 				resolve(res);
-			});
+			};
+			socket.once(event, onRes);
 			to({ event, data });
 		});
 	};
