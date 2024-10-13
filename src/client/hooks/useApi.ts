@@ -1,3 +1,5 @@
+import { useCallback } from "react";
+
 import { SocketEvent } from "@constants";
 import { useQuery } from "@tanstack/react-query";
 import { socket } from "@util";
@@ -13,24 +15,30 @@ type TReqParams<T = unknown> = {
 };
 
 export const useApi = () => {
-	const to = ({ event, data, callback }: TReqParams) => {
-		socket.emit(event, data);
-		callback?.(null);
-	};
+	const to = useCallback(
+		({ event, data, callback }: TReqParams) => {
+			socket.emit(event, data);
+			callback?.(null);
+		},
+		[socket]
+	);
 
-	const toAndFrom = async <T>({ event, data, callback }: TReqParams<T>) => {
-		return new Promise<T>((resolve, reject) => {
-			const timeout = setTimeout(() => reject(`Request timed out after ${TIMEOUT_MS}ms.`), TIMEOUT_MS);
-			const onRes = (res: T) => {
-				socket.off(event, onRes);
-				clearTimeout(timeout);
-				callback?.(res);
-				resolve(res);
-			};
-			socket.once(event, onRes);
-			to({ event, data });
-		});
-	};
+	const toAndFrom = useCallback(
+		async <T>({ event, data, callback }: TReqParams<T>) => {
+			return new Promise<T>((resolve, reject) => {
+				const timeout = setTimeout(() => reject(`Request timed out after ${TIMEOUT_MS}ms.`), TIMEOUT_MS);
+				const onRes = (res: T) => {
+					socket.off(event, onRes);
+					clearTimeout(timeout);
+					callback?.(res);
+					resolve(res);
+				};
+				socket.once(event, onRes);
+				to({ event, data });
+			});
+		},
+		[socket, to]
+	);
 
 	const helloToAndFrom = (message: string, callback?: (res: string) => void) =>
 		useQuery({
