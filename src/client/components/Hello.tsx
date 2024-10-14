@@ -1,3 +1,4 @@
+import { BunSvg } from "@components";
 import { useApi } from "@hooks";
 
 export const Hello = () => {
@@ -10,7 +11,7 @@ export const Hello = () => {
 	return (
 		<div className="hello">
 			<h1>{data}</h1>
-			<img src="./assets/bun.svg" width={300} height={300} alt="hello"></img>
+			<BunSvg width={300} height={300} />
 		</div>
 	);
 };
