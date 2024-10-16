@@ -1,14 +1,14 @@
 import { BunPack, BunPackConfig } from "bun-bundle";
 import path from "path";
 
-const bunPackConfig = {
+const bunPackConfig: BunPackConfig = {
 	srcDir: "./src/client",
 	outDir: "./public",
 	mainEntry: "main.tsx",
 	swEntry: "sw.ts",
 	copyFolders: ["assets"],
 	copyFiles: ["browserconfig.xml", "favicon.ico", "index.html", "manifest.json"]
-} as BunPackConfig;
+};
 
 const isProd = await BunPack.build(bunPackConfig);
 
