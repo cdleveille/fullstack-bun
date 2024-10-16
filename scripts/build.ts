@@ -26,6 +26,9 @@ try {
 		minify: IS_PROD
 	} as Partial<BuildConfig>;
 
+	const FOLDERS_TO_COPY = ["assets"];
+	const FILES_TO_COPY = ["browserconfig.xml", "favicon.ico", "index.html", "manifest.json"];
+
 	const buildMain = Bun.build({
 		...buildCommon,
 		entrypoints: [`${SRC_DIR}/main.tsx`],
@@ -37,11 +40,8 @@ try {
 			"Bun.env.IS_PROD": `"${IS_PROD}"`
 		},
 		plugins: [
-			copy(`${SRC_DIR}/assets/`, `${OUT_DIR}/assets/`),
-			copy(`${SRC_DIR}/browserconfig.xml`, `${OUT_DIR}/browserconfig.xml`),
-			copy(`${SRC_DIR}/favicon.ico`, `${OUT_DIR}/favicon.ico`),
-			copy(`${SRC_DIR}/index.html`, `${OUT_DIR}/index.html`),
-			copy(`${SRC_DIR}/manifest.json`, `${OUT_DIR}/manifest.json`)
+			...FOLDERS_TO_COPY.map(folder => copy(`${path.join(SRC_DIR, folder)}/`, `${path.join(OUT_DIR, folder)}/`)),
+			...FILES_TO_COPY.map(file => copy(path.join(SRC_DIR, file), path.join(OUT_DIR, file)))
 		]
 	});
 
@@ -68,16 +68,16 @@ try {
 	const cssFileName = path.parse(cssFile.path).base;
 
 	// inject .js and .css filenames into index.html
-	const indexHtmlContents = await Bun.file(`${OUT_DIR}/index.html`).text();
-	const indexHtmlContentsReplaced = indexHtmlContents.replace("{js}", jsFileName).replace("{css}", cssFileName);
+	let indexHtmlContents = await Bun.file(`${OUT_DIR}/index.html`).text();
+	indexHtmlContents = indexHtmlContents.replace("{js}", jsFileName).replace("{css}", cssFileName);
 
 	// remove script tag for 'reload' package in production
-	const indexHtmlContentsReplacedFinal = IS_PROD
-		? indexHtmlContentsReplaced.replace('<script type="text/javascript" src="/reload/reload.js"></script>', "")
-		: indexHtmlContentsReplaced;
+	indexHtmlContents = IS_PROD
+		? indexHtmlContents.replace('<script type="text/javascript" src="/reload/reload.js"></script>', "")
+		: indexHtmlContents;
 
 	await Promise.all([
-		Bun.write(`${OUT_DIR}/index.html`, indexHtmlContentsReplacedFinal),
+		Bun.write(`${OUT_DIR}/index.html`, indexHtmlContents),
 		Bun.write(`${OUT_DIR}/${jsFileName}`, Bun.file(jsFile.path))
 	]);
 
