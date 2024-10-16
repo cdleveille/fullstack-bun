@@ -17,11 +17,8 @@ const serverFile = path.resolve("./src/server/index.ts");
 
 if (isProd) {
 	let indexHtmlContents = await Bun.file(indexHtml).text();
-	indexHtmlContents = indexHtmlContents.replace(
-		'<script type="text/javascript" src="/reload/reload.js"></script>',
-		""
-	);
-	await Bun.write(path.join(indexHtml), indexHtmlContents);
+	indexHtmlContents = indexHtmlContents.replace("<script src=/reload/reload.js></script>", "");
+	await Bun.write(indexHtml, indexHtmlContents);
 } else {
 	const serverFileContents = await Bun.file(path.resolve(serverFile)).text();
 	await Bun.write(serverFile, serverFileContents);
