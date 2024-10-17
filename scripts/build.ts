@@ -1,7 +1,7 @@
-import { BunPack, BunPackConfig } from "bun-bundle";
+import { BunBundle, BunBundleBuildConfig } from "bun-bundle";
 import path from "path";
 
-const bunPackConfig: BunPackConfig = {
+const buildConfig: BunBundleBuildConfig = {
 	srcDir: "./src/client",
 	outDir: "./public",
 	mainEntry: "main.tsx",
@@ -10,9 +10,9 @@ const bunPackConfig: BunPackConfig = {
 	copyFiles: ["browserconfig.xml", "favicon.ico", "index.html", "manifest.json"]
 };
 
-const isProd = await BunPack.build(bunPackConfig);
+const { isProd } = await BunBundle.build(buildConfig);
 
-const indexHtml = path.join(bunPackConfig.outDir, "index.html");
+const indexHtml = path.join(buildConfig.outDir, "index.html");
 const serverFile = path.resolve("./src/server/index.ts");
 const reloadScriptTag = "<script src=/reload/reload.js></script>";
 
