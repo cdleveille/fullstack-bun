@@ -52,10 +52,10 @@ app.use(
 const limiter = rateLimit({
 	windowMs: 15 * 60 * 1000,
 	max: 100,
-	handler: (_req, res) => {
-		res.status(429).json({ error: "Too Many Requests" });
+	handler: (_req, res, _next, options) => {
+		res.status(options.statusCode).json({ error: "Too Many Requests" });
 	},
-	standardHeaders: "draft-7",
+	standardHeaders: true,
 	legacyHeaders: true
 });
 if (IS_PROD) app.use(limiter);
