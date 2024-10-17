@@ -1,6 +1,7 @@
 import compression from "compression";
 import cors from "cors";
 import express from "express";
+import rateLimit from "express-rate-limit";
 import helmet from "helmet";
 import { createServer } from "http";
 import nocache from "nocache";
@@ -18,7 +19,9 @@ const PUBLIC_DIR = path.join(process.cwd(), "public");
 if (!SKIP_DB) await connectToDatabase();
 
 const app = express();
+
 app.use(nocache());
+
 app.use(
 	helmet.contentSecurityPolicy({
 		directives: {
@@ -45,22 +48,39 @@ app.use(
 		}
 	})
 );
+
+const limiter = rateLimit({
+	windowMs: 15 * 60 * 1000,
+	max: 100,
+	handler: (_req, res) => {
+		res.status(429).json({ error: "Too Many Requests" });
+	},
+	standardHeaders: "draft-7",
+	legacyHeaders: true
+});
+if (IS_PROD) app.use(limiter);
+
 app.use(compression());
-app.use(
-	cors({
-		origin: "*",
-		methods: ["GET", "HEAD", "PUT", "PATCH", "POST", "DELETE"]
-	})
-);
+
+app.use(cors());
+
 app.use(express.static(PUBLIC_DIR));
+
 app.set("json spaces", 2);
+
 app.disable("x-powered-by");
+
 app.use(helloRouter);
+
 if (!IS_PROD) require("reload")(app, { port: RELOAD_PORT }).catch((error: unknown) => log.error(error));
+
 app.use(notFound);
+
 app.use(errorHandler);
+
 const httpServer = createServer(app);
 initSocket(httpServer);
+
 httpServer.listen(PORT, () => {
 	log.info(`Server started in ${IS_PROD ? "production" : "development"} mode - listening on ${HOST}:${PORT}`);
 });
