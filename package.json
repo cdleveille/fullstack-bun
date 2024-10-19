@@ -22,7 +22,7 @@
     "@types/react": "^18.3.11",
     "@types/react-dom": "^18.3.1",
     "@types/reload": "^3.2.3",
-    "bun-bundle": "^2.0.0",
+    "bun-bundle": "^2.1.1",
     "bun-copy-plugin": "^0.2.1",
     "bun-types": "^1.1.31",
     "eslint": "^9.13.0",
