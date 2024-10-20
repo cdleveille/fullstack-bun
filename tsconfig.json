@@ -31,7 +31,7 @@
       "@processes": ["./processes"],
       "@services": ["./src/server/services"],
       "@types": ["./src/server/types"],
-      "@util": ["./src/client/util"]
+      "@utils": ["./src/client/utils"]
     }
   },
   "include": ["./**/*.ts", "./**/*.tsx", "./**/*.json"]

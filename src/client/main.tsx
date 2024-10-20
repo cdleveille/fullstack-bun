@@ -6,7 +6,7 @@ import { createRoot } from "react-dom/client";
 
 import { Hello } from "@components";
 import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
-import { Config } from "@util";
+import { Config } from "@utils";
 
 window.addEventListener("load", async () => {
 	if (!Config.IS_PROD || !navigator.serviceWorker) return;
