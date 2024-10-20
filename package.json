@@ -11,7 +11,7 @@
     "fix": "bunx eslint --fix . && bunx prettier --write .",
     "build": "bun ./scripts/build.ts",
     "build:prod": "bun ./scripts/build.ts BUN_ENV=production && workbox injectManifest workbox-config.json",
-    "dev": "bun --watch ./src/server/index.ts",
+    "dev": "bun --hot ./src/server/index.ts",
     "start": "bun ./src/server/index.ts"
   },
   "devDependencies": {
