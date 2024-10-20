@@ -11,14 +11,14 @@ export const initSocket = (httpServer: HttpServer) => {
 	(async () => {
 		if (Config.IS_PROD) return;
 		const { initWatch } = await import("@processes");
-		const emitReload = () => io.emit(SocketEvent.RELOAD);
+		const emitReload = () => io.emit(SocketEvent.Reload);
 		await initWatch(emitReload);
 	})();
 
 	io.on("connect", socket => {
-		socket.on(SocketEvent.HELLO, (message: string) => {
+		socket.on(SocketEvent.Hello, (message: string) => {
 			log.info(message);
-			socket.emit(SocketEvent.HELLO, "hello from bun!");
+			socket.emit(SocketEvent.Hello, "hello from bun!");
 		});
 	});
 };

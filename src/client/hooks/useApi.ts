@@ -43,7 +43,7 @@ export const useApi = () => {
 	const helloToAndFrom = (message: string, callback?: (res: string) => void) =>
 		useQuery({
 			queryKey: ["helloToAndFrom"],
-			queryFn: () => toAndFrom({ event: SocketEvent.HELLO, data: message, callback })
+			queryFn: () => toAndFrom({ event: SocketEvent.Hello, data: message, callback })
 		});
 
 	return { socket, helloToAndFrom };

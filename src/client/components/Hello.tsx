@@ -4,14 +4,15 @@ import { useApi } from "@hooks";
 export const Hello = () => {
 	const { helloToAndFrom } = useApi();
 
-	const { data } = helloToAndFrom("hello from client!", res => console.log(res));
+	const { data: helloFromBun } = helloToAndFrom("hello from client!", res => console.log(res));
 
-	if (!data) return null;
+	if (!helloFromBun) return null;
 
 	return (
 		<div className="hello">
-			<h1>{data}</h1>
+			<h1>{helloFromBun}</h1>
 			<BunSvg width={300} height={300} />
+			<p>Automatically reloads with persisted state on file save.</p>
 			<Counter />
 		</div>
 	);

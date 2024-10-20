@@ -1,13 +1,5 @@
 import { SocketEvent } from "@constants";
 
-export type TConfig = {
-	IS_PROD: boolean;
-	HOST: string;
-	PORT: number;
-	MONGO_URI: string;
-	SKIP_DB: boolean;
-};
-
 export type TBase = {
 	created_at: Date;
 	updated_at: Date;

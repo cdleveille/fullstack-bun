@@ -4,4 +4,4 @@ import { SocketEvent } from "@constants";
 
 export const socket = io();
 
-socket.on(SocketEvent.RELOAD, () => window.location.reload());
+socket.on(SocketEvent.Reload, () => window.location.reload());

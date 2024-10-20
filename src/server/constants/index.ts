@@ -1,4 +1,6 @@
 export enum SocketEvent {
-	HELLO = "hello",
-	RELOAD = "reload"
+	Hello = "hello",
+	Reload = "reload"
 }
+
+export const STORED_STATE_PREFIX = "state";

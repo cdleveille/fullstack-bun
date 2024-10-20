@@ -55,7 +55,7 @@ app.use(
 );
 
 const limiter = rateLimit({
-	windowMs: 15 * 60 * 1000,
+	windowMs: 60 * 1000,
 	max: 100,
 	handler: (_req, res, _next, options) => {
 		res.status(options.statusCode).json({ error: "Too Many Requests" });

@@ -5,7 +5,6 @@
       "type": "bun",
       "request": "launch",
       "name": "debug",
-      "preLaunchTask": "build",
 
       // The path to a JavaScript or TypeScript file to run.
       "program": "src/server/index.ts",
@@ -25,7 +24,7 @@
       // If the program should be run in watch mode.
       // This is equivalent to passing `--watch` to the `bun` executable.
       // You can also set this to "hot" to enable hot reloading using `--hot`.
-      "watchMode": "hot",
+      "watchMode": true,
 
       // If the debugger should stop on the first line of the program.
       "stopOnEntry": false,

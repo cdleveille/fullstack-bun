@@ -52,4 +52,5 @@ h1 {
 	justify-content: center;
 	height: 100vh;
 	row-gap: 2rem;
+	text-align: center;
 }

@@ -5,7 +5,6 @@ export const Counter = () => {
 
 	return (
 		<>
-			<p>Automatically reloads with persisted state on file save.</p>
 			<button onClick={() => setCount(count => count + 1)}>Count: {count}</button>
 			<a onClick={() => setCount(0)}>Reset Count</a>
 		</>
