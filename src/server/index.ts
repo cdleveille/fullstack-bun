@@ -10,11 +10,13 @@ import path from "path";
 import { helloRouter } from "@controllers";
 import { Config } from "@helpers";
 import { errorHandler, notFound } from "@middleware";
-import { connectToDatabase, initSocket, log } from "@services";
+import { buildClient, connectToDatabase, initSocket, log } from "@services";
 
-const { IS_PROD, HOST, PORT, RELOAD_PORT, SKIP_DB } = Config;
+const { IS_PROD, HOST, PORT, SKIP_DB } = Config;
 
-const PUBLIC_DIR = path.join(process.cwd(), "public");
+const PUBLIC_DIR = path.resolve("./public");
+
+await buildClient();
 
 if (!SKIP_DB) await connectToDatabase();
 
@@ -28,7 +30,7 @@ app.use(
 			defaultSrc: ["'self'"],
 			baseUri: ["'self'"],
 			childSrc: ["'self'"],
-			connectSrc: ["'self'", ...(!IS_PROD ? [`ws://localhost:${RELOAD_PORT}`] : [])],
+			connectSrc: ["'self'"],
 			fontSrc: ["'self'", "https:", "data:"],
 			formAction: ["'self'"],
 			frameAncestors: ["'self'"],
@@ -71,8 +73,6 @@ app.set("json spaces", 2);
 app.disable("x-powered-by");
 
 app.use(helloRouter);
-
-if (!IS_PROD) require("reload")(app, { port: RELOAD_PORT }).catch((error: unknown) => log.error(error));
 
 app.use(notFound);
 

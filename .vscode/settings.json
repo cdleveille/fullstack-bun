@@ -15,8 +15,5 @@
     "**/CVS": true,
     "**/.DS_Store": true
   },
-  "eslint.validate": ["javascript", "typescript"],
-  "triggerTaskOnSave.tasks": {
-    "build": ["src/client/**/*", "scripts/build.ts", "tsconfig.json", ".env", "workbox-config.json"]
-  }
+  "eslint.validate": ["javascript", "typescript"]
 }

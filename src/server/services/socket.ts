@@ -2,7 +2,8 @@ import { Server as HttpServer } from "http";
 import { Server } from "socket.io";
 
 import { SocketEvent } from "@constants";
-import { log } from "@services";
+import { Config } from "@helpers";
+import { initWatch, log } from "@services";
 
 export const initSocket = (httpServer: HttpServer) => {
 	const io = new Server(httpServer);
@@ -13,4 +14,9 @@ export const initSocket = (httpServer: HttpServer) => {
 			socket.emit(SocketEvent.HELLO, "hello from bun!");
 		});
 	});
+
+	if (!Config.IS_PROD) {
+		const emitReload = () => io.emit(SocketEvent.RELOAD);
+		initWatch(emitReload);
+	}
 };

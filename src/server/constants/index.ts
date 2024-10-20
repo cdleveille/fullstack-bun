@@ -1,3 +1,4 @@
 export enum SocketEvent {
-	HELLO = "hello"
+	HELLO = "hello",
+	RELOAD = "reload"
 }

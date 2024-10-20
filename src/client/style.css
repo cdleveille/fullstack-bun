@@ -20,6 +20,24 @@ html,
 body {
 	background-color: #14151a;
 	color: #fbf0df;
+	font-size: 1.2rem;
+}
+
+a {
+	color: #9ca3af;
+}
+
+a:hover {
+	cursor: pointer;
+	text-decoration: underline;
+}
+
+button {
+	padding: 1rem 2rem;
+	font-size: 1.5rem;
+	border-radius: 1rem;
+	cursor: pointer;
+	box-shadow: 6px 6px #000000;
 }
 
 h1 {

@@ -1,4 +1,4 @@
-import { BunSvg } from "@components";
+import { BunSvg, Counter } from "@components";
 import { useApi } from "@hooks";
 
 export const Hello = () => {
@@ -12,6 +12,7 @@ export const Hello = () => {
 		<div className="hello">
 			<h1>{data}</h1>
 			<BunSvg width={300} height={300} />
+			<Counter />
 		</div>
 	);
 };

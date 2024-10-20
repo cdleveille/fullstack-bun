@@ -5,7 +5,6 @@
     "editorconfig.editorconfig",
     "esbenp.prettier-vscode",
     "mike-co.import-sorter",
-    "oven.bun-vscode",
-    "Gruntfuggly.triggertaskonsave"
+    "oven.bun-vscode"
   ]
 }
