@@ -1,4 +1,4 @@
-import { buildClient } from "@services";
+import { buildClient } from "@processes";
 
 await buildClient();
 process.exit(0);

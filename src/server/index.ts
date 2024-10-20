@@ -10,13 +10,16 @@ import path from "path";
 import { helloRouter } from "@controllers";
 import { Config } from "@helpers";
 import { errorHandler, notFound } from "@middleware";
-import { buildClient, connectToDatabase, initSocket, log } from "@services";
+import { connectToDatabase, initSocket, log } from "@services";
 
 const { IS_PROD, HOST, PORT, SKIP_DB } = Config;
 
-const PUBLIC_DIR = path.resolve("./public");
+if (!IS_PROD) {
+	const { buildClient } = await import("@processes");
+	await buildClient();
+}
 
-await buildClient();
+const PUBLIC_DIR = path.resolve("./public");
 
 if (!SKIP_DB) await connectToDatabase();
 

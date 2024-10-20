@@ -28,6 +28,7 @@
       "@hooks": ["./src/client/hooks"],
       "@middleware": ["./src/server/middleware"],
       "@models": ["./src/server/models"],
+      "@processes": ["./processes"],
       "@services": ["./src/server/services"],
       "@types": ["./src/server/types"],
       "@util": ["./src/client/util"]
