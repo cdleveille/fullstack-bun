@@ -1,2 +1,2 @@
 export * from "./useApi";
-export * from "./useState";
+export * from "./usePersistedState";

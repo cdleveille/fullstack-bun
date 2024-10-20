@@ -1,7 +1,7 @@
-import { useState } from "@hooks";
+import { usePersistedState } from "@hooks";
 
 export const Counter = () => {
-	const [count, setCount] = useState(0, "count");
+	const [count, setCount] = usePersistedState(0, "count");
 
 	return (
 		<>
