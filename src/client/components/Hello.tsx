@@ -9,7 +9,7 @@ export const Hello = () => {
 	if (!helloFromBun) return null;
 
 	return (
-		<div className="hello">
+		<div className="flex-center-col">
 			<h1>{helloFromBun}</h1>
 			<BunSvg width={300} height={300} />
 			<p>Automatically reloads with persisted state on file save.</p>

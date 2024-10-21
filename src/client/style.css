@@ -45,7 +45,7 @@ h1 {
 	text-shadow: 6px 6px #000000;
 }
 
-.hello {
+.flex-center-col {
 	display: flex;
 	flex-direction: column;
 	align-items: center;

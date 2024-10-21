@@ -10,6 +10,11 @@ export type TUser = {
 	password: string;
 };
 
+export type TAppContext = {
+	count: number;
+	setCount: React.Dispatch<React.SetStateAction<number>>;
+};
+
 type ReverseMap<T> = T[keyof T];
 export type TSocketEvent = ReverseMap<typeof SocketEvent>;
 

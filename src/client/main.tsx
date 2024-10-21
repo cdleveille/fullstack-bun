@@ -4,7 +4,7 @@ import "./style.css";
 
 import { createRoot } from "react-dom/client";
 
-import { Hello } from "@components";
+import { AppContextProvider, ErrorBoundary, Hello } from "@components";
 import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
 import { Config } from "@utils";
 
@@ -13,11 +13,14 @@ window.addEventListener("load", async () => {
 	if (!navigator.serviceWorker.controller) await navigator.serviceWorker.register("./sw.js");
 });
 
-const rootDiv = document.createElement("div");
-document.body.appendChild(rootDiv);
+const rootDiv = document.getElementById("root")!;
 const root = createRoot(rootDiv);
 root.render(
-	<QueryClientProvider client={new QueryClient()}>
-		<Hello />
-	</QueryClientProvider>
+	<ErrorBoundary>
+		<QueryClientProvider client={new QueryClient()}>
+			<AppContextProvider>
+				<Hello />
+			</AppContextProvider>
+		</QueryClientProvider>
+	</ErrorBoundary>
 );

@@ -1,7 +1,7 @@
-import { usePersistedState } from "@hooks";
+import { useAppContext } from "@hooks";
 
 export const Counter = () => {
-	const [count, setCount] = usePersistedState(0, "count", true);
+	const { count, setCount } = useAppContext();
 
 	return (
 		<>

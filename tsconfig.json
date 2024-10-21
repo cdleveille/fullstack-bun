@@ -23,6 +23,7 @@
       "@assets": ["./src/client/assets"],
       "@components": ["./src/client/components"],
       "@constants": ["./src/server/constants"],
+      "@contexts": ["./src/client/contexts"],
       "@controllers": ["./src/server/controllers"],
       "@helpers": ["./src/server/helpers"],
       "@hooks": ["./src/client/hooks"],
