@@ -23,11 +23,11 @@ body {
 	font-size: 1.2rem;
 }
 
-a {
+.reset {
 	color: #9ca3af;
 }
 
-a:hover {
+.reset:hover {
 	cursor: pointer;
 	text-decoration: underline;
 }

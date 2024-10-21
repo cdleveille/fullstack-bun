@@ -6,7 +6,9 @@ export const Counter = () => {
 	return (
 		<>
 			<button onClick={() => setCount(count => count + 1)}>Count: {count}</button>
-			<a onClick={() => setCount(0)}>Reset Count</a>
+			<div className="reset" onClick={() => setCount(0)}>
+				Reset Count
+			</div>
 		</>
 	);
 };
