@@ -1,7 +1,6 @@
 import compression from "compression";
 import cors from "cors";
 import express from "express";
-import rateLimit from "express-rate-limit";
 import helmet from "helmet";
 import { createServer } from "http";
 import nocache from "nocache";
@@ -53,17 +52,6 @@ app.use(
 		}
 	})
 );
-
-const limiter = rateLimit({
-	windowMs: 60 * 1000,
-	max: 100,
-	handler: (_req, res, _next, options) => {
-		res.status(options.statusCode).json({ error: "Too Many Requests" });
-	},
-	standardHeaders: true,
-	legacyHeaders: true
-});
-if (IS_PROD) app.use(limiter);
 
 app.use(compression());
 
