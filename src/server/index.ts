@@ -2,7 +2,7 @@ import express from "express";
 import { createServer } from "http";
 import path from "path";
 
-import { Env } from "@constants";
+import { Env, Path } from "@constants";
 import { initRoutes } from "@controllers";
 import { Config } from "@helpers";
 import { initMiddleware } from "@middleware";
@@ -23,7 +23,7 @@ app.set("json spaces", 2);
 
 app.disable("x-powered-by");
 
-app.use(express.static(path.resolve("./public")));
+app.use(express.static(path.resolve(Path.Public)));
 
 const httpServer = createServer(app);
 initSocket(httpServer);

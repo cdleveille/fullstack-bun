@@ -12,4 +12,9 @@ export enum SocketEvent {
 	Reload = "reload"
 }
 
+export enum Path {
+	Public = "./public",
+	ClientSrc = "./src/client"
+}
+
 export const STORED_STATE_PREFIX = "state";
