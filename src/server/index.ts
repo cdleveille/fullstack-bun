@@ -1,15 +1,11 @@
-import compression from "compression";
-import cors from "cors";
 import express from "express";
-import helmet from "helmet";
 import { createServer } from "http";
-import nocache from "nocache";
 import path from "path";
 
 import { Env } from "@constants";
-import { helloRouter } from "@controllers";
+import { initRoutes } from "@controllers";
 import { Config } from "@helpers";
-import { errorHandler, notFound } from "@middleware";
+import { initMiddleware } from "@middleware";
 import { connectToDatabase, initSocket, log } from "@services";
 
 const { IS_PROD, PORT, SKIP_DB } = Config;
@@ -19,59 +15,22 @@ if (!IS_PROD) {
 	await buildClient();
 }
 
-const PUBLIC_DIR = path.resolve("./public");
-
 if (!SKIP_DB) await connectToDatabase();
 
 const app = express();
-
-app.use(nocache());
-
-app.use(
-	helmet.contentSecurityPolicy({
-		directives: {
-			defaultSrc: ["'self'"],
-			baseUri: ["'self'"],
-			childSrc: ["'self'"],
-			connectSrc: ["'self'"],
-			fontSrc: ["'self'", "https:", "data:"],
-			formAction: ["'self'"],
-			frameAncestors: ["'self'"],
-			frameSrc: ["'self'"],
-			imgSrc: ["'self'", "data:"],
-			manifestSrc: ["'self'"],
-			mediaSrc: ["'self'"],
-			objectSrc: ["'none'"],
-			scriptSrc: ["'self'"],
-			scriptSrcAttr: ["'none'"],
-			scriptSrcElem: ["'self'"],
-			styleSrc: ["'self'", "https:", "'unsafe-inline'"],
-			styleSrcAttr: ["'none'"],
-			styleSrcElem: ["'self'", "https:", "'unsafe-inline'"],
-			upgradeInsecureRequests: [],
-			workerSrc: ["'self'", "blob:"]
-		}
-	})
-);
-
-app.use(compression());
-
-app.use(cors());
-
-app.use(express.static(PUBLIC_DIR));
 
 app.set("json spaces", 2);
 
 app.disable("x-powered-by");
 
-app.use(helloRouter);
-
-app.use(notFound);
-
-app.use(errorHandler);
+app.use(express.static(path.resolve("./public")));
 
 const httpServer = createServer(app);
 initSocket(httpServer);
+
+initRoutes(app);
+
+initMiddleware(app);
 
 httpServer.listen(PORT, () => {
 	log.info(`Server started in ${IS_PROD ? Env.Production : Env.Development} mode - listening on port ${PORT}`);

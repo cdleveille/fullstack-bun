@@ -3,6 +3,10 @@ export enum Env {
 	Development = "development"
 }
 
+export enum Route {
+	Hello = "/hello"
+}
+
 export enum SocketEvent {
 	Hello = "hello",
 	Reload = "reload"
