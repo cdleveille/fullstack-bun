@@ -18,3 +18,26 @@ export enum Path {
 }
 
 export const STORED_STATE_PREFIX = "state";
+
+export const GREETINGS = [
+	"hello",
+	"hi",
+	"hiya",
+	"hey",
+	"yo",
+	"sup",
+	"ahoy",
+	"greetings",
+	"salutations",
+	"howdy",
+	"hola",
+	"bonjour",
+	"good day",
+	"g'day",
+	"aloha",
+	"nǐ hǎo",
+	"konnichiwa",
+	"namaste",
+	"shalom",
+	"ciao"
+];
