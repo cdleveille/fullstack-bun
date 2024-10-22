@@ -20,29 +20,23 @@ html,
 body {
 	background-color: #14151a;
 	color: #fbf0df;
-	font-size: 1.2rem;
-}
-
-.reset {
-	color: #9ca3af;
-}
-
-.reset:hover {
-	cursor: pointer;
-	text-decoration: underline;
+	font-size: 1.1rem;
+	padding: 0.5rem;
 }
 
 button {
 	padding: 1rem 2rem;
-	font-size: 1.5rem;
+	font-size: 1.1rem;
 	border-radius: 1rem;
 	cursor: pointer;
-	box-shadow: 6px 6px #000000;
+	box-shadow: 0.5rem 0.5rem #000000;
+	background-color: #fbf0df;
+	color: "#000000";
 }
 
 h1 {
-	font-size: 3.5rem;
-	text-shadow: 6px 6px #000000;
+	font-size: 3rem;
+	text-shadow: 0.5rem 0.5rem #000000;
 }
 
 .flex-center-col {
@@ -53,4 +47,13 @@ h1 {
 	height: 100vh;
 	row-gap: 1.5rem;
 	text-align: center;
+}
+
+.reset {
+	color: #9ca3af;
+}
+
+.reset:hover {
+	cursor: pointer;
+	text-decoration: underline;
 }
