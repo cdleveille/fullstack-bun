@@ -26,7 +26,7 @@ app.disable("x-powered-by");
 app.use(express.static(path.resolve(Path.Public)));
 
 const httpServer = createServer(app);
-initSocket(httpServer);
+await initSocket(httpServer);
 
 initRoutes(app);
 

@@ -7,16 +7,18 @@
   "type": "module",
   "scripts": {
     "compose": "docker compose -f \"./.fullstack-bun-dev-container/docker-compose.yml\" up -d --build",
-    "lint": "bunx eslint . && bunx prettier --check .",
-    "fix": "bunx eslint --fix . && bunx prettier --write .",
+    "lint": "eslint . && prettier --check .",
+    "fix": "eslint --fix . && prettier --write .",
     "build": "bun ./scripts/build.ts",
     "build:prod": "bun ./scripts/build.ts BUN_ENV=production && workbox injectManifest workbox-config.json",
     "dev": "bun --watch ./src/server/index.ts",
     "start": "bun ./src/server/index.ts"
   },
   "devDependencies": {
+    "@eslint/js": "^9.13.0",
     "@types/compression": "^1.7.5",
     "@types/cors": "^2.8.17",
+    "@types/eslint__js": "^8.42.3",
     "@types/express": "^5.0.0",
     "@types/react": "^18.3.11",
     "@types/react-dom": "^18.3.1",

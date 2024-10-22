@@ -22,15 +22,15 @@ const isCacheFirstWithoutHash = (filename: string) => {
 	return false;
 };
 
+const onInstall = async () => {
+	const urlsToPrecache = ["/", ...(manifest?.length > 0 ? manifest.map(({ url }) => url) : [])];
+	const cache = await caches.open(cacheName);
+	await cache.addAll([...urlsToPrecache.map(url => url)]);
+};
+
 self.addEventListener("install", event => {
-	self.skipWaiting();
-	event.waitUntil(
-		(async () => {
-			const urlsToPrecache = ["/", ...(manifest?.length > 0 ? manifest.map(({ url }) => url) : [])];
-			const cache = await caches.open(cacheName);
-			await cache.addAll([...urlsToPrecache.map(url => url)]);
-		})()
-	);
+	void self.skipWaiting();
+	event.waitUntil(onInstall());
 });
 
 self.addEventListener("activate", event => {
@@ -57,7 +57,7 @@ const trimCache = (url: URL) => {
 	const hash = url.href.split(cacheFirstHashPrefix)[1];
 	const urlSuffixSplit = url.href.split(".");
 	const urlSuffix = urlSuffixSplit[urlSuffixSplit.length - 1];
-	(async () => {
+	void (async () => {
 		const cache = await caches.open(cacheName);
 		const requests = await cache.keys();
 		for (const request of requests) {

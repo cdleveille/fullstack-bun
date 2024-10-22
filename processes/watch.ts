@@ -15,10 +15,9 @@ const stopWatching = async () => {
 process.on("exit", () => stopWatching);
 process.on("SIGINT", () => stopWatching);
 
-export const initWatch = async (emitReload: () => void) => {
-	const buildAndReloadClient = async () => {
+export const initWatch = (emitReload: () => void) => {
+	watcher.on("change", async () => {
 		await buildClient();
 		emitReload();
-	};
-	watcher.on("change", buildAndReloadClient);
+	});
 };

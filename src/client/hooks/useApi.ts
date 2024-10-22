@@ -25,7 +25,10 @@ export const useApi = () => {
 	const toAndFrom = useCallback(
 		async <T>({ event, data, callback }: TReqParams<T>) => {
 			return new Promise<T>((resolve, reject) => {
-				const timeout = setTimeout(() => reject(`Request timed out after ${TIMEOUT_MS}ms.`), TIMEOUT_MS);
+				const timeout = setTimeout(
+					() => reject(new Error(`Request timed out after ${TIMEOUT_MS}ms.`)),
+					TIMEOUT_MS
+				);
 				const onRes = (res: T) => {
 					socket.off(event, onRes);
 					clearTimeout(timeout);

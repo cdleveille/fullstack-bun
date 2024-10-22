@@ -6,15 +6,21 @@ export default [
 	{
 		ignores: ["node_modules/", "public/"]
 	},
-	...tseslint.config(eslint.configs.recommended, ...tseslint.configs.recommended, {
+	...tseslint.config(eslint.configs.recommended, ...tseslint.configs.recommendedTypeChecked, {
 		languageOptions: {
-			ecmaVersion: "latest",
-			sourceType: "module"
+			parserOptions: {
+				projectService: true,
+				tsconfigRootDir: import.meta.dirname
+			}
 		},
 		rules: {
 			"@typescript-eslint/ban-ts-comment": "off",
-			"@typescript-eslint/no-var-requires": "off",
-			"@typescript-eslint/no-require-imports": "off"
+			"@typescript-eslint/no-misused-promises": [
+				"error",
+				{
+					checksVoidReturn: false
+				}
+			]
 		}
 	})
 ];
