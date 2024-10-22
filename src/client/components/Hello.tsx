@@ -1,15 +1,7 @@
-import { useApi } from "@hooks";
+import { useAppContext } from "@hooks";
 
 export const Hello = () => {
-	const { helloToAndFrom } = useApi();
+	const { message } = useAppContext();
 
-	const { data: helloFromBun } = helloToAndFrom("hello from client!", res => console.log(res));
-
-	if (!helloFromBun) return null;
-
-	return (
-		<>
-			<h1>{helloFromBun}</h1>
-		</>
-	);
+	return <h1>{message}</h1>;
 };

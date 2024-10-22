@@ -7,9 +7,9 @@ export const Counter = () => {
 		<>
 			<p>Automatically reloads with persisted state on file save.</p>
 			<button onClick={() => setCount(count => count + 1)}>Count: {count}</button>
-			<div className="reset" onClick={() => setCount(0)}>
+			<span className="reset" onClick={() => setCount(0)}>
 				Reset Count
-			</div>
+			</span>
 		</>
 	);
 };
