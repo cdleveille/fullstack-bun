@@ -15,8 +15,6 @@ const cacheFirstHashPrefix = "~";
 
 const cacheFirstWithoutHashFileTypes = [".webp", ".ttf", ".woff", ".woff2"];
 
-const urlsToPrecache = ["/"];
-
 const isCacheFirstWithHash = (filename: string) => filename.includes(cacheFirstHashPrefix);
 
 const isCacheFirstWithoutHash = (filename: string) => {
@@ -25,13 +23,12 @@ const isCacheFirstWithoutHash = (filename: string) => {
 };
 
 self.addEventListener("install", event => {
+	self.skipWaiting();
 	event.waitUntil(
 		(async () => {
-			if (manifest && urlsToPrecache?.length > 0) {
-				const cache = await caches.open(cacheName);
-				await cache.addAll([...manifest.map(({ url }) => url), ...urlsToPrecache.map(url => url)]);
-			}
-			await self.skipWaiting();
+			const urlsToPrecache = ["/", ...(manifest?.length > 0 ? manifest.map(({ url }) => url) : [])];
+			const cache = await caches.open(cacheName);
+			await cache.addAll([...urlsToPrecache.map(url => url)]);
 		})()
 	);
 });
