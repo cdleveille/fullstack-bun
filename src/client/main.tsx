@@ -6,7 +6,7 @@ import { StrictMode } from "react";
 
 import { createRoot } from "react-dom/client";
 
-import { AppContextProvider, ErrorBoundary, Hello } from "@components";
+import { AppContextProvider, ErrorBoundary, Main } from "@components";
 import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
 import { Config } from "@utils";
 
@@ -22,7 +22,7 @@ root.render(
 		<ErrorBoundary>
 			<QueryClientProvider client={new QueryClient()}>
 				<AppContextProvider>
-					<Hello />
+					<Main />
 				</AppContextProvider>
 			</QueryClientProvider>
 		</ErrorBoundary>
