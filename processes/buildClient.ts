@@ -1,12 +1,13 @@
 import { BunBundle, type BunBundleBuildConfig } from "bun-bundle";
 
+import { Env } from "@constants";
 import { Config } from "@helpers";
 
 const parseArg = (arg: string) => Bun.argv.find(a => a.startsWith(arg))?.split("=")[1];
 
 const BUN_ENV = parseArg("BUN_ENV") ?? parseArg("NODE_ENV");
 
-const IS_PROD = Config.IS_PROD || BUN_ENV === "production";
+const IS_PROD = Config.IS_PROD || BUN_ENV === Env.Production;
 
 const buildConfig: BunBundleBuildConfig = {
 	root: "./src/client",
@@ -29,6 +30,6 @@ const buildConfig: BunBundleBuildConfig = {
 
 export const buildClient = async () => {
 	const output = await BunBundle.build(buildConfig);
-	console.log(`Build completed in ${IS_PROD ? "production" : "development"} mode in ${output.buildTime}ms`);
+	console.log(`Build completed in ${IS_PROD ? Env.Production : Env.Development} mode in ${output.buildTime}ms`);
 	return output;
 };

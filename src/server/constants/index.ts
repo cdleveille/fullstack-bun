@@ -1,3 +1,8 @@
+export enum Env {
+	Production = "production",
+	Development = "development"
+}
+
 export enum SocketEvent {
 	Hello = "hello",
 	Reload = "reload"

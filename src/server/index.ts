@@ -6,12 +6,13 @@ import { createServer } from "http";
 import nocache from "nocache";
 import path from "path";
 
+import { Env } from "@constants";
 import { helloRouter } from "@controllers";
 import { Config } from "@helpers";
 import { errorHandler, notFound } from "@middleware";
 import { connectToDatabase, initSocket, log } from "@services";
 
-const { IS_PROD, HOST, PORT, SKIP_DB } = Config;
+const { IS_PROD, PORT, SKIP_DB } = Config;
 
 if (!IS_PROD) {
 	const { buildClient } = await import("@processes");
@@ -73,5 +74,5 @@ const httpServer = createServer(app);
 initSocket(httpServer);
 
 httpServer.listen(PORT, () => {
-	log.info(`Server started in ${IS_PROD ? "production" : "development"} mode - listening on ${HOST}:${PORT}`);
+	log.info(`Server started in ${IS_PROD ? Env.Production : Env.Development} mode - listening on port ${PORT}`);
 });
