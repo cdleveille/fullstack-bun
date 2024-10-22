@@ -1,7 +1,6 @@
 import { model, Schema } from "mongoose";
 
 import { BaseSchema } from "@helpers";
-
 import type { TUser } from "@types";
 
 const UserSchema = new Schema<TUser>(

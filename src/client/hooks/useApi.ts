@@ -2,9 +2,8 @@ import { useCallback } from "react";
 
 import { SocketEvent } from "@constants";
 import { useQuery } from "@tanstack/react-query";
-import { socket } from "@utils";
-
 import type { TSocketEvent } from "@types";
+import { socket } from "@utils";
 
 const TIMEOUT_MS = 5000;
 

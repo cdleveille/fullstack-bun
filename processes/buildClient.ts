@@ -1,4 +1,4 @@
-import { BunBundle, BunBundleBuildConfig } from "bun-bundle";
+import { BunBundle, type BunBundleBuildConfig } from "bun-bundle";
 
 import { Config } from "@helpers";
 

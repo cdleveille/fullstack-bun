@@ -1,9 +1,4 @@
-type BunSvgProps = {
-	width: number;
-	height: number;
-};
-
-export const BunSvg = ({ width, height }: BunSvgProps) => {
+export const BunSvg = ({ width, height }: { width: number; height: number }) => {
 	return (
 		<svg id="Bun" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 80 70" width={width} height={height}>
 			<title>Bun Logo</title>

@@ -11,7 +11,7 @@
     - [ESLint](https://marketplace.visualstudio.com/items?itemName=dbaeumer.vscode-eslint)
     - [EditorConfig](https://marketplace.visualstudio.com/items?itemName=editorconfig.editorconfig)
     - [Prettier](https://marketplace.visualstudio.com/items?itemName=esbenp.prettier-vscode)
-    - [TypeScript Import Sorter](https://marketplace.visualstudio.com/items?itemName=mike-co.import-sorter)
+    - [JS/TS Import/Export Sorter](https://marketplace.visualstudio.com/items?itemName=dozerg.tsimportsorter)
     - [Bun](https://marketplace.visualstudio.com/items?itemName=oven.bun-vscode)
 4. Install package dependencies: `bun i`
 5. Initialize database container: `bun compose`
