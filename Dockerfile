@@ -13,19 +13,20 @@ WORKDIR /app
 FROM base as build
 
 # Install packages needed to build node modules
-RUN apt-get update -qq && \
-    apt-get install -y build-essential pkg-config python-is-python3
+RUN apt-get update -qq
+RUN apt-get install -y build-essential pkg-config python-is-python3
 
 # Copy application code
 COPY --link bun.lockb package.json ./
 COPY --link . .
 
-RUN bun i --ignore-scripts && \
-    bun build:prod
+# Install all dependencies and run production build
+RUN bun i --ignore-scripts --frozen-lockfile
+RUN bun build:prod
 
-# Install production dependencies only
-RUN rm -rf node_modules && \
-    bun i --ignore-scripts --production
+# Clear node_modules folder and re-install production dependencies only
+RUN rm -rf node_modules
+RUN bun i --ignore-scripts --frozen-lockfile --production
 
 # Final stage for app image
 FROM base
