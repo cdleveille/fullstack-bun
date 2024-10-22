@@ -2,6 +2,7 @@
 
 import "./style.css";
 
+import { StrictMode } from "react";
 import { createRoot } from "react-dom/client";
 
 import { AppContextProvider, ErrorBoundary, Hello } from "@components";
@@ -16,11 +17,13 @@ window.addEventListener("load", async () => {
 const rootDiv = document.getElementById("root")!;
 const root = createRoot(rootDiv);
 root.render(
-	<ErrorBoundary>
-		<QueryClientProvider client={new QueryClient()}>
-			<AppContextProvider>
-				<Hello />
-			</AppContextProvider>
-		</QueryClientProvider>
-	</ErrorBoundary>
+	<StrictMode>
+		<ErrorBoundary>
+			<QueryClientProvider client={new QueryClient()}>
+				<AppContextProvider>
+					<Hello />
+				</AppContextProvider>
+			</QueryClientProvider>
+		</ErrorBoundary>
+	</StrictMode>
 );

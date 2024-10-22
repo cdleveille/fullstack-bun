@@ -19,6 +19,7 @@ export const ErrorBoundary = ({ children }: { children: React.ReactNode }) => {
 				sessionStorage.clear();
 				window.location.reload();
 			}}
+			onError={(error, info) => console.error(error, info)}
 		>
 			{children}
 		</ReactErrorBoundary>

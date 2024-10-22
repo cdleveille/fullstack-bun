@@ -51,6 +51,6 @@ h1 {
 	align-items: center;
 	justify-content: center;
 	height: 100vh;
-	row-gap: 2rem;
+	row-gap: 1.5rem;
 	text-align: center;
 }
