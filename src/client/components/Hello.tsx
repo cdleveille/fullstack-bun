@@ -1,4 +1,3 @@
-import { BunSvg } from "@components";
 import { useApi } from "@hooks";
 
 export const Hello = () => {
@@ -11,7 +10,6 @@ export const Hello = () => {
 	return (
 		<>
 			<h1>{helloFromBun}</h1>
-			<BunSvg width={300} height={300} />
 		</>
 	);
 };

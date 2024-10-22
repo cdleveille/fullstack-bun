@@ -21,7 +21,6 @@ body {
 	background-color: #14151a;
 	color: #fbf0df;
 	font-size: 1.1rem;
-	padding: 0.5rem;
 }
 
 button {
@@ -35,7 +34,7 @@ button {
 }
 
 h1 {
-	font-size: 3rem;
+	font-size: 2.5rem;
 	text-shadow: 0.5rem 0.5rem #000000;
 }
 
@@ -47,6 +46,7 @@ h1 {
 	height: 100vh;
 	row-gap: 1.5rem;
 	text-align: center;
+	padding: 0.5rem;
 }
 
 .reset {
