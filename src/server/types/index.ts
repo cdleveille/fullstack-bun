@@ -16,6 +16,9 @@ export type TAppContext = {
 	setCount: React.Dispatch<React.SetStateAction<number>>;
 };
 
+type ReverseMap<T> = T[keyof T];
+export type TSocketEvent = ReverseMap<typeof SocketEvent>;
+
 export type TClientToServerPayload = {
 	[SocketEvent.Hello]: string;
 };
@@ -35,6 +38,3 @@ export type TServerToClientSocketEvent = {
 	[SocketEvent.Reload]: () => void;
 	[SocketEvent.Scores]: (scores: TServerToClientPayload[SocketEvent.Scores]) => void;
 };
-
-type ReverseMap<T> = T[keyof T];
-export type TSocketEvent = ReverseMap<typeof SocketEvent>;
