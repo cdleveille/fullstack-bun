@@ -9,12 +9,15 @@ const TIMEOUT_MS = 5000;
 
 type TReqParams<T extends keyof TClientToServerSocketEvent> = {
 	event: T;
-	data: Parameters<TClientToServerSocketEvent[T]>;
+	data?: Parameters<TClientToServerSocketEvent[T]>;
 };
 
 export const useApi = () => {
 	const to = useCallback(
-		<T extends keyof TClientToServerSocketEvent>({ event, data }: TReqParams<T>) => {
+		<T extends keyof TClientToServerSocketEvent>({
+			event,
+			data = [] as Parameters<TClientToServerSocketEvent[T]>
+		}: TReqParams<T>) => {
 			socket.emit(event, ...data);
 		},
 		[socket]
@@ -49,7 +52,7 @@ export const useApi = () => {
 	const getGreetings = () =>
 		useQuery({
 			queryKey: ["getGreetings"],
-			queryFn: () => toAndFrom({ event: SocketEvent.Greetings, data: [] })
+			queryFn: () => toAndFrom({ event: SocketEvent.Greetings })
 		});
 
 	return { socket, helloToAndFrom, getGreetings };
