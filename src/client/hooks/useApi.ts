@@ -2,45 +2,40 @@ import { useCallback } from "react";
 
 import { SocketEvent } from "@constants";
 import { useQuery } from "@tanstack/react-query";
-import type {
-	TClientToServerEventPayload,
-	TClientToServerEvents,
-	TServerToClientEventPayload,
-	TServerToClientEvents
-} from "@types";
+import type { TSocketEvent } from "@types";
 import { socket } from "@utils";
 
 const TIMEOUT_MS = 5000;
 
-type TReqParams<SocketEvent extends keyof TClientToServerEvents> = {
-	event: SocketEvent;
-	data?: TClientToServerEventPayload[SocketEvent];
-	callback?: TServerToClientEvents[SocketEvent];
+type TReqParams<T = unknown> = {
+	event: TSocketEvent;
+	data?: unknown;
+	callback?: ((res: T) => void) | (() => void);
 };
 
 export const useApi = () => {
 	const to = useCallback(
-		<SocketEvent extends keyof TClientToServerEvents>({ event, data }: TReqParams<SocketEvent>) => {
-			// @ts-ignore
+		({ event, data, callback }: TReqParams) => {
 			socket.emit(event, data);
+			callback?.(null);
 		},
 		[socket]
 	);
 
 	const toAndFrom = useCallback(
-		async <SocketEvent extends keyof TClientToServerEvents>({ event, data, callback }: TReqParams<SocketEvent>) => {
-			return new Promise<TServerToClientEventPayload[SocketEvent]>((resolve, reject) => {
-				const timeout = setTimeout(() => {
-					reject(new Error(`Request timed out after ${TIMEOUT_MS}ms.`));
-				}, TIMEOUT_MS);
-
-				const onRes = (res: TServerToClientEventPayload[SocketEvent]) => {
+		async <T>({ event, data, callback }: TReqParams<T>) => {
+			return new Promise<T>((resolve, reject) => {
+				const timeout = setTimeout(
+					() => reject(new Error(`Request timed out after ${TIMEOUT_MS}ms.`)),
+					TIMEOUT_MS
+				);
+				const onRes = (res: T) => {
+					socket.off(event, onRes);
 					clearTimeout(timeout);
 					callback?.(res);
 					resolve(res);
 				};
-
-				socket.once(event as keyof TServerToClientEvents, onRes);
+				socket.once(event, onRes);
 				to({ event, data });
 			});
 		},

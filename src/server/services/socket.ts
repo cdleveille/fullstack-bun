@@ -4,10 +4,9 @@ import { Server } from "socket.io";
 import { GREETINGS, SocketEvent } from "@constants";
 import { Config } from "@helpers";
 import { log } from "@services";
-import type { TClientToServerEvents, TServerToClientEvents } from "@types";
 
 export const initSocket = async (httpServer: HttpServer) => {
-	const io = new Server<TClientToServerEvents, TServerToClientEvents>(httpServer);
+	const io = new Server(httpServer);
 
 	if (!Config.IS_PROD) {
 		const { initWatch } = await import("@processes");
