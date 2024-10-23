@@ -2,43 +2,48 @@ import { useCallback } from "react";
 
 import { SocketEvent } from "@constants";
 import { useQuery } from "@tanstack/react-query";
-import type { TSocketEvent } from "@types";
+import type {
+	TClientToServerSocketEvent,
+	TClientToServerSocketPayload,
+	TServerToClientSocketEvent,
+	TServerToClientSocketPayload
+} from "@types";
 import { socket } from "@utils";
 
 const TIMEOUT_MS = 5000;
 
-type TReqParams<T = unknown> = {
+type TReqParams<TSocketEvent extends keyof TClientToServerSocketEvent> = {
 	event: TSocketEvent;
-	data?: unknown;
-	callback?: ((res: T) => void) | (() => void);
+	data: TClientToServerSocketPayload[TSocketEvent];
+	callback?: (res: TServerToClientSocketPayload[TSocketEvent]) => void;
 };
 
 export const useApi = () => {
 	const to = useCallback(
-		({ event, data, callback }: TReqParams) => {
-			// @ts-ignore
-			socket.emit(event, data);
-			callback?.(null);
+		<SocketEvent extends keyof TClientToServerSocketEvent>({ event, data }: TReqParams<SocketEvent>) => {
+			socket.emit(event as keyof TClientToServerSocketEvent, data);
 		},
 		[socket]
 	);
 
 	const toAndFrom = useCallback(
-		async <T>({ event, data, callback }: TReqParams<T>) => {
-			return new Promise<T>((resolve, reject) => {
+		async <TSocketEvent extends keyof TClientToServerSocketEvent>({
+			event,
+			data,
+			callback
+		}: TReqParams<TSocketEvent>) => {
+			return new Promise<TServerToClientSocketPayload[TSocketEvent]>((resolve, reject) => {
 				const timeout = setTimeout(
 					() => reject(new Error(`Request timed out after ${TIMEOUT_MS}ms.`)),
 					TIMEOUT_MS
 				);
-				const onRes = (res: T) => {
-					// @ts-ignore
-					socket.off(event, onRes);
+				const onRes = (res: TServerToClientSocketPayload[TSocketEvent]) => {
+					socket.off(event as keyof TServerToClientSocketEvent, onRes);
 					clearTimeout(timeout);
 					callback?.(res);
 					resolve(res);
 				};
-				// @ts-ignore
-				socket.once(event, onRes);
+				socket.once(event as keyof TServerToClientSocketEvent, onRes);
 				to({ event, data });
 			});
 		},
@@ -51,5 +56,5 @@ export const useApi = () => {
 			queryFn: () => toAndFrom({ event: SocketEvent.Hello, data: message, callback })
 		});
 
-	return { socket, helloToAndFrom };
+	return { helloToAndFrom };
 };
