@@ -16,6 +16,7 @@ type TReqParams<T = unknown> = {
 export const useApi = () => {
 	const to = useCallback(
 		({ event, data, callback }: TReqParams) => {
+			// @ts-ignore
 			socket.emit(event, data);
 			callback?.(null);
 		},
@@ -30,11 +31,13 @@ export const useApi = () => {
 					TIMEOUT_MS
 				);
 				const onRes = (res: T) => {
+					// @ts-ignore
 					socket.off(event, onRes);
 					clearTimeout(timeout);
 					callback?.(res);
 					resolve(res);
 				};
+				// @ts-ignore
 				socket.once(event, onRes);
 				to({ event, data });
 			});

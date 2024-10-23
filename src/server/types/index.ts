@@ -18,3 +18,12 @@ export type TAppContext = {
 
 type ReverseMap<T> = T[keyof T];
 export type TSocketEvent = ReverseMap<typeof SocketEvent>;
+
+export type TClientToServerSocketEvent = {
+	[SocketEvent.Hello]: (message: string) => void;
+};
+
+export type TServerToClientSocketEvent = {
+	[SocketEvent.Hello]: (message: string) => void;
+	[SocketEvent.Reload]: () => void;
+};
