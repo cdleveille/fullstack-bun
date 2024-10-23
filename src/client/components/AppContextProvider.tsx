@@ -9,7 +9,7 @@ export const AppContextProvider = ({ children }: { children: React.ReactNode }) 
 
 	const { helloToAndFrom, getScores } = useApi();
 
-	const { data } = helloToAndFrom("hello from client!", res => console.log(res));
+	const { data } = helloToAndFrom("hello from client!");
 
 	const { data: scores } = getScores();
 
