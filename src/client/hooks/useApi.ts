@@ -7,8 +7,6 @@ import { socket } from "@utils";
 
 const TIMEOUT_MS = 5000;
 
-type THelloToAndFromPayload = TClientToServerPayload[SocketEvent.Hello];
-
 type TReqParams<T extends keyof TClientToServerSocketEvent> = {
 	event: T;
 	data: Parameters<TClientToServerSocketEvent[T]>;
@@ -23,26 +21,24 @@ export const useApi = () => {
 	);
 
 	const toAndFrom = useCallback(
-		async <T extends keyof TServerToClientPayload>({ event, data }: TReqParams<T>) => {
+		async <T extends keyof TClientToServerSocketEvent>({ event, data }: TReqParams<T>) => {
 			return new Promise<TServerToClientPayload[T]>((resolve, reject) => {
 				const timeout = setTimeout(
 					() => reject(new Error(`Request timed out after ${TIMEOUT_MS}ms.`)),
 					TIMEOUT_MS
 				);
-				const onRes = (res: TServerToClientPayload[T]) => {
-					// @ts-ignore
-					socket.off(event, onRes);
+				// @ts-ignore
+				socket.once(event, (res: TServerToClientPayload[T]) => {
 					clearTimeout(timeout);
 					resolve(res);
-				};
-				// @ts-ignore
-				socket.once(event, onRes);
+				});
 				to({ event, data });
 			});
 		},
 		[socket, to]
 	);
 
+	type THelloToAndFromPayload = TClientToServerPayload[SocketEvent.Hello];
 	const helloToAndFrom = (message: THelloToAndFromPayload) =>
 		useQuery({
 			queryKey: ["helloToAndFrom"],
