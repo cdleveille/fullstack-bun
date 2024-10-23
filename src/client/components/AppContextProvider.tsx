@@ -7,9 +7,13 @@ export const AppContextProvider = ({ children }: { children: React.ReactNode }) 
 	const [message, setMessage] = usePersistedState("", "message");
 	const [count, setCount] = usePersistedState(0, "count");
 
-	const { helloToAndFrom } = useApi();
+	const { helloToAndFrom, getScores } = useApi();
 
 	const { data } = helloToAndFrom("hello from client!", res => console.log(res));
+
+	const { data: scores } = getScores();
+
+	if (scores) console.log(scores);
 
 	useEffect(() => {
 		if (data) setMessage(data);

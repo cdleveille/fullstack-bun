@@ -9,7 +9,8 @@ export enum Route {
 
 export enum SocketEvent {
 	Hello = "hello",
-	Reload = "reload"
+	Reload = "reload",
+	Scores = "scores"
 }
 
 export enum Path {

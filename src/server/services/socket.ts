@@ -20,6 +20,10 @@ export const initSocket = async (httpServer: HttpServer) => {
 			log.info(message);
 			socket.emit(SocketEvent.Hello, `${getGreeting()} from bun!`);
 		});
+
+		socket.on(SocketEvent.Scores, () => {
+			socket.emit(SocketEvent.Scores, [1, 2, 3, 4, 5]);
+		});
 	});
 };
 
