@@ -2,7 +2,7 @@ import { Server as HttpServer } from "http";
 import { Server } from "socket.io";
 
 import { GREETINGS, SocketEvent } from "@constants";
-import { Config } from "@helpers";
+import { Config, getRandomElements } from "@helpers";
 import { log } from "@services";
 import { TClientToServerSocketEvent, TServerToClientSocketEvent } from "@types";
 
@@ -21,8 +21,8 @@ export const initSocket = async (httpServer: HttpServer) => {
 			socket.emit(SocketEvent.Hello, `${getGreeting()} from bun!`);
 		});
 
-		socket.on(SocketEvent.Scores, () => {
-			socket.emit(SocketEvent.Scores, [1, 2, 3, 4, 5]);
+		socket.on(SocketEvent.Greetings, () => {
+			socket.emit(SocketEvent.Greetings, getRandomElements(GREETINGS, 5));
 		});
 	});
 };

@@ -46,11 +46,11 @@ export const useApi = () => {
 			queryFn: () => toAndFrom({ event: SocketEvent.Hello, data: [message] })
 		});
 
-	const getScores = () =>
+	const getGreetings = () =>
 		useQuery({
-			queryKey: ["getScores"],
-			queryFn: () => toAndFrom({ event: SocketEvent.Scores, data: [] })
+			queryKey: ["getGreetings"],
+			queryFn: () => toAndFrom({ event: SocketEvent.Greetings, data: [] })
 		});
 
-	return { socket, helloToAndFrom, getScores };
+	return { socket, helloToAndFrom, getGreetings };
 };

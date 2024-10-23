@@ -10,7 +10,7 @@ export enum Route {
 export enum SocketEvent {
 	Hello = "hello",
 	Reload = "reload",
-	Scores = "scores"
+	Greetings = "greetings"
 }
 
 export enum Path {

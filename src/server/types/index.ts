@@ -25,16 +25,16 @@ export type TClientToServerPayload = {
 
 export type TClientToServerSocketEvent = {
 	[SocketEvent.Hello]: (message: TClientToServerPayload[SocketEvent.Hello]) => void;
-	[SocketEvent.Scores]: () => void;
+	[SocketEvent.Greetings]: () => void;
 };
 
 export type TServerToClientPayload = {
 	[SocketEvent.Hello]: string;
-	[SocketEvent.Scores]: number[];
+	[SocketEvent.Greetings]: string[];
 };
 
 export type TServerToClientSocketEvent = {
 	[SocketEvent.Hello]: (message: TServerToClientPayload[SocketEvent.Hello]) => void;
 	[SocketEvent.Reload]: () => void;
-	[SocketEvent.Scores]: (scores: TServerToClientPayload[SocketEvent.Scores]) => void;
+	[SocketEvent.Greetings]: (greetings: TServerToClientPayload[SocketEvent.Greetings]) => void;
 };
