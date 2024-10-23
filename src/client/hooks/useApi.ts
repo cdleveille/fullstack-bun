@@ -25,17 +25,16 @@ export const useApi = () => {
 
 	const toAndFrom = useCallback(
 		async <T extends keyof TClientToServerSocketEvent>({ event, data }: TReqParams<T>) => {
-			return new Promise<Parameters<TServerToClientSocketEvent[T]>[0]>((resolve, reject) => {
+			type TResArgs = Parameters<TServerToClientSocketEvent[T]>;
+			return new Promise<TResArgs[0]>((resolve, reject) => {
 				const timeout = setTimeout(
 					() => reject(new Error(`Request timed out after ${TIMEOUT_MS}ms.`)),
 					TIMEOUT_MS
 				);
-				const onRes = (...args: Parameters<TServerToClientSocketEvent[T]>) => {
+				socket.once(event as SocketEvent, (...args: TResArgs) => {
 					clearTimeout(timeout);
 					resolve(args[0]);
-				};
-				// @ts-ignore
-				socket.once(event, onRes);
+				});
 				to({ event, data });
 			});
 		},
@@ -55,5 +54,5 @@ export const useApi = () => {
 			queryFn: () => toAndFrom({ event: SocketEvent.Greetings })
 		});
 
-	return { socket, helloToAndFrom, getGreetings };
+	return { helloToAndFrom, getGreetings };
 };
