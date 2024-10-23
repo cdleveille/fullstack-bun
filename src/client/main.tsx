@@ -15,7 +15,8 @@ window.addEventListener("load", async () => {
 	if (!navigator.serviceWorker.controller) await navigator.serviceWorker.register("./sw.js");
 });
 
-const rootDiv = document.getElementById("root")!;
+const rootDiv = document.getElementById("root");
+if (!rootDiv) throw new Error("Element with id 'root' not found");
 const root = createRoot(rootDiv);
 root.render(
 	<StrictMode>
