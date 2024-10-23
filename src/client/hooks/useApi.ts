@@ -2,7 +2,7 @@ import { useCallback } from "react";
 
 import { SocketEvent } from "@constants";
 import { useQuery } from "@tanstack/react-query";
-import type { TClientToServerPayload, TClientToServerSocketEvent, TServerToClientSocketEvent } from "@types";
+import type { TClientToServerSocketEvent, TServerToClientSocketEvent } from "@types";
 import { socket } from "@utils";
 
 const TIMEOUT_MS = 5000;
@@ -41,8 +41,7 @@ export const useApi = () => {
 		[socket, to]
 	);
 
-	type THelloToAndFromPayload = TClientToServerPayload[SocketEvent.Hello];
-	const helloToAndFrom = (message: THelloToAndFromPayload) =>
+	const helloToAndFrom = (message: string) =>
 		useQuery({
 			queryKey: ["helloToAndFrom"],
 			queryFn: () => toAndFrom({ event: SocketEvent.Hello, data: [message] })
