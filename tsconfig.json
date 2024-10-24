@@ -25,12 +25,12 @@
       "@components": ["./src/client/components"],
       "@constants": ["./src/server/constants"],
       "@contexts": ["./src/client/contexts"],
-      "@controllers": ["./src/server/controllers"],
       "@helpers": ["./src/server/helpers"],
       "@hooks": ["./src/client/hooks"],
       "@middleware": ["./src/server/middleware"],
       "@models": ["./src/server/models"],
       "@processes": ["./processes"],
+      "@routes": ["./src/server/routes"],
       "@services": ["./src/server/services"],
       "@types": ["./src/server/types"],
       "@utils": ["./src/client/utils"]

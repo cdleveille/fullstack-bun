@@ -2,17 +2,17 @@ import { Route, SocketEvent } from "@constants";
 
 export type TRequestMethod = "get" | "post" | "put" | "delete" | "patch" | "options" | "head" | "all";
 
-export type TReqRouteParams = {
+export type TRequestRouteParams = {
 	[Route.Hello]: undefined;
 	[Route.Goodbye]: undefined;
 };
 
-export type TReqQueryParams = {
+export type TRequestBody = {
 	[Route.Hello]: { name?: string };
 	[Route.Goodbye]: { name?: string };
 };
 
-export type TRequestBody = {
+export type TRequestQueryParams = {
 	[Route.Hello]: { name?: string };
 	[Route.Goodbye]: { name?: string };
 };

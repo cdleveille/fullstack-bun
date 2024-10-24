@@ -2,7 +2,14 @@ import type { NextFunction, Request, Response, Router } from "express";
 import { Schema } from "mongoose";
 
 import type { Route } from "@constants";
-import type { TBase, TReqQueryParams, TReqRouteParams, TRequestBody, TRequestMethod, TResponseBody } from "@types";
+import type {
+	TBase,
+	TRequestQueryParams,
+	TRequestRouteParams,
+	TRequestBody,
+	TRequestMethod,
+	TResponseBody
+} from "@types";
 
 export const BaseSchema = new Schema<TBase>({
 	created_at: {
@@ -31,7 +38,7 @@ export const registerRouteHandler = <T extends Route>(
 	method: TRequestMethod,
 	route: T,
 	handler: (arg: {
-		req: Request<TReqRouteParams[T], unknown, TRequestBody[T], TReqQueryParams[T]>;
+		req: Request<TRequestRouteParams[T], unknown, TRequestBody[T], TRequestQueryParams[T]>;
 		res: Response<TResponseBody[T]>;
 		next: NextFunction;
 	}) => void
@@ -39,7 +46,7 @@ export const registerRouteHandler = <T extends Route>(
 	router[method](
 		route,
 		(
-			req: Request<TReqRouteParams[T], unknown, TRequestBody[T], TReqQueryParams[T]>,
+			req: Request<TRequestRouteParams[T], unknown, TRequestBody[T], TRequestQueryParams[T]>,
 			res: Response<TResponseBody[T]>,
 			next: NextFunction
 		) => {

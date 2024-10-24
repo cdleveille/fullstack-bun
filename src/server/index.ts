@@ -3,9 +3,9 @@ import { createServer } from "http";
 import path from "path";
 
 import { Env, Path } from "@constants";
-import { initRoutes } from "@controllers";
 import { Config } from "@helpers";
 import { initMiddleware } from "@middleware";
+import { initRoutes } from "@routes";
 import { connectToDatabase, initSocket, log } from "@services";
 
 const { IS_PROD, PORT, SKIP_DB } = Config;
