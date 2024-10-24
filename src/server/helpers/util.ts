@@ -1,8 +1,15 @@
 import type { NextFunction, Request, Response, Router } from "express";
 import { Schema } from "mongoose";
 
-import type { RequestMethod, Route } from "@constants";
-import type { TBase, TRequestBody, TRequestQueryParams, TRequestRouteParams, TResponseBody } from "@types";
+import { RequestMethod, Route } from "@constants";
+import type {
+	TBase,
+	TRequestBody,
+	TRequestMethod,
+	TRequestQueryParams,
+	TRequestRouteParams,
+	TResponseBody
+} from "@types";
 
 export const BaseSchema = new Schema<TBase>({
 	created_at: {
@@ -28,7 +35,7 @@ export const getRandomElements = <T>(arr: T[], n: number) => {
 
 export const registerRoute = <T extends Route>(
 	router: Router,
-	method: RequestMethod,
+	method: TRequestMethod,
 	route: T,
 	handler: (arg: {
 		req: Request<TRequestRouteParams[T], unknown, TRequestBody[T], TRequestQueryParams[T]>;
@@ -36,7 +43,7 @@ export const registerRoute = <T extends Route>(
 		next: NextFunction;
 	}) => void
 ) => {
-	router[method](
+	router[RequestMethod[method]](
 		route,
 		(
 			req: Request<TRequestRouteParams[T], unknown, TRequestBody[T], TRequestQueryParams[T]>,

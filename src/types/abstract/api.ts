@@ -1,4 +1,6 @@
-import { Route, SocketEvent } from "@constants";
+import { type RequestMethod, Route, SocketEvent } from "@constants";
+
+export type TRequestMethod = keyof typeof RequestMethod;
 
 export type TRequestRouteParams = {
 	[Route.Hello]: undefined;
