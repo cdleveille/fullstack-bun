@@ -4,10 +4,10 @@ import { Schema } from "mongoose";
 import type { Route } from "@constants";
 import type {
 	TBase,
-	TRequestQueryParams,
-	TRequestRouteParams,
 	TRequestBody,
 	TRequestMethod,
+	TRequestQueryParams,
+	TRequestRouteParams,
 	TResponseBody
 } from "@types";
 

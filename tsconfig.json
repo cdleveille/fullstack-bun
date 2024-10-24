@@ -23,7 +23,7 @@
     "paths": {
       "@assets": ["./src/client/assets"],
       "@components": ["./src/client/components"],
-      "@constants": ["./src/server/constants"],
+      "@constants": ["./src/types/constants"],
       "@contexts": ["./src/client/contexts"],
       "@helpers": ["./src/server/helpers"],
       "@hooks": ["./src/client/hooks"],
@@ -32,7 +32,7 @@
       "@processes": ["./processes"],
       "@routes": ["./src/server/routes"],
       "@services": ["./src/server/services"],
-      "@types": ["./src/server/types"],
+      "@types": ["./src/types/abstract"],
       "@utils": ["./src/client/utils"]
     }
   },
