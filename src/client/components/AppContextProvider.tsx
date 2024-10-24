@@ -9,9 +9,11 @@ export const AppContextProvider = ({ children }: { children: React.ReactNode }) 
 
 	const { helloToAndFrom, getGreetings } = useApi();
 
-	const { data: hello } = helloToAndFrom("hello from client!");
+	const { data: hello, mutate: sendHello } = helloToAndFrom("hello from client!");
 
 	const { data: greetings } = getGreetings();
+
+	useEffect(sendHello, []);
 
 	useEffect(() => {
 		if (hello) setMessage(hello);
@@ -26,6 +28,7 @@ export const AppContextProvider = ({ children }: { children: React.ReactNode }) 
 	return (
 		<AppContext.Provider
 			value={{
+				sendHello,
 				message,
 				count,
 				setCount

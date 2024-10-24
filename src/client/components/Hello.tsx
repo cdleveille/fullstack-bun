@@ -1,7 +1,11 @@
 import { useAppContext } from "@hooks";
 
 export const Hello = () => {
-	const { message } = useAppContext();
+	const { sendHello, message } = useAppContext();
 
-	return <h1>{message}</h1>;
+	return (
+		<h1 onClick={sendHello} className="cursor-pointer">
+			{message}
+		</h1>
+	);
 };

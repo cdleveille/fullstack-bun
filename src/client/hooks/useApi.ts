@@ -1,7 +1,7 @@
 import { useCallback } from "react";
 
 import { SocketEvent } from "@constants";
-import { useQuery } from "@tanstack/react-query";
+import { useMutation, useQuery } from "@tanstack/react-query";
 import type { TClientToServerSocketEvent, TServerToClientSocketEvent } from "@types";
 import { socket } from "@utils";
 
@@ -42,10 +42,7 @@ export const useApi = () => {
 	);
 
 	const helloToAndFrom = (message: string) =>
-		useQuery({
-			queryKey: ["helloToAndFrom"],
-			queryFn: () => toAndFrom({ event: SocketEvent.Hello, data: [message] })
-		});
+		useMutation({ mutationFn: () => toAndFrom({ event: SocketEvent.Hello, data: [message] }) });
 
 	const getGreetings = () =>
 		useQuery({
