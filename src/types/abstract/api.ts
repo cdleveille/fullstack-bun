@@ -1,7 +1,5 @@
 import { Route, SocketEvent } from "@constants";
 
-export type TRequestMethod = "get" | "post" | "put" | "delete" | "patch" | "options" | "head" | "all";
-
 export type TRequestRouteParams = {
 	[Route.Hello]: undefined;
 	[Route.Goodbye]: undefined;

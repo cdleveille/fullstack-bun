@@ -1,10 +1,9 @@
 import express from "express";
 import { createServer } from "http";
-import path from "path";
 
-import { Env, Path } from "@constants";
+import { Env } from "@constants";
 import { Config } from "@helpers";
-import { initMiddleware } from "@middleware";
+import { errorHandler, initMiddleware, notFound } from "@middleware";
 import { initRoutes } from "@routes";
 import { connectToDatabase, initSocket, log } from "@services";
 
@@ -19,10 +18,6 @@ if (!SKIP_DB) await connectToDatabase();
 
 const app = express();
 
-app.use(express.json());
-
-app.use(express.static(path.resolve(Path.Public)));
-
 app.set("json spaces", 2);
 
 app.disable("x-powered-by");
@@ -30,9 +25,13 @@ app.disable("x-powered-by");
 const httpServer = createServer(app);
 await initSocket(httpServer);
 
+initMiddleware(app);
+
 initRoutes(app);
 
-initMiddleware(app);
+// these must be applied last
+app.use(notFound());
+app.use(errorHandler());
 
 httpServer.listen(PORT, () => {
 	log.info(

@@ -1,12 +1,24 @@
 import compression from "compression";
 import cors from "cors";
-import type { Express } from "express";
+import express, { type Express } from "express";
 import helmet from "helmet";
 import nocache from "nocache";
+import path from "path";
 
-import { errorHandler, notFound } from "@middleware";
+import { Path } from "@constants";
 
 export const initMiddleware = (app: Express) => {
+	app.use(express.static(path.resolve(Path.Public)));
+
+	app.use(express.json());
+	app.use(express.urlencoded({ extended: true }));
+
+	app.use(compression());
+
+	app.use(cors());
+
+	app.use(nocache());
+
 	app.use(
 		helmet.contentSecurityPolicy({
 			directives: {
@@ -33,16 +45,6 @@ export const initMiddleware = (app: Express) => {
 			}
 		})
 	);
-
-	app.use(compression());
-
-	app.use(cors());
-
-	app.use(nocache());
-
-	app.use(notFound());
-
-	app.use(errorHandler());
 };
 
 export * from "./errorHandler";

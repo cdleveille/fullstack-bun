@@ -1,22 +1,18 @@
 import { type Express, Router } from "express";
 
-import { Route } from "@constants";
-import { registerRouteHandler } from "@helpers";
+import { RequestMethod, Route } from "@constants";
+import { registerRoute } from "@helpers";
 
 export const initRoutes = (app: Express) => {
 	const router = Router();
 
-	registerRouteHandler(router, "get", Route.Hello, ({ req, res }) => {
-		const { name: queryName } = req.query;
-		const { name: bodyName } = req.body;
-		const name = queryName ?? bodyName;
+	registerRoute(router, RequestMethod.GET, Route.Hello, ({ req, res }) => {
+		const { name } = req.query;
 		res.json({ message: `Hello${name ? `, ${name}` : ""}!` });
 	});
 
-	registerRouteHandler(router, "get", Route.Goodbye, ({ req, res }) => {
-		const { name: queryName } = req.query;
-		const { name: bodyName } = req.body;
-		const name = queryName ?? bodyName;
+	registerRoute(router, RequestMethod.GET, Route.Goodbye, ({ req, res }) => {
+		const { name } = req.query;
 		res.json({ message: `Goodbye${name ? `, ${name}` : ""}!` });
 	});
 
