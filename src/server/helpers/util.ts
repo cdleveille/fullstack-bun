@@ -43,15 +43,15 @@ export const registerRoute = <T extends Route>(
 	method: TRequestMethod,
 	route: T,
 	handler: (arg: {
-		req: Request<TRequestRouteParams<T>, unknown, TRequestBody<T>, TRequestQueryParams<T>>;
+		req: Request<TRequestRouteParams<T>, TResponseBody<T>, TRequestBody<T>, TRequestQueryParams<T>>;
 		res: Response<TResponseBody<T>>;
 		next: NextFunction;
-	}) => void
+	}) => Promise<void> | void
 ) => {
 	router[RequestMethod[method]](
 		route,
-		(
-			req: Request<TRequestRouteParams<T>, unknown, TRequestBody<T>, TRequestQueryParams<T>>,
+		async (
+			req: Request<TRequestRouteParams<T>, TResponseBody<T>, TRequestBody<T>, TRequestQueryParams<T>>,
 			res: Response<TResponseBody<T>>,
 			next: NextFunction
 		) => {
@@ -59,7 +59,7 @@ export const registerRoute = <T extends Route>(
 				validateRouteParams(route, req.params);
 				validateBody(route, req.body);
 				validateQuery(route, req.query);
-				handler({ req, res, next });
+				await handler({ req, res, next });
 			} catch (error) {
 				next(error);
 			}
@@ -98,10 +98,11 @@ const validateQuery = <T extends Route>(route: T, query: unknown) => {
 const throwValidationError = (message: string, error: ZodError) => {
 	const errorMessages = error.errors
 		.map(err => {
-			const error = err as ZodIssue & { expected: string };
+			const error = err as ZodIssue & { expected?: string };
 			const path = error.path.join(".");
 			const message = error.message;
-			return `${path}<${error.expected}>: ${message}`;
+			const expected = error.expected ? ` <${error.expected}>` : "";
+			return `${path}${expected}: ${message}`;
 		})
 		.join(", ");
 	throw new CustomError(`${message}: ${errorMessages}`, 400);

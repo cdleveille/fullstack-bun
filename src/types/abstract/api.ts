@@ -4,25 +4,32 @@ import { type RequestMethod, Route, SocketEvent } from "@constants";
 
 export type TRequestMethod = keyof typeof RequestMethod;
 
-export const RequestRouteParamsSchema = {};
+const UserSchema = z.object({ username: z.string() });
+
+const NewUserSchema = z.object({
+	username: z.string().min(4)
+});
+
+export const RequestRouteParamsSchema = {
+	[Route.UserByUsername]: z.object(UserSchema.shape),
+	[Route.UpdateUser]: z.object(UserSchema.shape),
+	[Route.DeleteUser]: z.object(UserSchema.shape)
+};
 
 export const RequestBodySchema = {
-	[Route.Hello]: z.object({ name: z.string().optional() })
+	[Route.NewUser]: z.object(NewUserSchema.shape),
+	[Route.UpdateUser]: z.object(NewUserSchema.shape)
 };
 
-export const RequestQueryParamsSchema = {
-	[Route.Hello]: z.object({ name: z.string().optional() }),
-	[Route.Goodbye]: z.object({ name: z.string().optional() })
-};
+export const RequestQueryParamsSchema = {};
 
 export const ResponseBodySchema = {
-	[Route.Hello]: z.object({ message: z.string() }),
-	[Route.Goodbye]: z.object({ message: z.string() })
+	[Route.User]: z.array(z.object(UserSchema.shape)),
+	[Route.UserByUsername]: z.object(UserSchema.shape),
+	[Route.NewUser]: z.object(UserSchema.shape),
+	[Route.UpdateUser]: z.object(UserSchema.shape),
+	[Route.DeleteUser]: z.object(UserSchema.shape)
 };
-
-export type TResponseBody<T extends Route> = T extends keyof typeof ResponseBodySchema
-	? z.infer<(typeof ResponseBodySchema)[T]>
-	: object;
 
 export type TClientToServerSocketEvent = {
 	[SocketEvent.Hello]: (message: string) => void;
@@ -45,4 +52,8 @@ export type TRequestBody<T extends Route> = T extends keyof typeof RequestBodySc
 
 export type TRequestQueryParams<T extends Route> = T extends keyof typeof RequestQueryParamsSchema
 	? z.infer<(typeof RequestQueryParamsSchema)[T]>
+	: object;
+
+export type TResponseBody<T extends Route> = T extends keyof typeof ResponseBodySchema
+	? z.infer<(typeof ResponseBodySchema)[T]>
 	: object;

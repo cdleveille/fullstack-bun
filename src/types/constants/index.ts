@@ -17,8 +17,11 @@ export enum RequestMethod {
 }
 
 export enum Route {
-	Hello = "/hello",
-	Goodbye = "/goodbye"
+	User = "/user",
+	UserByUsername = "/user/:username",
+	NewUser = "/user/new",
+	UpdateUser = "/user/:username/update",
+	DeleteUser = "/user/:username/delete"
 }
 
 export enum SocketEvent {

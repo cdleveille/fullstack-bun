@@ -5,5 +5,4 @@ export type TBase = {
 
 export type TUser = {
 	username: string;
-	password: string;
 };
