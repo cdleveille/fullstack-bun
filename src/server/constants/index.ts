@@ -4,7 +4,8 @@ export enum Env {
 }
 
 export enum Route {
-	Hello = "/hello"
+	Hello = "/hello",
+	Goodbye = "/goodbye"
 }
 
 export enum SocketEvent {

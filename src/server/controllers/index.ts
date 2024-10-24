@@ -1,9 +1,9 @@
 import type { Express } from "express";
 
-import { helloRouter } from "@controllers";
+import { router } from "@controllers";
 
 export const initRoutes = (app: Express) => {
-	app.use(helloRouter);
+	app.use(router);
 };
 
-export * from "./hello";
+export * from "./router";

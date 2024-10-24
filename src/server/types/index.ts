@@ -1,5 +1,3 @@
-import { SocketEvent } from "@constants";
-
 export type TBase = {
 	created_at: Date;
 	updated_at: Date;
@@ -16,13 +14,4 @@ export type TAppContext = {
 	setCount: React.Dispatch<React.SetStateAction<number>>;
 };
 
-export type TClientToServerSocketEvent = {
-	[SocketEvent.Hello]: (message: string) => void;
-	[SocketEvent.Greetings]: () => void;
-};
-
-export type TServerToClientSocketEvent = {
-	[SocketEvent.Hello]: (message: string) => void;
-	[SocketEvent.Reload]: () => void;
-	[SocketEvent.Greetings]: (greetings: string[]) => void;
-};
+export * from "./api";

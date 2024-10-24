@@ -19,11 +19,13 @@ if (!SKIP_DB) await connectToDatabase();
 
 const app = express();
 
+app.use(express.json());
+
+app.use(express.static(path.resolve(Path.Public)));
+
 app.set("json spaces", 2);
 
 app.disable("x-powered-by");
-
-app.use(express.static(path.resolve(Path.Public)));
 
 const httpServer = createServer(app);
 await initSocket(httpServer);
@@ -33,5 +35,7 @@ initRoutes(app);
 initMiddleware(app);
 
 httpServer.listen(PORT, () => {
-	log.info(`Server started in ${IS_PROD ? Env.Production : Env.Development} mode - listening on port ${PORT}`);
+	log.info(
+		`Server started in ${IS_PROD ? Env.Production : Env.Development} mode - listening on ${!IS_PROD ? "http://localhost:" : "port "}${PORT}`
+	);
 });
