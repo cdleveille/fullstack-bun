@@ -4,7 +4,7 @@ import { Server } from "socket.io";
 import { GREETINGS, SocketEvent } from "@constants";
 import { Config, getRandomElements } from "@helpers";
 import { log } from "@services";
-import { TClientToServerSocketEvent, TServerToClientSocketEvent } from "@types";
+import type { TClientToServerSocketEvent, TServerToClientSocketEvent } from "@types";
 
 export const initSocket = async (httpServer: HttpServer) => {
 	const io = new Server<TClientToServerSocketEvent, TServerToClientSocketEvent>(httpServer);

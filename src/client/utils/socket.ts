@@ -1,7 +1,7 @@
-import { io, Socket } from "socket.io-client";
+import { io, type Socket } from "socket.io-client";
 
 import { SocketEvent } from "@constants";
-import { TClientToServerSocketEvent, TServerToClientSocketEvent } from "@types";
+import type { TClientToServerSocketEvent, TServerToClientSocketEvent } from "@types";
 
 export const socket: Socket<TServerToClientSocketEvent, TClientToServerSocketEvent> = io();
 
