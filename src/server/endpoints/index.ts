@@ -9,80 +9,80 @@ export * from "./register";
 export const registerEndpoints = (app: Express) => {
 	const router = Router();
 
-	registerEndpoint(
+	registerEndpoint({
 		router,
-		"GET",
-		"/user",
-		async ({ res }) => {
+		method: "GET",
+		route: "/user",
+		handler: async ({ res }) => {
 			const users = await User.getAllUsers();
 			res.json(users);
 		},
-		{
-			responseBodySchema: z.array(z.object({ username: z.string() }))
+		schema: {
+			responseBody: z.array(z.object({ username: z.string() }))
 		}
-	);
+	});
 
-	registerEndpoint(
+	registerEndpoint({
 		router,
-		"GET",
-		"/user/:username",
-		async ({ req, res }) => {
+		method: "GET",
+		route: "/user/:username",
+		handler: async ({ req, res }) => {
 			const { username } = req.params;
 			const user = await User.assertUserExists(username);
 			res.json(user);
 		},
-		{
-			requestRouteParamsSchema: z.object({ username: z.string() }),
-			responseBodySchema: z.object({ username: z.string() })
+		schema: {
+			requestRouteParams: z.object({ username: z.string() }),
+			responseBody: z.object({ username: z.string() })
 		}
-	);
+	});
 
-	registerEndpoint(
+	registerEndpoint({
 		router,
-		"POST",
-		"/user",
-		async ({ req, res }) => {
+		method: "POST",
+		route: "/user",
+		handler: async ({ req, res }) => {
 			const { username } = req.body;
 			const user = await User.newUser(username);
 			res.status(201).json(user);
 		},
-		{
-			requestBodySchema: z.object({ username: z.string().min(4) }),
-			responseBodySchema: z.object({ username: z.string() })
+		schema: {
+			requestBody: z.object({ username: z.string().min(4) }),
+			responseBody: z.object({ username: z.string() })
 		}
-	);
+	});
 
-	registerEndpoint(
+	registerEndpoint({
 		router,
-		"PATCH",
-		"/user/:username",
-		async ({ req, res }) => {
+		method: "PATCH",
+		route: "/user/:username",
+		handler: async ({ req, res }) => {
 			const { username } = req.params;
 			const { username: newUsername } = req.body;
 			const updatedUser = await User.updateUser(username, newUsername);
 			res.json(updatedUser);
 		},
-		{
-			requestRouteParamsSchema: z.object({ username: z.string() }),
-			requestBodySchema: z.object({ username: z.string().min(4) }),
-			responseBodySchema: z.object({ username: z.string() })
+		schema: {
+			requestRouteParams: z.object({ username: z.string() }),
+			requestBody: z.object({ username: z.string().min(4) }),
+			responseBody: z.object({ username: z.string() })
 		}
-	);
+	});
 
-	registerEndpoint(
+	registerEndpoint({
 		router,
-		"DELETE",
-		"/user/:username",
-		async ({ req, res }) => {
+		method: "DELETE",
+		route: "/user/:username",
+		handler: async ({ req, res }) => {
 			const { username } = req.params;
 			const user = await User.deleteUser(username);
 			res.json(user);
 		},
-		{
-			requestRouteParamsSchema: z.object({ username: z.string() }),
-			responseBodySchema: z.object({ username: z.string() })
+		schema: {
+			requestRouteParams: z.object({ username: z.string() }),
+			responseBody: z.object({ username: z.string() })
 		}
-	);
+	});
 
 	app.use(router);
 };

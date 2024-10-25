@@ -1,53 +1,40 @@
-import type { NextFunction, Request, Response, Router } from "express";
+import type { NextFunction, Request, Response } from "express";
 import { z, type ZodError, type ZodIssue } from "zod";
 
 import { RequestMethod } from "@constants";
 import { CustomError } from "@helpers";
-import type { TRequestMethod } from "@types";
+import type { TRegisterEndpointProps } from "@types";
 
 export const registerEndpoint = <
 	TRouteParams extends z.ZodTypeAny = z.ZodAny,
 	TReqBody extends z.ZodTypeAny = z.ZodAny,
 	TQueryParams extends z.ZodTypeAny = z.ZodAny,
 	TResBody extends z.ZodTypeAny = z.ZodAny
->(
-	router: Router,
-	method: TRequestMethod,
-	route: string,
-	handler: (arg: {
-		req: Request<z.infer<TRouteParams>, unknown, z.infer<TReqBody>, z.infer<TQueryParams>>;
-		res: Response<z.infer<TResBody>>;
-		next: NextFunction;
-	}) => Promise<void> | void,
-	schema: {
-		requestRouteParamsSchema?: TRouteParams;
-		requestBodySchema?: TReqBody;
-		requestQueryParamsSchema?: TQueryParams;
-		responseBodySchema?: TResBody;
-	} = {}
-) => {
-	const {
-		requestRouteParamsSchema = z.any(),
-		requestBodySchema = z.any(),
-		requestQueryParamsSchema = z.any()
-	} = schema;
+>({
+	router,
+	method,
+	route,
+	handler,
+	schema = {}
+}: TRegisterEndpointProps<TRouteParams, TReqBody, TQueryParams, TResBody>) => {
+	const { requestRouteParams = z.any(), requestBody = z.any(), requestQueryParams = z.any() } = schema;
 
 	router[RequestMethod[method]](
 		route,
 		async (
 			req: Request<
-				z.infer<typeof requestRouteParamsSchema>,
+				z.infer<typeof requestRouteParams>,
 				unknown,
-				z.infer<typeof requestBodySchema>,
-				z.infer<typeof requestQueryParamsSchema>
+				z.infer<typeof requestBody>,
+				z.infer<typeof requestQueryParams>
 			>,
 			res: Response<TResBody>,
 			next: NextFunction
 		) => {
 			try {
-				validateRouteParams(requestRouteParamsSchema, req.params);
-				validateBody(requestBodySchema, req.body);
-				validateQueryParams(requestQueryParamsSchema, req.query);
+				validatePayload(requestRouteParams, req.params, "Invalid request route parameter(s)");
+				validatePayload(requestBody, req.body, "Invalid request body");
+				validatePayload(requestQueryParams, req.query, "Invalid request query parameter(s)");
 				await handler({ req, res, next });
 			} catch (error) {
 				next(error);
@@ -56,19 +43,9 @@ export const registerEndpoint = <
 	);
 };
 
-const validateRouteParams = <T extends z.ZodTypeAny>(schema: T, routeParams: unknown) => {
-	const result = schema.safeParse(routeParams);
-	if (!result.success) throwValidationError("Invalid request route parameter(s)", result.error);
-};
-
-const validateBody = <T extends z.ZodTypeAny>(schema: T, body: unknown) => {
-	const result = schema.safeParse(body);
-	if (!result.success) throwValidationError("Invalid request body", result.error);
-};
-
-const validateQueryParams = <T extends z.ZodTypeAny>(schema: T, queryParams: unknown) => {
-	const result = schema.safeParse(queryParams);
-	if (!result.success) throwValidationError("Invalid request query parameter(s)", result.error);
+const validatePayload = <T extends z.ZodTypeAny>(schema: T, object: unknown, message = "Invalid payload") => {
+	const result = schema.safeParse(object);
+	if (!result.success) throwValidationError(message, result.error);
 };
 
 const throwValidationError = (message: string, error: ZodError) => {
