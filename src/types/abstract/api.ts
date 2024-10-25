@@ -52,7 +52,7 @@ export type TRegisterEndpointProps<
 	schema: TEndpointSchema<TRequestRouteParams, TResponseBody, TRequestBody, TRequestQueryParams>;
 };
 
-export type TValidatePayloadAgainstSchemaProps<T extends z.ZodTypeAny> = {
+export type TValidateRequestPayloadAgainstSchemaProps<T extends z.ZodTypeAny> = {
 	payload: unknown;
 	schema: T;
 	message?: string;

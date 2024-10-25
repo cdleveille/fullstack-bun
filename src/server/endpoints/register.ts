@@ -3,7 +3,7 @@ import { z, type ZodError, type ZodIssue } from "zod";
 
 import { RequestMethod } from "@constants";
 import { CustomError } from "@helpers";
-import type { TRegisterEndpointProps, TValidatePayloadAgainstSchemaProps } from "@types";
+import type { TRegisterEndpointProps, TValidateRequestPayloadAgainstSchemaProps } from "@types";
 
 export const registerEndpoint = <
 	TRouteParams extends z.ZodTypeAny,
@@ -32,17 +32,17 @@ export const registerEndpoint = <
 			next: NextFunction
 		) => {
 			try {
-				validatePayloadAgainstSchema({
+				validateRequestPayloadAgainstSchema({
 					payload: req.params,
 					schema: requestRouteParams,
 					message: "Invalid request route parameter(s)"
 				});
-				validatePayloadAgainstSchema({
+				validateRequestPayloadAgainstSchema({
 					payload: req.body,
 					schema: requestBody,
 					message: "Invalid request body"
 				});
-				validatePayloadAgainstSchema({
+				validateRequestPayloadAgainstSchema({
 					payload: req.query,
 					schema: requestQueryParams,
 					message: "Invalid request query parameter(s)"
@@ -55,11 +55,11 @@ export const registerEndpoint = <
 	);
 };
 
-const validatePayloadAgainstSchema = <T extends z.ZodTypeAny>({
+const validateRequestPayloadAgainstSchema = <T extends z.ZodTypeAny>({
 	payload,
 	schema,
-	message = "Invalid payload"
-}: TValidatePayloadAgainstSchemaProps<T>) => {
+	message = "Invalid request payload"
+}: TValidateRequestPayloadAgainstSchemaProps<T>) => {
 	const result = schema.safeParse(payload);
 	if (!result.success) throwValidationError(message, result.error);
 };
