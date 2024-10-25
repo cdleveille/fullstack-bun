@@ -14,8 +14,6 @@ export type TServerToClientSocketEvent = {
 	[SocketEvent.Greetings]: (greetings: string[]) => void;
 };
 
-export type TRequestMethod = keyof typeof RequestMethod;
-
 export type TZodAnyOrUndefined = ZodTypeAny | undefined;
 
 export type TEndpoint<
@@ -24,7 +22,7 @@ export type TEndpoint<
 	TQueryParams extends TZodAnyOrUndefined = undefined,
 	TResBody extends TZodAnyOrUndefined = undefined
 > = {
-	method: TRequestMethod;
+	method: keyof typeof RequestMethod;
 	route: Route;
 	requestRouteParamsSchema?: TRouteParams;
 	requestBodySchema?: TReqBody;
