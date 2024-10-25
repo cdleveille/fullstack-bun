@@ -2,9 +2,9 @@ import express from "express";
 import { createServer } from "http";
 
 import { Env } from "@constants";
+import { registerEndpoints } from "@endpoints";
 import { Config } from "@helpers";
 import { errorHandler, initMiddleware, notFound } from "@middleware";
-import { initRoutes } from "@routes";
 import { connectToDatabase, initSocket, log } from "@services";
 
 const { IS_PROD, PORT, SKIP_DB } = Config;
@@ -27,7 +27,7 @@ await initSocket(httpServer);
 
 initMiddleware(app);
 
-initRoutes(app);
+registerEndpoints(app);
 
 // these must be applied last
 app.use(notFound());

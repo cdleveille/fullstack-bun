@@ -7,6 +7,9 @@ import path from "path";
 
 import { Path } from "@constants";
 
+export * from "./errorHandler";
+export * from "./notFound";
+
 export const initMiddleware = (app: Express) => {
 	app.use(express.static(path.resolve(Path.Public)));
 
@@ -46,6 +49,3 @@ export const initMiddleware = (app: Express) => {
 		})
 	);
 };
-
-export * from "./errorHandler";
-export * from "./notFound";
