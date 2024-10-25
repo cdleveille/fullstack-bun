@@ -16,19 +16,6 @@ export enum RequestMethod {
 	ALL = "all"
 }
 
-export enum Endpoint {
-	GetAllUsers = "getAllUsers",
-	GetUserByUsername = "getUserByUsername",
-	NewUser = "newUser",
-	UpdateUser = "updateUser",
-	DeleteUser = "deleteUser"
-}
-
-export enum Route {
-	User = "/user",
-	UserByUsername = "/user/:username"
-}
-
 export enum SocketEvent {
 	Hello = "hello",
 	Reload = "reload",

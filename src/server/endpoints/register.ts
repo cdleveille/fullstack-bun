@@ -1,32 +1,53 @@
-import { type NextFunction, type Request, type Response, Router } from "express";
+import type { NextFunction, Request, Response, Router } from "express";
 import { z, type ZodError, type ZodIssue } from "zod";
 
-import { Endpoint, RequestMethod } from "@constants";
-import { Endpoints } from "@endpoints";
+import { RequestMethod } from "@constants";
 import { CustomError } from "@helpers";
-import type { TRequestBody, TRequestQueryParams, TRequestRouteParams, TResponseBody } from "@types";
+import type { TRequestMethod } from "@types";
 
-export const registerEndpoint = <T extends Endpoint>(
+export const registerEndpoint = <
+	TRouteParams extends z.ZodTypeAny = z.ZodAny,
+	TReqBody extends z.ZodTypeAny = z.ZodAny,
+	TQueryParams extends z.ZodTypeAny = z.ZodAny,
+	TResBody extends z.ZodTypeAny = z.ZodAny
+>(
 	router: Router,
-	endpointKey: T,
+	method: TRequestMethod,
+	route: string,
 	handler: (arg: {
-		req: Request<TRequestRouteParams<T>, TResponseBody<T>, TRequestBody<T>, TRequestQueryParams<T>>;
-		res: Response<TResponseBody<T>>;
+		req: Request<z.infer<TRouteParams>, unknown, z.infer<TReqBody>, z.infer<TQueryParams>>;
+		res: Response<z.infer<TResBody>>;
 		next: NextFunction;
-	}) => Promise<void> | void
+	}) => Promise<void> | void,
+	schema: {
+		requestRouteParamsSchema?: TRouteParams;
+		requestBodySchema?: TReqBody;
+		requestQueryParamsSchema?: TQueryParams;
+		responseBodySchema?: TResBody;
+	} = {}
 ) => {
-	const endpoint = Endpoints[endpointKey];
-	router[RequestMethod[endpoint.method]](
-		endpoint.route,
+	const {
+		requestRouteParamsSchema = z.any(),
+		requestBodySchema = z.any(),
+		requestQueryParamsSchema = z.any()
+	} = schema;
+
+	router[RequestMethod[method]](
+		route,
 		async (
-			req: Request<TRequestRouteParams<T>, TResponseBody<T>, TRequestBody<T>, TRequestQueryParams<T>>,
-			res: Response<TResponseBody<T>>,
+			req: Request<
+				z.infer<typeof requestRouteParamsSchema>,
+				unknown,
+				z.infer<typeof requestBodySchema>,
+				z.infer<typeof requestQueryParamsSchema>
+			>,
+			res: Response<TResBody>,
 			next: NextFunction
 		) => {
 			try {
-				validateRouteParams(endpointKey, req.params);
-				validateBody(endpointKey, req.body);
-				validateQueryParams(endpointKey, req.query);
+				validateRouteParams(requestRouteParamsSchema, req.params);
+				validateBody(requestBodySchema, req.body);
+				validateQueryParams(requestQueryParamsSchema, req.query);
 				await handler({ req, res, next });
 			} catch (error) {
 				next(error);
@@ -35,24 +56,18 @@ export const registerEndpoint = <T extends Endpoint>(
 	);
 };
 
-const validateRouteParams = (endpointKey: Endpoint, routeParams: unknown) => {
-	const endpoint = Endpoints[endpointKey];
-	const schema = "requestRouteParamsSchema" in endpoint ? endpoint.requestRouteParamsSchema : z.any();
-	const result = (schema as z.ZodTypeAny).safeParse(routeParams);
+const validateRouteParams = <T extends z.ZodTypeAny>(schema: T, routeParams: unknown) => {
+	const result = schema.safeParse(routeParams);
 	if (!result.success) throwValidationError("Invalid request route parameter(s)", result.error);
 };
 
-const validateBody = (endpointKey: Endpoint, body: unknown) => {
-	const endpoint = Endpoints[endpointKey];
-	const schema = "requestBodySchema" in endpoint ? endpoint.requestBodySchema : z.any();
-	const result = (schema as z.ZodTypeAny).safeParse(body);
+const validateBody = <T extends z.ZodTypeAny>(schema: T, body: unknown) => {
+	const result = schema.safeParse(body);
 	if (!result.success) throwValidationError("Invalid request body", result.error);
 };
 
-const validateQueryParams = (endpointKey: Endpoint, queryParams: unknown) => {
-	const endpoint = Endpoints[endpointKey];
-	const schema = "requestQueryParamsSchema" in endpoint ? endpoint.requestQueryParamsSchema : z.any();
-	const result = (schema as z.ZodTypeAny).safeParse(queryParams);
+const validateQueryParams = <T extends z.ZodTypeAny>(schema: T, queryParams: unknown) => {
+	const result = schema.safeParse(queryParams);
 	if (!result.success) throwValidationError("Invalid request query parameter(s)", result.error);
 };
 
