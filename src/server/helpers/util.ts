@@ -2,15 +2,16 @@ import type { NextFunction, Request, Response, Router } from "express";
 import { Schema } from "mongoose";
 import { z, type ZodError, type ZodIssue } from "zod";
 
-import { RequestMethod, Route } from "@constants";
+import { RequestMethod } from "@constants";
 import { CustomError } from "@helpers";
 import {
+	Endpoint,
 	RequestBodySchema,
 	RequestQueryParamsSchema,
 	RequestRouteParamsSchema,
 	type TBase,
+	type TEndpointKey,
 	type TRequestBody,
-	type TRequestMethod,
 	type TRequestQueryParams,
 	type TRequestRouteParams,
 	type TResponseBody
@@ -38,27 +39,27 @@ export const getRandomElements = <T>(arr: T[], n: number) => {
 	return arr.slice(0, n);
 };
 
-export const registerRoute = <T extends Route>(
+export const registerEndpoint = <T extends TEndpointKey>(
 	router: Router,
-	method: TRequestMethod,
-	route: T,
+	endpointKey: T,
 	handler: (arg: {
 		req: Request<TRequestRouteParams<T>, TResponseBody<T>, TRequestBody<T>, TRequestQueryParams<T>>;
 		res: Response<TResponseBody<T>>;
 		next: NextFunction;
 	}) => Promise<void> | void
 ) => {
-	router[RequestMethod[method]](
-		route,
+	const endpoint = Endpoint[endpointKey];
+	router[RequestMethod[endpoint.method]](
+		endpoint.route,
 		async (
 			req: Request<TRequestRouteParams<T>, TResponseBody<T>, TRequestBody<T>, TRequestQueryParams<T>>,
 			res: Response<TResponseBody<T>>,
 			next: NextFunction
 		) => {
 			try {
-				validateRouteParams(route, req.params);
-				validateBody(route, req.body);
-				validateQuery(route, req.query);
+				validateRouteParams(endpointKey, req.params);
+				validateBody(endpointKey, req.body);
+				validateQueryParams(endpointKey, req.query);
 				await handler({ req, res, next });
 			} catch (error) {
 				next(error);
@@ -67,32 +68,29 @@ export const registerRoute = <T extends Route>(
 	);
 };
 
-const validateRouteParams = <T extends Route>(route: T, routeParams: unknown) => {
+const validateRouteParams = (endpointKey: TEndpointKey, routeParams: unknown) => {
 	const schema =
-		route in RequestRouteParamsSchema
-			? RequestRouteParamsSchema[route as keyof typeof RequestRouteParamsSchema]
-			: z.object({});
+		endpointKey in RequestRouteParamsSchema
+			? RequestRouteParamsSchema[endpointKey as keyof typeof RequestRouteParamsSchema]
+			: z.any();
 	const result = schema.safeParse(routeParams);
 	if (!result.success) throwValidationError("Invalid request route parameter(s)", result.error);
-	return result.data;
 };
 
-const validateBody = <T extends Route>(route: T, body: unknown) => {
+const validateBody = (endpointKey: TEndpointKey, body: unknown) => {
 	const schema =
-		route in RequestBodySchema ? RequestBodySchema[route as keyof typeof RequestBodySchema] : z.object({});
+		endpointKey in RequestBodySchema ? RequestBodySchema[endpointKey as keyof typeof RequestBodySchema] : z.any();
 	const result = schema.safeParse(body);
 	if (!result.success) throwValidationError("Invalid request body", result.error);
-	return result.data;
 };
 
-const validateQuery = <T extends Route>(route: T, query: unknown) => {
+const validateQueryParams = (endpointKey: TEndpointKey, queryParams: unknown) => {
 	const schema =
-		route in RequestQueryParamsSchema
-			? RequestQueryParamsSchema[route as keyof typeof RequestQueryParamsSchema]
-			: z.object({});
-	const result = schema.safeParse(query);
+		endpointKey in RequestQueryParamsSchema
+			? RequestQueryParamsSchema[endpointKey as keyof typeof RequestQueryParamsSchema]
+			: z.any();
+	const result = schema.safeParse(queryParams);
 	if (!result.success) throwValidationError("Invalid request query parameter(s)", result.error);
-	return result.data;
 };
 
 const throwValidationError = (message: string, error: ZodError) => {

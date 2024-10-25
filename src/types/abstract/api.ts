@@ -11,24 +11,24 @@ const NewUserSchema = z.object({
 });
 
 export const RequestRouteParamsSchema = {
-	[Route.UserByUsername]: z.object(UserSchema.shape),
-	[Route.UpdateUser]: z.object(UserSchema.shape),
-	[Route.DeleteUser]: z.object(UserSchema.shape)
+	getUserByUsername: UserSchema,
+	updateUser: UserSchema,
+	deleteUser: UserSchema
 };
 
 export const RequestBodySchema = {
-	[Route.NewUser]: z.object(NewUserSchema.shape),
-	[Route.UpdateUser]: z.object(NewUserSchema.shape)
+	newUser: NewUserSchema,
+	updateUser: NewUserSchema
 };
 
 export const RequestQueryParamsSchema = {};
 
 export const ResponseBodySchema = {
-	[Route.User]: z.array(z.object(UserSchema.shape)),
-	[Route.UserByUsername]: z.object(UserSchema.shape),
-	[Route.NewUser]: z.object(UserSchema.shape),
-	[Route.UpdateUser]: z.object(UserSchema.shape),
-	[Route.DeleteUser]: z.object(UserSchema.shape)
+	getAllUsers: z.array(UserSchema),
+	getUserByUsername: UserSchema,
+	newUser: UserSchema,
+	updateUser: UserSchema,
+	deleteUser: UserSchema
 };
 
 export type TClientToServerSocketEvent = {
@@ -42,18 +42,48 @@ export type TServerToClientSocketEvent = {
 	[SocketEvent.Greetings]: (greetings: string[]) => void;
 };
 
-export type TRequestRouteParams<T extends Route> = T extends keyof typeof RequestRouteParamsSchema
+export type TEndpoint = {
+	method: TRequestMethod;
+	route: Route;
+};
+
+export const Endpoint = {
+	getAllUsers: {
+		method: "GET",
+		route: Route.User
+	},
+	getUserByUsername: {
+		method: "GET",
+		route: Route.UserByUsername
+	},
+	newUser: {
+		method: "POST",
+		route: Route.User
+	},
+	updateUser: {
+		method: "PATCH",
+		route: Route.UserByUsername
+	},
+	deleteUser: {
+		method: "DELETE",
+		route: Route.UserByUsername
+	}
+} satisfies Record<string, TEndpoint>;
+
+export type TEndpointKey = keyof typeof Endpoint;
+
+export type TRequestRouteParams<T extends TEndpointKey> = T extends keyof typeof RequestRouteParamsSchema
 	? z.infer<(typeof RequestRouteParamsSchema)[T]>
-	: object;
+	: unknown;
 
-export type TRequestBody<T extends Route> = T extends keyof typeof RequestBodySchema
+export type TRequestBody<T extends TEndpointKey> = T extends keyof typeof RequestBodySchema
 	? z.infer<(typeof RequestBodySchema)[T]>
-	: object;
+	: unknown;
 
-export type TRequestQueryParams<T extends Route> = T extends keyof typeof RequestQueryParamsSchema
+export type TRequestQueryParams<T extends TEndpointKey> = T extends keyof typeof RequestQueryParamsSchema
 	? z.infer<(typeof RequestQueryParamsSchema)[T]>
-	: object;
+	: unknown;
 
-export type TResponseBody<T extends Route> = T extends keyof typeof ResponseBodySchema
+export type TResponseBody<T extends TEndpointKey> = T extends keyof typeof ResponseBodySchema
 	? z.infer<(typeof ResponseBodySchema)[T]>
-	: object;
+	: unknown;
