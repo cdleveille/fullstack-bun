@@ -12,12 +12,10 @@ const IS_PROD = Config.IS_PROD || BUN_ENV === Env.Production;
 const buildConfig: BunBundleBuildConfig = {
 	root: Path.ClientSrc,
 	outdir: Path.Public,
-	entrypoints: ["main.tsx"],
+	entrypoints: ["index.html"],
 	swEntrypoint: "sw.ts",
-	jsStringTemplate: "<!-- {js} -->",
-	cssStringTemplate: "<!-- {css} -->",
 	copyFolders: ["assets"],
-	copyFiles: ["browserconfig.xml", "favicon.ico", "index.html", "manifest.json"],
+	copyFiles: ["browserconfig.xml", "favicon.ico", "manifest.json"],
 	define: { "Bun.env.IS_PROD": `"${IS_PROD}"` },
 	sourcemap: IS_PROD ? "none" : "linked",
 	naming: {

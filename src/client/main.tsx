@@ -1,7 +1,5 @@
 /// <reference lib="dom" />
 
-import "./style.css";
-
 import { StrictMode } from "react";
 
 import { createRoot } from "react-dom/client";

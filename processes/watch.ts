@@ -3,12 +3,12 @@ import path from "path";
 
 import { buildClient } from "@processes";
 
-const SRC_DIR = path.resolve("./src/client");
+const WATCH_DIR = path.resolve("./src/client");
 
-const watcher = chokidar.watch(SRC_DIR, { persistent: true });
+const watcher = chokidar.watch(WATCH_DIR, { persistent: true });
 
 const stopWatching = async () => {
-	watcher.unwatch(SRC_DIR);
+	watcher.unwatch(WATCH_DIR);
 	await watcher.close();
 };
 

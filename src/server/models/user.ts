@@ -9,7 +9,8 @@ const UserModel = model<TUser>(
 		{
 			username: {
 				type: String,
-				required: true
+				required: true,
+				index: true
 			}
 		},
 		{ collection: "fullstack_bun_user" }

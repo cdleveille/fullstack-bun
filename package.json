@@ -20,10 +20,10 @@
     "@types/cors": "^2.8.17",
     "@types/eslint__js": "^8.42.3",
     "@types/express": "^5.0.0",
-    "@types/react": "^18.3.11",
+    "@types/react": "^18.3.12",
     "@types/react-dom": "^18.3.1",
-    "bun-bundle": "^3.0.0",
-    "bun-types": "^1.1.32",
+    "bun-bundle": "^4.0.1",
+    "bun-types": "^1.1.33",
     "chokidar": "^4.0.1",
     "eslint": "^9.13.0",
     "prettier": "^3.3.3",
@@ -34,18 +34,18 @@
     "workbox-strategies": "^7.1.0"
   },
   "dependencies": {
-    "@tanstack/react-query": "^5.59.15",
+    "@tanstack/react-query": "^5.59.16",
     "compression": "^1.7.4",
     "cors": "^2.8.5",
     "express": "^4.21.1",
     "helmet": "^8.0.0",
-    "mongoose": "^8.7.2",
+    "mongoose": "^8.7.3",
     "nocache": "^4.0.0",
     "react": "^18.3.1",
     "react-dom": "^18.3.1",
     "react-error-boundary": "^4.1.2",
-    "socket.io": "^4.8.0",
-    "socket.io-client": "^4.8.0",
+    "socket.io": "^4.8.1",
+    "socket.io-client": "^4.8.1",
     "zod": "^3.23.8"
   }
 }
