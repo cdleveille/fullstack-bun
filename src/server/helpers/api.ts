@@ -6,45 +6,40 @@ import { CustomError } from "@helpers";
 import type { TRegisterEndpointProps, TValidateRequestPayloadAgainstSchemaProps } from "@types";
 
 export const registerEndpoint = <
-	TRouteParams extends z.ZodTypeAny,
+	TReqParams extends z.ZodTypeAny,
 	TResBody extends z.ZodTypeAny,
 	TReqBody extends z.ZodTypeAny,
-	TQueryParams extends z.ZodTypeAny
+	TReqQuery extends z.ZodTypeAny
 >({
 	router,
 	method,
 	route,
 	handler,
 	schema
-}: TRegisterEndpointProps<TRouteParams, TResBody, TReqBody, TQueryParams>) => {
-	const { requestRouteParams = z.any(), requestBody = z.any(), requestQueryParams = z.any() } = schema;
+}: TRegisterEndpointProps<TReqParams, TResBody, TReqBody, TReqQuery>) => {
+	const { reqParams = z.any(), reqBody = z.any(), reqQuery = z.any() } = schema;
 
 	router[RequestMethod[method]](
 		route,
 		async (
-			req: Request<
-				z.infer<typeof requestRouteParams>,
-				unknown,
-				z.infer<typeof requestBody>,
-				z.infer<typeof requestQueryParams>
-			>,
+			req: Request<z.infer<typeof reqParams>, unknown, z.infer<typeof reqBody>, z.infer<typeof reqQuery>>,
 			res: Response<TResBody>,
 			next: NextFunction
 		) => {
 			try {
 				validateRequestPayloadAgainstSchema({
 					payload: req.params,
-					schema: requestRouteParams,
+					schema: reqParams,
 					message: "Invalid request route parameter(s)"
 				});
 				validateRequestPayloadAgainstSchema({
 					payload: req.body,
-					schema: requestBody,
+					schema: reqBody,
 					message: "Invalid request body"
 				});
 				validateRequestPayloadAgainstSchema({
 					payload: req.query,
-					schema: requestQueryParams,
+					schema: reqQuery,
 					message: "Invalid request query parameter(s)"
 				});
 				await handler({ req, res, next });
@@ -55,11 +50,11 @@ export const registerEndpoint = <
 	);
 };
 
-const validateRequestPayloadAgainstSchema = <T extends z.ZodTypeAny>({
+const validateRequestPayloadAgainstSchema = <TSchema extends z.ZodTypeAny>({
 	payload,
 	schema,
 	message = "Invalid request payload"
-}: TValidateRequestPayloadAgainstSchemaProps<T>) => {
+}: TValidateRequestPayloadAgainstSchemaProps<TSchema>) => {
 	const result = schema.safeParse(payload);
 	if (!result.success) throwValidationError(message, result.error);
 };

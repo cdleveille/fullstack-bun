@@ -17,43 +17,43 @@ export type TServerToClientSocketEvent = {
 };
 
 export type TEndpointHandler<
-	TRequestRouteParams extends z.ZodTypeAny,
-	TResponseBody extends z.ZodTypeAny,
-	TRequestBody extends z.ZodTypeAny,
-	TRequestQueryParams extends z.ZodTypeAny
+	TReqParams extends z.ZodTypeAny,
+	TResBody extends z.ZodTypeAny,
+	TReqBody extends z.ZodTypeAny,
+	TReqQuery extends z.ZodTypeAny
 > = (arg: {
-	req: Request<z.infer<TRequestRouteParams>, unknown, z.infer<TRequestBody>, z.infer<TRequestQueryParams>>;
-	res: Response<z.infer<TResponseBody>>;
+	req: Request<z.infer<TReqParams>, unknown, z.infer<TReqBody>, z.infer<TReqQuery>>;
+	res: Response<z.infer<TResBody>>;
 	next: NextFunction;
 }) => Promise<void> | void;
 
 export type TEndpointSchema<
-	TRequestRouteParams extends z.ZodTypeAny,
-	TResponseBody extends z.ZodTypeAny,
-	TRequestBody extends z.ZodTypeAny,
-	TRequestQueryParams extends z.ZodTypeAny
+	TReqParams extends z.ZodTypeAny,
+	TResBody extends z.ZodTypeAny,
+	TReqBody extends z.ZodTypeAny,
+	TReqQuery extends z.ZodTypeAny
 > = {
-	requestRouteParams?: TRequestRouteParams;
-	responseBody?: TResponseBody;
-	requestBody?: TRequestBody;
-	requestQueryParams?: TRequestQueryParams;
+	reqParams?: TReqParams;
+	resBody?: TResBody;
+	reqBody?: TReqBody;
+	reqQuery?: TReqQuery;
 };
 
 export type TRegisterEndpointProps<
-	TRequestRouteParams extends z.ZodTypeAny = z.ZodAny,
-	TResponseBody extends z.ZodTypeAny = z.ZodAny,
-	TRequestBody extends z.ZodTypeAny = z.ZodAny,
-	TRequestQueryParams extends z.ZodTypeAny = z.ZodAny
+	TReqParams extends z.ZodTypeAny,
+	TResBody extends z.ZodTypeAny,
+	TReqBody extends z.ZodTypeAny,
+	TReqQuery extends z.ZodTypeAny
 > = {
 	router: Router;
 	method: TRequestMethod;
 	route: string;
-	handler: TEndpointHandler<TRequestRouteParams, TResponseBody, TRequestBody, TRequestQueryParams>;
-	schema: TEndpointSchema<TRequestRouteParams, TResponseBody, TRequestBody, TRequestQueryParams>;
+	handler: TEndpointHandler<TReqParams, TResBody, TReqBody, TReqQuery>;
+	schema: TEndpointSchema<TReqParams, TResBody, TReqBody, TReqQuery>;
 };
 
-export type TValidateRequestPayloadAgainstSchemaProps<T extends z.ZodTypeAny> = {
+export type TValidateRequestPayloadAgainstSchemaProps<TSchema extends z.ZodTypeAny> = {
 	payload: unknown;
-	schema: T;
+	schema: TSchema;
 	message?: string;
 };

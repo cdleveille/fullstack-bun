@@ -1,6 +1,6 @@
 # fullstack-bun
 
-"MERB" stack monorepo project template written in TypeScript. Bun/Express/Mongo on the backend, React on the frontend, with Socket.IO bridging the gap.
+Fully type-safe "MERB" stack monorepo project template. Bun/Express/Mongo on the backend, React on the frontend, with Socket.IO bridging the gap.
 
 ## Setup
 
