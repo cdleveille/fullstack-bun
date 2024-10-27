@@ -22,7 +22,7 @@ export type TEndpointHandler<
 	TReqBody extends z.ZodTypeAny,
 	TReqQuery extends z.ZodTypeAny
 > = (arg: {
-	req: Request<z.infer<TReqParams>, unknown, z.infer<TReqBody>, z.infer<TReqQuery>>;
+	req: Request<z.infer<TReqParams>, z.infer<TResBody>, z.infer<TReqBody>, z.infer<TReqQuery>>;
 	res: Response<z.infer<TResBody>>;
 	next: NextFunction;
 }) => Promise<void> | void;

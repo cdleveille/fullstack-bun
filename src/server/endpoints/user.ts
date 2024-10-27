@@ -7,6 +7,7 @@ import { User } from "@models";
 export const registerUserEndpoints = (app: Express) => {
 	const router = Router();
 
+	// get all users
 	registerEndpoint({
 		router,
 		method: "GET",
@@ -20,6 +21,7 @@ export const registerUserEndpoints = (app: Express) => {
 		}
 	});
 
+	// get user by username
 	registerEndpoint({
 		router,
 		method: "GET",
@@ -35,13 +37,14 @@ export const registerUserEndpoints = (app: Express) => {
 		}
 	});
 
+	// create user
 	registerEndpoint({
 		router,
 		method: "POST",
 		route: "/user",
 		handler: async ({ req, res }) => {
 			const { username } = req.body;
-			const user = await User.newUser(username);
+			const user = await User.createUser(username);
 			res.status(201).json(user);
 		},
 		schema: {
@@ -50,6 +53,7 @@ export const registerUserEndpoints = (app: Express) => {
 		}
 	});
 
+	// update user by username
 	registerEndpoint({
 		router,
 		method: "PATCH",
@@ -67,6 +71,7 @@ export const registerUserEndpoints = (app: Express) => {
 		}
 	});
 
+	// delete user username
 	registerEndpoint({
 		router,
 		method: "DELETE",

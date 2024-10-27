@@ -22,7 +22,7 @@ export const registerEndpoint = <
 	router[RequestMethod[method]](
 		route,
 		async (
-			req: Request<z.infer<typeof reqParams>, unknown, z.infer<typeof reqBody>, z.infer<typeof reqQuery>>,
+			req: Request<TReqParams, TResBody, TReqBody, TReqQuery>,
 			res: Response<TResBody>,
 			next: NextFunction
 		) => {

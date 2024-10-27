@@ -32,7 +32,7 @@ const assertUserDoesNotExist = async (username: string) => {
 	if (user) throw new CustomError(`User with username '${username}' already exists`, 400);
 };
 
-const newUser = async (username: string) => {
+const createUser = async (username: string) => {
 	await assertUserDoesNotExist(username);
 	return UserModel.create({ username });
 };
@@ -41,8 +41,7 @@ const updateUser = async (username: string, newUsername: string) => {
 	await assertUserExists(username);
 	await assertUserDoesNotExist(newUsername);
 	await UserModel.updateOne({ username }, { username: newUsername });
-	const updatedUser = await assertUserExists(newUsername);
-	return updatedUser;
+	return assertUserExists(newUsername);
 };
 
 const deleteUser = async (username: string) => {
@@ -56,7 +55,7 @@ export const User = {
 	getUserByUsername,
 	assertUserExists,
 	assertUserDoesNotExist,
-	newUser,
+	createUser,
 	updateUser,
 	deleteUser
 };
