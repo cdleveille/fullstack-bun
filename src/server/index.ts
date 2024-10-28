@@ -2,7 +2,7 @@ import express from "express";
 import { createServer } from "http";
 
 import { Env } from "@constants";
-import { registerEndpoints } from "@endpoints";
+import { initEndpoints } from "@endpoints";
 import { Config } from "@helpers";
 import { errorHandler, initMiddleware, notFound } from "@middleware";
 import { connectToDatabase, initSocket, log } from "@services";
@@ -27,7 +27,7 @@ await initSocket(httpServer);
 
 initMiddleware(app);
 
-registerEndpoints(app);
+initEndpoints(app);
 
 // these must be applied last
 app.use(notFound());

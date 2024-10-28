@@ -49,7 +49,7 @@ export type TRegisterEndpointProps<
 	method: TRequestMethod;
 	route: string;
 	handler: TEndpointHandler<TReqParams, TResBody, TReqBody, TReqQuery>;
-	schema: TEndpointSchema<TReqParams, TResBody, TReqBody, TReqQuery>;
+	schema?: TEndpointSchema<TReqParams, TResBody, TReqBody, TReqQuery>;
 };
 
 export type TValidateRequestPayloadAgainstSchemaProps<TSchema extends z.ZodTypeAny> = {

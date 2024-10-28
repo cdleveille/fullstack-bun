@@ -17,7 +17,7 @@ export const registerEndpoint = <
 	handler,
 	schema
 }: TRegisterEndpointProps<TReqParams, TResBody, TReqBody, TReqQuery>) => {
-	const { reqParams = z.any(), reqBody = z.any(), reqQuery = z.any() } = schema;
+	const { reqParams = z.any(), reqBody = z.any(), reqQuery = z.any() } = schema ?? {};
 
 	router[RequestMethod[method]](
 		route,
