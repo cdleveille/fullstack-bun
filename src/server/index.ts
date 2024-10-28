@@ -9,21 +9,19 @@ import { connectToDatabase, initSocket, log } from "@services";
 
 const { IS_PROD, PORT, SKIP_DB } = Config;
 
-if (!IS_PROD) {
-	const { buildClient } = await import("@processes");
-	await buildClient();
-}
-
-if (!SKIP_DB) await connectToDatabase();
-
 const app = express();
+
+const httpServer = createServer(app);
+
+const buildIfDev = IS_PROD ? [] : [(await import("@processes")).buildClient()];
+
+const connectToDb = SKIP_DB ? [] : [connectToDatabase()];
+
+await Promise.all([...buildIfDev, ...connectToDb, initSocket(httpServer)]);
 
 app.set("json spaces", 2);
 
 app.disable("x-powered-by");
-
-const httpServer = createServer(app);
-await initSocket(httpServer);
 
 initMiddleware(app);
 
