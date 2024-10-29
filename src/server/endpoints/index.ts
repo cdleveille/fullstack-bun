@@ -1,9 +1,10 @@
 import { type Express } from "express";
 
-import { userRouter } from "@endpoints";
+import { registerUserEndpoints } from "@endpoints";
 
 export * from "./user";
 
 export const initEndpoints = (app: Express) => {
+	const { userRouter } = registerUserEndpoints();
 	app.use("/user", userRouter);
 };

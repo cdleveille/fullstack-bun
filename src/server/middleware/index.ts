@@ -13,8 +13,8 @@ export * from "./notFound";
 export const initMiddleware = (app: Express) => {
 	app.use(express.static(path.resolve(Path.Public)));
 
-	app.use(express.json());
 	app.use(express.urlencoded({ extended: true }));
+	app.use(express.json({ limit: "10mb" }));
 
 	app.use(compression());
 
@@ -48,4 +48,8 @@ export const initMiddleware = (app: Express) => {
 			}
 		})
 	);
+
+	app.set("json spaces", 2);
+
+	app.disable("x-powered-by");
 };

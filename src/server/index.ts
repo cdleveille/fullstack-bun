@@ -19,10 +19,6 @@ const connectToDb = SKIP_DB ? [] : [connectToDatabase()];
 
 await Promise.all([...buildIfDev, ...connectToDb, initSocket(httpServer)]);
 
-app.set("json spaces", 2);
-
-app.disable("x-powered-by");
-
 initMiddleware(app);
 
 initEndpoints(app);
