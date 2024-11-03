@@ -13,11 +13,11 @@ Fully type-safe "MERB" stack monorepo project template. Bun/Express/Mongo on the
 
 ## Stack
 
--   [Bun](https://bun.sh) (server runtime, module bundling, package manager, script runner)
+-   [Bun](https://bun.sh) (server runtime, bundler, package manager, script runner)
 -   [Express](https://expressjs.com) (web framework)
 -   [MongoDB](https://www.mongodb.com), [Mongoose](https://mongoosejs.com) (database)
--   [React](https://react.dev) (ui)
--   [TanStack Query](https://tanstack.com/query) (data fetching)
--   [Socket.IO](https://socket.io) (real-time server/client interaction)
+-   [React](https://react.dev) (user interface)
+-   [TanStack Query](https://tanstack.com/query) (async state management)
+-   [Socket.IO](https://socket.io) (real-time server/client communication)
 -   [Zod](https://zod.dev) (schema validation)
--   [TypeScript](https://www.typescriptlang.org), [ESLint](https://eslint.org), [Prettier](https://prettier.io) (code quality)
+-   [TypeScript](https://www.typescriptlang.org), [ESLint](https://eslint.org), [Prettier](https://prettier.io) (code quality/style)
