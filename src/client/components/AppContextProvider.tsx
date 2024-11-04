@@ -4,7 +4,7 @@ import { AppContext } from "@contexts";
 import { useApi, usePersistedState } from "@hooks";
 
 export const AppContextProvider = ({ children }: { children: React.ReactNode }) => {
-	const [message, setMessage] = useState("");
+	const [message, setMessage] = useState("hello!");
 	const [count, setCount] = usePersistedState(0, "count");
 
 	const { helloToAndFrom } = useApi();
@@ -18,8 +18,6 @@ export const AppContextProvider = ({ children }: { children: React.ReactNode }) 
 		setMessage(hello);
 		console.log(hello);
 	}, [hello]);
-
-	if (!message) return null;
 
 	return (
 		<AppContext.Provider
