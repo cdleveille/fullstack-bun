@@ -5,13 +5,10 @@ import { Config } from "@helpers";
 import type { TClientToServerSocketEvent, TServerToClientSocketEvent } from "@types";
 
 const { IS_PROD, WS_PORT, HOST, PORT } = Config;
-const WS_HOST = Config.HOST.replace("http", "ws");
 
 export const initSocket = async () => {
 	const io = new Server<TClientToServerSocketEvent, TServerToClientSocketEvent>(WS_PORT, {
-		cors: {
-			origin: [HOST, `${HOST}:${PORT}`, `${HOST}:${WS_PORT}`, `${WS_HOST}:${PORT}`, `${WS_HOST}:${WS_PORT}`]
-		},
+		cors: { origin: [HOST, `${HOST}:${PORT}`] },
 		serveClient: false
 	} as Partial<ServerOptions>);
 
