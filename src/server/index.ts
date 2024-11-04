@@ -2,7 +2,7 @@ import { Hono } from "hono";
 import { serveStatic } from "hono/bun";
 import { cors } from "hono/cors";
 import { secureHeaders } from "hono/secure-headers";
-import { StatusCode } from "hono/utils/http-status";
+import type { StatusCode } from "hono/utils/http-status";
 import { z } from "zod";
 
 import { Env, Path } from "@constants";
@@ -36,7 +36,7 @@ app.use(
 			scriptSrcAttr: ["'none'"],
 			scriptSrcElem: ["'self'"],
 			styleSrc: ["'self'", "https:", "'unsafe-inline'"],
-			styleSrcAttr: ["'none'"],
+			styleSrcAttr: ["'self'", "https:", "'unsafe-inline'"],
 			styleSrcElem: ["'self'", "https:", "'unsafe-inline'"],
 			upgradeInsecureRequests: [],
 			workerSrc: ["'self'", "blob:"]

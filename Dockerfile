@@ -1,39 +1,39 @@
 # syntax = docker/dockerfile:1
 
-# Adjust BUN_VERSION as desired
+# adjust BUN_VERSION as desired
 ARG BUN_VERSION=latest
 FROM oven/bun:${BUN_VERSION} as base
 
 LABEL fly_launch_runtime="Bun"
 
-# Bun app lives here
+# bun app lives here
 WORKDIR /app
 
-# Throw-away build stage to reduce size of final image
+# throw-away build stage to reduce size of final image
 FROM base as build
 
-# Install packages needed to build node modules
+# install packages needed to build node modules
 RUN apt-get update -qq
 RUN apt-get install -y build-essential pkg-config python-is-python3
 
-# Copy application code
+# copy application code
 COPY --link bun.lockb package.json ./
 COPY --link . .
 
-# Install all dependencies and run production build
+# install all dependencies and run production build
 RUN bun i --ignore-scripts --frozen-lockfile
 RUN bun build:prod
 
-# Clear node_modules folder and re-install production dependencies only
+# clear node_modules folder and re-install production dependencies only
 RUN rm -rf node_modules
 RUN bun i --ignore-scripts --frozen-lockfile --production
 
-# Final stage for app image
+# final stage for app image
 FROM base
 
-# Copy built application
+# copy built application
 COPY --from=build /app /app
 
-# Start the server by default, this can be overwritten at runtime
+# start the server
 EXPOSE 8080
 CMD [ "bun", "start" ]

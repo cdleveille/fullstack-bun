@@ -4,8 +4,8 @@ import { SocketEvent } from "@constants";
 import type { TClientToServerSocketEvent, TServerToClientSocketEvent } from "@types";
 import { Config } from "@utils";
 
-const uri = `${location.protocol}//${location.hostname}:${Config.WS_PORT}`;
-
-export const socket: Socket<TServerToClientSocketEvent, TClientToServerSocketEvent> = io(uri);
+export const socket: Socket<TServerToClientSocketEvent, TClientToServerSocketEvent> = io(
+	`${location.protocol}//${location.hostname}:${Config.WS_PORT}`
+);
 
 socket.on(SocketEvent.Reload, () => location.reload());
