@@ -8,6 +8,7 @@
   "scripts": {
     "lint": "eslint . && prettier --check .",
     "fix": "eslint --fix . && prettier --write .",
+    "deploy": "flyctl deploy --remote-only --detach --no-cache --config fly.toml",
     "build": "bun ./scripts/build.ts",
     "build:prod": "bun ./scripts/build.ts BUN_ENV=production && workbox injectManifest workbox-config.json",
     "dev": "bun --watch ./src/server/index.ts",
