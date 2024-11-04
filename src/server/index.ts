@@ -1,34 +1,78 @@
-import express from "express";
-import { createServer } from "http";
+import { Hono } from "hono";
+import { serveStatic } from "hono/bun";
+import { cors } from "hono/cors";
+import { secureHeaders } from "hono/secure-headers";
+import { StatusCode } from "hono/utils/http-status";
+import { z } from "zod";
 
-import { Env } from "@constants";
-import { initEndpoints } from "@endpoints";
-import { Config } from "@helpers";
-import { errorHandler, initMiddleware, notFound } from "@middleware";
-import { connectToDatabase, initSocket, log } from "@services";
+import { Env, Path } from "@constants";
+import { Config, initSocket, validatePayloadSchema } from "@helpers";
+import type { TMessageRes } from "@types";
 
-const { IS_PROD, PORT, SKIP_DB } = Config;
+const app = new Hono();
 
-const app = express();
+const { IS_PROD, PORT, WS_PORT, HOST } = Config;
+const WS_HOST = Config.HOST.replace("http", "ws");
 
-const httpServer = createServer(app);
+if (!IS_PROD) void (await import("@processes")).buildClient();
 
-const buildIfDev = IS_PROD ? [] : [(await import("@processes")).buildClient()];
+app.use(cors());
+app.use(
+	secureHeaders({
+		contentSecurityPolicy: {
+			defaultSrc: ["'self'"],
+			baseUri: ["'self'"],
+			childSrc: ["'self'"],
+			connectSrc: ["'self'", `${HOST}:${WS_PORT}`, `${WS_HOST}:${WS_PORT}`],
+			fontSrc: ["'self'", "https:", "data:"],
+			formAction: ["'self'"],
+			frameAncestors: ["'self'"],
+			frameSrc: ["'self'"],
+			imgSrc: ["'self'", "data:"],
+			manifestSrc: ["'self'"],
+			mediaSrc: ["'self'"],
+			objectSrc: ["'none'"],
+			scriptSrc: ["'self'"],
+			scriptSrcAttr: ["'none'"],
+			scriptSrcElem: ["'self'"],
+			styleSrc: ["'self'", "https:", "'unsafe-inline'"],
+			styleSrcAttr: ["'none'"],
+			styleSrcElem: ["'self'", "https:", "'unsafe-inline'"],
+			upgradeInsecureRequests: [],
+			workerSrc: ["'self'", "blob:"]
+		}
+	})
+);
 
-const connectToDb = SKIP_DB ? [] : [connectToDatabase()];
-
-await Promise.all([...buildIfDev, ...connectToDb, initSocket(httpServer)]);
-
-initMiddleware(app);
-
-initEndpoints(app);
-
-// these must be applied last
-app.use(notFound());
-app.use(errorHandler());
-
-httpServer.listen(PORT, () => {
-	log.info(
-		`Server started in ${IS_PROD ? Env.Production : Env.Development} mode - listening on ${!IS_PROD ? "http://localhost:" : "port "}${PORT}`
-	);
+app.get("/hello", c => {
+	const name = c.req.query("name");
+	const message = `Hello ${name ?? "World"}!`;
+	return c.json<TMessageRes>({ message });
 });
+
+app.post("/hello", async c => {
+	const bodySchema = z.object({ name: z.string().min(1) });
+	const body = await c.req.json<z.infer<typeof bodySchema>>();
+	validatePayloadSchema({ payload: body, schema: bodySchema, message: "Invalid request body" });
+	const message = `Hello ${body.name || "World"}!`;
+	return c.json<TMessageRes>({ message });
+});
+
+app.get("/health", c => c.text("OK"));
+
+app.get("/*", serveStatic({ root: Path.Public }));
+
+app.notFound(c => c.json({ message: "Not Found" }, 404));
+app.onError((e, c) => {
+	const errorStatus = ("status" in e && typeof e.status === "number" ? e.status : 500) as StatusCode;
+	return c.json<TMessageRes>({ message: e.message || "Internal Server Error" }, errorStatus);
+});
+
+await initSocket();
+
+console.log(`Starting server on port ${PORT} in ${IS_PROD ? Env.Production : Env.Development} mode...`);
+
+export default {
+	port: Config.PORT,
+	fetch: app.fetch
+};

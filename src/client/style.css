@@ -14,7 +14,6 @@
 		"Open Sans",
 		"Helvetica Neue",
 		sans-serif;
-	user-select: none;
 }
 
 html,
@@ -48,10 +47,6 @@ h1 {
 	row-gap: 1.5rem;
 	text-align: center;
 	padding: 0.5rem;
-}
-
-.cursor-pointer:hover {
-	cursor: pointer;
 }
 
 .reset {
