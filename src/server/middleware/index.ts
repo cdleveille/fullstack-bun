@@ -55,13 +55,13 @@ export const initMiddleware = (app: OpenAPIHono) => {
 		})
 	);
 
-	app.doc31("/doc", openApiInfo);
+	app.doc31("/spec", openApiInfo);
 	app.getOpenAPI31Document(openApiInfo);
 
 	app.get(
 		"/reference",
 		apiReference({
-			spec: { url: "/doc" }
+			spec: { url: "/spec" }
 		})
 	);
 };
