@@ -4,13 +4,11 @@ Type-safe monorepo project template. [Bun](https://bun.sh)/[Hono](https://hono.d
 
 ## Features
 
--   API routes are automatically validated and documented via [@hono/zod-openapi](https://www.npmjs.com/package/@hono/zod-openapi). [OpenAPI Specification](https://swagger.io/specification) .json data is served on `/spec`, and [Scalar](https://guides.scalar.com) documentation is served on `/reference`.
+-   Server API routes are automatically validated and documented via [@hono/zod-openapi](https://www.npmjs.com/package/@hono/zod-openapi). [OpenAPI Specification](https://swagger.io/specification) .json data is served on [/spec](https://fullstack-bun.fly.dev/spec), and [Scalar](https://guides.scalar.com) documentation is served on [/reference](https://fullstack-bun.fly.dev/reference).
 
--   Includes a Dockerfile and config/workflow for deploying to [fly.io](https://fly.io).
+-   The client implements [PWA](https://developer.mozilla.org/en-US/docs/Web/Progressive_web_apps) standards for a native app-like experience and boasts a near-perfect [Lighthouse](https://developer.chrome.com/docs/lighthouse/) score out of the box. It instantly rebuilds when a client-side source file is saved, and the browser will automatically refresh, optionally with [persisted state](https://github.com/cdleveille/fullstack-bun/blob/main/src/client/hooks/usePersistedState.ts).
 
--   The client implements [PWA](https://developer.mozilla.org/en-US/docs/Web/Progressive_web_apps) standards for a native app-like experience and boasts a perfect [Lighthouse](https://developer.chrome.com/docs/lighthouse/) score out of the box.
-
--   The frontend instantly rebuilds when a client-side source file is saved. The browser will also automatically refresh, optionally with persisted state.
+-   Includes a [Dockerfile](https://github.com/cdleveille/fullstack-bun/blob/main/Dockerfile), [config](https://github.com/cdleveille/fullstack-bun/blob/main/fly.toml), and [workflow](https://github.com/cdleveille/fullstack-bun/blob/main/.github/workflows/deploy.yml) for deploying to [fly.io](https://fly.io).
 
 ## Setup
 
@@ -27,7 +25,7 @@ bun i
 bun dev
 ```
 
-4. By default, the client will be served on [localhost:3000](http://localhost:3000) in development mode.
+4. By default, the client will be served on [localhost:3000](http://localhost:3000) in development mode. This can be overridden in a .env file.
 
 ## Stack
 

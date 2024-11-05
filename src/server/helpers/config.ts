@@ -6,7 +6,7 @@ const PORT = parseInt(Bun.env.PORT ?? (IS_PROD ? "8080" : "3000"));
 
 const WS_PORT = parseInt(Bun.env.WS_PORT ?? "8081");
 
-const HOST = Bun.env.HOST ?? (IS_PROD ? "https://fullstack-bun.fly.dev" : "http://localhost");
+const HOST = Bun.env.HOST ?? "http://localhost";
 
 export const Config = {
 	IS_PROD,
