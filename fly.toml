@@ -35,3 +35,8 @@ primary_region = "bos"
   [[services.ports]]
     handlers = ["tls", "http"]
     port = 8081
+
+[[vm]]
+  memory = '256mb'
+  cpu_kind = 'shared'
+  cpus = 1

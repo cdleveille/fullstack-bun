@@ -25,7 +25,7 @@ bun i
 bun dev
 ```
 
-4. By default, the client will be served on [localhost:3000](http://localhost:3000) in development mode. This can be overridden in a .env file.
+4. By default, the client will be served on [localhost:3000](http://localhost:3000) in development mode. This can be overridden in a .env file (see [.env.example](https://github.com/cdleveille/fullstack-bun/blob/main/.env.example) for all environment variable options).
 
 ## Stack
 
