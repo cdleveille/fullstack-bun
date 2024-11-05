@@ -1,3 +1,8 @@
+import type { StatusCode } from "hono/utils/http-status";
+
+import type { OpenAPIHono } from "@hono/zod-openapi";
+import type { TResMessage } from "@types";
+
 export class CustomError extends Error {
 	status: number;
 
@@ -7,3 +12,11 @@ export class CustomError extends Error {
 		Object.setPrototypeOf(this, CustomError.prototype);
 	}
 }
+
+export const initErrorHandling = (app: OpenAPIHono) => {
+	app.notFound(c => c.json({ message: "Not Found" }, 404));
+	app.onError((e, c) => {
+		const errorStatus = ("status" in e && typeof e.status === "number" ? e.status : 500) as StatusCode;
+		return c.json<TResMessage>({ message: e.message || "Internal Server Error" }, errorStatus);
+	});
+};

@@ -24,4 +24,6 @@ export const initSocket = async () => {
 			socket.emit(SocketEvent.Hello, "hello from bun!");
 		});
 	});
+
+	console.log(`Socket.IO server started on port ${WS_PORT}`);
 };

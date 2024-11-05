@@ -27,7 +27,9 @@
       "@contexts": ["./src/client/contexts"],
       "@helpers": ["./src/server/helpers"],
       "@hooks": ["./src/client/hooks"],
+      "@middleware": ["./src/server/middleware"],
       "@processes": ["./processes"],
+      "@routes": ["./src/server/routes"],
       "@types": ["./src/types/abstract"],
       "@utils": ["./src/client/utils"]
     }
