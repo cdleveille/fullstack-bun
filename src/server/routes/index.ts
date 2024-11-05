@@ -1,5 +1,6 @@
 import type { OpenAPIHono } from "@hono/zod-openapi";
 import { initHelloRoutes } from "@routes";
+import { apiReference } from "@scalar/hono-api-reference";
 
 export * from "./hello";
 
@@ -15,4 +16,13 @@ export const initRoutes = (app: OpenAPIHono) => {
 			title: "fullstack-bun"
 		}
 	});
+
+	app.get(
+		"/reference",
+		apiReference({
+			spec: {
+				url: "/doc"
+			}
+		})
+	);
 };

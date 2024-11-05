@@ -29,7 +29,7 @@ export const initMiddleware = (app: OpenAPIHono) => {
 				objectSrc: ["'none'"],
 				scriptSrc: ["'self'"],
 				scriptSrcAttr: ["'none'"],
-				scriptSrcElem: ["'self'"],
+				scriptSrcElem: ["'self'", "https://cdn.jsdelivr.net/npm/@scalar/api-reference"],
 				styleSrc: ["'self'", "https:", "'unsafe-inline'"],
 				styleSrcAttr: ["'self'", "https:", "'unsafe-inline'"],
 				styleSrcElem: ["'self'", "https:", "'unsafe-inline'"],
