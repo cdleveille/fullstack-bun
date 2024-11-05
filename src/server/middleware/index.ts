@@ -5,9 +5,17 @@ import { secureHeaders } from "hono/secure-headers";
 import { Path } from "@constants";
 import { Config } from "@helpers";
 import type { OpenAPIHono } from "@hono/zod-openapi";
+import { apiReference } from "@scalar/hono-api-reference";
+
+import { name, version } from "../../../package.json";
 
 const { WS_PORT, HOST } = Config;
 const WS_HOST = Config.HOST.replace("http", "ws");
+
+const openApiInfo = {
+	openapi: "3.1.0",
+	info: { version, title: name }
+};
 
 export const initMiddleware = (app: OpenAPIHono) => {
 	app.use(cors());
@@ -44,6 +52,16 @@ export const initMiddleware = (app: OpenAPIHono) => {
 		serveStatic({
 			root: Path.Public,
 			onFound: (_path, c) => c.header("Cache-Control", "no-store")
+		})
+	);
+
+	app.doc31("/doc", openApiInfo);
+	app.getOpenAPI31Document(openApiInfo);
+
+	app.get(
+		"/reference",
+		apiReference({
+			spec: { url: "/doc" }
 		})
 	);
 };
