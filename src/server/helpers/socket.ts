@@ -8,7 +8,7 @@ const { IS_PROD, WS_PORT, HOST, PORT } = Config;
 
 export const initSocket = async () => {
 	const io = new Server<TClientToServerSocketEvent, TServerToClientSocketEvent>(WS_PORT, {
-		cors: { origin: `${HOST}:${PORT}` },
+		cors: { origin: [HOST, `${HOST}:${PORT}`] },
 		serveClient: false
 	} as Partial<ServerOptions>);
 
