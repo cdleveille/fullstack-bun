@@ -9,6 +9,7 @@ export enum Path {
 }
 
 export enum SocketEvent {
+	Connect = "connect",
 	Hello = "hello",
 	Reload = "reload"
 }

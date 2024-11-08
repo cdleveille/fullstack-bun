@@ -10,7 +10,7 @@ export const initSocket = async () => {
 	const io = new Server<TClientToServerSocketEvent, TServerToClientSocketEvent>(WS_PORT, {
 		cors: { origin: [HOST, `${HOST}:${PORT}`] },
 		serveClient: false
-	} as Partial<ServerOptions>);
+	} satisfies Partial<ServerOptions>);
 
 	if (!IS_PROD) {
 		const { initWatch } = await import("@processes");
@@ -18,7 +18,7 @@ export const initSocket = async () => {
 		initWatch(emitReload);
 	}
 
-	io.on("connect", socket => {
+	io.on(SocketEvent.Connect, socket => {
 		socket.on(SocketEvent.Hello, (message: string) => {
 			console.log(message);
 			socket.emit(SocketEvent.Hello, "hello from bun!");
