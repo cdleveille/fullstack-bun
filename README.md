@@ -1,10 +1,10 @@
 # fullstack-bun
 
-Type-safe monorepo project template. [Bun](https://bun.sh)/[Hono](https://hono.dev) backend, [React](https://react.dev) frontend, [Socket.IO](https://socket.io) bridging the gap.
+Type-safe monorepo project template. [Bun](https://bun.sh)/[Elysia](https://elysiajs.com/) backend, [React](https://react.dev) frontend, [Socket.IO](https://socket.io) bridging the gap.
 
 ## Features
 
--   Server API routes are automatically validated and documented via [@hono/zod-openapi](https://www.npmjs.com/package/@hono/zod-openapi). [OpenAPI Specification](https://swagger.io/specification) .json data is served on [/spec](https://fullstack-bun.fly.dev/spec), and [Scalar](https://guides.scalar.com) documentation is served on [/reference](https://fullstack-bun.fly.dev/reference).
+-   [Scalar](https://guides.scalar.com) documentation for API routes is served on [/reference](https://fullstack-bun.fly.dev/reference). [OpenAPI Specification](https://swagger.io/specification) raw .json data is served on [/reference/json](https://fullstack-bun.fly.dev/spec).
 
 -   The client implements [PWA](https://developer.mozilla.org/en-US/docs/Web/Progressive_web_apps) standards for a native app-like experience and boasts a [near-perfect PageSpeed Insights score](https://pagespeed.web.dev/analysis/https-fullstack-bun-fly-dev/uosoviysds?form_factor=desktop) out of the box. It instantly rebuilds when a client-side source file is saved, and the browser will automatically refresh, optionally with [persisted state](https://github.com/cdleveille/fullstack-bun/blob/main/src/client/hooks/usePersistedState.ts).
 
@@ -30,7 +30,7 @@ bun dev
 ## Stack
 
 -   [Bun](https://bun.sh) (server runtime, bundler, package manager, script runner)
--   [Hono](https://hono.dev) (web framework)
+-   [Elysia](https://elysiajs.com/) (web framework)
 -   [React](https://react.dev) (user interface)
 -   [TanStack Query](https://tanstack.com/query) (async state management)
 -   [Socket.IO](https://socket.io) (real-time server/client communication)

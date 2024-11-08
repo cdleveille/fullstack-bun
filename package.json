@@ -1,7 +1,7 @@
 {
   "name": "fullstack-bun",
   "version": "1.0.0",
-  "description": "Type-safe monorepo project template. Bun/Hono backend, React frontend, Socket.IO bridging the gap.",
+  "description": "Type-safe monorepo project template. Bun/Elysia backend, React frontend, Socket.IO bridging the gap.",
   "author": "Chris Leveille <cdleveille@gmail.com>",
   "license": "MIT",
   "type": "module",
@@ -35,9 +35,11 @@
     "workbox-strategies": "^7.3.0"
   },
   "dependencies": {
-    "@hono/zod-openapi": "^0.16.4",
-    "@scalar/hono-api-reference": "^0.5.158",
-    "hono": "^4.6.8",
+    "@elysiajs/cors": "^1.1.1",
+    "@elysiajs/static": "^1.1.1",
+    "@elysiajs/swagger": "^1.1.5",
+    "elysia": "^1.1.24",
+    "elysia-helmet": "^2.0.0",
     "socket.io": "^4.8.1"
   }
 }

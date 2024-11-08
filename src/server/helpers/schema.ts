@@ -1,3 +1,3 @@
-import { z } from "@hono/zod-openapi";
+import { t } from "elysia";
 
-export const resMessageSchema = z.object({ message: z.string() });
+export const resMessageSchema = t.Object({ message: t.String() });

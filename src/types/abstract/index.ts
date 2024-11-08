@@ -1,8 +1,4 @@
 import { SocketEvent } from "@constants";
-import { resMessageSchema } from "@helpers";
-import { z } from "@hono/zod-openapi";
-
-export type TResMessage = z.infer<typeof resMessageSchema>;
 
 export type TAppContext = {
 	message: string;
