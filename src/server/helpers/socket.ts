@@ -1,7 +1,7 @@
 import { Server, type ServerOptions } from "socket.io";
 
 import { SocketEvent } from "@constants";
-import { Config, log } from "@helpers";
+import { Config } from "@helpers";
 import type { TClientToServerSocketEvent, TServerToClientSocketEvent } from "@types";
 
 const { IS_PROD, WS_PORT, HOST, PORT } = Config;
@@ -20,10 +20,10 @@ export const initSocket = async () => {
 
 	io.on(SocketEvent.Connect, socket => {
 		socket.on(SocketEvent.Hello, (message: string) => {
-			log.info(message);
+			console.log(message);
 			socket.emit(SocketEvent.Hello, "hello from bun!");
 		});
 	});
 
-	log.info(`Socket.IO server started on port ${WS_PORT}`);
+	console.log(`Socket.IO server started on port ${WS_PORT}`);
 };
