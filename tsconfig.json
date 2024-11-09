@@ -3,7 +3,7 @@
     "lib": ["esnext"],
     "module": "esnext",
     "target": "esnext",
-    "types": ["bun-types"],
+    "types": ["@types/bun"],
     "moduleResolution": "bundler",
     "moduleDetection": "force",
     "noEmit": true,
@@ -15,7 +15,6 @@
     "esModuleInterop": true,
     "allowSyntheticDefaultImports": true,
     "forceConsistentCasingInFileNames": true,
-    "downlevelIteration": true,
     "skipLibCheck": true,
     "jsx": "react-jsx",
     "strict": true,
@@ -28,6 +27,7 @@
       "@helpers": ["./src/server/helpers"],
       "@hooks": ["./src/client/hooks"],
       "@processes": ["./processes"],
+      "@routes": ["./src/server/routes"],
       "@types": ["./src/types/abstract"],
       "@utils": ["./src/client/utils"]
     }

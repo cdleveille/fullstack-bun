@@ -1,9 +1,10 @@
-import { Elysia, t, ValidationError } from "elysia";
+import { Elysia, ValidationError } from "elysia";
 
 import { Env } from "@constants";
 import { staticPlugin } from "@elysiajs/static";
 import { swagger } from "@elysiajs/swagger";
-import { Config, initSocket, resMessageSchema } from "@helpers";
+import { Config, initSocket } from "@helpers";
+import { helloRouter } from "@routes";
 
 import { name, version } from "../../package.json";
 
@@ -25,33 +26,8 @@ const app = new Elysia()
 	.use(swagger({ path: "/reference", documentation: { info: { title: name, version } } }))
 	.use(staticPlugin({ prefix: "/", assets: "./public", noCache: true }))
 	.get("/health", () => "OK")
-	.get(
-		"/hello",
-		c => {
-			const { name } = c.query;
-			return {
-				message: `hello ${name ? name : "world"}!`
-			};
-		},
-		{
-			query: t.Object({ name: t.Optional(t.String()) }),
-			response: resMessageSchema
-		}
-	)
-	.post(
-		"/hello",
-		c => {
-			const { name } = c.body;
-			return {
-				message: `hello ${name ? name : "world"}!`
-			};
-		},
-		{
-			body: t.Object({ name: t.String() }),
-			response: resMessageSchema
-		}
-	)
-	.listen(PORT);
+	.group("/hello", app => app.use(helloRouter))
+	.listen({ port: PORT });
 
 const url = app?.server?.url?.toString();
 console.log(`HTTP server listening on ${url} in ${IS_PROD ? Env.Production : Env.Development} mode`);
