@@ -5,7 +5,7 @@ primary_region = "bos"
   auto_stop_machines = false
   auto_start_machines = true
   min_machines_running = 1
-  internal_port = 8080
+  internal_port = 3000
   processes = ["app"]
   protocol = "tcp"
   [services.concurrency]
@@ -20,7 +20,7 @@ primary_region = "bos"
     port = 443
   [[services.ports]]
     handlers = ["tls", "http"]
-    port = 8080
+    port = 3000
   [[services.http_checks]]
     grace_period = "10s"
     interval = "60s"
@@ -29,12 +29,12 @@ primary_region = "bos"
     path = "/health"
 
 [[services]]
-  internal_port = 8081
+  internal_port = 3001
   processes = ["app"]
   protocol = "tcp"
   [[services.ports]]
     handlers = ["tls", "http"]
-    port = 8081
+    port = 3001
 
 [[vm]]
   memory = '256mb'

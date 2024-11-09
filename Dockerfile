@@ -35,5 +35,5 @@ FROM base
 COPY --from=build /app /app
 
 # start the server
-EXPOSE 8080
+EXPOSE 3000
 CMD [ "bun", "start" ]
