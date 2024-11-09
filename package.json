@@ -1,7 +1,7 @@
 {
   "name": "fullstack-bun",
   "version": "1.0.0",
-  "description": "Type-safe monorepo project template. Bun/Elysia backend, React frontend, Socket.IO bridging the gap.",
+  "description": "Minimal, performant, type-safe monorepo project template. Bun/Elysia backend, React frontend, Socket.IO bridging the gap.",
   "author": "Chris Leveille <cdleveille@gmail.com>",
   "license": "MIT",
   "type": "module",

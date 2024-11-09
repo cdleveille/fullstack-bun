@@ -4,7 +4,7 @@ import { resMessageSchema } from "@helpers";
 
 export const helloRouter = new Elysia()
 	.get(
-		"/",
+		"",
 		c => {
 			const { name } = c.query;
 			return {
@@ -17,7 +17,7 @@ export const helloRouter = new Elysia()
 		}
 	)
 	.post(
-		"/",
+		"",
 		c => {
 			const { name } = c.body;
 			return {
