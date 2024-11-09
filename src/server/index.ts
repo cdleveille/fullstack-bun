@@ -3,7 +3,7 @@ import { Elysia, ValidationError } from "elysia";
 import { Env } from "@constants";
 import { staticPlugin } from "@elysiajs/static";
 import { swagger } from "@elysiajs/swagger";
-import { Config, initSocket } from "@helpers";
+import { Config, initSocket, log } from "@helpers";
 import { helloRouter } from "@routes";
 
 import { name, version } from "../../package.json";
@@ -30,4 +30,4 @@ const app = new Elysia()
 	.listen({ port: PORT });
 
 const url = app?.server?.url?.toString();
-console.log(`HTTP server listening on ${url} in ${IS_PROD ? Env.Production : Env.Development} mode`);
+log.info(`HTTP server listening on ${url} in ${IS_PROD ? Env.Production : Env.Development} mode`);

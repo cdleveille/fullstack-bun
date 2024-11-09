@@ -1,7 +1,7 @@
 import { BunBundle, type BunBundleBuildConfig } from "bun-bundle";
 
 import { Env, Path } from "@constants";
-import { Config } from "@helpers";
+import { Config, log } from "@helpers";
 
 const parseArg = (arg: string) => Bun.argv.find(a => a.startsWith(arg))?.split("=")[1];
 
@@ -28,6 +28,6 @@ const buildConfig: BunBundleBuildConfig = {
 
 export const buildClient = async () => {
 	const output = await BunBundle.build(buildConfig);
-	console.log(`Build completed in ${IS_PROD ? Env.Production : Env.Development} mode in ${output.buildTime}ms`);
+	log.info(`Build completed in ${IS_PROD ? Env.Production : Env.Development} mode in ${output.buildTime}ms`);
 	return output;
 };
