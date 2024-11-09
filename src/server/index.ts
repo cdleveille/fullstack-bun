@@ -22,7 +22,7 @@ new Elysia()
 	})
 	.use(plugins)
 	.use(staticPlugin({ prefix: "/", assets: Path.Public, noCache: true }))
-	.get("/health", () => "OK")
+	.get("/health", "OK")
 	.group("/hello", app => app.use(helloRouter))
 	.listen({ port: PORT });
 

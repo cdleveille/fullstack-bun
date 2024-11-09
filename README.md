@@ -15,7 +15,7 @@ Minimal, performant, type-safe monorepo project template. [Bun](https://bun.sh)/
 1. Install [Bun](https://bun.sh)
 2. Install package dependencies: `bun i`
 3. Start app: `bun dev`
-4. By default, the client will be served on [localhost:3000](http://localhost:3000) in development mode. This can be overridden in a `.env` file (see [.env.example](https://github.com/cdleveille/fullstack-bun/blob/main/.env.example) for all environment variable options).
+4. The client will be served on [localhost:3000](http://localhost:3000) unless overridden in a .env file (see [.env.example](https://github.com/cdleveille/fullstack-bun/blob/main/.env.example) for all environment variable options)
 
 ## Stack
 

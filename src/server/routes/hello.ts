@@ -1,7 +1,5 @@
 import { Elysia, t } from "elysia";
 
-import { resMessageSchema } from "@helpers";
-
 export const helloRouter = new Elysia()
 	.get(
 		"",
@@ -13,7 +11,7 @@ export const helloRouter = new Elysia()
 		},
 		{
 			query: t.Object({ name: t.Optional(t.String()) }),
-			response: resMessageSchema
+			response: t.Object({ message: t.String() })
 		}
 	)
 	.post(
@@ -26,6 +24,6 @@ export const helloRouter = new Elysia()
 		},
 		{
 			body: t.Object({ name: t.String() }),
-			response: resMessageSchema
+			response: t.Object({ message: t.String() })
 		}
 	);
