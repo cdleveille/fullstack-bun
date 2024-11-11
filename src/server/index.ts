@@ -14,11 +14,13 @@ await Promise.all([...buildIfDev, initSocket()]);
 new Elysia()
 	.onError(c => {
 		if (c.error instanceof ValidationError) {
-			return {
-				message: c.error.all.map(e => e.summary).join(", ")
-			};
+			c.set.status = 400;
+			return { message: c.error.all.map(e => e.summary).join(", ") };
 		}
 		return { message: c.error?.message ?? "Internal Server Error" };
+	})
+	.onBeforeHandle(c => {
+		c.set.headers.vary = "Origin";
 	})
 	.use(plugins)
 	.use(staticPlugin({ prefix: "/", assets: Path.Public, noCache: true }))

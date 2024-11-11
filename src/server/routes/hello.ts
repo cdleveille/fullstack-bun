@@ -10,8 +10,10 @@ export const helloRouter = new Elysia()
 			};
 		},
 		{
-			query: t.Object({ name: t.Optional(t.String()) }),
-			response: t.Object({ message: t.String() })
+			response: {
+				200: t.Object({ message: t.String() }),
+				500: t.Object({ message: t.String() })
+			}
 		}
 	)
 	.post(
@@ -24,6 +26,10 @@ export const helloRouter = new Elysia()
 		},
 		{
 			body: t.Object({ name: t.String() }),
-			response: t.Object({ message: t.String() })
+			response: {
+				200: t.Object({ message: t.String() }),
+				400: t.Object({ message: t.String() }),
+				500: t.Object({ message: t.String() })
+			}
 		}
 	);

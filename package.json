@@ -35,9 +35,11 @@
     "workbox-strategies": "^7.3.0"
   },
   "dependencies": {
+    "@elysiajs/cors": "^1.1.1",
     "@elysiajs/static": "^1.1.1",
     "@elysiajs/swagger": "^1.1.5",
     "elysia": "^1.1.24",
+    "elysia-helmet": "^2.0.0",
     "socket.io": "^4.8.1"
   }
 }
