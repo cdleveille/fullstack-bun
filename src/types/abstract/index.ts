@@ -3,7 +3,7 @@ import { SocketEvent } from "@constants";
 export type TAppContext = {
 	message: string;
 	count: number;
-	setCount: React.Dispatch<React.SetStateAction<number>>;
+	setCount: TReactStateSetter<number>;
 };
 
 export type TClientToServerSocketEvent = {
@@ -14,3 +14,5 @@ export type TServerToClientSocketEvent = {
 	[SocketEvent.Hello]: (message: string) => void;
 	[SocketEvent.Reload]: () => void;
 };
+
+export type TReactStateSetter<T> = React.Dispatch<React.SetStateAction<T>>;
