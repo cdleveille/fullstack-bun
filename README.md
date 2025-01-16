@@ -19,9 +19,9 @@ Minimal, performant, type-safe monorepo project template. [Bun](https://bun.sh)/
 
 ## Stack
 
-- [Bun](https://bun.sh) (server runtime, bundler, package manager, script runner)
-- [Elysia](https://elysiajs.com) (web framework)
-- [React](https://react.dev) (user interface)
-- [TanStack Query](https://tanstack.com/query) (async state management)
-- [Socket.IO](https://socket.io) (real-time server/client communication)
-- [TypeScript](https://www.typescriptlang.org), [ESLint](https://eslint.org), [Prettier](https://prettier.io) (code quality/style)
+- [Bun](https://bun.sh) - server runtime, bundler, package manager, script runner
+- [Elysia](https://elysiajs.com) - web framework
+- [React](https://react.dev) - user interface
+- [TanStack Query](https://tanstack.com/query) - async state management
+- [Socket.IO](https://socket.io) - real-time server/client communication
+- [TypeScript](https://www.typescriptlang.org), [ESLint](https://eslint.org), [Prettier](https://prettier.io) - code quality/style
