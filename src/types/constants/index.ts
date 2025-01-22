@@ -14,4 +14,8 @@ export enum SocketEvent {
 	Reload = "reload"
 }
 
+export enum ErrorMessage {
+	InternalServerError = "Internal Server Error"
+}
+
 export const STORED_STATE_PREFIX = "state";

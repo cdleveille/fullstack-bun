@@ -1,6 +1,6 @@
 import { Elysia, ValidationError } from "elysia";
 
-import { Env, Path } from "@constants";
+import { Env, ErrorMessage, Path } from "@constants";
 import { staticPlugin } from "@elysiajs/static";
 import { Config, initSocket, log, plugins } from "@helpers";
 import { helloRouter } from "@routes";
@@ -17,7 +17,11 @@ new Elysia()
 			c.set.status = 400;
 			return { message: c.error.all.map(e => e.summary).join(", ") };
 		}
-		return { message: c.error?.message ?? "Internal Server Error" };
+		const message =
+			c.error instanceof Error
+				? (c.error?.message ?? ErrorMessage.InternalServerError)
+				: ErrorMessage.InternalServerError;
+		return { message };
 	})
 	.onBeforeHandle(c => {
 		c.set.headers.vary = "Origin";
