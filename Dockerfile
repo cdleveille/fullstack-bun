@@ -17,7 +17,7 @@ RUN apt-get update -qq
 RUN apt-get install -y build-essential pkg-config python-is-python3
 
 # copy application code
-COPY --link bun.lockb package.json ./
+COPY --link bun.lock package.json ./
 COPY --link . .
 
 # install all dependencies and run production build
