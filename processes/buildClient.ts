@@ -38,7 +38,7 @@ export const buildClient = async () => {
 					),
 					...copyFiles.map(file => copy(path.join(Path.ClientSrc, file), path.join(Path.Public, file)))
 				],
-				minify: false
+				minify: IS_PROD
 			}),
 			Bun.build({ entrypoints: [path.join(Path.ClientSrc, "sw.ts")], outdir: Path.Public, minify: IS_PROD })
 		]);
