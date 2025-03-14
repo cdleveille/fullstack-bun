@@ -28,7 +28,8 @@ export default tseslint.config(
 				{
 					checksVoidReturn: false
 				}
-			]
+			],
+			"@typescript-eslint/only-throw-error": "off"
 		}
 	}
 );
