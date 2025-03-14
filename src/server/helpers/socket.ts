@@ -14,15 +14,16 @@ export const initSocket = async () => {
 
 	if (!IS_PROD) {
 		const { initWatch } = await import("@processes");
-		const emitReload = () => io.emit(SocketEvent.Reload);
-		initWatch(emitReload);
+		initWatch(() => io.emit(SocketEvent.Reload));
 	}
 
 	io.on(SocketEvent.Connect, socket => {
-		socket.on(SocketEvent.Hello, (message: string) => {
+		const onHello = (message: string) => {
 			log.info(message);
 			socket.emit(SocketEvent.Hello, "hello from bun!");
-		});
+		};
+
+		socket.on(SocketEvent.Hello, onHello);
 	});
 
 	log.info(`Socket.IO server started on port ${WS_PORT}`);

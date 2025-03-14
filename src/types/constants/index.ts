@@ -4,8 +4,8 @@ export enum Env {
 }
 
 export enum Path {
-	Public = "./public",
-	ClientSrc = "./src/client"
+	Public = "public",
+	ClientSrc = "src/client"
 }
 
 export enum SocketEvent {

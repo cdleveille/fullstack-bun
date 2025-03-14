@@ -20,17 +20,17 @@
     "strict": true,
     "baseUrl": ".",
     "paths": {
-      "@assets": ["./src/client/assets"],
-      "@components": ["./src/client/components"],
-      "@constants": ["./src/types/constants"],
-      "@contexts": ["./src/client/contexts"],
-      "@helpers": ["./src/server/helpers"],
-      "@hooks": ["./src/client/hooks"],
-      "@processes": ["./processes"],
-      "@routes": ["./src/server/routes"],
-      "@types": ["./src/types/abstract"],
-      "@utils": ["./src/client/utils"]
+      "@assets": ["src/client/assets"],
+      "@components": ["src/client/components"],
+      "@constants": ["src/types/constants"],
+      "@contexts": ["src/client/contexts"],
+      "@helpers": ["src/server/helpers"],
+      "@hooks": ["src/client/hooks"],
+      "@processes": ["processes"],
+      "@routes": ["src/server/routes"],
+      "@types": ["src/types/abstract"],
+      "@utils": ["src/client/utils"]
     }
   },
-  "include": ["./**/*.ts", "./**/*.tsx", "./**/*.js", "./**/*.jsx", "./**/*.json"]
+  "include": ["**/*.ts", "**/*.tsx", "**/*.js", "**/*.jsx", "**/*.json"]
 }

@@ -7,7 +7,7 @@
       "name": "debug",
 
       // The path to a JavaScript or TypeScript file to run.
-      "program": "./src/server/index.ts",
+      "program": "src/server/index.ts",
 
       // The arguments to pass to the program, if any.
       "args": [],

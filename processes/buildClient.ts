@@ -14,7 +14,7 @@ const src = Path.ClientSrc;
 const outdir = Path.Public;
 
 const copyFolders = ["assets"];
-const copyFiles = ["browserconfig.xml", "favicon.ico", "manifest.json"];
+const copyFiles = ["favicon.ico", "manifest.json"];
 
 export const buildClient = async () => {
 	try {
@@ -24,7 +24,7 @@ export const buildClient = async () => {
 
 		const results = await Promise.all([
 			Bun.build({
-				entrypoints: [`${src}/index.html`],
+				entrypoints: [`${src}/index.html`, `${src}/sw.ts`],
 				outdir,
 				define: { "Bun.env.IS_PROD": `"${isProd}"`, "Bun.env.WS_PORT": `"${Config.WS_PORT}"` },
 				sourcemap: isProd ? "none" : "linked",
@@ -37,15 +37,14 @@ export const buildClient = async () => {
 					...copyFiles.map(file => copy(`${src}/${file}`, `${outdir}/${file}`))
 				],
 				minify: isProd
-			}),
-			Bun.build({ entrypoints: [`${src}/sw.ts`], outdir, minify: isProd })
+			})
 		]);
 
 		results.forEach(result => {
 			if (!result.success) throw result.logs;
 		});
 
-		const buildTime = parseFloat((now() - start).toFixed(2));
+		const buildTime = (now() - start).toFixed(2);
 
 		log.info(`Build completed in ${isProd ? Env.Production : Env.Development} mode in ${buildTime}ms`);
 	} catch (error) {

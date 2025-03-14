@@ -5,15 +5,15 @@
   "author": "Chris Leveille <cdleveille@gmail.com>",
   "license": "MIT",
   "type": "module",
-  "module": "./src/server/index.ts",
+  "module": "src/server/index.ts",
   "scripts": {
     "lint": "eslint . && prettier --check .",
     "fix": "eslint --fix . && prettier --write .",
     "deploy": "flyctl deploy --remote-only --detach --no-cache --config fly.toml",
-    "build": "bun ./scripts/build.ts",
-    "build:prod": "bun ./scripts/build.ts BUN_ENV=production && workbox injectManifest workbox-config.json",
-    "dev": "bun --watch ./src/server/index.ts",
-    "start": "bun ./src/server/index.ts"
+    "build": "bun scripts/build.ts",
+    "build:prod": "bun scripts/build.ts BUN_ENV=production && workbox injectManifest workbox-config.json",
+    "dev": "bun --watch src/server/index.ts",
+    "start": "bun src/server/index.ts"
   },
   "devDependencies": {
     "@tanstack/react-query": "^5.67.3",

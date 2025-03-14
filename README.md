@@ -1,6 +1,6 @@
 # fullstack-bun
 
-Minimal, performant, type-safe monorepo project template. [Bun](https://bun.sh)/[Elysia](https://elysiajs.com) backend, [React](https://react.dev) frontend, [Socket.IO](https://socket.io) bridging the gap.
+Minimal, performant, type-safe monorepo project template. [Bun](https://bun.sh)/[Elysia](https://elysiajs.com) backend, [React](https://react.dev) frontend, [Socket.IO](https://socket.io) bridging the gap. Designed for building single-page web apps with real-time, bi-directional server/client interaction.
 
 ## Features
 
