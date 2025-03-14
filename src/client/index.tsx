@@ -13,8 +13,7 @@ window.addEventListener("load", async () => {
 	if (!navigator.serviceWorker.controller) await navigator.serviceWorker.register("sw.js");
 });
 
-const rootDiv = document.getElementById("root")!;
-const root = createRoot(rootDiv);
+const root = createRoot(document.getElementById("root")!);
 root.render(
 	<StrictMode>
 		<ErrorBoundary>

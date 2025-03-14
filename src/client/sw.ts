@@ -4,33 +4,28 @@ import { registerRoute } from "workbox-routing";
 import { CacheFirst, NetworkFirst } from "workbox-strategies";
 
 declare const self: ServiceWorkerGlobalScope & { __WB_DISABLE_DEV_LOGS: boolean; __WB_MANIFEST: { url: string }[] };
-
+self.__WB_DISABLE_DEV_LOGS = true;
 const manifest = self.__WB_MANIFEST;
 
-self.__WB_DISABLE_DEV_LOGS = true;
-
 const cacheName = "sw-cache";
-
 const cacheFirstHashPrefix = "~";
-
 const cacheFirstWithoutHashFileTypes = [".webp", ".ttf", ".woff", ".woff2"];
 
 const isCacheFirstWithHash = (filename: string) => filename.includes(cacheFirstHashPrefix);
-
 const isCacheFirstWithoutHash = (filename: string) => {
 	for (const fileType of cacheFirstWithoutHashFileTypes) if (filename.endsWith(fileType)) return true;
 	return false;
 };
 
-const onInstall = async () => {
-	const urlsToPrecache = ["/", ...(manifest?.length > 0 ? manifest.map(({ url }) => url) : [])];
-	const cache = await caches.open(cacheName);
-	await cache.addAll([...urlsToPrecache.map(url => url)]);
-};
-
 self.addEventListener("install", event => {
 	void self.skipWaiting();
-	event.waitUntil(onInstall());
+	event.waitUntil(
+		(async () => {
+			const urlsToPrecache = ["/", ...(manifest?.map(({ url }) => url) ?? [])];
+			const cache = await caches.open(cacheName);
+			await cache.addAll([...urlsToPrecache.map(url => url)]);
+		})()
+	);
 });
 
 self.addEventListener("activate", event => {
