@@ -16,6 +16,6 @@ jobs:
         with:
           bun-version: latest
 
-      - run: bun i --ignore-scripts --frozen-lockfile
-      - run: bun lint
-      - run: bun build:prod
+      - run: bun install --ignore-scripts --frozen-lockfile
+      - run: bun run lint
+      - run: bun run build:prod

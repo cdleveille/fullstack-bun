@@ -10,10 +10,10 @@
     "lint": "eslint . && prettier --check .",
     "fix": "eslint --fix . && prettier --write .",
     "deploy": "flyctl deploy --remote-only --detach --no-cache --config fly.toml",
-    "build": "bun scripts/build.ts",
-    "build:prod": "bun scripts/build.ts BUN_ENV=production && workbox injectManifest workbox-config.json",
-    "dev": "bun --watch src/server/index.ts",
-    "start": "bun src/server/index.ts"
+    "build": "bun run scripts/build.ts",
+    "build:prod": "bun run scripts/build.ts BUN_ENV=production && workbox injectManifest workbox-config.json",
+    "dev": "bun run --watch src/server/index.ts",
+    "start": "bun run src/server/index.ts"
   },
   "devDependencies": {
     "@tanstack/react-query": "^5.67.3",

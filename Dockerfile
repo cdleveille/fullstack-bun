@@ -21,12 +21,12 @@ COPY --link bun.lock package.json ./
 COPY --link . .
 
 # install all dependencies and run production build
-RUN bun i --ignore-scripts --frozen-lockfile
-RUN bun build:prod
+RUN bun install --ignore-scripts --frozen-lockfile
+RUN bun run build:prod
 
 # clear node_modules folder and re-install production dependencies only
 RUN rm -rf node_modules
-RUN bun i --ignore-scripts --frozen-lockfile --production
+RUN bun install --ignore-scripts --frozen-lockfile --production
 
 # final stage for app image
 FROM base
