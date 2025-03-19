@@ -1,10 +1,9 @@
 # syntax = docker/dockerfile:1
 
-# adjust BUN_VERSION as desired
-ARG BUN_VERSION=latest
-FROM oven/bun:${BUN_VERSION} as base
+# adjust bun image as desired
+FROM oven/bun:latest as base
 
-LABEL fly_launch_runtime="Bun"
+LABEL fly_launch_runtime="bun"
 
 # bun app lives here
 WORKDIR /app

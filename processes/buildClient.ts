@@ -10,8 +10,7 @@ const isProd = Config.IS_PROD || env === Env.Production;
 const src = Path.ClientSrc;
 const outdir = Path.Public;
 
-const copyFolders = ["icons"];
-const copyFiles = ["favicon.ico", "manifest.json"];
+const toCopy = ["icons/", "favicon.ico", "manifest.json"];
 
 export const buildClient = async () => {
 	const start = now();
@@ -27,10 +26,7 @@ export const buildClient = async () => {
 			entry: "[dir]/[name].[ext]",
 			asset: "[dir]/[name]~[hash].[ext]"
 		},
-		plugins: [
-			...copyFolders.map(folder => copy(`${src}/${folder}/`, `${outdir}/${folder}/`)),
-			...copyFiles.map(file => copy(`${src}/${file}`, `${outdir}/${file}`))
-		],
+		plugins: toCopy.map(path => copy(`${src}/${path}`, `${outdir}/${path}`)),
 		minify: isProd
 	});
 

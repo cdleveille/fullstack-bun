@@ -10,7 +10,7 @@ export const Main = () => {
 			<img src={bunSvg} width={200} height={200} alt="hello from bun!" />
 			<p>Automatically reloads with persisted state on file save.</p>
 			<button onClick={() => setCount(count => count + 1)}>Count: {count}</button>
-			<a className="reset" onClick={() => setCount(0)}>
+			<a onClick={() => setCount(0)} className="reset">
 				Reset Count
 			</a>
 		</div>
