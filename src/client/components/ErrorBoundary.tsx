@@ -1,5 +1,3 @@
-import React from "react";
-
 import { ErrorBoundary as ReactErrorBoundary } from "react-error-boundary";
 
 const ErrorFallback = ({ error, resetErrorBoundary }: { error: Error; resetErrorBoundary: () => void }) => {
