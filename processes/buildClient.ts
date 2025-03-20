@@ -24,7 +24,7 @@ export const buildClient = async () => {
 		sourcemap: isProd ? "none" : "linked",
 		naming: {
 			entry: "[dir]/[name].[ext]",
-			asset: "[dir]/[name]~[hash].[ext]"
+			asset: "[dir]/[name]-[hash].[ext]"
 		},
 		plugins: toCopy.map(path => copy(`${src}/${path}`, `${outdir}/${path}`)),
 		minify: isProd

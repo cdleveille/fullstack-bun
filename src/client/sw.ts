@@ -8,7 +8,7 @@ self.__WB_DISABLE_DEV_LOGS = true;
 const manifest = self.__WB_MANIFEST;
 
 const cacheName = "sw-cache";
-const cacheFirstHashPrefix = "~";
+const cacheFirstHashPrefix = "-";
 const cacheFirstWithoutHashFileTypes = [".webp", ".ttf", ".woff", ".woff2"];
 
 const isCacheFirstWithHash = (filename: string) => filename.includes(cacheFirstHashPrefix);
