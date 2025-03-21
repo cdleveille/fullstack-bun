@@ -17,7 +17,7 @@
   },
   "devDependencies": {
     "@tanstack/react-query": "^5.69.0",
-    "@types/bun": "^1.2.5",
+    "@types/bun": "latest",
     "@types/react": "^19.0.11",
     "@types/react-dom": "^19.0.4",
     "bun-copy-plugin": "^0.2.1",
