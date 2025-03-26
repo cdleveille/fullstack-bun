@@ -6,9 +6,12 @@
 **/.vscode
 **/node_modules
 **/public
+.dockerignore
 .editorconfig
+.env.example
 .eslint*
 .prettier*
+Dockerfile
 eslint*
 fly.toml
 import-sorter.json
