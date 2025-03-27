@@ -25,11 +25,17 @@ RUN bun run build:prod
 RUN bun run compile
 
 # final stage for app image
-FROM scratch
+FROM debian:bullseye-slim
 
 # copy built application
 COPY --from=build /app /app
 
+# set working directory
+WORKDIR /app
+
+# ensure main is executable
+RUN chmod +x /app/main
+
 # start the server
 EXPOSE 3000
-ENTRYPOINT [ "main" ]
+ENTRYPOINT [ "./main" ]
