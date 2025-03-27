@@ -25,7 +25,7 @@ RUN bun run build:prod
 RUN bun run compile
 
 # final stage for app image
-FROM scratch
+FROM debian:bullseye-slim
 
 # copy built application
 COPY --from=build /app/public /app/public
