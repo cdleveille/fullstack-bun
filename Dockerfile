@@ -28,7 +28,8 @@ RUN bun run compile
 FROM debian:bullseye-slim
 
 # copy built application
-COPY --from=build /app /app
+COPY --from=build /app/public /app/public
+COPY --from=build /app/main /app/main
 
 # set working directory
 WORKDIR /app
