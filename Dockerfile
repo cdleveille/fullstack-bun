@@ -28,8 +28,7 @@ RUN bun run compile
 FROM scratch
 
 # copy built application
-COPY --from=build /app/public /app/public
-COPY --from=build /app/main /app/main
+COPY --from=build /app /app
 
 # start the server
 EXPOSE 3000
