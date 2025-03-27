@@ -22,17 +22,15 @@ COPY --link . .
 # install all dependencies and run production build
 RUN bun install --ignore-scripts --frozen-lockfile
 RUN bun run build:prod
-
-# clear node_modules folder and re-install production dependencies only
-RUN rm -rf node_modules
-RUN bun install --ignore-scripts --frozen-lockfile --production
+RUN bun run compile
 
 # final stage for app image
-FROM base
+FROM scratch
 
 # copy built application
-COPY --from=build /app /app
+COPY --from=build /app/public /app/public
+COPY --from=build /app/main /app/main
 
 # start the server
 EXPOSE 3000
-CMD [ "bun", "start" ]
+ENTRYPOINT [ "main" ]

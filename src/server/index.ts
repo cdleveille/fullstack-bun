@@ -7,9 +7,7 @@ import { helloRouter } from "@routes";
 
 const { IS_PROD, PORT } = Config;
 
-const buildIfDev = IS_PROD ? [] : [(await import("@processes")).buildClient()];
-
-await Promise.all([...buildIfDev, initSocket()]);
+initSocket();
 
 new Elysia()
 	.onError(c => {

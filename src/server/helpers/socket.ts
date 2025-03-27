@@ -6,16 +6,14 @@ import type { TClientToServerSocketEvent, TServerToClientSocketEvent } from "@ty
 
 const { IS_PROD, WS_PORT, HOST, PORT } = Config;
 
-export const initSocket = async () => {
+export const initSocket = () => {
 	const io = new Server<TClientToServerSocketEvent, TServerToClientSocketEvent>(WS_PORT, {
 		cors: { origin: [HOST, `${HOST}:${PORT}`] },
 		serveClient: false
 	} satisfies Partial<ServerOptions>);
 
-	if (!IS_PROD) {
-		const { initWatch } = await import("@processes");
-		initWatch(() => io.emit(SocketEvent.Reload));
-	}
+	if (!IS_PROD)
+		import("@processes").then(({ initWatch }) => initWatch(() => io.emit(SocketEvent.Reload))).catch(log.error);
 
 	io.on(SocketEvent.Connect, socket => {
 		const onHello = (message: string) => {
