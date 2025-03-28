@@ -24,6 +24,9 @@ RUN bun install --ignore-scripts --frozen-lockfile
 RUN bun run build:prod
 RUN bun run compile
 
+# ensure main is executable
+RUN chmod +x main
+
 # final stage for app image
 FROM gcr.io/distroless/static-debian12
 
