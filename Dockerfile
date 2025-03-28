@@ -39,4 +39,4 @@ RUN chmod +x /app/main
 
 # start the server
 EXPOSE 3000
-ENTRYPOINT ["main"]
+ENTRYPOINT ["./main"]
