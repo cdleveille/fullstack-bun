@@ -34,9 +34,6 @@ COPY --from=build /app/main /app/main
 # set working directory
 WORKDIR /app
 
-# ensure main is executable
-RUN chmod +x /app/main
-
 # start the server
 EXPOSE 3000
 ENTRYPOINT ["./main"]
