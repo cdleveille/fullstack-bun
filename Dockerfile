@@ -25,7 +25,7 @@ RUN bun run build:prod
 RUN bun run compile
 
 # final stage for app image
-FROM debian:bullseye-slim
+FROM gcr.io/distroless/static-debian12
 
 # copy built application
 COPY --from=build /app/public /app/public
@@ -34,9 +34,6 @@ COPY --from=build /app/main /app/main
 # set working directory
 WORKDIR /app
 
-# ensure main is executable
-RUN chmod +x /app/main
-
 # start the server
 EXPOSE 3000
-ENTRYPOINT [ "./main" ]
+ENTRYPOINT ["main"]
