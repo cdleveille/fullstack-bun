@@ -24,11 +24,8 @@ RUN bun install --ignore-scripts --frozen-lockfile
 RUN bun run build:prod
 RUN bun run compile
 
-# ensure main is executable
-RUN chmod +x main
-
 # final stage for app image
-FROM gcr.io/distroless/static-debian12
+FROM debian:bullseye-slim
 
 # copy built application
 COPY --from=build /app/public /app/public
@@ -37,6 +34,9 @@ COPY --from=build /app/main /app/main
 # set working directory
 WORKDIR /app
 
+# ensure main is executable
+RUN chmod +x /app/main
+
 # start the server
 EXPOSE 3000
-ENTRYPOINT ["./main"]
+ENTRYPOINT ["main"]
