@@ -24,6 +24,7 @@ jobs:
       - run: bun install --ignore-scripts --frozen-lockfile
       - run: bun run lint
       - run: bun run build:prod
+      - run: bun run compile
 
       - uses: superfly/flyctl-actions/setup-flyctl@master
       - run: flyctl deploy --remote-only --detach --no-cache --config fly.toml
