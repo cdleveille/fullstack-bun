@@ -19,3 +19,4 @@ jobs:
       - run: bun install --ignore-scripts --frozen-lockfile
       - run: bun run lint
       - run: bun run build:prod
+      - run: bun run compile
