@@ -3,8 +3,6 @@
 # adjust bun image as desired
 FROM oven/bun:latest as base
 
-LABEL fly_launch_runtime="bun"
-
 # bun app lives here
 WORKDIR /app
 
