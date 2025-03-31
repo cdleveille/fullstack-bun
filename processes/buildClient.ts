@@ -32,5 +32,7 @@ export const buildClient = async () => {
 
 	const buildTime = (now() - start).toFixed(2);
 
-	log.info(`Build completed in ${isProd ? Env.Production : Env.Development} mode in ${buildTime}ms`);
+	log.info(
+		`Build completed in ${isProd ? Env.Production : Env.Development} mode in ${buildTime}ms`
+	);
 };

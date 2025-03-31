@@ -3,7 +3,10 @@
 import { registerRoute } from "workbox-routing";
 import { CacheFirst, NetworkFirst } from "workbox-strategies";
 
-declare const self: ServiceWorkerGlobalScope & { __WB_DISABLE_DEV_LOGS: boolean; __WB_MANIFEST: { url: string }[] };
+declare const self: ServiceWorkerGlobalScope & {
+	__WB_DISABLE_DEV_LOGS: boolean;
+	__WB_MANIFEST: { url: string }[];
+};
 self.__WB_DISABLE_DEV_LOGS = true;
 const manifest = self.__WB_MANIFEST;
 
@@ -13,7 +16,8 @@ const cacheFirstWithoutHashFileTypes = [".webp", ".ttf", ".woff", ".woff2"];
 
 const isCacheFirstWithHash = (filename: string) => filename.includes(cacheFirstHashPrefix);
 const isCacheFirstWithoutHash = (filename: string) => {
-	for (const fileType of cacheFirstWithoutHashFileTypes) if (filename.endsWith(fileType)) return true;
+	for (const fileType of cacheFirstWithoutHashFileTypes)
+		if (filename.endsWith(fileType)) return true;
 	return false;
 };
 
@@ -35,7 +39,8 @@ self.addEventListener("activate", event => {
 			await Promise.all(
 				existingCacheNames.reduce(
 					(acc, existingCacheName) => {
-						if (existingCacheName !== cacheName) acc.push(() => caches.delete(existingCacheName));
+						if (existingCacheName !== cacheName)
+							acc.push(() => caches.delete(existingCacheName));
 						return acc;
 					},
 					[] as (() => Promise<boolean>)[]
@@ -57,7 +62,11 @@ const trimCache = (url: URL) => {
 		const requests = await cache.keys();
 		for (const request of requests) {
 			const cacheHash = request.url.split(cacheFirstHashPrefix)[1];
-			if (request.url.startsWith(urlPrefix) && request.url.endsWith(urlSuffix) && hash !== cacheHash)
+			if (
+				request.url.startsWith(urlPrefix) &&
+				request.url.endsWith(urlSuffix) &&
+				hash !== cacheHash
+			)
 				return await cache.delete(request);
 		}
 	})();

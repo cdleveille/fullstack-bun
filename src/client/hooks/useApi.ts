@@ -42,7 +42,10 @@ export const useApi = () => {
 	);
 
 	const helloToAndFrom = (message: string) =>
-		useQuery({ queryKey: ["hello"], queryFn: () => toAndFrom({ event: SocketEvent.Hello, data: [message] }) });
+		useQuery({
+			queryKey: ["hello"],
+			queryFn: () => toAndFrom({ event: SocketEvent.Hello, data: [message] })
+		});
 
 	return { helloToAndFrom };
 };

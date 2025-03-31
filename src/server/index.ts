@@ -31,5 +31,7 @@ new Elysia()
 	.get("/health", "OK")
 	.group("/hello", app => app.use(helloRouter))
 	.listen({ port: PORT }, () =>
-		log.info(`HTTP server listening on port ${PORT} in ${IS_PROD ? Env.Production : Env.Development} mode`)
+		log.info(
+			`HTTP server listening on port ${PORT} in ${IS_PROD ? Env.Production : Env.Development} mode`
+		)
 	);
