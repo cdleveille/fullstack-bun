@@ -5,8 +5,5 @@
   "editor.defaultFormatter": "esbenp.prettier-vscode",
   "editor.formatOnPaste": true,
   "editor.formatOnSave": true,
-  "editor.codeActionsOnSave": {
-    "source.organizeImports.sortImports": "explicit"
-  },
   "eslint.validate": ["javascript", "typescript"]
 }
