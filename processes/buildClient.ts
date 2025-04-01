@@ -1,5 +1,5 @@
+import { $ } from "bun";
 import copy from "bun-copy-plugin";
-import { rimrafSync } from "rimraf";
 
 import { Env, Path } from "@constants";
 import { Config, log, now, parseArg } from "@helpers";
@@ -15,7 +15,7 @@ const toCopy = ["icons/", "favicon.ico", "manifest.json"];
 export const buildClient = async () => {
 	const start = now();
 
-	rimrafSync(outdir);
+	await $`rm -rf ${outdir}`;
 
 	await Bun.build({
 		entrypoints: [`${src}/index.html`, `${src}/sw.ts`],
