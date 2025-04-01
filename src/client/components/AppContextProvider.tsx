@@ -8,9 +8,9 @@ export const AppContext = createContext<TAppContext | null>(null);
 export const AppContextProvider = ({ children }: { children: React.ReactNode }) => {
 	const [count, setCount] = usePersistedState(0, "count");
 
-	const { helloToAndFrom } = useApi();
+	const { hello } = useApi();
 
-	const { data: message } = helloToAndFrom("hello from client!");
+	const { data: message } = hello("hello from client!");
 
 	useEffect(() => {
 		if (message) console.log(message);
