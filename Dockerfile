@@ -1,15 +1,12 @@
 # syntax = docker/dockerfile:1
 
 # adjust bun image as desired
-FROM oven/bun:latest as base
+FROM oven/bun:latest as build
 
 # bun app lives here
 WORKDIR /app
 
-# throw-away build stage to reduce size of final image
-FROM base as build
-
-# install packages needed to build node modules
+# install packages needed to build dependencies
 RUN apt-get update -qq
 RUN apt-get install -y build-essential pkg-config python-is-python3
 
@@ -17,12 +14,13 @@ RUN apt-get install -y build-essential pkg-config python-is-python3
 COPY --link bun.lock package.json ./
 COPY --link . .
 
-# install all dependencies and run production build
+# install dependencies, lint project, build frontend, and compile backend
 RUN bun install --ignore-scripts --frozen-lockfile
+RUN bun run biome ci .
 RUN bun run build:prod
 RUN bun run compile
 
-# final stage for app image
+# minimalist final stage for app image
 FROM gcr.io/distroless/base
 
 # copy built application

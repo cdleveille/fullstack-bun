@@ -3,6 +3,8 @@ name: deploy
 on:
   push:
     branches: [main]
+  pull_request:
+    branches: ["main"]
 
 env:
   FLY_API_TOKEN: ${{ secrets.FLY_API_TOKEN }}
@@ -10,21 +12,9 @@ env:
 jobs:
   deploy:
     name: fly.io deploy
-
     runs-on: ubuntu-latest
-
     environment: production
-
     steps:
       - uses: actions/checkout@v3
-      - uses: oven-sh/setup-bun@v1
-        with:
-          bun-version: latest
-
-      - run: bun install --ignore-scripts --frozen-lockfile
-      - run: bun run lint
-      - run: bun run build:prod
-      - run: bun run compile
-
       - uses: superfly/flyctl-actions/setup-flyctl@master
       - run: flyctl deploy --remote-only --detach --no-cache --config fly.toml

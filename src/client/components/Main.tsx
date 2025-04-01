@@ -4,8 +4,6 @@ import { useAppContext } from "@hooks";
 export const Main = () => {
 	const { message, count, setCount } = useAppContext();
 
-	const resetCount = () => setCount(0);
-
 	return (
 		<div className="flex-center-col">
 			<h1>{message}</h1>
@@ -14,7 +12,7 @@ export const Main = () => {
 			<button type="button" onClick={() => setCount(count => count + 1)}>
 				Count: {count}
 			</button>
-			<button type="button" onClick={resetCount}>
+			<button type="button" onClick={() => setCount(0)}>
 				Reset Count
 			</button>
 		</div>

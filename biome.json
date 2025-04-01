@@ -9,7 +9,7 @@
     "enabled": true,
     "attributePosition": "auto",
     "bracketSpacing": true,
-    "formatWithErrors": false,
+    "formatWithErrors": true,
     "indentStyle": "tab",
     "indentWidth": 4,
     "lineEnding": "lf",
