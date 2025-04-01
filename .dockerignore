@@ -6,7 +6,6 @@
 **/public
 .dockerignore
 .env.example
-biome.json
 Dockerfile
 fly.toml
 LICENSE
