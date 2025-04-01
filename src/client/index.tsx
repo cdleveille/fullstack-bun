@@ -13,7 +13,9 @@ window.addEventListener("load", async () => {
 	if (!navigator.serviceWorker.controller) await navigator.serviceWorker.register("sw.js");
 });
 
-const root = createRoot(document.getElementById("root")!);
+const rootEle = document.getElementById("root");
+if (!rootEle) throw new Error("Element with id 'root' not found");
+const root = createRoot(rootEle);
 root.render(
 	<StrictMode>
 		<ErrorBoundary>

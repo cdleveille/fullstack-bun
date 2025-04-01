@@ -11,7 +11,9 @@ const ErrorFallback = ({
 		<div role="alert" className="flex-center-col">
 			<p>Oops! Something went wrong:</p>
 			<div style={{ color: "red", width: "100%" }}>{error.message}</div>
-			<button onClick={resetErrorBoundary}>Clear State and Refresh</button>
+			<button type="button" onClick={resetErrorBoundary}>
+				Clear State and Refresh
+			</button>
 		</div>
 	);
 };

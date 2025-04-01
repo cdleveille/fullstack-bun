@@ -1,6 +1,6 @@
 import { useCallback } from "react";
 
-import { SocketEvent } from "@constants";
+import type { SocketEvent } from "@constants";
 import type {
 	TClientToServerSocketEvent,
 	TServerToClientSocketEvent,
@@ -18,7 +18,7 @@ export const useSocket = () => {
 		}: TSocketReqParams<T>) => {
 			socket.emit(event, ...data);
 		},
-		[socket]
+		[]
 	);
 
 	const emitAndReceive = useCallback(
@@ -39,7 +39,7 @@ export const useSocket = () => {
 				emit({ event, data });
 			});
 		},
-		[socket, emit]
+		[emit]
 	);
 
 	return { emit, emitAndReceive };

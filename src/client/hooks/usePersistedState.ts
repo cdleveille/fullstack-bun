@@ -13,14 +13,14 @@ export const usePersistedState = <T>(
 		if (isPersistDisabled) return initialValue;
 		const storedValue = storage.session.getItem<T>(`${STORED_STATE_PREFIX}:${id}`);
 		return storedValue ?? initialValue;
-	}, []);
+	}, [initialValue, id, isPersistDisabled]);
 
 	const [state, setState] = useState<T>(persistedInitialValue);
 
 	useEffect(() => {
 		if (isPersistDisabled) return;
 		storage.session.setItem(`${STORED_STATE_PREFIX}:${id}`, state);
-	}, [state]);
+	}, [id, isPersistDisabled, state]);
 
 	return [state, setState];
 };
