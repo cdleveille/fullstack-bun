@@ -23,7 +23,7 @@ RUN bun run build:prod
 RUN bun run compile
 
 # final stage for app image
-FROM scratch
+FROM gcr.io/distroless/base
 
 # copy built application
 COPY --from=build /app/main /app/main
