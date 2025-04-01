@@ -16,26 +16,29 @@ export const plugins = new Elysia()
 		helmet({
 			contentSecurityPolicy: {
 				directives: {
-					defaultSrc: ["'self'"],
 					baseUri: ["'self'"],
 					childSrc: ["'self'"],
 					connectSrc: ["'self'", `${HOST}:${WS_PORT}`, `${WS_HOST}:${WS_PORT}`],
+					defaultSrc: ["'self'"],
 					fontSrc: ["'self'", "https:", "data:"],
 					formAction: ["'self'"],
 					frameAncestors: ["'self'"],
-					frameSrc: ["'self'"],
 					imgSrc: ["'self'", "data:"],
 					manifestSrc: ["'self'"],
 					mediaSrc: ["'self'"],
 					objectSrc: ["'none'"],
 					scriptSrc: ["'self'"],
 					scriptSrcAttr: ["'none'"],
-					scriptSrcElem: ["*", "'unsafe-inline'"],
-					styleSrc: ["'self'", "https:", "'unsafe-inline'"],
-					styleSrcAttr: ["'self'", "https:", "'unsafe-inline'"],
-					styleSrcElem: ["'self'", "https:", "'unsafe-inline'"],
+					scriptSrcElem: [
+						"'self'",
+						"'sha256-TcUB1mzXiQO4GxpTRZ0EMpOXKMU3u+n/q1WrgVIcs1I='",
+						"https://cdn.jsdelivr.net/npm/@scalar/"
+					],
+					styleSrc: ["'self'"],
+					styleSrcAttr: ["'self'", "'unsafe-inline'"],
+					styleSrcElem: ["'self'", "'unsafe-inline'"],
 					upgradeInsecureRequests: [],
-					workerSrc: ["'self'", "blob:"]
+					workerSrc: ["'self'"]
 				}
 			}
 		})

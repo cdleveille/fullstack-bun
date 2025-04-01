@@ -1,4 +1,4 @@
-import { Server, type ServerOptions } from "socket.io";
+import { Server } from "socket.io";
 
 import { SocketEvent } from "@constants";
 import { Config, log } from "@helpers";
@@ -10,7 +10,7 @@ export const initSocket = async () => {
 	const io = new Server<TClientToServerSocketEvent, TServerToClientSocketEvent>(WS_PORT, {
 		cors: { origin: [HOST, `${HOST}:${PORT}`] },
 		serveClient: false
-	} satisfies Partial<ServerOptions>);
+	});
 
 	if (!IS_PROD) {
 		const { initWatch } = await import("@processes");

@@ -13,7 +13,7 @@ Minimal, performant, type-safe monorepo project template. [Bun](https://bun.sh)/
 ## Setup
 
 1. Install [Bun](https://bun.sh)
-2. Install package dependencies: `bun i`
+2. Install package dependencies: `bun install`
 3. Start app in dev mode: `bun dev`
 4. The client will be served on [localhost:3000](http://localhost:3000) unless overridden in a .env file (see [.env.example](https://github.com/cdleveille/fullstack-bun/blob/main/.env.example) for all environment variable options)
 
