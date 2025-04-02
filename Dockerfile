@@ -31,5 +31,5 @@ COPY --from=build /app/public /app/public
 WORKDIR /app
 
 # start the server
-EXPOSE 3000
+EXPOSE 3000 3001
 ENTRYPOINT ["./main"]
