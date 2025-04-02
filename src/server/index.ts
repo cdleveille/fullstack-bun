@@ -7,9 +7,13 @@ import { helloRouter } from "@routes";
 
 const { IS_PROD, PORT } = Config;
 
-const buildIfDev = IS_PROD ? [] : [(await import("@processes")).buildClient()];
+const buildIfDev = async () => {
+	if (IS_PROD) return;
+	const { buildClient } = await import("@processes");
+	await buildClient();
+};
 
-await Promise.all([...buildIfDev, initSocket()]);
+await Promise.all([buildIfDev(), initSocket()]);
 
 new Elysia()
 	.onError(c => {
@@ -30,8 +34,8 @@ new Elysia()
 	.use(staticPlugin({ prefix: "/", assets: Path.Public, noCache: true }))
 	.get("/health", "OK")
 	.group("/hello", app => app.use(helloRouter))
-	.listen({ port: PORT }, () =>
+	.listen({ port: PORT, development: !IS_PROD }, ({ port, development, url }) => {
 		log.info(
-			`HTTP server listening on port ${PORT} in ${IS_PROD ? Env.Production : Env.Development} mode`
-		)
-	);
+			`HTTP server listening on port ${port} in ${!development ? Env.Production : Env.Development} mode - ${url.origin}`
+		);
+	});
