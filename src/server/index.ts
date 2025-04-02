@@ -34,8 +34,8 @@ new Elysia()
 	.use(staticPlugin({ prefix: "/", assets: Path.Public, noCache: true }))
 	.get("/health", "OK")
 	.group("/hello", app => app.use(helloRouter))
-	.listen({ port: PORT, development: !IS_PROD }, ({ port, development, url }) => {
+	.listen({ port: PORT, development: !IS_PROD }, ({ development, url }) =>
 		log.info(
-			`HTTP server listening on port ${port} in ${!development ? Env.Production : Env.Development} mode - ${url.origin}`
-		);
-	});
+			`HTTP server listening on ${url.origin} in ${development ? Env.Development : Env.Production} mode`
+		)
+	);
