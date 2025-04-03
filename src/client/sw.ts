@@ -47,7 +47,7 @@ self.addEventListener("activate", event => {
 	);
 });
 
-const trimCache = (url: URL) => {
+const isCacheFirstRequest = (url: URL) => {
 	if (isCacheFirstWithoutHash(url.href)) return true;
 	if (!isCacheFirstWithHash(url.href)) return false;
 	// delete stale cache entries asynchronously
@@ -73,6 +73,6 @@ const trimCache = (url: URL) => {
 	return true;
 };
 
-registerRoute(({ url }) => trimCache(url), new CacheFirst({ cacheName }));
+registerRoute(({ url }) => isCacheFirstRequest(url), new CacheFirst({ cacheName }));
 
-registerRoute(({ url }) => true, new NetworkFirst({ cacheName }));
+registerRoute(() => true, new NetworkFirst({ cacheName }));
