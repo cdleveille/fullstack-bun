@@ -21,8 +21,8 @@ const isCacheFirstWithoutHash = (filename: string) =>
 		filename.toLowerCase().endsWith(fileType.toLowerCase())
 	);
 
-self.addEventListener("install", async event => {
-	await self.skipWaiting();
+self.addEventListener("install", event => {
+	self.skipWaiting();
 	event.waitUntil(
 		(async () => {
 			const cache = await caches.open(cacheName);
