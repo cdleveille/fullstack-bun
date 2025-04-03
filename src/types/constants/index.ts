@@ -19,3 +19,5 @@ export enum ErrorMessage {
 }
 
 export const STORED_STATE_PREFIX = "state";
+
+export const WS_TIMEOUT_MS = 5000;

@@ -19,4 +19,8 @@ export type TSocketReqParams<T extends keyof TClientToServerSocketEvent> = {
 	data?: Parameters<TClientToServerSocketEvent[T]>;
 };
 
+export type TSocketResArgs<T extends keyof TClientToServerSocketEvent> = Parameters<
+	TServerToClientSocketEvent[T]
+>;
+
 export type TReactStateSetter<T> = React.Dispatch<React.SetStateAction<T>>;
