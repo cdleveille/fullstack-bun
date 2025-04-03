@@ -1,9 +1,8 @@
 # syntax = docker/dockerfile:1
 
-# adjust bun image as desired
+# use bun image for throw-away build stage
 FROM oven/bun:latest as build
 
-# bun app lives here
 WORKDIR /app
 
 # install packages needed to build dependencies
@@ -27,7 +26,6 @@ FROM gcr.io/distroless/base
 COPY --from=build /app/main /app/main
 COPY --from=build /app/public /app/public
 
-# set working directory
 WORKDIR /app
 
 # start the server
