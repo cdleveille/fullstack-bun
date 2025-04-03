@@ -14,7 +14,8 @@ const cacheName = "sw-cache";
 const cacheFirstHashPrefix = "~";
 const cacheFirstWithoutHashFileTypes = [".webp", ".ttf", ".woff", ".woff2"];
 
-const isCacheFirstWithHash = (filename: string) => filename.includes(cacheFirstHashPrefix);
+const isCacheFirstWithHash = (filename: string) =>
+	new RegExp(`${cacheFirstHashPrefix}[a-zA-Z0-9]{8}\\.[a-z0-9]+$`).test(filename);
 
 const isCacheFirstWithoutHash = (filename: string) =>
 	cacheFirstWithoutHashFileTypes.some(fileType =>
