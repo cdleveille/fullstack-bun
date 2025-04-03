@@ -16,12 +16,9 @@ export const AppContextProvider = ({ children }: { children: React.ReactNode }) 
 		if (message) console.log(message);
 	}, [message]);
 
-	if (!message) return null;
-
 	return (
 		<AppContext.Provider
 			value={{
-				message,
 				count,
 				setCount
 			}}
