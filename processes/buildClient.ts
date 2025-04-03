@@ -1,5 +1,5 @@
 import { $ } from "bun";
-import copy from "bun-copy-plugin";
+import { copyPlugin } from "bun-copy-plugin";
 
 import { Env, Path } from "@constants";
 import { Config, log, now, parseArg } from "@helpers";
@@ -26,7 +26,7 @@ export const buildClient = async () => {
 			entry: "[dir]/[name].[ext]",
 			asset: "[dir]/[name]-[hash].[ext]"
 		},
-		plugins: toCopy.map(path => copy(`${src}/${path}`, `${outdir}/${path}`)),
+		plugins: toCopy.map(path => copyPlugin(`${src}/${path}`, `${outdir}/${path}`)),
 		minify: isProd
 	});
 
