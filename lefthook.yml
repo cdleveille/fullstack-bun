@@ -1,6 +1,5 @@
 pre-commit:
   parallel: true
   commands:
-    lint-staged:
-      run: biome check --staged || true
-      skip_empty: true
+    lint:
+      run: bun run lint
