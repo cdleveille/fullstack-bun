@@ -24,4 +24,4 @@ Minimal, performant, type-safe monorepo project template. [Bun](https://bun.sh)/
 - [React](https://react.dev) - user interface
 - [TanStack Query](https://tanstack.com/query) - async state management
 - [Socket.IO](https://socket.io) - real-time server/client communication
-- [TypeScript](https://www.typescriptlang.org), [Biome](https://biomejs.dev) - code quality/style
+- [TypeScript](https://www.typescriptlang.org), [Biome](https://biomejs.dev), [Lefthook](https://lefthook.dev) - code quality/style

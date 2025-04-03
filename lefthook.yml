@@ -2,4 +2,4 @@ pre-commit:
   parallel: true
   commands:
     lint-staged:
-      run: bun run biome check --staged
+      run: biome check --staged
