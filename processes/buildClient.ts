@@ -4,8 +4,7 @@ import { copyPlugin } from "bun-copy-plugin";
 import { Env, Path } from "@constants";
 import { Config, log, now, parseArg } from "@helpers";
 
-const env = parseArg("BUN_ENV") ?? parseArg("NODE_ENV");
-const isProd = Config.IS_PROD || env === Env.Production;
+const isProd = Config.IS_PROD || (parseArg("BUN_ENV") ?? parseArg("NODE_ENV")) === Env.Production;
 
 const src = Path.ClientSrc;
 const outdir = Path.Public;
@@ -24,15 +23,15 @@ export const buildClient = async () => {
 		sourcemap: isProd ? "none" : "linked",
 		naming: {
 			entry: "[dir]/[name].[ext]",
-			asset: "[dir]/[name]-[hash].[ext]"
+			asset: "[dir]/[name]~[hash].[ext]",
+			chunk: "[dir]/chunk~[hash].[ext]"
 		},
 		plugins: toCopy.map(path => copyPlugin(`${src}/${path}`, `${outdir}/${path}`)),
 		minify: isProd
 	});
 
+	const buildMode = isProd ? Env.Production : Env.Development;
 	const buildTime = (now() - start).toFixed(2);
 
-	log.info(
-		`Build completed in ${isProd ? Env.Production : Env.Development} mode in ${buildTime}ms`
-	);
+	log.info(`Build completed in ${buildMode} mode in ${buildTime}ms`);
 };
