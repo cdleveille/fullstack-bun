@@ -29,7 +29,7 @@ self.addEventListener("install", event => {
 			if (!cache) return;
 			const urlsToPrecache = ["/", ...(manifest?.map(({ url }) => url) ?? [])];
 			await cache.addAll(urlsToPrecache.map(url => url));
-		})()
+		})().catch(console.error)
 	);
 });
 
@@ -42,7 +42,7 @@ self.addEventListener("activate", event => {
 					.filter(existingCacheName => existingCacheName !== cacheName)
 					.map(existingCacheName => caches.delete(existingCacheName))
 			);
-		})()
+		})().catch(console.error)
 	);
 });
 
@@ -68,7 +68,7 @@ const trimCache = (url: URL) => {
 				)
 				.map(entry => cache.delete(entry))
 		);
-	})();
+	})().catch(console.error);
 	return true;
 };
 
