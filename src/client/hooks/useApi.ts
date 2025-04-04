@@ -1,13 +1,19 @@
 import { SocketEvent } from "@constants";
 import { useQuery } from "@tanstack/react-query";
-import { emitAndReceive } from "@utils";
+import { http, socket } from "@utils";
 
 export const useApi = () => {
-	const hello = (message: string) =>
+	const helloSocket = (message: string) =>
 		useQuery({
 			queryKey: ["hello-socket"],
-			queryFn: () => emitAndReceive({ event: SocketEvent.Hello, data: [message] })
+			queryFn: () => socket.emitAndReceive({ event: SocketEvent.Hello, data: [message] })
 		});
 
-	return { hello };
+	const helloHttp = (name?: string) =>
+		useQuery({
+			queryKey: ["hello-http"],
+			queryFn: () => http.GET<{ message: string }>(`hello${name ? `?name=${name}` : ""}`)
+		});
+
+	return { helloSocket, helloHttp };
 };

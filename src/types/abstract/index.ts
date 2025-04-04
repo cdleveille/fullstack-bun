@@ -10,7 +10,7 @@ export type TClientToServerSocketEvent = {
 };
 
 export type TServerToClientSocketEvent = {
-	[SocketEvent.Hello]: (message: string) => void;
+	[SocketEvent.Hello]: ({ message }: { message: string }) => void;
 	[SocketEvent.Reload]: () => void;
 };
 

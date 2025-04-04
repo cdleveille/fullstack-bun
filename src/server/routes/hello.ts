@@ -6,7 +6,7 @@ export const helloRouter = new Elysia()
 		c => {
 			const { name } = c.query;
 			return {
-				message: `hello ${name ?? "world"}!`
+				message: `hello ${name || "from bun"}!`
 			};
 		},
 		{
@@ -21,7 +21,7 @@ export const helloRouter = new Elysia()
 		c => {
 			const { name } = c.body;
 			return {
-				message: `hello ${name ?? "world"}!`
+				message: `hello ${name || "from bun"}!`
 			};
 		},
 		{

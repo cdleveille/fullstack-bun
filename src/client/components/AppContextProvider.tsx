@@ -8,13 +8,17 @@ export const AppContext = createContext<TAppContext | null>(null);
 export const AppContextProvider = ({ children }: { children: React.ReactNode }) => {
 	const [count, setCount] = usePersistedState(0, "count");
 
-	const { hello } = useApi();
+	const { helloSocket, helloHttp } = useApi();
 
-	const { data: message } = hello("hello from client!");
-
+	const { data: messageSocket } = helloSocket("hello from client!");
 	useEffect(() => {
-		if (message) console.log(message);
-	}, [message]);
+		if (messageSocket) console.log(`socket: ${messageSocket.message}`);
+	}, [messageSocket]);
+
+	const { data: messageHttp } = helloHttp();
+	useEffect(() => {
+		if (messageHttp) console.log(`http: ${messageHttp.message}`);
+	}, [messageHttp]);
 
 	return (
 		<AppContext.Provider

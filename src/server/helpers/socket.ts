@@ -20,7 +20,7 @@ export const initSocket = async () => {
 	io.on(SocketEvent.Connect, socket => {
 		const onHello = (message: string) => {
 			log.info(message);
-			socket.emit(SocketEvent.Hello, "hello from bun!");
+			socket.emit(SocketEvent.Hello, { message: "hello from bun!" });
 		};
 
 		socket.on(SocketEvent.Hello, onHello);
