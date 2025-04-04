@@ -1,8 +1,12 @@
 export const http = {
-	GET: async <T>(url: string) => request<T>({ url, method: "GET" }),
-	POST: async <T>(url: string, body?: unknown) => request<T>({ url, method: "POST", body }),
-	PUT: async <T>(url: string, body?: unknown) => request<T>({ url, method: "PUT", body }),
-	DELETE: async <T>(url: string, body?: unknown) => request<T>({ url, method: "DELETE", body })
+	GET: async <T>(url: string, { headers }: { headers?: Headers } = {}) =>
+		request<T>({ url, method: "GET", headers }),
+	POST: async <T>(url: string, { headers, body }: { headers?: Headers; body?: unknown } = {}) =>
+		request<T>({ url, method: "POST", headers, body }),
+	PUT: async <T>(url: string, { headers, body }: { headers?: Headers; body?: unknown } = {}) =>
+		request<T>({ url, method: "PUT", headers, body }),
+	DELETE: async <T>(url: string, { headers, body }: { headers?: Headers; body?: unknown } = {}) =>
+		request<T>({ url, method: "DELETE", headers, body })
 };
 
 const request = async <T>({
