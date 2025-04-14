@@ -2,7 +2,4 @@ pre-commit:
   parallel: true
   commands:
     lint:
-      run: bunx biome lint .
-    format:
-      run: bunx biome format --write .
-      run: git add .
+      run: bun run lint
