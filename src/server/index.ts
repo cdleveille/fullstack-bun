@@ -8,7 +8,7 @@ import { helloRouter } from "@routes";
 const { IS_PROD, PORT } = Config;
 
 const buildIfDev = async () => {
-		if (IS_PROD) return;
+	if (IS_PROD) return;
 	const { buildClient } = await import("@processes");
 	await buildClient();
 };
