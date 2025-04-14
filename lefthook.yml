@@ -1,5 +1,5 @@
 pre-commit:
   parallel: true
   commands:
-    lint-staged:
-      run: bunx lint-staged
+    lint:
+      run: bun run lint
