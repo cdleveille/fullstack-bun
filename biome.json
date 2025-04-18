@@ -19,7 +19,7 @@
     "indentWidth": 4,
     "lineEnding": "lf",
     "lineWidth": 100,
-    "useEditorconfig": true
+    "useEditorconfig": false
   },
   "javascript": {
     "formatter": {
