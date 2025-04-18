@@ -8,7 +8,9 @@
   "module": "src/server/index.ts",
   "scripts": {
     "prepare": "lefthook install",
-    "lint": "biome check .",
+    "lint": "biome lint .",
+    "format": "biome format --write .",
+    "check": "biome check .",
     "deploy": "flyctl deploy --remote-only --detach --no-cache --config fly.toml",
     "build": "bun run scripts/build.ts",
     "build:prod": "bun run scripts/build.ts BUN_ENV=production && workbox injectManifest workbox-config.json",
