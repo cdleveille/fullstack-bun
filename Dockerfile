@@ -1,7 +1,7 @@
 # syntax = docker/dockerfile:1
 
 # use bun image for throw-away build stage
-FROM oven/bun:latest as build
+FROM oven/bun:latest AS build
 
 WORKDIR /app
 
