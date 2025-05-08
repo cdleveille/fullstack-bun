@@ -12,7 +12,7 @@ export const useApi = () => {
 	const helloHttp = (name?: string) =>
 		useQuery({
 			queryKey: ["hello-http"],
-			queryFn: () => http.GET<{ message: string }>(`hello${name ? `?name=${name}` : ""}`)
+			queryFn: () => http.GET<{ message: string }>(`api/hello${name ? `?name=${name}` : ""}`)
 		});
 
 	return { helloSocket, helloHttp };

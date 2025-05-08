@@ -3,17 +3,11 @@ import { Elysia, ValidationError } from "elysia";
 import { Env, ErrorMessage, Path } from "@constants";
 import { staticPlugin } from "@elysiajs/static";
 import { Config, initSocket, log, plugins } from "@helpers";
-import { helloRouter } from "@routes";
+import { apiRouter } from "@routes";
 
 const { IS_PROD, PORT } = Config;
 
-const buildIfDev = async () => {
-	if (IS_PROD) return;
-	const { buildClient } = await import("@processes");
-	await buildClient();
-};
-
-await Promise.all([buildIfDev(), initSocket()]);
+initSocket();
 
 new Elysia()
 	.onError(c => {
@@ -31,9 +25,9 @@ new Elysia()
 		c.set.headers.vary = "Origin";
 	})
 	.use(plugins)
-	.use(staticPlugin({ prefix: "/", assets: Path.Public, noCache: true }))
+	.use(staticPlugin({ prefix: "/", assets: IS_PROD ? Path.Public : "", noCache: true }))
 	.get("/health", "OK")
-	.group("/hello", app => app.use(helloRouter))
+	.group("/api", app => app.use(apiRouter))
 	.listen({ port: PORT, development: !IS_PROD }, ({ development, url }) =>
 		log.info(
 			`HTTP server listening on ${url.origin} in ${development ? Env.Development : Env.Production} mode`

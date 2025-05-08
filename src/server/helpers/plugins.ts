@@ -7,7 +7,7 @@ import { Config } from "@helpers";
 
 import { description, name, version } from "../../../package.json";
 
-const { HOST, WS_PORT } = Config;
+const { HOST, WS_PORT, VITE_PORT } = Config;
 const WS_HOST = Config.HOST.replace("http", "ws");
 
 export const plugins = new Elysia()
@@ -18,7 +18,13 @@ export const plugins = new Elysia()
 				directives: {
 					baseUri: ["'self'"],
 					childSrc: ["'self'"],
-					connectSrc: ["'self'", `${HOST}:${WS_PORT}`, `${WS_HOST}:${WS_PORT}`],
+					connectSrc: [
+						"'self'",
+						`${HOST}:${WS_PORT}`,
+						`${WS_HOST}:${WS_PORT}`,
+						`${HOST}:${VITE_PORT}`,
+						`${WS_HOST}:${VITE_PORT}`
+					],
 					defaultSrc: ["'self'"],
 					fontSrc: ["'self'", "https:", "data:"],
 					formAction: ["'self'"],
