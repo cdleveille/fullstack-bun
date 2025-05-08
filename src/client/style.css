@@ -39,11 +39,16 @@ h1 {
 	padding: 0.5rem;
 }
 
-.reset {
-	color: #9ca3af;
+.link-btn {
+	background-color: transparent;
+	border: none;
+	border-radius: 0;
+	box-shadow: none;
+	padding: 0;
+	color: #fbf0df;
 }
 
-.reset:hover {
-	cursor: pointer;
+.link-btn:hover,
+.link-btn:focus {
 	text-decoration: underline;
 }

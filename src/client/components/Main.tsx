@@ -12,7 +12,7 @@ export const Main = () => {
 			<button type="button" onClick={() => setCount(count => count + 1)}>
 				Count: {count}
 			</button>
-			<button type="button" onClick={() => setCount(0)}>
+			<button type="button" className="link-btn" onClick={() => setCount(0)}>
 				Reset Count
 			</button>
 		</div>
