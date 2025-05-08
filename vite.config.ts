@@ -17,6 +17,8 @@ export default defineConfig(({ mode }) => {
 		server: {
 			open: true,
 			hmr: true,
+			port: Number.parseInt(env.VITE_PORT ?? "5173"),
+			strictPort: false,
 			proxy: {
 				"/api": {
 					target: `http://localhost:${env.VITE_HTTP_PORT ?? "3000"}`,
