@@ -15,7 +15,7 @@ export default defineConfig(({ mode }) => {
 		plugins: [react(), tsconfigPaths()],
 		root: Path.ClientSrc,
 		define: {
-			"import.meta.env.VITE_ENV": JSON.stringify(env.VITE_ENV ?? Env.Development),
+			"import.meta.env.VITE_ENV": JSON.stringify(Env.Development),
 			"import.meta.env.VITE_PORT": JSON.stringify(PORT)
 		},
 		server: {
@@ -25,14 +25,6 @@ export default defineConfig(({ mode }) => {
 			strictPort: false,
 			proxy: {
 				[Route.Api]: {
-					target,
-					changeOrigin: true
-				},
-				[Route.Health]: {
-					target,
-					changeOrigin: true
-				},
-				[Route.Reference]: {
 					target,
 					changeOrigin: true
 				}

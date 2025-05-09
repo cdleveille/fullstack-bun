@@ -3,6 +3,7 @@ import { Elysia, t } from "elysia";
 import { Route } from "@constants";
 
 export const api = new Elysia({ prefix: Route.Api })
+	.get(Route.Health, "OK")
 	.get(
 		Route.Hello,
 		c => {

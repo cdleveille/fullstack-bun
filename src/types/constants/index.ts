@@ -27,3 +27,7 @@ export enum ErrorMessage {
 export const STORED_STATE_PREFIX = "state";
 
 export const WS_TIMEOUT_MS = 5000;
+
+export const HASH_PREFIX = "~";
+
+export const HASH_REGEX = new RegExp(`${HASH_PREFIX}[a-zA-Z0-9]{8}\\.[a-z0-9]+$`);

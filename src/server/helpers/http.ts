@@ -1,6 +1,20 @@
 import type { IncomingMessage, ServerResponse } from "node:http";
-import type { Elysia } from "elysia";
+import { type Elysia, type ErrorHandler, ValidationError } from "elysia";
 
+import { ErrorMessage } from "@constants";
+
+export const handleError: ErrorHandler = c => {
+	const { error } = c;
+	if (error instanceof ValidationError) {
+		c.set.status = 400;
+		const message = error.all.map(e => e.summary).join(", ");
+		return { message };
+	}
+	const message = "message" in error ? error.message : ErrorMessage.InternalServerError;
+	return { message };
+};
+
+// Creates a Node-style handler for the Elysia app (needed to attach Socket.IO instance to server)
 export const createNodeHandler = (app: Elysia) => {
 	return async function handler(req: IncomingMessage, res: ServerResponse) {
 		try {
@@ -17,7 +31,6 @@ export const createNodeHandler = (app: Elysia) => {
 
 			const response = await app.handle(request);
 
-			// Process headers, maintaining Node.js expected format
 			const headers: Record<string, string> = {};
 			response.headers.forEach((value, key) => {
 				headers[key] = value;

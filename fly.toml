@@ -26,7 +26,7 @@ primary_region = "bos"
     interval = "60s"
     timeout = "5s"
     method = "GET"
-    path = "/health"
+    path = "/api/health"
 
 [[vm]]
   memory = '256mb'

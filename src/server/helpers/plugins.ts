@@ -4,6 +4,7 @@ import { helmet } from "elysia-helmet";
 import { cors } from "@elysiajs/cors";
 import { swagger } from "@elysiajs/swagger";
 
+import { Route } from "@constants";
 import { description, name, version } from "../../../package.json";
 
 export const plugins = new Elysia()
@@ -41,8 +42,8 @@ export const plugins = new Elysia()
 	)
 	.use(
 		swagger({
-			path: "/reference",
+			path: `${Route.Api}${Route.Reference}`,
 			documentation: { info: { title: name, version, description } },
-			exclude: ["/health"]
+			exclude: [`${Route.Api}${Route.Health}`]
 		})
 	);
