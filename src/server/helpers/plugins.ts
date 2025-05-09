@@ -7,6 +7,10 @@ import { swagger } from "@elysiajs/swagger";
 import { Route } from "@constants";
 import { description, name, version } from "../../../package.json";
 
+import { Config } from "@helpers";
+
+const WS_HOST = Config.HOST.replace("http", "ws");
+
 export const plugins = new Elysia()
 	.use(cors())
 	.use(
@@ -15,7 +19,11 @@ export const plugins = new Elysia()
 				directives: {
 					baseUri: ["'self'"],
 					childSrc: ["'self'"],
-					connectSrc: ["'self'"],
+					connectSrc: [
+						"'self'",
+						`${Config.HOST}:${Config.PORT}`,
+						`${WS_HOST}:${Config.PORT}`
+					],
 					defaultSrc: ["'self'"],
 					fontSrc: ["'self'", "https:", "data:"],
 					formAction: ["'self'"],
