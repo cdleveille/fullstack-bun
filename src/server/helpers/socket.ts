@@ -1,16 +1,16 @@
+import type { Server as HTTPServer } from "node:http";
 import { Server } from "socket.io";
 
 import { SocketEvent } from "@constants";
 import { Config, log } from "@helpers";
 import type { TClientToServerSocketEvent, TServerToClientSocketEvent } from "@types";
 
-const { HOST, PORT } = Config;
+const { HOST, PORT, DEV_PORT } = Config;
 
-export const initSocket = () => {
+export const initSocket = (server: HTTPServer) => {
 	const io = new Server<TClientToServerSocketEvent, TServerToClientSocketEvent>({
-		cors: { origin: [HOST, `${HOST}:${PORT}`] },
-		serveClient: false,
-		transports: ["websocket", "polling"]
+		cors: { origin: [HOST, `${HOST}:${PORT}`, `${HOST}:${DEV_PORT}`] },
+		serveClient: false
 	});
 
 	io.on(SocketEvent.Connect, socket => {
@@ -39,5 +39,5 @@ export const initSocket = () => {
 	process.on("SIGTERM", shutdown);
 	process.on("SIGINT", shutdown);
 
-	return io;
+	io.attach(server);
 };

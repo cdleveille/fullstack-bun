@@ -15,7 +15,8 @@ export default defineConfig(({ mode }) => {
 		plugins: [react(), tsconfigPaths()],
 		root: Path.ClientSrc,
 		define: {
-			"import.meta.env.VITE_ENV": JSON.stringify(env.VITE_ENV ?? Env.Development)
+			"import.meta.env.VITE_ENV": JSON.stringify(env.VITE_ENV ?? Env.Development),
+			"import.meta.env.VITE_PORT": JSON.stringify(env.VITE_PORT)
 		},
 		server: {
 			open: true,
@@ -26,12 +27,12 @@ export default defineConfig(({ mode }) => {
 				"/api": {
 					target,
 					changeOrigin: true
-				},
-				"/socket.io": {
-					target,
-					changeOrigin: true,
-					ws: true
 				}
+				// "/socket.io": {
+				// 	target,
+				// 	changeOrigin: true,
+				// 	ws: true
+				// }
 			},
 			fs: {
 				deny: ["sw.*"]

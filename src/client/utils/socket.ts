@@ -7,8 +7,11 @@ import type {
 	TSocketReqParams,
 	TSocketResArgs
 } from "@types";
+import { Config } from "@utils";
 
-const io: Socket<TServerToClientSocketEvent, TClientToServerSocketEvent> = socketIo();
+const io: Socket<TServerToClientSocketEvent, TClientToServerSocketEvent> = socketIo(
+	`${location.protocol}//${location.hostname}:${Config.PORT}`
+);
 
 const emit = <T extends keyof TClientToServerSocketEvent>({
 	event,

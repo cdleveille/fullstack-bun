@@ -30,12 +30,10 @@ const app = new Elysia()
 
 const server = createServer(createNodeHandler(app));
 
-const io = initSocket();
+initSocket(server);
 
 server.listen(PORT, () =>
 	log.info(
 		`HTTP server listening on http://localhost:${PORT} in ${IS_PROD ? Env.Production : Env.Development} mode`
 	)
 );
-
-io.attach(server);
