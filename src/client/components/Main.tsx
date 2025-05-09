@@ -8,7 +8,7 @@ export const Main = () => {
 		<div className="flex-center-col">
 			<h1>hello from bun!</h1>
 			<img src={bunSvg} width={200} height={200} alt="hello from bun!" />
-			<p>Automatically reloads with persisted state on file save.</p>
+			<p>Hot-reloads with persisted state on file save.</p>
 			<button type="button" onClick={() => setCount(count => count + 1)}>
 				Count: {count}
 			</button>

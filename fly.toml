@@ -28,14 +28,6 @@ primary_region = "bos"
     method = "GET"
     path = "/health"
 
-[[services]]
-  internal_port = 3001
-  processes = ["app"]
-  protocol = "tcp"
-  [[services.ports]]
-    handlers = ["tls", "http"]
-    port = 3001
-
 [[vm]]
   memory = '256mb'
   cpu_kind = 'shared'
