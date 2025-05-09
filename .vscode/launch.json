@@ -7,7 +7,7 @@
       "name": "bun",
       "program": "${workspaceFolder}/src/server/index.ts",
       "cwd": "${workspaceFolder}",
-      "watchMode": true,
+      "watchMode": "hot",
       "internalConsoleOptions": "neverOpen",
       "presentation": {
         "hidden": true

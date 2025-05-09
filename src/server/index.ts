@@ -1,15 +1,14 @@
+import { createServer } from "node:http";
 import { Elysia, ValidationError } from "elysia";
 
 import { Env, ErrorMessage, Path } from "@constants";
 import { staticPlugin } from "@elysiajs/static";
-import { Config, initSocket, log, plugins } from "@helpers";
+import { Config, createNodeHandler, initSocket, log, plugins } from "@helpers";
 import { apiRouter } from "@routes";
 
 const { IS_PROD, PORT } = Config;
 
-initSocket();
-
-new Elysia()
+const app = new Elysia()
 	.onError(c => {
 		if (c.error instanceof ValidationError) {
 			c.set.status = 400;
@@ -27,9 +26,16 @@ new Elysia()
 	.use(plugins)
 	.use(staticPlugin({ prefix: "/", assets: IS_PROD ? Path.Public : "", noCache: true }))
 	.get("/health", "OK")
-	.group("/api", app => app.use(apiRouter))
-	.listen({ port: PORT, development: !IS_PROD }, ({ development, url }) =>
-		log.info(
-			`HTTP server listening on ${url.origin} in ${development ? Env.Development : Env.Production} mode`
-		)
-	);
+	.group("/api", app => app.use(apiRouter));
+
+const server = createServer(createNodeHandler(app));
+
+const io = initSocket();
+
+server.listen(PORT, () =>
+	log.info(
+		`HTTP server listening on http://localhost:${PORT} in ${IS_PROD ? Env.Production : Env.Development} mode`
+	)
+);
+
+io.attach(server);

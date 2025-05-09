@@ -1,17 +1,14 @@
 import { type Socket, io as socketIo } from "socket.io-client";
 
-import { SocketEvent, WS_TIMEOUT_MS } from "@constants";
+import { type SocketEvent, WS_TIMEOUT_MS } from "@constants";
 import type {
 	TClientToServerSocketEvent,
 	TServerToClientSocketEvent,
 	TSocketReqParams,
 	TSocketResArgs
 } from "@types";
-import { Config } from "@utils";
 
-const io: Socket<TServerToClientSocketEvent, TClientToServerSocketEvent> = socketIo(
-	`${location.protocol}//${location.hostname}:${Config.WS_PORT}`
-).on(SocketEvent.Reload, () => location.reload());
+const io: Socket<TServerToClientSocketEvent, TClientToServerSocketEvent> = socketIo();
 
 const emit = <T extends keyof TClientToServerSocketEvent>({
 	event,
@@ -24,7 +21,7 @@ const emitAndReceive = async <T extends keyof TClientToServerSocketEvent>({
 }: TSocketReqParams<T>) =>
 	new Promise<TSocketResArgs<T>[0]>((resolve, reject) => {
 		const timeout = setTimeout(
-			() => reject(new Error(`Socket.io request timed out after ${WS_TIMEOUT_MS}ms.`)),
+			() => reject(new Error(`socket.io request timed out after ${WS_TIMEOUT_MS}ms`)),
 			WS_TIMEOUT_MS
 		);
 		io.once(event as SocketEvent, (...resArgs: TSocketResArgs<T>) => {

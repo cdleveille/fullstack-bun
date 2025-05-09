@@ -4,11 +4,11 @@ import { SocketEvent } from "@constants";
 import { Config, log } from "@helpers";
 import type { TClientToServerSocketEvent, TServerToClientSocketEvent } from "@types";
 
-const { WS_PORT, HOST, PORT, VITE_PORT } = Config;
+const { HOST, PORT } = Config;
 
 export const initSocket = () => {
-	const io = new Server<TClientToServerSocketEvent, TServerToClientSocketEvent>(WS_PORT, {
-		cors: { origin: [HOST, `${HOST}:${PORT}`, `${HOST}:${VITE_PORT}`] },
+	const io = new Server<TClientToServerSocketEvent, TServerToClientSocketEvent>({
+		cors: { origin: [HOST, `${HOST}:${PORT}`] },
 		serveClient: false
 	});
 
@@ -21,5 +21,5 @@ export const initSocket = () => {
 		socket.on(SocketEvent.Hello, onHello);
 	});
 
-	log.info(`Socket.IO server started on port ${WS_PORT}`);
+	return io;
 };

@@ -19,8 +19,7 @@ await Bun.build({
 	entrypoints: [`${src}/index.html`, `${src}/sw.ts`],
 	outdir,
 	define: {
-		"import.meta.env.VITE_ENV": `"${isProd}"`,
-		"import.meta.env.VITE_WS_PORT": `"${Config.WS_PORT}"`
+		"import.meta.env.VITE_ENV": `"${isProd}"`
 	},
 	sourcemap: isProd ? "none" : "linked",
 	naming: {
