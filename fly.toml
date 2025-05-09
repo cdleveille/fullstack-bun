@@ -21,12 +21,6 @@ primary_region = "bos"
   [[services.ports]]
     handlers = ["tls", "http"]
     port = 3000
-  [[services.http_checks]]
-    grace_period = "10s"
-    interval = "60s"
-    timeout = "5s"
-    method = "GET"
-    path = "/api/health"
 
 [[vm]]
   memory = '256mb'

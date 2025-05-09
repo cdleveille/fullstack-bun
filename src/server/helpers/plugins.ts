@@ -51,7 +51,6 @@ export const plugins = new Elysia()
 	.use(
 		swagger({
 			path: `${Route.Api}${Route.Reference}`,
-			documentation: { info: { title: name, version, description } },
-			exclude: [`${Route.Api}${Route.Health}`]
+			documentation: { info: { title: name, version, description } }
 		})
 	);

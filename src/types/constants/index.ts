@@ -15,7 +15,6 @@ export enum SocketEvent {
 
 export enum Route {
 	Api = "/api",
-	Health = "/health",
 	Hello = "/hello",
 	Reference = "/reference"
 }
