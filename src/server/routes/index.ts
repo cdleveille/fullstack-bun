@@ -1,8 +1,10 @@
 import { Elysia, t } from "elysia";
 
-export const api = new Elysia({ prefix: "/api" })
+import { Route } from "@constants";
+
+export const api = new Elysia({ prefix: Route.Api })
 	.get(
-		"/hello",
+		Route.Hello,
 		c => {
 			const { name } = c.query;
 			return {
@@ -17,7 +19,7 @@ export const api = new Elysia({ prefix: "/api" })
 		}
 	)
 	.post(
-		"/hello",
+		Route.Hello,
 		c => {
 			const { name } = c.body;
 			return {

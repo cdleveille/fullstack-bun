@@ -1,7 +1,7 @@
 import { createServer } from "node:http";
 import { Elysia, ValidationError } from "elysia";
 
-import { Env, ErrorMessage, Path } from "@constants";
+import { Env, ErrorMessage, Path, Route } from "@constants";
 import { staticPlugin } from "@elysiajs/static";
 import { Config, createNodeHandler, initSocket, log, plugins } from "@helpers";
 import { api } from "@routes";
@@ -24,9 +24,10 @@ const app = new Elysia()
 		c.set.headers.vary = "Origin";
 	})
 	.use(plugins)
-	.use(staticPlugin({ prefix: "/", assets: IS_PROD ? Path.Public : "", noCache: true }))
-	.get("/health", "OK")
+	.get(Route.Health, "OK")
 	.use(api);
+
+if (IS_PROD) app.use(staticPlugin({ prefix: "/", assets: Path.Public, noCache: true }));
 
 const server = createServer(createNodeHandler(app));
 

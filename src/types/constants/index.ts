@@ -10,8 +10,14 @@ export enum Path {
 
 export enum SocketEvent {
 	Connect = "connect",
-	Hello = "hello",
-	Reload = "reload"
+	Hello = "hello"
+}
+
+export enum Route {
+	Api = "/api",
+	Health = "/health",
+	Hello = "/hello",
+	Reference = "/reference"
 }
 
 export enum ErrorMessage {

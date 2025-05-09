@@ -11,7 +11,6 @@ export type TClientToServerSocketEvent = {
 
 export type TServerToClientSocketEvent = {
 	[SocketEvent.Hello]: ({ message }: { message: string }) => void;
-	[SocketEvent.Reload]: () => void;
 };
 
 export type TSocketReqParams<T extends keyof TClientToServerSocketEvent> = {

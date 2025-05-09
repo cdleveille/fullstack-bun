@@ -12,8 +12,7 @@
     "format": "biome format --write .",
     "check": "biome check .",
     "deploy": "flyctl deploy --remote-only --detach --no-cache --config fly.toml",
-    "build": "bun run scripts/build.ts",
-    "build:prod": "bun run scripts/build.ts ENV=production && workbox injectManifest workbox-config.json",
+    "build": "bun run scripts/build.ts ENV=production && workbox injectManifest workbox-config.json",
     "compile": "bun build --compile --minify --sourcemap --bytecode src/server/index.ts --outfile main",
     "dev": "concurrently --prefix \"[{name}]\" --names \"server,client\" -c \"bgBlue.bold,bgGreen.bold\" \"bun run --hot src/server/index.ts\" \"bunx --bun vite\"",
     "start": "bun run src/server/index.ts"
