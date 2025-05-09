@@ -5,7 +5,7 @@ import { SocketEvent } from "@constants";
 import type { TApi } from "@routes";
 import { socket } from "@utils";
 
-const client = treaty<TApi>(location.origin);
+const client = treaty<TApi>(window.location.origin);
 
 export const useApi = () => {
 	const helloSocket = (message: string) =>

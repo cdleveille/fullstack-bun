@@ -10,7 +10,7 @@ import type {
 import { Config } from "@utils";
 
 const io: Socket<TServerToClientSocketEvent, TClientToServerSocketEvent> = socketIo(
-	`${location.protocol}//${location.hostname}:${Config.PORT}`
+	`${window.location.protocol}//${window.location.hostname}:${Config.PORT}`
 );
 
 const emit = <T extends keyof TClientToServerSocketEvent>({

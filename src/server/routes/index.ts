@@ -6,7 +6,7 @@ export const api = new Elysia({ prefix: Route.Api })
 	.get(
 		Route.Hello,
 		c => {
-			const { name } = c.query ?? {};
+			const { name } = c.query;
 			return {
 				message: `hello ${name || "from bun"}!`
 			};
