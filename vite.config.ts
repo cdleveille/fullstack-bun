@@ -9,6 +9,8 @@ export default defineConfig(({ mode }) => {
 
 	const PORT = env.VITE_PORT ?? "3000";
 
+	const target = `http://localhost:${PORT}`;
+
 	return {
 		plugins: [react(), tsconfigPaths()],
 		root: Path.ClientSrc,
@@ -23,7 +25,15 @@ export default defineConfig(({ mode }) => {
 			strictPort: false,
 			proxy: {
 				"/api": {
-					target: `http://localhost:${PORT}`,
+					target,
+					changeOrigin: true
+				},
+				"/reference": {
+					target,
+					changeOrigin: true
+				},
+				"/health": {
+					target,
 					changeOrigin: true
 				}
 			},

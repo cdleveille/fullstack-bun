@@ -1,6 +1,6 @@
 import { Elysia, t } from "elysia";
 
-export const apiRouter = new Elysia()
+export const api = new Elysia({ prefix: "/api" })
 	.get(
 		"/hello",
 		c => {
@@ -33,3 +33,5 @@ export const apiRouter = new Elysia()
 			}
 		}
 	);
+
+export type TApi = typeof api;

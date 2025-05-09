@@ -4,7 +4,7 @@ import { Elysia, ValidationError } from "elysia";
 import { Env, ErrorMessage, Path } from "@constants";
 import { staticPlugin } from "@elysiajs/static";
 import { Config, createNodeHandler, initSocket, log, plugins } from "@helpers";
-import { apiRouter } from "@routes";
+import { api } from "@routes";
 
 const { IS_PROD, PORT } = Config;
 
@@ -26,7 +26,7 @@ const app = new Elysia()
 	.use(plugins)
 	.use(staticPlugin({ prefix: "/", assets: IS_PROD ? Path.Public : "", noCache: true }))
 	.get("/health", "OK")
-	.group("/api", app => app.use(apiRouter));
+	.use(api);
 
 const server = createServer(createNodeHandler(app));
 

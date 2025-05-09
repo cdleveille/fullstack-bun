@@ -1,6 +1,11 @@
-import { SocketEvent } from "@constants";
+import { treaty } from "@elysiajs/eden";
 import { useQuery } from "@tanstack/react-query";
-import { http, socket } from "@utils";
+
+import { SocketEvent } from "@constants";
+import type { TApi } from "@routes";
+import { Config, socket } from "@utils";
+
+const client = treaty<TApi>(`${location.protocol}//${location.hostname}:${Config.PORT}`);
 
 export const useApi = () => {
 	const helloSocket = (message: string) =>
@@ -12,7 +17,12 @@ export const useApi = () => {
 	const helloHttp = (name?: string) =>
 		useQuery({
 			queryKey: ["hello-http"],
-			queryFn: () => http.GET<{ message: string }>(`/api/hello${name ? `?name=${name}` : ""}`)
+			queryFn: async () => {
+				const { data } = await client.api.hello.get({
+					query: name ? { name } : undefined
+				});
+				return data;
+			}
 		});
 
 	return { helloSocket, helloHttp };

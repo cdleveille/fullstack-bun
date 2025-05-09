@@ -13,6 +13,7 @@
       },
       "devDependencies": {
         "@biomejs/biome": "1.9.4",
+        "@elysiajs/eden": "^1.3.2",
         "@evilmartians/lefthook": "^1.11.12",
         "@tanstack/react-query": "^5.75.5",
         "@types/bun": "latest",
@@ -238,6 +239,8 @@
     "@biomejs/cli-win32-x64": ["@biomejs/cli-win32-x64@1.9.4", "", { "os": "win32", "cpu": "x64" }, "sha512-8Y5wMhVIPaWe6jw2H+KlEm4wP/f7EW3810ZLmDlrEEy5KvBsb9ECEfu/kMWD484ijfQ8+nIi0giMgu9g1UAuuA=="],
 
     "@elysiajs/cors": ["@elysiajs/cors@1.3.1", "", { "peerDependencies": { "elysia": ">= 1.3.0" } }, "sha512-JYfVDD1ndplEVw7tcZBYcpUcPzKfDTTZCyAuml1ld7uKS3r+yIzbySvGaJI2A9q1gWY/r9DsSwd0N86B2TPUQQ=="],
+
+    "@elysiajs/eden": ["@elysiajs/eden@1.3.2", "", { "peerDependencies": { "elysia": ">= 1.3.0" } }, "sha512-0bCU5DO7J7hQfS2y3O3399GtoxMWRDMgQNMTHOnf70/F2nF8SwGHvzwh3+wO62Ko5FMF7EYqTN9Csw/g/Q7qwg=="],
 
     "@elysiajs/static": ["@elysiajs/static@1.3.0", "", { "dependencies": { "node-cache": "^5.1.2" }, "peerDependencies": { "elysia": ">= 1.3.0" } }, "sha512-7mWlj2U/AZvH27IfRKqpUjDP1W9ZRldF9NmdnatFEtx0AOy7YYgyk0rt5hXrH6wPcR//2gO2Qy+k5rwswpEhJA=="],
 
