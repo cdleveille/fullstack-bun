@@ -2,7 +2,7 @@ import { $ } from "bun";
 import { copyPlugin } from "bun-copy-plugin";
 
 import { Env, Path } from "@constants";
-import { Config, log, now, parseArg } from "@helpers";
+import { Config, log, now } from "@helpers";
 
 const start = now();
 
