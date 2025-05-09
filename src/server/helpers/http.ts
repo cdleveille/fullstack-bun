@@ -4,9 +4,6 @@ import type { Elysia } from "elysia";
 export const createNodeHandler = (app: Elysia) => {
 	return async function handler(req: IncomingMessage, res: ServerResponse) {
 		try {
-			// Skip Socket.IO requests as they should be handled by a specialized handler
-			if (req.url?.startsWith("/socket.io/")) return;
-
 			const host = req.headers.host || "localhost";
 			const url = new URL(req.url || "/", `http://${host}`);
 
