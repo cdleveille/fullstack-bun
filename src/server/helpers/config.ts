@@ -1,4 +1,4 @@
-const PORT = Number.parseInt(process.env.VITE_PORT ?? "3000");
+const PORT = Number.parseInt(process.env.PORT ?? "3000");
 
 const DEV_PORT = Number.parseInt(process.env.DEV_PORT ?? "5173");
 
