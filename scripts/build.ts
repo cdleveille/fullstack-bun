@@ -20,7 +20,7 @@ await Bun.build({
 	entrypoints: [`${src}/index.html`, `${src}/sw.ts`],
 	outdir,
 	define: {
-		"import.meta.env.VITE_ENV": JSON.stringify(Env.Production),
+		"import.meta.env.ENV": JSON.stringify(Env.Production),
 		"import.meta.env.PORT": JSON.stringify(Config.PORT)
 	},
 	sourcemap: "none",

@@ -11,7 +11,7 @@ export default defineConfig({
 	plugins: [react(), tsconfigPaths()],
 	root: Path.ClientSrc,
 	define: {
-		"import.meta.env.VITE_ENV": JSON.stringify(Env.Development),
+		"import.meta.env.ENV": JSON.stringify(Env.Development),
 		"import.meta.env.PORT": JSON.stringify(Config.PORT)
 	},
 	server: {
