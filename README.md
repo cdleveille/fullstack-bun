@@ -16,10 +16,13 @@ Designed for building single-page web apps with real-time, bi-directional server
 
 1. Install [Bun](https://bun.sh)
 2. Install package dependencies:
+
    ```bash
    bun install
    ```
+
 3. Start app in dev mode:
+
    ```bash
    bun dev
    ```
