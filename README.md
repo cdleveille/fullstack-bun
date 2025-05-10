@@ -1,6 +1,8 @@
 # fullstack-bun
 
-Minimal, performant, type-safe monorepo project template. [Bun](https://bun.sh)/[Elysia](https://elysiajs.com) backend, [React](https://react.dev) frontend, [Socket.IO](https://socket.io) bridging the gap. Designed for building single-page web apps with real-time, bi-directional server/client interaction.
+Opinionated monorepo project template with emphasis on developer experience and type safety. [Bun](https://bun.sh)/[Elysia](https://elysiajs.com) backend, [React](https://react.dev) frontend, [Socket.IO](https://socket.io) and [TanStack Query](https://tanstack.com/query) bridging the gap.
+
+Designed for building single-page web apps with real-time, bi-directional server/client interaction.
 
 ## Features
 
@@ -8,13 +10,19 @@ Minimal, performant, type-safe monorepo project template. [Bun](https://bun.sh)/
 
 - The client meets [PWA](https://developer.mozilla.org/en-US/docs/Web/Progressive_web_apps) requirements for an installable, native app-like experience on a variety of platforms, and boasts a near-perfect [PageSpeed Insights](https://pagespeed.web.dev) score out of the box.
 
-- Includes a [Dockerfile](https://github.com/cdleveille/fullstack-bun/blob/main/Dockerfile), [fly.toml](https://github.com/cdleveille/fullstack-bun/blob/main/fly.toml), and [GitHub workflow](https://github.com/cdleveille/fullstack-bun/blob/main/.github/workflows/deploy.yml) for deploying to [fly.io](https://fly.io) on pushes to the `main` branch. The Dockerfile compiles the app into a standalone binary, which is then run in a [distroless](https://github.com/GoogleContainerTools/distroless) image for optimal cloud resource efficiency.
+- Includes a [Dockerfile](https://github.com/cdleveille/fullstack-bun/blob/main/Dockerfile), [fly.toml](https://github.com/cdleveille/fullstack-bun/blob/main/fly.toml), and [GitHub workflow](https://github.com/cdleveille/fullstack-bun/blob/main/.github/workflows/deploy.yml) for deploying to [fly.io](https://fly.io) on pushes to the `main` branch. The Dockerfile compiles the app into a standalone binary, which is then run in a [distroless](https://github.com/GoogleContainerTools/distroless) image.
 
 ## Setup
 
 1. Install [Bun](https://bun.sh)
-2. Install package dependencies: `bun install`
-3. Start app in dev mode: `bun dev`
+2. Install package dependencies:
+   ```bash
+   bun install
+   ```
+3. Start app in dev mode:
+   ```bash
+   bun dev
+   ```
 
 ## Stack
 
