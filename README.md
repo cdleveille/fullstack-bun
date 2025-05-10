@@ -1,6 +1,6 @@
 # fullstack-bun
 
-Opinionated monorepo project template with emphasis on developer experience and type safety. [Bun](https://bun.sh)/[Elysia](https://elysiajs.com) backend, [React](https://react.dev) frontend, [Socket.IO](https://socket.io) and [TanStack Query](https://tanstack.com/query) bridging the gap.
+Curated web app project template with emphasis on developer experience and type safety. [Bun](https://bun.sh)/[Elysia](https://elysiajs.com) backend, [React](https://react.dev) frontend, [Socket.IO](https://socket.io) and [TanStack Query](https://tanstack.com/query) bridging the gap.
 
 Designed for building single-page web apps with real-time, bi-directional server/client interaction.
 
