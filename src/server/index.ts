@@ -7,7 +7,7 @@ import { staticPlugin } from "@elysiajs/static";
 import { Config, createNodeHandler, handleError, initSocket, log, plugins } from "@helpers";
 import { api } from "@routes";
 
-const { PORT } = Config;
+const { PORT, HOST } = Config;
 
 const app = new Elysia()
 	.onError(c => handleError(c))
@@ -25,4 +25,4 @@ const server = createServer(createNodeHandler(app));
 
 initSocket(server);
 
-server.listen(PORT, () => log.info(`Server listening on http://localhost:${PORT}`));
+server.listen(PORT, () => log.info(`Server listening on ${HOST}:${PORT}`));

@@ -3,6 +3,7 @@ import { defineConfig, loadEnv } from "vite";
 import tsconfigPaths from "vite-tsconfig-paths";
 
 import { Env, Path, Route } from "@constants";
+import { Config } from "@helpers";
 
 export default defineConfig(({ mode }) => {
 	const env = loadEnv(mode, process.cwd());
@@ -21,8 +22,8 @@ export default defineConfig(({ mode }) => {
 		server: {
 			open: true,
 			hmr: true,
-			port: Number.parseInt(env.VITE_DEV_PORT ?? "5173"),
-			strictPort: false,
+			port: Config.DEV_PORT,
+			strictPort: true,
 			proxy: {
 				[Route.Api]: {
 					target,
