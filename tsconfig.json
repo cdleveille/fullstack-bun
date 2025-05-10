@@ -7,7 +7,6 @@
     "moduleResolution": "bundler",
     "moduleDetection": "force",
     "noEmit": true,
-    "composite": true,
     "allowImportingTsExtensions": true,
     "resolveJsonModule": true,
     "allowJs": true,
@@ -19,6 +18,7 @@
     "jsx": "react-jsx",
     "strict": true,
     "baseUrl": ".",
+    "incremental": false,
     "paths": {
       "@assets": ["src/client/assets"],
       "@components": ["src/client/components"],
@@ -31,5 +31,6 @@
       "@utils": ["src/client/utils"]
     }
   },
-  "include": ["**/*.ts", "**/*.tsx", "**/*.js", "**/*.jsx", "**/*.json"]
+  "include": ["**/*.ts", "**/*.tsx", "**/*.js", "**/*.jsx", "**/*.json"],
+  "exclude": ["node_modules", "public"]
 }

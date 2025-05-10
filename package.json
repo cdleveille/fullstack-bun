@@ -11,6 +11,7 @@
     "lint": "biome lint .",
     "format": "biome format --write .",
     "check": "biome check .",
+    "tsc": "tsc -p tsconfig.json",
     "deploy": "flyctl deploy --remote-only --detach --no-cache --config fly.toml",
     "build": "bun run scripts/build.ts",
     "compile": "bun build --compile --minify --sourcemap --bytecode src/server/index.ts --outfile main",
