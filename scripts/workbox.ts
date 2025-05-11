@@ -1,11 +1,10 @@
 import { injectManifest } from "workbox-build";
 
-import { log } from "@server/helpers/log";
 import { HASH_REGEX, Path } from "@shared/constants";
 
 const outDir = Path.Public;
 
-log.info("Injecting build manifest into sw.js...");
+console.log("Injecting build manifest into sw.js...");
 
 const { count } = await injectManifest({
 	globDirectory: outDir,
@@ -16,4 +15,4 @@ const { count } = await injectManifest({
 	dontCacheBustURLsMatching: HASH_REGEX
 });
 
-log.info(`${count} URLs were injected ✅`);
+console.log(`${count} URLs were injected ✅`);

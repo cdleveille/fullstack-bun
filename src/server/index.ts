@@ -6,7 +6,6 @@ import { Elysia } from "elysia";
 import { api } from "@server/helpers/api";
 import { Config } from "@server/helpers/config";
 import { createNodeHandler, handleError } from "@server/helpers/http";
-import { log } from "@server/helpers/log";
 import { plugins } from "@server/helpers/plugins";
 import { initSocket } from "@server/helpers/socket";
 import { Path } from "@shared/constants";
@@ -29,4 +28,4 @@ const server = createServer(createNodeHandler(app));
 
 initSocket(server);
 
-server.listen(PORT, () => log.info(`Server listening on ${HOST}:${PORT}`));
+server.listen(PORT, () => console.log(`Server listening on ${HOST}:${PORT}`));

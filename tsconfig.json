@@ -20,11 +20,8 @@
     "baseUrl": ".",
     "incremental": false,
     "paths": {
-      "@server/*": ["src/server/*"],
-      "@client/*": ["src/client/*"],
-      "@shared/*": ["src/shared/*"]
+      "@*": ["src/*"]
     }
   },
-  "include": ["**/*.ts", "**/*.tsx", "**/*.js", "**/*.jsx", "**/*.json"],
   "exclude": ["node_modules", "public"]
 }
