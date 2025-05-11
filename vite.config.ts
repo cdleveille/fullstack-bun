@@ -47,6 +47,10 @@ export default defineConfig(({ mode }) => {
 					sw: resolve(src, "sw.ts")
 				},
 				output: {
+					manualChunks: path => {
+						if (path.includes("node_modules")) return "vendor";
+						return null;
+					},
 					entryFileNames: entry => {
 						if (entry.name === "sw") return "sw.js";
 						return "assets/[name]~[hash].js";
