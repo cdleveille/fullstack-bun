@@ -6,27 +6,48 @@ Designed for building single-page web apps with real-time, bi-directional server
 
 ## Features
 
+- All server/client interaction is fully type-safe. See [api.ts](https://github.com/cdleveille/fullstack-bun/blob/main/src/server/helpers/api.ts) and [useApi.ts](https://github.com/cdleveille/fullstack-bun/blob/main/src/client/hooks/useApi.ts) for simple examples.
+
 - [Scalar](https://guides.scalar.com) documentation for API routes is served on [/api/reference](https://fullstack-bun.fly.dev/api/reference). [OpenAPI Specification](https://swagger.io/specification) raw .json data is served on [/api/reference/json](https://fullstack-bun.fly.dev/api/reference/json).
 
 - The client meets [PWA](https://developer.mozilla.org/en-US/docs/Web/Progressive_web_apps) requirements for an installable, native app-like experience on a variety of platforms, and boasts a near-perfect [PageSpeed Insights](https://pagespeed.web.dev) score out of the box.
 
 - Includes a [Dockerfile](https://github.com/cdleveille/fullstack-bun/blob/main/Dockerfile), [fly.toml](https://github.com/cdleveille/fullstack-bun/blob/main/fly.toml), and [GitHub workflow](https://github.com/cdleveille/fullstack-bun/blob/main/.github/workflows/deploy.yml) for deploying to [fly.io](https://fly.io) on pushes to the `main` branch. The Dockerfile compiles the app into a standalone binary, which is then run in a [distroless](https://github.com/GoogleContainerTools/distroless) image.
 
-## Setup
+## Development
 
-1. Install [Bun](https://bun.sh)
+Install [Bun](https://bun.sh).
 
-2. Install package dependencies:
+Optionally create a `.env` file in the root directory to override default environment variables. See [.env.example](https://github.com/cdleveille/fullstack-bun/blob/main/.env.example) for available options.
 
-   ```bash
-   bun install
-   ```
+Install dependencies and launch:
 
-3. Start app in dev mode:
+```bash
+bun install
+bun run dev
+```
 
-   ```bash
-   bun dev
-   ```
+## Production
+
+Build client and compile server to standalone binary:
+
+```bash
+bun run build
+bun run compile
+```
+
+Start server by executing the compiled `main` binary or by running:
+
+```bash
+bun run start
+```
+
+Alternatively, build and run in a Docker container:
+
+```bash
+docker build -t fullstack-bun .
+docker run -p 3000:3000 fullstack-bun
+```
 
 ## Stack
 

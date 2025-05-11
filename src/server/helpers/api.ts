@@ -1,6 +1,10 @@
 import { Elysia, t } from "elysia";
 
+import { io } from "@server/helpers/socket";
+import { SocketEvent } from "@shared/constants";
 import { Route } from "@shared/constants";
+
+export type TApi = typeof api;
 
 export const api = new Elysia({ prefix: Route.Api })
 	.get(
@@ -39,4 +43,9 @@ export const api = new Elysia({ prefix: Route.Api })
 		}
 	);
 
-export type TApi = typeof api;
+io.on(SocketEvent.Connect, socket => {
+	socket.on(SocketEvent.Hello, message => {
+		console.log(message);
+		socket.emit(SocketEvent.Hello, { message: "hello from bun!" });
+	});
+});

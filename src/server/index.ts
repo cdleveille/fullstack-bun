@@ -7,7 +7,7 @@ import { api } from "@server/helpers/api";
 import { Config } from "@server/helpers/config";
 import { createNodeHandler, handleError } from "@server/helpers/http";
 import { plugins } from "@server/helpers/plugins";
-import { initSocket } from "@server/helpers/socket";
+import { io } from "@server/helpers/socket";
 import { Path } from "@shared/constants";
 
 const { PORT, HOST } = Config;
@@ -26,6 +26,6 @@ if (existsSync(Path.Public)) {
 
 const server = createServer(createNodeHandler(app));
 
-initSocket(server);
+io.attach(server);
 
 server.listen(PORT, () => console.log(`Server listening on ${HOST}:${PORT}`));
