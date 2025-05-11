@@ -1,9 +1,9 @@
 import { existsSync } from "node:fs";
 import { createServer } from "node:http";
+import { staticPlugin } from "@elysiajs/static";
 import { Elysia } from "elysia";
 
 import { Path } from "@constants";
-import { staticPlugin } from "@elysiajs/static";
 import { Config, createNodeHandler, handleError, initSocket, log, plugins } from "@helpers";
 import { api } from "@routes";
 

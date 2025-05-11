@@ -1,7 +1,6 @@
 /// <reference lib="dom" />
 
 import { StrictMode } from "react";
-
 import { createRoot } from "react-dom/client";
 
 import { AppContextProvider, ErrorBoundary, Main } from "@components";

@@ -1,13 +1,12 @@
+import { cors } from "@elysiajs/cors";
+import { swagger } from "@elysiajs/swagger";
 import { Elysia } from "elysia";
 import { helmet } from "elysia-helmet";
 
-import { cors } from "@elysiajs/cors";
-import { swagger } from "@elysiajs/swagger";
-
 import { Route } from "@constants";
-import { description, name, version } from "../../../package.json";
-
 import { Config } from "@helpers";
+
+import { description, name, version } from "../../../package.json";
 
 const WS_HOST = Config.HOST.replace("http", "ws");
 
