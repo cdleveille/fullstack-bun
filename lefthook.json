@@ -1,7 +1,8 @@
 {
   "$schema": "https://json.schemastore.org/lefthook.json",
+  "colors": false,
   "pre-commit": {
-    "parallel": false,
+    "parallel": true,
     "commands": {
       "lint-staged": {
         "run": "bunx biome lint --no-errors-on-unmatched --files-ignore-unknown=true {staged_files}"
