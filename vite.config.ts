@@ -5,7 +5,7 @@ import { viteStaticCopy } from "vite-plugin-static-copy";
 import tsconfigPaths from "vite-tsconfig-paths";
 
 import { Path, Route } from "@constants";
-import { Config, log } from "@helpers";
+import { Config } from "@helpers";
 
 const src = Path.ClientSrc;
 const outDir = Path.Public;
@@ -56,7 +56,7 @@ export default defineConfig(({ mode }) => {
 						return "assets/[name]~[hash].js";
 					},
 					assetFileNames: asset => {
-						if (asset.names[0] === "manifest.json") return "manifest.json";
+						if (asset.names.includes("manifest.json")) return "manifest.json";
 						return "assets/[name]~[hash][extname]";
 					}
 				}

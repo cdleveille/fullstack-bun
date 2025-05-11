@@ -5,7 +5,7 @@ import { log } from "@helpers";
 
 const outDir = Path.Public;
 
-log.info("Precaching build manifest in sw.js...");
+log.info("Injecting build manifest into sw.js...");
 
 const { count } = await injectManifest({
 	globDirectory: outDir,
@@ -16,4 +16,4 @@ const { count } = await injectManifest({
 	dontCacheBustURLsMatching: HASH_REGEX
 });
 
-log.info(`${count} URLs were precached ✅`);
+log.info(`${count} URLs were injected ✅`);
