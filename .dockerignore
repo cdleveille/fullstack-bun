@@ -10,4 +10,3 @@ fly.toml
 lefthook*
 LICENSE
 README.md
-vite.config.ts
