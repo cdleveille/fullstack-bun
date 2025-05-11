@@ -19,6 +19,7 @@ RUN bun run biome ci .
 RUN bun run tsc
 RUN bun run build
 RUN bun run compile
+RUN chmod +x ./main
 
 # minimalist final stage for app image
 FROM gcr.io/distroless/base
