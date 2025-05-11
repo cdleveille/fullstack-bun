@@ -29,10 +29,10 @@ Designed for building single-page web apps with real-time, bi-directional server
 
 ## Stack
 
-- [Bun](https://bun.sh) - server runtime, bundler, package manager, script runner
+- [Bun](https://bun.sh) - server runtime, package manager, script runner
 - [Elysia](https://elysiajs.com) - web framework
 - [React](https://react.dev) - user interface
 - [TanStack Query](https://tanstack.com/query) - async state management
 - [Socket.IO](https://socket.io) - real-time server/client communication
 - [TypeScript](https://www.typescriptlang.org), [Biome](https://biomejs.dev), [Lefthook](https://lefthook.dev) - code quality/style
-- [Vite](https://vite.dev) - local dev server
+- [Vite](https://vite.dev) - dev server, bundler

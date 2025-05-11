@@ -1,32 +1,72 @@
+import { resolve } from "node:path";
 import react from "@vitejs/plugin-react";
 import { defineConfig } from "vite";
+import { viteStaticCopy } from "vite-plugin-static-copy";
 import tsconfigPaths from "vite-tsconfig-paths";
 
-import { Env, Path, Route } from "@constants";
-import { Config } from "@helpers";
+import { Path, Route } from "@constants";
+import { Config, log } from "@helpers";
+
+const src = Path.ClientSrc;
+const outDir = Path.Public;
+
+const toCopy = ["icons/", "favicon.ico"];
 
 const target = `http://localhost:${Config.PORT}`;
 
-export default defineConfig({
-	plugins: [react(), tsconfigPaths()],
-	root: Path.ClientSrc,
-	define: {
-		"import.meta.env.ENV": JSON.stringify(Env.Development),
-		"import.meta.env.PORT": JSON.stringify(Config.PORT)
-	},
-	server: {
-		open: true,
-		hmr: true,
-		port: Config.DEV_PORT,
-		strictPort: true,
-		proxy: {
-			[Route.Api]: {
-				target,
-				changeOrigin: true
+export default defineConfig(({ mode }) => {
+	return {
+		root: resolve(src),
+		define: {
+			"import.meta.env.ENV": JSON.stringify(mode),
+			"import.meta.env.PORT": JSON.stringify(Config.PORT)
+		},
+		server: {
+			open: true,
+			hmr: true,
+			port: Config.DEV_PORT,
+			strictPort: true,
+			proxy: {
+				[Route.Api]: {
+					target,
+					changeOrigin: true
+				}
+			},
+			fs: {
+				deny: ["sw.*"]
 			}
 		},
-		fs: {
-			deny: ["sw.*"]
-		}
-	}
+		build: {
+			outDir: resolve(outDir),
+			emptyOutDir: true,
+			sourcemap: false,
+			minify: true,
+			rollupOptions: {
+				input: {
+					main: resolve(src, "index.html"),
+					sw: resolve(src, "sw.ts")
+				},
+				output: {
+					entryFileNames: entry => {
+						if (entry.name === "sw") return "sw.js";
+						return "assets/[name]~[hash].js";
+					},
+					assetFileNames: asset => {
+						if (asset.names[0] === "manifest.json") return "manifest.json";
+						return "assets/[name]~[hash][extname]";
+					}
+				}
+			}
+		},
+		plugins: [
+			react(),
+			tsconfigPaths(),
+			viteStaticCopy({
+				targets: toCopy.map(path => ({
+					src: resolve(src, path),
+					dest: "./"
+				}))
+			})
+		]
+	};
 });

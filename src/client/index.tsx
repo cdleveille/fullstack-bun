@@ -10,7 +10,9 @@ import { Config } from "@utils";
 
 window.addEventListener("load", async () => {
 	if (!Config.IS_PROD || !navigator.serviceWorker) return;
-	if (!navigator.serviceWorker.controller) await navigator.serviceWorker.register("sw.js");
+	if (!navigator.serviceWorker.controller) {
+		await navigator.serviceWorker.register("sw.js", { type: "module", scope: "/" });
+	}
 });
 
 const rootEle = document.getElementById("root");
