@@ -4,7 +4,7 @@ import { Elysia } from "elysia";
 import { helmet } from "elysia-helmet";
 
 import { Route } from "@constants";
-import { Config } from "@helpers";
+import { Config } from "@server/helpers/config";
 
 import { description, name, version } from "../../../package.json";
 

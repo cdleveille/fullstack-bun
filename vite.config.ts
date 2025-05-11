@@ -5,7 +5,7 @@ import { viteStaticCopy } from "vite-plugin-static-copy";
 import tsconfigPaths from "vite-tsconfig-paths";
 
 import { Path, Route } from "@constants";
-import { Config } from "@helpers";
+import { Config } from "@server/helpers/config";
 
 const root = Path.ClientSrc;
 const outDir = Path.Public;

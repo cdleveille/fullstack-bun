@@ -20,15 +20,10 @@
     "baseUrl": ".",
     "incremental": false,
     "paths": {
-      "@assets": ["src/client/assets"],
-      "@components": ["src/client/components"],
+      "@server/*": ["src/server/*"],
+      "@client/*": ["src/client/*"],
       "@constants": ["src/types/constants"],
-      "@contexts": ["src/client/contexts"],
-      "@helpers": ["src/server/helpers"],
-      "@hooks": ["src/client/hooks"],
-      "@routes": ["src/server/routes"],
-      "@types": ["src/types/abstract"],
-      "@utils": ["src/client/utils"]
+      "@types": ["src/types/abstract"]
     }
   },
   "include": ["**/*.ts", "**/*.tsx", "**/*.js", "**/*.jsx", "**/*.json"],

@@ -1,7 +1,7 @@
 import { injectManifest } from "workbox-build";
 
 import { HASH_REGEX, Path } from "@constants";
-import { log } from "@helpers";
+import { log } from "@server/helpers/log";
 
 const outDir = Path.Public;
 

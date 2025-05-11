@@ -1,9 +1,9 @@
 import { treaty } from "@elysiajs/eden";
 import { useQuery } from "@tanstack/react-query";
 
+import { socket } from "@client/utils/socket";
 import { SocketEvent } from "@constants";
-import type { TApi } from "@routes";
-import { socket } from "@utils";
+import type { TApi } from "@server/helpers/api";
 
 const client = treaty<TApi>(window.location.origin);
 

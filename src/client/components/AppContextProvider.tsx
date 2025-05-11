@@ -1,9 +1,8 @@
-import { createContext, useEffect } from "react";
+import { useEffect } from "react";
 
-import { useApi, usePersistedState } from "@hooks";
-import type { TAppContext } from "@types";
-
-export const AppContext = createContext<TAppContext | null>(null);
+import { AppContext } from "@client/contexts/app";
+import { useApi } from "@client/hooks/useApi";
+import { usePersistedState } from "@client/hooks/usePersistedState";
 
 export const AppContextProvider = ({ children }: { children: React.ReactNode }) => {
 	const [count, setCount] = usePersistedState(0, "count");

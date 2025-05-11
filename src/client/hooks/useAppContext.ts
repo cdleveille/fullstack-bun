@@ -1,6 +1,6 @@
 import { useContext } from "react";
 
-import { AppContext } from "@components";
+import { AppContext } from "@client/contexts/app";
 
 export const useAppContext = () => {
 	const ctx = useContext(AppContext);

@@ -4,8 +4,12 @@ import { staticPlugin } from "@elysiajs/static";
 import { Elysia } from "elysia";
 
 import { Path } from "@constants";
-import { Config, createNodeHandler, handleError, initSocket, log, plugins } from "@helpers";
-import { api } from "@routes";
+import { api } from "@server/helpers/api";
+import { Config } from "@server/helpers/config";
+import { createNodeHandler, handleError } from "@server/helpers/http";
+import { log } from "@server/helpers/log";
+import { plugins } from "@server/helpers/plugins";
+import { initSocket } from "@server/helpers/socket";
 
 const { PORT, HOST } = Config;
 
