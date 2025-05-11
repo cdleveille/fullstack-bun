@@ -1,3 +1,9 @@
+export const Contact = {
+	name: "Chris Leveille",
+	email: "cdleveille@gmail.com",
+	url: "https://www.cdleveille.net"
+};
+
 export enum Env {
 	Production = "production",
 	Development = "development"

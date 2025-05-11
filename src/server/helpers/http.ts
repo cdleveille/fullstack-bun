@@ -30,6 +30,7 @@ export const createNodeHandler = (app: Elysia) => {
 			});
 
 			const response = await app.handle(request);
+			const clonedResponse = response.clone();
 
 			const headers: Record<string, string> = {};
 			response.headers.forEach((value, key) => {
@@ -38,14 +39,15 @@ export const createNodeHandler = (app: Elysia) => {
 
 			res.writeHead(response.status, headers);
 
-			if (response.body) {
-				const body = Buffer.from(await response.arrayBuffer());
+			if (clonedResponse.body) {
+				const body = Buffer.from(await clonedResponse.arrayBuffer());
 				res.end(body);
 			} else {
 				res.end();
 			}
 		} catch (error) {
-			console.error("Error in HTTP adapter:", error);
+			console.error("Error in HTTP adapter:");
+			console.error(error);
 			if (!res.headersSent) {
 				res.writeHead(500, { "Content-Type": "text/plain" });
 				res.end("Internal Server Error");

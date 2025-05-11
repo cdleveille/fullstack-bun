@@ -29,9 +29,7 @@ export default defineConfig(({ mode }) => ({
 				changeOrigin: true
 			}
 		},
-		fs: {
-			deny: ["sw.*"]
-		}
+		fs: { deny: ["sw.*"] }
 	},
 	build: {
 		outDir: resolve(outDir),

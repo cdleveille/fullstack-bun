@@ -4,9 +4,9 @@ import { Elysia } from "elysia";
 import { helmet } from "elysia-helmet";
 
 import { Config } from "@server/helpers/config";
-import { Route } from "@shared/constants";
+import { Contact, Route } from "@shared/constants";
 
-import { description, name, version } from "../../../package.json";
+import { description, license, name, version } from "package.json";
 
 const WS_HOST = Config.HOST.replace("http", "ws");
 
@@ -50,6 +50,14 @@ export const plugins = new Elysia()
 	.use(
 		swagger({
 			path: `${Route.Api}${Route.Reference}`,
-			documentation: { info: { title: name, version, description } }
+			documentation: {
+				info: {
+					title: name,
+					version,
+					description,
+					contact: Contact,
+					license: { name: license }
+				}
+			}
 		})
 	);

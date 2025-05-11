@@ -13,7 +13,7 @@
     "check": "biome check .",
     "tsc": "tsc -p tsconfig.json",
     "deploy": "flyctl deploy --remote-only --detach --no-cache --config fly.toml",
-    "build": "bunx --bun vite build && bun run scripts/workbox.ts",
+    "build": "bunx --bun vite build && bun run src/server/helpers/workbox.ts",
     "compile": "bun build --compile --minify --sourcemap --bytecode src/server/index.ts --outfile main",
     "dev": "concurrently --prefix \"[{name}]\" --names \"server,client\" -c \"bgBlue.bold,bgGreen.bold\" \"bun run --hot src/server/index.ts\" \"bunx --bun vite\"",
     "start": "bun run src/server/index.ts"
