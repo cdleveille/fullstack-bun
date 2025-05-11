@@ -51,6 +51,7 @@ export default defineConfig(({ mode }) => {
 						if (path.includes("node_modules")) return "vendor";
 						return null;
 					},
+					chunkFileNames: "assets/[name]~[hash].js",
 					entryFileNames: entry => {
 						if (entry.name === "sw") return "sw.js";
 						return "assets/[name]~[hash].js";
