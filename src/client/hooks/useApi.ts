@@ -16,7 +16,7 @@ export const useApi = () => {
 
 	const helloHttp = (name?: string) =>
 		useQuery({
-			queryKey: ["hello-http"],
+			queryKey: ["hello-http", name],
 			queryFn: async () => {
 				const { data } = await client.api.hello.get({
 					query: { name }
