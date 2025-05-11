@@ -22,8 +22,7 @@
     "paths": {
       "@server/*": ["src/server/*"],
       "@client/*": ["src/client/*"],
-      "@constants": ["src/types/constants"],
-      "@types": ["src/types/abstract"]
+      "@shared/*": ["src/shared/*"]
     }
   },
   "include": ["**/*.ts", "**/*.tsx", "**/*.js", "**/*.jsx", "**/*.json"],

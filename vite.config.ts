@@ -4,8 +4,8 @@ import { defineConfig } from "vite";
 import { viteStaticCopy } from "vite-plugin-static-copy";
 import tsconfigPaths from "vite-tsconfig-paths";
 
-import { Path, Route } from "@constants";
 import { Config } from "@server/helpers/config";
+import { Env, Path, Route } from "@shared/constants";
 
 const root = Path.ClientSrc;
 const outDir = Path.Public;
@@ -63,11 +63,15 @@ export default defineConfig(({ mode }) => ({
 	plugins: [
 		react(),
 		tsconfigPaths(),
-		viteStaticCopy({
-			targets: toCopy.map(path => ({
-				src: resolve(root, path),
-				dest: "./"
-			}))
-		})
+		...[
+			mode === Env.Production
+				? viteStaticCopy({
+						targets: toCopy.map(path => ({
+							src: resolve(root, path),
+							dest: "./"
+						}))
+					})
+				: []
+		]
 	]
 }));

@@ -1,4 +1,4 @@
-import { SocketEvent } from "@constants";
+import { SocketEvent } from "@shared/constants";
 
 export type TAppContext = {
 	count: number;

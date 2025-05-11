@@ -1,13 +1,13 @@
 import { type Socket, io as socketIo } from "socket.io-client";
 
 import { Config } from "@client/utils/config";
-import { type SocketEvent, WS_TIMEOUT_MS } from "@constants";
+import { type SocketEvent, WS_TIMEOUT_MS } from "@shared/constants";
 import type {
 	TClientToServerSocketEvent,
 	TServerToClientSocketEvent,
 	TSocketReqParams,
 	TSocketResArgs
-} from "@types";
+} from "@shared/types";
 
 const io: Socket<TServerToClientSocketEvent, TClientToServerSocketEvent> = socketIo(
 	`${window.location.protocol}//${window.location.hostname}:${Config.PORT}`

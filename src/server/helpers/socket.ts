@@ -1,10 +1,10 @@
 import type { Server as HTTPServer } from "node:http";
 import { Server } from "socket.io";
 
-import { SocketEvent } from "@constants";
 import { Config } from "@server/helpers/config";
 import { log } from "@server/helpers/log";
-import type { TClientToServerSocketEvent, TServerToClientSocketEvent } from "@types";
+import { SocketEvent } from "@shared/constants";
+import type { TClientToServerSocketEvent, TServerToClientSocketEvent } from "@shared/types";
 
 const { HOST, PORT, DEV_PORT } = Config;
 

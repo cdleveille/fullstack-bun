@@ -3,8 +3,8 @@ import { swagger } from "@elysiajs/swagger";
 import { Elysia } from "elysia";
 import { helmet } from "elysia-helmet";
 
-import { Route } from "@constants";
 import { Config } from "@server/helpers/config";
+import { Route } from "@shared/constants";
 
 import { description, name, version } from "../../../package.json";
 

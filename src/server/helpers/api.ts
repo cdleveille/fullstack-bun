@@ -1,6 +1,6 @@
 import { Elysia, t } from "elysia";
 
-import { Route } from "@constants";
+import { Route } from "@shared/constants";
 
 export const api = new Elysia({ prefix: Route.Api })
 	.get(

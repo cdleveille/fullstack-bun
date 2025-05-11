@@ -3,7 +3,7 @@
 import { registerRoute } from "workbox-routing";
 import { CacheFirst, NetworkFirst, NetworkOnly } from "workbox-strategies";
 
-import { HASH_PREFIX, HASH_REGEX } from "@constants";
+import { HASH_PREFIX, HASH_REGEX } from "@shared/constants";
 
 declare const self: ServiceWorkerGlobalScope & {
 	__WB_DISABLE_DEV_LOGS: boolean;
