@@ -1,7 +1,7 @@
 /// <reference lib="webworker" />
 
 import { registerRoute } from "workbox-routing";
-import { CacheFirst, NetworkFirst } from "workbox-strategies";
+import { CacheFirst, NetworkFirst, NetworkOnly } from "workbox-strategies";
 
 import { HASH_PREFIX, HASH_REGEX } from "@constants";
 
@@ -72,6 +72,8 @@ const isCacheFirstRequest = (url: URL) => {
 	})().catch(console.error);
 	return true;
 };
+
+registerRoute(({ url }) => url.href.includes("/socket.io/"), new NetworkOnly());
 
 registerRoute(({ url }) => isCacheFirstRequest(url), new CacheFirst({ cacheName }));
 
