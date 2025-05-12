@@ -21,8 +21,8 @@ const emit = <T extends keyof TClientToServerSocketEvent>({
 const emitAndReceive = async <T extends keyof TClientToServerSocketEvent>({
 	event,
 	data
-}: TSocketReqParams<T>) =>
-	new Promise<TSocketResArgs<T>[0]>((resolve, reject) => {
+}: TSocketReqParams<T>) => {
+	return new Promise<TSocketResArgs<T>[0]>((resolve, reject) => {
 		const timeout = setTimeout(
 			() => reject(new Error(`Socket.IO request timed out after ${WS_TIMEOUT_MS}ms`)),
 			WS_TIMEOUT_MS
@@ -33,5 +33,6 @@ const emitAndReceive = async <T extends keyof TClientToServerSocketEvent>({
 		});
 		emit({ event, data });
 	});
+};
 
 export const socket = { io, emit, emitAndReceive };
