@@ -14,3 +14,5 @@ export const Config: TConfig = {
 	DEV_PORT,
 	HOST
 };
+
+export const isCustomHost = HOST !== DefaultConfig.HOST;

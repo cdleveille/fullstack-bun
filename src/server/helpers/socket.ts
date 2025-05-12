@@ -1,12 +1,14 @@
 import { Server } from "socket.io";
 
-import { Config } from "@server/helpers/config";
+import { Config, isCustomHost } from "@server/helpers/config";
 import type { TClientToServerSocketEvent, TServerToClientSocketEvent } from "@shared/types";
 
 const { HOST, PORT, DEV_PORT } = Config;
 
+const origin = isCustomHost ? [HOST, `${HOST}:${PORT}`, `${HOST}:${DEV_PORT}`] : "*";
+
 export const io = new Server<TClientToServerSocketEvent, TServerToClientSocketEvent>({
-	cors: { origin: [HOST, `${HOST}:${PORT}`, `${HOST}:${DEV_PORT}`] },
+	cors: { origin },
 	serveClient: false
 });
 
