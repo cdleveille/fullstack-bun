@@ -21,8 +21,7 @@ export default defineConfig(({ mode }) => ({
 	server: {
 		open: true,
 		hmr: true,
-		port: Config.DEV_PORT,
-		strictPort: true,
+		strictPort: false,
 		proxy: {
 			[Route.Api]: {
 				target: `http://localhost:${Config.PORT}`,
