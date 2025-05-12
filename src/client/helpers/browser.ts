@@ -1,4 +1,4 @@
-import { Config } from "@client/utils/config";
+import { Config } from "@client/helpers/config";
 
 const accessStorage = (storage: Storage) => ({
 	setItem: (key: string, data: unknown) => storage.setItem(key, JSON.stringify(data)),

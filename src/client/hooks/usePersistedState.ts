@@ -1,6 +1,6 @@
 import { useEffect, useMemo, useState } from "react";
 
-import { storage } from "@client/utils/browser";
+import { storage } from "@client/helpers/browser";
 import { STORED_STATE_PREFIX } from "@shared/constants";
 import type { TReactStateSetter } from "@shared/types";
 

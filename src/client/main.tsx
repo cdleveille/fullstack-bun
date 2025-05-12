@@ -7,7 +7,7 @@ import { createRoot } from "react-dom/client";
 import { AppContextProvider } from "@client/components/AppContextProvider";
 import { ErrorBoundary } from "@client/components/ErrorBoundary";
 import { Main } from "@client/components/Main";
-import { assertGetElementById, registerServiceWorker } from "@client/utils/browser";
+import { assertGetElementById, registerServiceWorker } from "@client/helpers/browser";
 
 registerServiceWorker().catch(console.error);
 

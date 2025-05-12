@@ -1,6 +1,6 @@
 import { type Socket, io as socketIo } from "socket.io-client";
 
-import { Config } from "@client/utils/config";
+import { Config } from "@client/helpers/config";
 import { type SocketEvent, WS_TIMEOUT_MS } from "@shared/constants";
 import type {
 	TClientToServerSocketEvent,

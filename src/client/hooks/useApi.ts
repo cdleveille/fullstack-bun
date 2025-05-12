@@ -1,7 +1,7 @@
 import { treaty } from "@elysiajs/eden";
 import { useQuery } from "@tanstack/react-query";
 
-import { socket } from "@client/utils/socket";
+import { socket } from "@client/helpers/socket";
 import type { TApi } from "@server/helpers/api";
 import { SocketEvent } from "@shared/constants";
 
