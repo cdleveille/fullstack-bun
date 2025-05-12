@@ -1,12 +1,11 @@
 import type { IncomingMessage, ServerResponse } from "node:http";
-import { type Elysia, type ErrorHandler, ValidationError } from "elysia";
+import { type Elysia, type ErrorHandler, type Handler, ValidationError } from "elysia";
 
 import { ErrorMessage } from "@shared/constants";
 
-export const handleError: ErrorHandler = c => {
-	const { error } = c;
+export const onError: ErrorHandler = ({ error, set }) => {
 	if (error instanceof ValidationError) {
-		c.set.status = 400;
+		set.status = 400;
 		const message = error.all.map(e => e.summary).join(", ");
 		return { message };
 	}
@@ -14,9 +13,14 @@ export const handleError: ErrorHandler = c => {
 	return { message };
 };
 
-// Creates a Node-style handler for the Elysia app (needed to attach Socket.IO instance to server)
-export const createNodeHandler = (app: Elysia) => {
-	return async function handler(req: IncomingMessage, res: ServerResponse) {
+export const onBeforeHandle: Handler = c => {
+	// Needed to prevent service worker error
+	c.set.headers.vary = "Origin";
+};
+
+// Creates a Node-style HTTP adapter function (needed to attach Socket.IO to Elysia)
+export const createHttpAdapter = (app: Elysia) => {
+	return async (req: IncomingMessage, res: ServerResponse) => {
 		try {
 			const host = req.headers.host || "localhost";
 			const url = new URL(req.url || "/", `http://${host}`);

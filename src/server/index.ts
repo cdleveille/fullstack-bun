@@ -5,7 +5,7 @@ import { Elysia } from "elysia";
 
 import { api } from "@server/helpers/api";
 import { Config } from "@server/helpers/config";
-import { createNodeHandler, handleError } from "@server/helpers/http";
+import { createHttpAdapter, onBeforeHandle, onError } from "@server/helpers/elysia";
 import { plugins } from "@server/helpers/plugins";
 import { io } from "@server/helpers/socket";
 import { Path } from "@shared/constants";
@@ -13,10 +13,8 @@ import { Path } from "@shared/constants";
 const { PORT, HOST } = Config;
 
 const app = new Elysia()
-	.onError(c => handleError(c))
-	.onBeforeHandle(c => {
-		c.set.headers.vary = "Origin";
-	})
+	.onError(c => onError(c))
+	.onBeforeHandle(onBeforeHandle)
 	.use(plugins)
 	.use(api);
 
@@ -24,7 +22,7 @@ if (existsSync(Path.Public)) {
 	app.use(staticPlugin({ prefix: "/", assets: Path.Public, noCache: true }));
 }
 
-const server = createServer(createNodeHandler(app));
+const server = createServer(createHttpAdapter(app));
 
 io.attach(server);
 
