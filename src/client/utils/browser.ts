@@ -1,3 +1,5 @@
+import { Config } from "@client/utils/config";
+
 const accessStorage = (storage: Storage) => ({
 	setItem: (key: string, data: unknown) => storage.setItem(key, JSON.stringify(data)),
 	getItem: <T = unknown>(key: string) => {
@@ -17,4 +19,11 @@ export const assertGetElementById = (id: string) => {
 	const element = document.getElementById(id);
 	if (!element) throw new Error(`Element with id '${id}' not found`);
 	return element;
+};
+
+export const registerServiceWorker = async () => {
+	if (!Config.IS_PROD) return;
+	if (!navigator.serviceWorker) return;
+	if (navigator.serviceWorker.controller) return;
+	await navigator.serviceWorker.register("sw.js", { type: "module", scope: "/" });
 };
