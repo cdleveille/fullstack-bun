@@ -1,5 +1,11 @@
 import { SocketEvent } from "@shared/constants";
 
+export type TConfig = {
+	PORT: number;
+	DEV_PORT: number;
+	HOST: string;
+};
+
 export type TAppContext = {
 	count: number;
 	setCount: TReactStateSetter<number>;

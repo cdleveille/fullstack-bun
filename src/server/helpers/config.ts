@@ -1,10 +1,15 @@
-const PORT = Number(process.env.PORT) || 3000;
+import { DefaultConfig } from "@shared/constants";
+import type { TConfig } from "@shared/types";
 
-const DEV_PORT = Number(process.env.DEV_PORT) || 5173;
+const PORT = process.env.PORT ? Number.parseInt(process.env.PORT) : DefaultConfig.PORT;
 
-const HOST = process.env.HOST ?? "http://localhost";
+const DEV_PORT = process.env.DEV_PORT
+	? Number.parseInt(process.env.DEV_PORT)
+	: DefaultConfig.DEV_PORT;
 
-export const Config = {
+const HOST = process.env.HOST ?? DefaultConfig.HOST;
+
+export const Config: TConfig = {
 	PORT,
 	DEV_PORT,
 	HOST

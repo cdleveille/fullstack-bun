@@ -1,3 +1,11 @@
+import type { TConfig } from "@shared/types";
+
+export const DefaultConfig: TConfig = {
+	PORT: 3000,
+	DEV_PORT: 5173,
+	HOST: "http://localhost"
+};
+
 export const Contact = {
 	name: "Chris Leveille",
 	email: "cdleveille@gmail.com",
