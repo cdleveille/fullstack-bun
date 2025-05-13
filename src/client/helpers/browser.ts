@@ -21,9 +21,13 @@ export const assertGetElementById = (id: string) => {
 	return element;
 };
 
-export const registerServiceWorker = async () => {
-	if (!Config.IS_PROD) return;
-	if (!navigator.serviceWorker) return;
-	if (navigator.serviceWorker.controller) return;
-	await navigator.serviceWorker.register("sw.js", { type: "module", scope: "/" });
+export const registerOrUpdateServiceWorker = async () => {
+	if (!Config.IS_PROD || !navigator.serviceWorker) return;
+
+	const registration = await navigator.serviceWorker.register("sw.js", {
+		type: "module",
+		scope: "/"
+	});
+
+	if (registration.active) await registration.update();
 };

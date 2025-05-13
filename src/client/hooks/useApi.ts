@@ -5,12 +5,12 @@ import { socket } from "@client/helpers/socket";
 import type { TApi } from "@server/helpers/api";
 import { SocketEvent } from "@shared/constants";
 
-const client = treaty<TApi>(window.location.origin);
+const httpClient = treaty<TApi>(window.location.origin);
 
 export const useApi = () => {
 	const helloSocket = (message: string) =>
 		useQuery({
-			queryKey: ["hello-socket"],
+			queryKey: ["hello-socket", message],
 			queryFn: () => socket.emitAndReceive({ event: SocketEvent.Hello, data: [message] })
 		});
 
@@ -18,7 +18,7 @@ export const useApi = () => {
 		useQuery({
 			queryKey: ["hello-http", name],
 			queryFn: async () => {
-				const { data } = await client.api.hello.get({
+				const { data } = await httpClient.api.hello.get({
 					query: { name }
 				});
 				return data;

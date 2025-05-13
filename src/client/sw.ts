@@ -1,5 +1,3 @@
-/// <reference lib="webworker" />
-
 import { registerRoute } from "workbox-routing";
 import { CacheFirst, NetworkFirst, NetworkOnly } from "workbox-strategies";
 
@@ -13,7 +11,15 @@ self.__WB_DISABLE_DEV_LOGS = true;
 const manifest = self.__WB_MANIFEST;
 
 const cacheName = "sw-cache";
-const cacheFirstWithoutHashFileTypes = [".webp", ".ttf", ".woff", ".woff2"];
+const cacheFirstWithoutHashFileTypes = [
+	".ttf",
+	".woff",
+	".woff2",
+	".jpg",
+	".jpeg",
+	".png",
+	".webp"
+];
 
 const isCacheFirstWithHash = (filename: string) => HASH_REGEX.test(filename);
 
