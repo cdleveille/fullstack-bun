@@ -1,4 +1,4 @@
-<!doctype html>
+<!DOCTYPE html>
 <html lang="en">
   <head>
     <meta charset="UTF-8" />
@@ -6,19 +6,16 @@
       name="viewport"
       content="width=device-width, height=device-height, initial-scale=1.0"
     />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
     <meta name="application-name" content="hello from bun!" />
     <meta name="description" content="👋" />
-    <meta name="author" content="Chris Leveille &lt;cdleveille@gmail.com&gt;" />
+    <meta name="author" content="Chris Leveille" />
     <meta name="theme-color" content="#14151a" />
+    <meta name="color-scheme" content="dark light" />
     <meta name="mobile-web-app-capable" content="yes" />
     <meta name="apple-mobile-web-app-title" content="hello from bun!" />
     <meta name="apple-mobile-web-app-capable" content="yes" />
     <meta name="apple-mobile-web-app-status-bar-style" content="default" />
-    <meta name="msapplication-navbutton-color" content="#14151a" />
-    <meta name="msapplication-TileColor" content="#14151a" />
-    <meta name="msapplication-TileImage" content="icons/icon_144x144.png" />
-    <meta name="msapplication-tooltip" content="hello from bun!" />
-    <meta name="msapplication-starturl" content="/" />
     <meta name="full-screen" content="yes" />
     <meta name="browsermode" content="application" />
     <meta property="og:type" content="website" />
@@ -31,7 +28,15 @@
     <meta property="og:image:height" content="192" />
     <meta property="og:image:alt" content="hello from bun!" />
     <meta property="og:image:type" content="image/png" />
+    <meta name="twitter:card" content="summary" />
+    <meta name="twitter:title" content="hello from bun!" />
+    <meta name="twitter:description" content="👋" />
+    <meta name="twitter:image" content="icons/icon_192x192.png" />
+    <meta name="robots" content="index, follow" />
+    <meta name="referrer" content="strict-origin-when-cross-origin" />
+    <link rel="canonical" href="https://fullstack-bun.fly.dev" />
     <link rel="icon" href="assets/bun.svg" type="image/svg+xml" />
+    <link rel="icon" href="favicon.ico" sizes="any" />
     <link
       rel="apple-touch-icon"
       href="icons/icon_180x180.png"
@@ -40,6 +45,21 @@
     <link rel="manifest" href="manifest.json" />
     <link rel="stylesheet" href="main.css" type="text/css" />
     <script src="main.tsx" type="module"></script>
+    <script type="application/ld+json">
+      {
+        "@context": "https://schema.org",
+        "@type": "WebApplication",
+        "name": "hello from bun!",
+        "description": "👋",
+        "applicationCategory": "DeveloperApplication",
+        "operatingSystem": "Any",
+        "author": {
+          "@type": "Person",
+          "name": "Chris Leveille",
+          "url": "https://www.cdleveille.net"
+        }
+      }
+    </script>
     <title>hello from bun!</title>
   </head>
   <body>

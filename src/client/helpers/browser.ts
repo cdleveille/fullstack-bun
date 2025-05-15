@@ -21,7 +21,7 @@ export const assertGetElementById = (id: string) => {
 	return element;
 };
 
-export const registerOrUpdateServiceWorker = async () => {
+export const registerServiceWorker = async () => {
 	if (!Config.IS_PROD || !navigator.serviceWorker) return;
 
 	const registration = await navigator.serviceWorker.register("sw.js", {

@@ -5,9 +5,9 @@ import { createRoot } from "react-dom/client";
 import { AppContextProvider } from "@client/components/AppContextProvider";
 import { ErrorBoundary } from "@client/components/ErrorBoundary";
 import { Main } from "@client/components/Main";
-import { assertGetElementById, registerOrUpdateServiceWorker } from "@client/helpers/browser";
+import { assertGetElementById, registerServiceWorker } from "@client/helpers/browser";
 
-registerOrUpdateServiceWorker().catch(console.error);
+registerServiceWorker().catch(console.error);
 
 const root = assertGetElementById("root");
 createRoot(root).render(
