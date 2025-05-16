@@ -1,14 +1,21 @@
 import type { TConfig } from "@shared/types";
+import { author, description, license, version } from "package.json";
+
+export const AppInfo = {
+	name: "hello from bun!",
+	version,
+	description,
+	author: {
+		name: author,
+		url: "https://www.cdleveille.net"
+	},
+	license,
+	url: "https://fullstack-bun.fly.dev"
+};
 
 export const DefaultConfig: TConfig = {
 	PORT: 3000,
 	HOST: "http://localhost"
-};
-
-export const Contact = {
-	name: "Chris Leveille",
-	email: "cdleveille@gmail.com",
-	url: "https://www.cdleveille.net"
 };
 
 export enum Env {

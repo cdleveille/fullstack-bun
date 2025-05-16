@@ -5,7 +5,7 @@ import { viteStaticCopy } from "vite-plugin-static-copy";
 import tsconfigPaths from "vite-tsconfig-paths";
 
 import { Config } from "@server/helpers/config";
-import { Env, Path, Route } from "@shared/constants";
+import { AppInfo, Env, Path, Route } from "@shared/constants";
 
 const root = Path.ClientSrc;
 const outDir = Path.Public;
@@ -60,6 +60,17 @@ export default defineConfig(({ mode }) => ({
 	plugins: [
 		react(),
 		tsconfigPaths(),
+		{
+			name: "html-transform",
+			transformIndexHtml(html) {
+				return html
+					.replace(/{{name}}/g, AppInfo.name)
+					.replace(/{{url}}/g, AppInfo.url)
+					.replace(/{{description}}/g, AppInfo.description)
+					.replace(/{{author.name}}/g, AppInfo.author.name)
+					.replace(/{{author.url}}/g, AppInfo.author.url);
+			}
+		},
 		...[
 			mode === Env.Production
 				? viteStaticCopy({

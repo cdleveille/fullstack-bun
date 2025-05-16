@@ -4,9 +4,7 @@ import { Elysia } from "elysia";
 import { helmet } from "elysia-helmet";
 
 import { Config, isCustomHost } from "@server/helpers/config";
-import { Contact, Route } from "@shared/constants";
-
-import { description, license, name, version } from "package.json";
+import { AppInfo, Route } from "@shared/constants";
 
 const { HOST, PORT } = Config;
 
@@ -52,11 +50,11 @@ export const plugins = new Elysia()
 			path: `${Route.Api}${Route.Reference}`,
 			documentation: {
 				info: {
-					title: name,
-					version,
-					description,
-					contact: Contact,
-					license: { name: license }
+					title: AppInfo.name,
+					version: AppInfo.version,
+					description: AppInfo.description,
+					contact: AppInfo.author,
+					license: { name: AppInfo.license }
 				}
 			}
 		})

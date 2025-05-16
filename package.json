@@ -1,8 +1,8 @@
 {
   "name": "fullstack-bun",
   "version": "1.0.0",
-  "description": "Curated web app project template with emphasis on developer experience and type safety. Bun/Elysia backend, React frontend, Socket.IO and TanStack Query bridging the gap.",
-  "author": "Chris Leveille <cdleveille@gmail.com>",
+  "description": "👋",
+  "author": "Chris Leveille",
   "license": "MIT",
   "type": "module",
   "module": "src/server/index.ts",
