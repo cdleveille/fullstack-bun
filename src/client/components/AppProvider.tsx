@@ -4,7 +4,7 @@ import { AppContext } from "@client/contexts/app";
 import { useApi } from "@client/hooks/useApi";
 import { usePersistedState } from "@client/hooks/usePersistedState";
 
-export const AppContextProvider = ({ children }: { children: React.ReactNode }) => {
+export const AppProvider = ({ children }: { children: React.ReactNode }) => {
 	const [count, setCount] = usePersistedState(0, "count");
 
 	const { helloSocket, helloHttp } = useApi();

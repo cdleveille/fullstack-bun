@@ -2,7 +2,7 @@ import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
 import { StrictMode } from "react";
 import { createRoot } from "react-dom/client";
 
-import { AppContextProvider } from "@client/components/AppContextProvider";
+import { AppProvider } from "@client/components/AppProvider";
 import { ErrorBoundary } from "@client/components/ErrorBoundary";
 import { Main } from "@client/components/Main";
 import { assertGetElementById, registerServiceWorker } from "@client/helpers/browser";
@@ -14,9 +14,9 @@ createRoot(root).render(
 	<StrictMode>
 		<ErrorBoundary>
 			<QueryClientProvider client={new QueryClient()}>
-				<AppContextProvider>
+				<AppProvider>
 					<Main />
-				</AppContextProvider>
+				</AppProvider>
 			</QueryClientProvider>
 		</ErrorBoundary>
 	</StrictMode>

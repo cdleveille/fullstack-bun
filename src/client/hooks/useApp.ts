@@ -2,12 +2,10 @@ import { useContext } from "react";
 
 import { AppContext } from "@client/contexts/app";
 
-export const useAppContext = () => {
+export const useApp = () => {
 	const ctx = useContext(AppContext);
 	if (!ctx) {
-		throw new Error(
-			"useAppContext must be used within a child component of AppContextProvider"
-		);
+		throw new Error("useApp must be used within a child component of AppProvider");
 	}
 	return ctx;
 };
