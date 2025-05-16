@@ -2,6 +2,7 @@ import { resolve } from "node:path";
 import react from "@vitejs/plugin-react-swc";
 import { defineConfig } from "vite";
 import { viteStaticCopy } from "vite-plugin-static-copy";
+import svgr from "vite-plugin-svgr";
 import tsconfigPaths from "vite-tsconfig-paths";
 
 import { Config } from "@server/helpers/config";
@@ -59,6 +60,13 @@ export default defineConfig(({ mode }) => ({
 	},
 	plugins: [
 		react(),
+		svgr({
+			svgrOptions: {
+				exportType: "default",
+				ref: true
+			},
+			include: "**/*.svg"
+		}),
 		tsconfigPaths(),
 		{
 			name: "html-transform",
