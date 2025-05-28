@@ -9,9 +9,13 @@ import type {
 	TSocketResArgs
 } from "@shared/types";
 
-const io: Socket<TServerToClientSocketEvent, TClientToServerSocketEvent> = socketIo(
-	`${window.location.protocol}//${window.location.hostname}:${Config.PORT}`
-);
+const host = Config.IS_PROD
+	? window.location.origin
+	: `${window.location.protocol}//${window.location.hostname}:${Config.PORT}`;
+
+const io: Socket<TServerToClientSocketEvent, TClientToServerSocketEvent> = socketIo(host, {
+	transports: ["websocket"]
+});
 
 const emit = <T extends keyof TClientToServerSocketEvent>({
 	event,
