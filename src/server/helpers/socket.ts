@@ -13,15 +13,15 @@ export const io = new Server<TClientToServerSocketEvent, TServerToClientSocketEv
 });
 
 const shutdown = () => {
-	console.log("Shutting down Socket.IO...");
+	console.log("Closing connections and shutting down server...");
 
 	io.close(() => {
-		console.log("Socket.IO server closed");
+		console.log("Server closed");
 		process.exit(0);
 	});
 
 	setTimeout(() => {
-		console.error("Could not close connections in time, forcefully shutting down Socket.IO");
+		console.error("Could not close connections in time, forcefully shutting down server");
 		process.exit(1);
 	}, 10000);
 };
