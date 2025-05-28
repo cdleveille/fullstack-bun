@@ -1,7 +1,8 @@
 import type { IncomingMessage, ServerResponse } from "node:http";
 import { type Elysia, type ErrorHandler, type Handler, ValidationError } from "elysia";
 
-import { ErrorMessage } from "@shared/constants";
+import { readFileSync } from "node:fs";
+import { ErrorMessage, Path } from "@shared/constants";
 
 export const onError: ErrorHandler = ({ error, set }) => {
 	if (error instanceof ValidationError) {
@@ -61,3 +62,9 @@ export const createHttpAdapter = (app: Elysia) => {
 		}
 	};
 };
+
+export const indexHtml = new Response(readFileSync(`${Path.Public}/index.html`, "utf-8"), {
+	headers: {
+		"Content-Type": "text/html; charset=utf-8"
+	}
+});
