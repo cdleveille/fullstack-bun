@@ -1,5 +1,5 @@
 import type { IncomingMessage, ServerResponse } from "node:http";
-import { type Elysia, type ErrorHandler, type Handler, ValidationError } from "elysia";
+import { type ErrorHandler, type Handler, ValidationError } from "elysia";
 
 import { readFileSync } from "node:fs";
 import { ErrorMessage, Path } from "@shared/constants";
@@ -20,7 +20,7 @@ export const onBeforeHandle: Handler = c => {
 };
 
 // Creates a Node-style HTTP adapter function (needed to attach Socket.IO to Elysia)
-export const createHttpAdapter = (app: Elysia) => {
+export const createHttpAdapter = (app: { handle: (req: Request) => Promise<Response> }) => {
 	return async (req: IncomingMessage, res: ServerResponse) => {
 		try {
 			const host = req.headers.host || "localhost";
