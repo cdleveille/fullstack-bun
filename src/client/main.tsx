@@ -13,7 +13,6 @@ registerServiceWorker().catch(console.error);
 
 const router = createBrowserRouter([
 	{
-		path: "/",
 		errorElement: <ErrorBoundary />,
 		hydrateFallbackElement: <></>,
 		children: [
