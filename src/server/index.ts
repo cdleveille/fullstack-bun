@@ -19,7 +19,7 @@ const app = new Elysia()
 	.use(api);
 
 if (existsSync(Path.Public)) {
-	app.use(staticPlugin({ prefix: "/", assets: Path.Public, noCache: true }));
+	app.use(staticPlugin({ prefix: "/", assets: Path.Public, noCache: true, indexHTML: true }));
 }
 
 const server = createServer(createHttpAdapter(app));
