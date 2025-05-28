@@ -7,7 +7,7 @@ import { AppProvider } from "@client/components/AppProvider";
 import { ErrorBoundary } from "@client/components/ErrorBoundary";
 import { Main } from "@client/components/Main";
 import { assertGetElementById, registerServiceWorker } from "@client/helpers/browser";
-import { mainLoader } from "@client/helpers/loader";
+import { mainLoader } from "@client/hooks/useApi";
 
 registerServiceWorker().catch(console.error);
 

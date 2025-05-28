@@ -1,14 +1,14 @@
 import { useLoaderData } from "react-router-dom";
 
 import Bun from "@client/assets/bun.svg";
-import type { mainLoader } from "@client/helpers/loader";
+import type { mainLoader } from "@client/hooks/useApi";
 import { useApp } from "@client/hooks/useApp";
 
 export const Main = () => {
 	const { count, setCount } = useApp();
 
-	const todos = useLoaderData<typeof mainLoader>();
-	console.log("todos:", todos);
+	const data = useLoaderData<typeof mainLoader>();
+	console.log(data);
 
 	return (
 		<div className="flex-center-col">

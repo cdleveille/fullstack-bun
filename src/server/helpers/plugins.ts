@@ -10,9 +10,7 @@ const { HOST, PORT } = Config;
 
 const WS_HOST = HOST.replace("http", "ws");
 
-const connectSrc = isCustomHost
-	? ["'self'", `${HOST}:${PORT}`, `${WS_HOST}:${PORT}`, "https://jsonplaceholder.typicode.com"]
-	: ["*"];
+const connectSrc = isCustomHost ? ["'self'", `${HOST}:${PORT}`, `${WS_HOST}:${PORT}`] : ["*"];
 
 export const plugins = new Elysia()
 	.use(cors())

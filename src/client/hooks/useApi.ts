@@ -1,12 +1,17 @@
-import { treaty } from "@elysiajs/eden";
 import { useQuery } from "@tanstack/react-query";
 
+import { httpClient } from "@client/helpers/http";
 import { socket } from "@client/helpers/socket";
-import type { TApi } from "@server/helpers/api";
 import { SocketEvent } from "@shared/constants";
 
-const httpClient = treaty<TApi>(window.location.origin);
+// For any initial data fetching to be done via React Router loader before React components are rendered
+export const mainLoader = async () => {
+	const { data, error } = await httpClient.api.hello.get({ query: {} });
+	if (error) throw new Error(error.value.message);
+	return data;
+};
 
+// For any API interactions to be used within React components
 export const useApi = () => {
 	const helloSocket = (message: string) =>
 		useQuery({
@@ -18,9 +23,10 @@ export const useApi = () => {
 		useQuery({
 			queryKey: ["hello-http", name],
 			queryFn: async () => {
-				const { data } = await httpClient.api.hello.get({
+				const { data, error } = await httpClient.api.hello.get({
 					query: { name }
 				});
+				if (error) throw new Error(error.value.message);
 				return data;
 			}
 		});
