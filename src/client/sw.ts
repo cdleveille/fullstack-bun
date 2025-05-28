@@ -56,7 +56,7 @@ self.addEventListener("activate", event => {
 const isCacheFirstRequest = (url: URL) => {
 	if (isCacheFirstWithoutHash(url.href)) return true;
 	if (!isCacheFirstWithHash(url.href)) return false;
-	// delete stale cache entries asynchronously
+	// Delete stale cache entries asynchronously
 	(async () => {
 		const urlPrefix = url.href.split(HASH_PREFIX)[0];
 		const hash = url.href.split(HASH_PREFIX)[1];

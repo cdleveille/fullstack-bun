@@ -7,7 +7,7 @@ import { AppProvider } from "@client/components/AppProvider";
 import { ErrorBoundary } from "@client/components/ErrorBoundary";
 import { Main } from "@client/components/Main";
 import { assertGetElementById, registerServiceWorker } from "@client/helpers/browser";
-import { mainLoader } from "@client/hooks/useApi";
+import { loader } from "@client/hooks/useApi";
 
 registerServiceWorker().catch(console.error);
 
@@ -16,7 +16,7 @@ const router = createBrowserRouter([
 		errorElement: <ErrorBoundary />,
 		hydrateFallbackElement: <></>,
 		children: [
-			{ index: true, element: <Main />, loader: mainLoader }
+			{ index: true, element: <Main />, loader }
 			// Add more routes here as needed
 		]
 	}

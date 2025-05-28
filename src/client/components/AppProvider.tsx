@@ -7,17 +7,13 @@ import { usePersistedState } from "@client/hooks/usePersistedState";
 export const AppProvider = ({ children }: { children: React.ReactNode }) => {
 	const [count, setCount] = usePersistedState(0, "count");
 
-	const { helloSocket, helloHttp } = useApi();
+	const { hello } = useApi();
 
-	const { data: messageSocket } = helloSocket("hello from client!");
-	useEffect(() => {
-		if (messageSocket) console.log(`socket: ${messageSocket.message}`);
-	}, [messageSocket]);
+	const { data } = hello("hello from client!");
 
-	const { data: messageHttp } = helloHttp();
 	useEffect(() => {
-		if (messageHttp) console.log(`http: ${messageHttp.message}`);
-	}, [messageHttp]);
+		if (data) console.log(`socket: ${data.message}`);
+	}, [data]);
 
 	return (
 		<AppContext.Provider
