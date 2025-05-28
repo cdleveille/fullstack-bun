@@ -1,6 +1,7 @@
 import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
 import { StrictMode } from "react";
 import { createRoot } from "react-dom/client";
+import { BrowserRouter } from "react-router-dom";
 
 import { AppProvider } from "@client/components/AppProvider";
 import { ErrorBoundary } from "@client/components/ErrorBoundary";
@@ -15,7 +16,9 @@ createRoot(root).render(
 		<ErrorBoundary>
 			<QueryClientProvider client={new QueryClient()}>
 				<AppProvider>
-					<Main />
+					<BrowserRouter>
+						<Main />
+					</BrowserRouter>
 				</AppProvider>
 			</QueryClientProvider>
 		</ErrorBoundary>
