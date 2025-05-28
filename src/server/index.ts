@@ -12,7 +12,7 @@ import { Path } from "@shared/constants";
 
 const { PORT, HOST } = Config;
 
-const app = new Elysia({ aot: true, precompile: true })
+const app = new Elysia({ aot: true, precompile: true, nativeStaticResponse: true })
 	.onError(c => onError(c))
 	.onBeforeHandle(onBeforeHandle)
 	.use(api)
