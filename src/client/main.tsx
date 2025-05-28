@@ -1,30 +1,35 @@
 import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
 import { StrictMode } from "react";
 import { createRoot } from "react-dom/client";
-import { BrowserRouter, Route, Routes } from "react-router-dom";
+import { RouterProvider, createBrowserRouter } from "react-router-dom";
 
 import { AppProvider } from "@client/components/AppProvider";
 import { ErrorBoundary } from "@client/components/ErrorBoundary";
 import { Main } from "@client/components/Main";
-import { NotFound } from "@client/components/NotFound";
 import { assertGetElementById, registerServiceWorker } from "@client/helpers/browser";
+import { mainLoader } from "@client/helpers/loader";
 
 registerServiceWorker().catch(console.error);
+
+const router = createBrowserRouter([
+	{
+		path: "/",
+		errorElement: <ErrorBoundary />,
+		hydrateFallbackElement: <></>,
+		children: [
+			{ index: true, element: <Main />, loader: mainLoader }
+			// Add more routes here as needed
+		]
+	}
+]);
 
 const root = assertGetElementById("root");
 createRoot(root).render(
 	<StrictMode>
-		<ErrorBoundary>
-			<QueryClientProvider client={new QueryClient()}>
-				<AppProvider>
-					<BrowserRouter>
-						<Routes>
-							<Route path="/" element={<Main />} />
-							<Route path="*" element={<NotFound />} />
-						</Routes>
-					</BrowserRouter>
-				</AppProvider>
-			</QueryClientProvider>
-		</ErrorBoundary>
+		<QueryClientProvider client={new QueryClient()}>
+			<AppProvider>
+				<RouterProvider router={router} />
+			</AppProvider>
+		</QueryClientProvider>
 	</StrictMode>
 );

@@ -54,6 +54,7 @@ docker run -p 3000:3000 fullstack-bun
 - [Bun](https://bun.sh) - server runtime, package manager, script runner
 - [Elysia](https://elysiajs.com) - web framework
 - [React](https://react.dev) - user interface
+- [React Router](https://reactrouter.com) - client-side routing
 - [TanStack Query](https://tanstack.com/query) - async state management
 - [Socket.IO](https://socket.io) - real-time server/client communication
 - [TypeScript](https://www.typescriptlang.org), [Biome](https://biomejs.dev), [Lefthook](https://lefthook.dev) - code quality/style
