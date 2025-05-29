@@ -16,11 +16,13 @@ export const Main = () => {
 	return (
 		<div className="flex-center-col">
 			<h1>{message}</h1>
-			<Bun className="logo" width={300} height={300} onClick={() => mutate()} />
+			<button type="button" onClick={() => mutate()} className="logo">
+				<Bun width={300} height={300} />
+			</button>
 			<button type="button" onClick={() => setCount(count => count + 1)}>
 				Count: {count}
 			</button>
-			<button type="button" className="link-btn" onClick={() => setCount(0)}>
+			<button type="button" onClick={() => setCount(0)} className="link-btn">
 				Reset Count
 			</button>
 		</div>

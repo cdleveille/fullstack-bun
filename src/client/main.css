@@ -72,13 +72,17 @@ h1 {
 }
 
 .logo {
+	background: transparent;
+	border: none;
+	box-shadow: none;
 	border-radius: 50%;
 	min-height: 200px;
 	min-width: 200px;
 	transition: 0.2s ease-in-out;
 }
 
-.logo:hover {
+.logo:hover,
+.logo:focus {
 	cursor: pointer;
 	scale: 1.1;
 }
