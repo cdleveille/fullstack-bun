@@ -1,4 +1,5 @@
-import { useMutation, useQuery } from "@tanstack/react-query";
+import { useMutation } from "@tanstack/react-query";
+import { useLoaderData } from "react-router-dom";
 
 import { httpClient } from "@client/helpers/http";
 import { socket } from "@client/helpers/socket";
@@ -13,13 +14,14 @@ export const loader = async () => {
 
 // For API interactions to be used within React components
 export const useApi = () => {
-	const hello = (message: string) =>
-		useMutation({
-			mutationFn: () => socket.emitAndReceive({ event: SocketEvent.Hello, data: [message] }),
-			onSuccess: ({ message }) => {
-				console.log(`socket: ${message}`);
-			}
-		});
+	const loaderData = useLoaderData<typeof loader>();
 
-	return { hello };
+	const hello = (message: string) => {
+		return useMutation({
+			mutationFn: () => socket.emitAndReceive({ event: SocketEvent.Hello, data: [message] }),
+			onSuccess: ({ message }) => console.log(message)
+		});
+	};
+
+	return { loaderData, hello };
 };
