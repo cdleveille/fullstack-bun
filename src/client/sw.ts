@@ -1,14 +1,15 @@
-import { registerRoute } from "workbox-routing";
-import { CacheFirst, NetworkFirst } from "workbox-strategies";
-
-import { HASH_PREFIX, HASH_REGEX } from "@shared/constants";
+import { HASH_REGEX } from "@shared/constants";
 
 declare const self: ServiceWorkerGlobalScope & {
 	__WB_DISABLE_DEV_LOGS: boolean;
 	__WB_MANIFEST: { url: string }[];
 };
 self.__WB_DISABLE_DEV_LOGS = true;
+
 const manifest = self.__WB_MANIFEST;
+
+// Add any additional URLs to precache here
+const urlsToPrecache = ["/api/hello", ...manifest.map(({ url }) => url)];
 
 const cacheName = "sw-cache";
 const cacheFirstWithoutHashFileTypes = [
@@ -21,6 +22,11 @@ const cacheFirstWithoutHashFileTypes = [
 	".webp"
 ];
 
+const precacheAssets = async () => {
+	const cache = await caches.open(cacheName);
+	await cache.addAll(urlsToPrecache);
+};
+
 const isCacheFirstWithHash = (filename: string) => HASH_REGEX.test(filename);
 
 const isCacheFirstWithoutHash = (filename: string) =>
@@ -28,57 +34,70 @@ const isCacheFirstWithoutHash = (filename: string) =>
 		filename.toLowerCase().endsWith(fileType.toLowerCase())
 	);
 
+const isCacheFirstRequest = (url: string) => {
+	if (isCacheFirstWithoutHash(url)) return true;
+	if (isCacheFirstWithHash(url)) return true;
+	return false;
+};
+
+const cacheResponse = async (event: FetchEvent) => {
+	const cache = await caches.open(cacheName);
+	return cache.match(event.request, { ignoreVary: true });
+};
+
+const networkResponse = async (event: FetchEvent) => {
+	const res = await fetch(event.request);
+	const cache = await caches.open(cacheName);
+	cache.put(event.request, res.clone());
+	return res;
+};
+
+const cacheFirst = async (event: FetchEvent) => {
+	try {
+		const res = await cacheResponse(event);
+		if (!res) return networkResponse(event);
+		return res;
+	} catch (error) {
+		return await networkResponse(event);
+	}
+};
+
+const networkFirst = async (event: FetchEvent) => {
+	try {
+		const res = await networkResponse(event);
+		return res;
+	} catch (error) {
+		return await cacheResponse(event);
+	}
+};
+
 self.addEventListener("install", event => {
 	self.skipWaiting();
-	event.waitUntil(
-		(async () => {
-			const cache = await caches.open(cacheName);
-			if (!cache) return;
-			const urlsToPrecache = ["/", ...(manifest?.map(({ url }) => url) ?? [])];
-			await cache.addAll(urlsToPrecache.map(url => url));
-		})().catch(console.error)
-	);
+	event.waitUntil(precacheAssets().catch(console.error));
 });
 
 self.addEventListener("activate", event => {
 	event.waitUntil(
 		(async () => {
-			const existingCacheNames = await caches.keys();
-			await Promise.all(
-				existingCacheNames
-					.filter(existingCacheName => existingCacheName !== cacheName)
-					.map(existingCacheName => caches.delete(existingCacheName))
-			);
+			const cacheNames = await caches.keys();
+			const deleteOldCaches = cacheNames
+				.filter(name => name !== cacheName)
+				.map(name => caches.delete(name));
+			await Promise.all(deleteOldCaches);
+			await self.clients.claim();
 		})().catch(console.error)
 	);
 });
 
-const isCacheFirstRequest = (url: URL) => {
-	if (isCacheFirstWithoutHash(url.href)) return true;
-	if (!isCacheFirstWithHash(url.href)) return false;
-	// Delete stale cache entries asynchronously
-	(async () => {
-		const urlPrefix = url.href.split(HASH_PREFIX)[0];
-		const hash = url.href.split(HASH_PREFIX)[1];
-		const urlSuffixSplit = url.href.split(".");
-		const urlSuffix = urlSuffixSplit[urlSuffixSplit.length - 1];
-		const cache = await caches.open(cacheName);
-		if (!cache) return;
-		const entries = await cache.keys();
-		await Promise.all(
-			entries
-				.filter(
-					entry =>
-						entry.url.startsWith(urlPrefix) &&
-						entry.url.endsWith(urlSuffix) &&
-						hash !== entry.url.split(HASH_PREFIX)[1]
-				)
-				.map(entry => cache.delete(entry))
-		);
-	})().catch(console.error);
-	return true;
-};
-
-registerRoute(({ url }) => isCacheFirstRequest(url), new CacheFirst({ cacheName }));
-
-registerRoute(() => true, new NetworkFirst({ cacheName }));
+self.addEventListener("fetch", event => {
+	event.respondWith(
+		(async () => {
+			const { url } = event.request;
+			if (isCacheFirstRequest(url)) return await cacheFirst(event);
+			const res = await networkFirst(event);
+			if (!res)
+				throw new Error(`Error fetching ${url} - not found in sw cache or over network`);
+			return res;
+		})()
+	);
+});
