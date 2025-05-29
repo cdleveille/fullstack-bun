@@ -20,19 +20,13 @@
   },
   "devDependencies": {
     "@biomejs/biome": "1.9.4",
-    "@elysiajs/eden": "^1.3.2",
     "@evilmartians/lefthook": "^1.11.13",
-    "@tanstack/react-query": "^5.77.2",
-    "@types/bun": "^1.2.14",
+    "@types/bun": "latest",
     "@types/react": "^19.1.6",
     "@types/react-dom": "^19.1.5",
     "@vitejs/plugin-react": "^4.5.0",
     "babel-plugin-react-compiler": "^19.1.0-rc.2",
     "concurrently": "^9.1.2",
-    "react": "^19.1.0",
-    "react-dom": "^19.1.0",
-    "react-router-dom": "^7.6.1",
-    "socket.io-client": "^4.8.1",
     "typescript": "^5.8.3",
     "vite": "^6.3.5",
     "vite-plugin-static-copy": "^3.0.0",
@@ -44,10 +38,16 @@
   },
   "dependencies": {
     "@elysiajs/cors": "^1.3.3",
+    "@elysiajs/eden": "^1.3.2",
     "@elysiajs/static": "^1.3.0",
     "@elysiajs/swagger": "^1.3.0",
+    "@tanstack/react-query": "^5.77.2",
     "elysia": "^1.3.3",
     "elysia-helmet": "^3.0.0",
-    "socket.io": "^4.8.1"
+    "react": "^19.1.0",
+    "react-dom": "^19.1.0",
+    "react-router-dom": "^7.6.1",
+    "socket.io": "^4.8.1",
+    "socket.io-client": "^4.8.1"
   }
 }
