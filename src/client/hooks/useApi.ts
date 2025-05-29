@@ -1,4 +1,4 @@
-import { useQuery } from "@tanstack/react-query";
+import { useMutation, useQuery } from "@tanstack/react-query";
 
 import { httpClient } from "@client/helpers/http";
 import { socket } from "@client/helpers/socket";
@@ -14,9 +14,11 @@ export const loader = async () => {
 // For API interactions to be used within React components
 export const useApi = () => {
 	const hello = (message: string) =>
-		useQuery({
-			queryKey: ["hello", message],
-			queryFn: () => socket.emitAndReceive({ event: SocketEvent.Hello, data: [message] })
+		useMutation({
+			mutationFn: () => socket.emitAndReceive({ event: SocketEvent.Hello, data: [message] }),
+			onSuccess: ({ message }) => {
+				console.log(`socket: ${message}`);
+			}
 		});
 
 	return { hello };

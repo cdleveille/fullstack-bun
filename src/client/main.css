@@ -70,3 +70,19 @@ h1 {
 .link-btn:focus {
 	text-decoration: underline;
 }
+
+.logo {
+	border-radius: 50%;
+	min-height: 200px;
+	min-width: 200px;
+	transition: 0.2s ease-in-out;
+}
+
+.logo:hover {
+	cursor: pointer;
+	scale: 1.1;
+}
+
+.logo:active {
+	scale: 1.05;
+}
