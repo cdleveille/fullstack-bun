@@ -22,11 +22,6 @@ const cacheFirstWithoutHashFileTypes = [
 	".webp"
 ];
 
-const precacheAssets = async () => {
-	const cache = await caches.open(cacheName);
-	await cache.addAll(urlsToPrecache);
-};
-
 const isCacheFirstWithHash = (filename: string) => HASH_REGEX.test(filename);
 
 const isCacheFirstWithoutHash = (filename: string) =>
@@ -40,64 +35,68 @@ const isCacheFirstRequest = (url: string) => {
 	return false;
 };
 
-const cacheResponse = async (event: FetchEvent) => {
+const cacheResponse = async (request: Request) => {
 	const cache = await caches.open(cacheName);
-	return cache.match(event.request, { ignoreVary: true });
+	return cache.match(request, { ignoreVary: true });
 };
 
-const networkResponse = async (event: FetchEvent) => {
-	const res = await fetch(event.request);
+const networkResponse = async (request: Request) => {
+	const res = await fetch(request);
 	const cache = await caches.open(cacheName);
-	cache.put(event.request, res.clone());
+	cache.put(request, res.clone());
 	return res;
 };
 
-const cacheFirst = async (event: FetchEvent) => {
+const cacheFirst = async (request: Request) => {
 	try {
-		const res = await cacheResponse(event);
-		if (!res) return networkResponse(event);
+		const res = await cacheResponse(request);
+		if (!res) return networkResponse(request);
 		return res;
 	} catch (error) {
-		return await networkResponse(event);
+		return await networkResponse(request);
 	}
 };
 
-const networkFirst = async (event: FetchEvent) => {
+const networkFirst = async (request: Request) => {
 	try {
-		const res = await networkResponse(event);
+		const res = await networkResponse(request);
 		return res;
 	} catch (error) {
-		return await cacheResponse(event);
+		return await cacheResponse(request);
 	}
+};
+
+const precacheAssets = async () => {
+	const cache = await caches.open(cacheName);
+	await cache.addAll(urlsToPrecache);
+};
+
+const deleteOldCaches = async () => {
+	const cacheNames = await caches.keys();
+	const deleteOldCaches = cacheNames
+		.filter(name => name !== cacheName)
+		.map(name => caches.delete(name));
+	await Promise.all(deleteOldCaches);
+	await self.clients.claim();
+};
+
+const onFetch = async (request: Request) => {
+	const { url } = request;
+	if (isCacheFirstRequest(url)) return await cacheFirst(request);
+	const res = await networkFirst(request);
+	if (!res) throw new Error(`Error fetching ${url} - not found in sw cache or over network`);
+	return res;
 };
 
 self.addEventListener("install", event => {
 	self.skipWaiting();
-	event.waitUntil(precacheAssets().catch(console.error));
+	event.waitUntil(precacheAssets());
 });
 
 self.addEventListener("activate", event => {
-	event.waitUntil(
-		(async () => {
-			const cacheNames = await caches.keys();
-			const deleteOldCaches = cacheNames
-				.filter(name => name !== cacheName)
-				.map(name => caches.delete(name));
-			await Promise.all(deleteOldCaches);
-			await self.clients.claim();
-		})().catch(console.error)
-	);
+	event.waitUntil(deleteOldCaches());
 });
 
 self.addEventListener("fetch", event => {
-	event.respondWith(
-		(async () => {
-			const { url } = event.request;
-			if (isCacheFirstRequest(url)) return await cacheFirst(event);
-			const res = await networkFirst(event);
-			if (!res)
-				throw new Error(`Error fetching ${url} - not found in sw cache or over network`);
-			return res;
-		})()
-	);
+	event.respondWith(onFetch(event.request));
 });
