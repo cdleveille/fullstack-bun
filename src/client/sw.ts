@@ -80,7 +80,7 @@ const deleteOldCaches = async () => {
 	await self.clients.claim();
 };
 
-const onFetch = async (request: Request) => {
+const handleRequest = async (request: Request) => {
 	const { url } = request;
 	if (isCacheFirstRequest(url)) return await cacheFirst(request);
 	const res = await networkFirst(request);
@@ -98,5 +98,5 @@ self.addEventListener("activate", event => {
 });
 
 self.addEventListener("fetch", event => {
-	event.respondWith(onFetch(event.request));
+	event.respondWith(handleRequest(event.request));
 });
