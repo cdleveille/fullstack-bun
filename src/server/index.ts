@@ -1,12 +1,11 @@
 import { existsSync } from "node:fs";
 import { createServer } from "node:http";
-import { staticPlugin } from "@elysiajs/static";
 import { Elysia } from "elysia";
 
 import { api } from "@server/helpers/api";
 import { Config } from "@server/helpers/config";
-import { createHttpAdapter, indexHtml, onBeforeHandle, onError } from "@server/helpers/elysia";
-import { plugins } from "@server/helpers/plugins";
+import { createHttpAdapter, onAfterHandle, onError } from "@server/helpers/elysia";
+import { plugins, serveStatic } from "@server/helpers/plugins";
 import { io } from "@server/helpers/socket";
 import { Path } from "@shared/constants";
 
@@ -14,20 +13,11 @@ const { PORT, HOST } = Config;
 
 const app = new Elysia({ aot: true, precompile: true, nativeStaticResponse: true })
 	.onError(c => onError(c))
-	.onBeforeHandle(onBeforeHandle)
-	.use(api)
-	.use(plugins);
+	.onAfterHandle(onAfterHandle)
+	.use(plugins)
+	.use(api);
 
-if (existsSync(Path.Public)) {
-	app.use(
-		staticPlugin({
-			prefix: "/",
-			assets: Path.Public,
-			noCache: true,
-			alwaysStatic: true
-		})
-	).get("*", indexHtml);
-}
+if (existsSync(Path.Public)) app.use(serveStatic);
 
 const server = createServer(createHttpAdapter(app));
 

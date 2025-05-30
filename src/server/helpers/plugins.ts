@@ -1,10 +1,12 @@
 import { cors } from "@elysiajs/cors";
+import { staticPlugin } from "@elysiajs/static";
 import { swagger } from "@elysiajs/swagger";
 import { Elysia } from "elysia";
 import { helmet } from "elysia-helmet";
 
 import { Config, isCustomHost } from "@server/helpers/config";
-import { AppInfo, Route } from "@shared/constants";
+import { indexHtml } from "@server/helpers/elysia";
+import { AppInfo, Path, Route } from "@shared/constants";
 
 const { HOST, PORT } = Config;
 
@@ -59,3 +61,15 @@ export const plugins = new Elysia()
 			}
 		})
 	);
+
+export const serveStatic = new Elysia()
+	.use(
+		staticPlugin({
+			prefix: "/",
+			assets: Path.Public,
+			indexHTML: true,
+			noCache: true,
+			alwaysStatic: true
+		})
+	)
+	.get("*", indexHtml);

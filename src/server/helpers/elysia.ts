@@ -14,7 +14,7 @@ export const onError: ErrorHandler = ({ error, set }) => {
 	return { message };
 };
 
-export const onBeforeHandle: Handler = c => {
+export const onAfterHandle: Handler = c => {
 	// Needed to prevent service worker error
 	c.set.headers.vary = "Origin";
 };
@@ -51,8 +51,7 @@ export const createHttpAdapter = (app: { handle: (req: Request) => Promise<Respo
 				res.end();
 			}
 		} catch (error) {
-			console.error("Error in HTTP adapter:");
-			console.error(error);
+			console.error("Error in HTTP adapter:", error);
 			if (!res.headersSent) {
 				res.writeHead(500, { "Content-Type": "text/plain" });
 				res.end("Internal Server Error");
