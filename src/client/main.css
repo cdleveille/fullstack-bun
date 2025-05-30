@@ -71,7 +71,7 @@ h1 {
 	text-decoration: underline;
 }
 
-.logo {
+.bun-logo {
 	background: transparent;
 	border: none;
 	box-shadow: none;
@@ -81,12 +81,12 @@ h1 {
 	transition: 0.2s ease-in-out;
 }
 
-.logo:hover,
-.logo:focus {
+.bun-logo:hover,
+.bun-logo:focus {
 	cursor: pointer;
 	scale: 1.1;
 }
 
-.logo:active {
+.bun-logo:active {
 	scale: 1.05;
 }

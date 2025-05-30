@@ -16,12 +16,12 @@ export const loader = async () => {
 export const useApi = () => {
 	const loaderData = useLoaderData<typeof loader>();
 
-	const hello = (message: string) => {
+	const useHello = (message: string) => {
 		return useMutation({
 			mutationFn: () => socket.emitAndReceive({ event: SocketEvent.Hello, data: [message] }),
 			onSuccess: ({ message }) => console.log(message)
 		});
 	};
 
-	return { loaderData, hello };
+	return { loaderData, useHello };
 };

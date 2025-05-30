@@ -5,14 +5,14 @@ import { useApp } from "@client/hooks/useApp";
 export const Main = () => {
 	const { count, setCount } = useApp();
 
-	const { hello, loaderData } = useApi();
+	const { useHello, loaderData } = useApi();
 
-	const { mutate } = hello("hello from client!");
+	const { mutate: helloToServer } = useHello("hello from client!");
 
 	return (
 		<div className="flex-center-col">
 			<h1>{loaderData.message}</h1>
-			<button type="button" onClick={() => mutate()} className="logo">
+			<button type="button" onClick={() => helloToServer()} className="bun-logo">
 				<Bun width={300} height={300} />
 			</button>
 			<button type="button" onClick={() => setCount(count => count + 1)}>
