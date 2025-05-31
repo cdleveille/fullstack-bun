@@ -47,14 +47,14 @@ h1 {
 }
 
 .flex-center-col {
+	position: absolute;
 	display: flex;
 	flex-direction: column;
 	align-items: center;
-	justify-content: center;
-	height: 100vh;
-	row-gap: 1.5rem;
+	justify-content: space-evenly;
+	width: 100%;
+	height: 100%;
 	text-align: center;
-	padding: 0.5rem;
 }
 
 .link-btn {
