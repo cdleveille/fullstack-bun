@@ -2,9 +2,9 @@
   "version": "0.2.0",
   "configurations": [
     {
+      "name": "server",
       "type": "bun",
       "request": "launch",
-      "name": "bun",
       "program": "${workspaceFolder}/src/server/index.ts",
       "cwd": "${workspaceFolder}",
       "watchMode": "hot",
@@ -14,14 +14,14 @@
       }
     },
     {
+      "name": "client",
       "type": "node",
       "request": "launch",
-      "name": "vite",
       "runtimeExecutable": "bunx",
       "runtimeArgs": ["--bun", "vite"],
       "cwd": "${workspaceFolder}",
       "serverReadyAction": {
-        "pattern": "Local:.+(https?://\\S+)",
+        "pattern": "local:.+(https?://\\S+)",
         "uriFormat": "%s",
         "action": "openExternally"
       },
@@ -33,7 +33,7 @@
   "compounds": [
     {
       "name": "debug",
-      "configurations": ["bun", "vite"],
+      "configurations": ["server", "client"],
       "stopAll": true
     }
   ]
