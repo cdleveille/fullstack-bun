@@ -45,9 +45,9 @@ const assertGetFromCache = async (request: Request) => {
 const fetchFromNetworkAndCacheResponse = async (request: Request) => {
 	const res = await fetch(request);
 	if (request.method !== "GET" || !res?.ok) return res;
-	const clone = res.clone();
-	// To avoid delaying response, do not await async cache ops
-	caches.open(cacheName).then(cache => cache.put(request, clone));
+	const resClone = res.clone();
+	// To avoid delaying response, do not await async cache write
+	caches.open(cacheName).then(cache => cache.put(request, resClone));
 	return res;
 };
 
@@ -67,34 +67,51 @@ const networkFirstStrategy = async (request: Request) => {
 	}
 };
 
-const precacheAssets = async (urlsToPrecache: string[]) => {
+const precacheUrls = async (urlsToPrecache: string[]) => {
 	const cache = await caches.open(cacheName);
 	await cache.addAll(urlsToPrecache);
 };
 
-const deleteOldCaches = async () => {
+const deleteOldCaches = async (newCacheName: string) => {
 	const cacheNames = await caches.keys();
-	const deleteOldCaches = cacheNames
-		.filter(name => name !== cacheName)
-		.map(name => caches.delete(name));
-	await Promise.all([self.clients.claim(), ...deleteOldCaches]);
+	await Promise.all(
+		cacheNames.filter(name => name !== newCacheName).map(name => caches.delete(name))
+	);
 };
 
-const handleRequest = async (request: Request) => {
-	const { url } = request;
-	if (isCacheFirstRequest(url)) return await cacheFirstStrategy(request);
+const TRUSTED_DOMAINS = ["https://fullstack-bun.fly.dev"];
+
+const handleFetchRequest = async (request: Request) => {
+	const url = new URL(request.url);
+
+	// Only read/write cache for cross-origin requests from trusted domains
+	if (url.origin !== self.location.origin) {
+		if (TRUSTED_DOMAINS.includes(url.hostname)) {
+			return await networkFirstStrategy(request);
+		}
+		return await fetch(request);
+	}
+
+	// Cache-first or network-first strategy for same-origin requests
+	if (isCacheFirstRequest(url.pathname)) return await cacheFirstStrategy(request);
 	return await networkFirstStrategy(request);
 };
 
 self.addEventListener("install", event => {
 	self.skipWaiting();
-	event.waitUntil(precacheAssets(urlsToPrecache));
+	event.waitUntil(precacheUrls(urlsToPrecache));
 });
 
 self.addEventListener("activate", event => {
-	event.waitUntil(deleteOldCaches());
+	event.waitUntil(
+		Promise.all([
+			deleteOldCaches(cacheName),
+			self.clients.claim(),
+			self.registration.navigationPreload?.enable()
+		])
+	);
 });
 
 self.addEventListener("fetch", event => {
-	event.respondWith(handleRequest(event.request));
+	event.respondWith(handleFetchRequest(event.request));
 });
