@@ -12,13 +12,21 @@ Single-page web app project template curated for performance, developer experien
 
 - Installs a [service worker](https://developer.mozilla.org/en-US/docs/Web/API/Service_Worker_API/Using_Service_Workers) for caching static assets and API responses client-side, enabling offline functionality and faster subsequent loads with fewer requests to the server.
 
-- Includes a [Dockerfile](https://github.com/cdleveille/fullstack-bun/blob/main/Dockerfile), [fly.toml](https://github.com/cdleveille/fullstack-bun/blob/main/fly.toml), and [GitHub workflow](https://github.com/cdleveille/fullstack-bun/blob/main/.github/workflows/deploy.yml) for deploying to [fly.io](https://fly.io) on pushes to the `main` branch. The Dockerfile compiles the app into a standalone binary, which is then run in a [distroless](https://github.com/GoogleContainerTools/distroless) image.
+- Includes a [Dockerfile](https://github.com/cdleveille/fullstack-bun/blob/main/Dockerfile), [fly.toml](https://github.com/cdleveille/fullstack-bun/blob/main/fly.toml), and [GitHub workflow](https://github.com/cdleveille/fullstack-bun/blob/main/.github/workflows/deploy.yml) for deploying to [fly.io](https://fly.io) on pushes to the `main` branch. The Dockerfile compiles the app into a standalone binary and runs it in a [distroless](https://github.com/GoogleContainerTools/distroless) image.
 
 ## Not Included
 
 - Server-side rendering
 
-- Database implementation
+- Database
+
+- Authentication
+
+- CSS Framework
+
+- Tests
+
+...but I may look into adding these in the future!
 
 ## Development
 
