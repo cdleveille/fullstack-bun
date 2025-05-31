@@ -11,7 +11,7 @@ import { AppInfo, Env, Path, Route } from "@shared/constants";
 const root = Path.ClientSrc;
 const outDir = Path.Public;
 
-const toCopy = ["icons/", "favicon.ico"];
+const toCopy = ["icons/", "favicon.ico", "robots.txt"];
 
 export default defineConfig(({ mode }) => ({
 	root: resolve(root),

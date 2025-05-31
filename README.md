@@ -14,7 +14,7 @@ Single-page web app project template curated for performance, developer experien
 
 - Includes a [Dockerfile](https://github.com/cdleveille/fullstack-bun/blob/main/Dockerfile), [fly.toml](https://github.com/cdleveille/fullstack-bun/blob/main/fly.toml), and [GitHub workflow](https://github.com/cdleveille/fullstack-bun/blob/main/.github/workflows/deploy.yml) for deploying to [fly.io](https://fly.io) on pushes to the `main` branch. The Dockerfile compiles the app into a standalone binary and runs it in a [distroless](https://github.com/GoogleContainerTools/distroless) image.
 
-## Not Included
+## Not Implemented
 
 - Server-side rendering
 
