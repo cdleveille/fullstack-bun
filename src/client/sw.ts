@@ -38,8 +38,7 @@ const isCacheFirstRequest = (request: Request) => {
 
 const getFromCache = async (request: Request) => {
 	const cache = await caches.open(cacheName);
-	const match = await cache.match(request, { ignoreVary: true });
-	return match;
+	return await cache.match(request, { ignoreVary: true });
 };
 
 const fetchFromNetworkAndCacheResponse = async (request: Request) => {
@@ -54,7 +53,8 @@ const fetchFromNetworkAndCacheResponse = async (request: Request) => {
 const cacheFirstStrategy = async (request: Request) => {
 	try {
 		const res = await getFromCache(request);
-		return res ?? (await fetchFromNetworkAndCacheResponse(request));
+		if (!res) throw new Error(`Cache miss for ${request.url}`);
+		return res;
 	} catch (error) {
 		return await fetchFromNetworkAndCacheResponse(request);
 	}
