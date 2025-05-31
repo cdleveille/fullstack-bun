@@ -35,38 +35,39 @@ const isCacheFirstRequest = (url: string) => {
 	return false;
 };
 
-const cacheResponse = async (request: Request) => {
+const assertGetFromCache = async (request: Request) => {
 	const cache = await caches.open(cacheName);
-	return cache.match(request, { ignoreVary: true });
+	const match = await cache.match(request, { ignoreVary: true });
+	if (!match) throw new Error(`Cache miss for ${request.url}`);
+	return match;
 };
 
-const networkResponse = async (request: Request) => {
+const fetchFromNetworkAndCacheResponse = async (request: Request) => {
 	const res = await fetch(request);
-	const cache = await caches.open(cacheName);
-	cache.put(request, res.clone());
+	if (request.method !== "GET" || !res?.ok) return res;
+	const clone = res.clone();
+	// To avoid delaying response, do not await async cache ops
+	caches.open(cacheName).then(cache => cache.put(request, clone));
 	return res;
 };
 
-const cacheFirst = async (request: Request) => {
+const cacheFirstStrategy = async (request: Request) => {
 	try {
-		const res = await cacheResponse(request);
-		if (!res) return networkResponse(request);
-		return res;
+		return await assertGetFromCache(request);
 	} catch (error) {
-		return await networkResponse(request);
+		return await fetchFromNetworkAndCacheResponse(request);
 	}
 };
 
-const networkFirst = async (request: Request) => {
+const networkFirstStrategy = async (request: Request) => {
 	try {
-		const res = await networkResponse(request);
-		return res;
+		return await fetchFromNetworkAndCacheResponse(request);
 	} catch (error) {
-		return await cacheResponse(request);
+		return await assertGetFromCache(request);
 	}
 };
 
-const precacheAssets = async () => {
+const precacheAssets = async (urlsToPrecache: string[]) => {
 	const cache = await caches.open(cacheName);
 	await cache.addAll(urlsToPrecache);
 };
@@ -76,21 +77,18 @@ const deleteOldCaches = async () => {
 	const deleteOldCaches = cacheNames
 		.filter(name => name !== cacheName)
 		.map(name => caches.delete(name));
-	await Promise.all(deleteOldCaches);
-	await self.clients.claim();
+	await Promise.all([self.clients.claim(), ...deleteOldCaches]);
 };
 
 const handleRequest = async (request: Request) => {
 	const { url } = request;
-	if (isCacheFirstRequest(url)) return await cacheFirst(request);
-	const res = await networkFirst(request);
-	if (!res) throw new Error(`Error fetching ${url} - not found in sw cache or over network`);
-	return res;
+	if (isCacheFirstRequest(url)) return await cacheFirstStrategy(request);
+	return await networkFirstStrategy(request);
 };
 
 self.addEventListener("install", event => {
 	self.skipWaiting();
-	event.waitUntil(precacheAssets());
+	event.waitUntil(precacheAssets(urlsToPrecache));
 });
 
 self.addEventListener("activate", event => {
