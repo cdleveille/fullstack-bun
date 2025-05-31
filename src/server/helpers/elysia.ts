@@ -64,5 +64,5 @@ export const createHttpAdapter = (app: { handle: (req: Request) => Promise<Respo
 };
 
 export const indexHtml = new Response(Bun.file(`${Path.Public}/index.html`), {
-	headers: { "Content-Type": "text/html" }
+	headers: { "Content-Type": "text/html; charset=utf-8" }
 });
