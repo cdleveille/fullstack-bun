@@ -28,7 +28,3 @@ export type TSocketResArgs<T extends keyof TClientToServerSocketEvent> = Paramet
 >;
 
 export type TReactStateSetter<T> = React.Dispatch<React.SetStateAction<T>>;
-
-export type TMessage = {
-	message: string;
-};

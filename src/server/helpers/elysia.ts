@@ -2,7 +2,6 @@ import type { IncomingMessage, ServerResponse } from "node:http";
 import { type ErrorHandler, type Handler, ValidationError } from "elysia";
 
 import { ErrorMessage, Path } from "@shared/constants";
-import type { TMessage } from "@shared/types";
 
 export const onError: ErrorHandler = ({ error }) => {
 	if (error instanceof ValidationError) {
@@ -14,18 +13,16 @@ export const onError: ErrorHandler = ({ error }) => {
 };
 
 const getErrorMessage = (error: unknown) => {
-	if (isErrorWithMessage(error)) return error.message;
-	if (typeof error === "string") return error;
-	return ErrorMessage.InternalServerError;
-};
-
-const isErrorWithMessage = (error: unknown): error is TMessage => {
-	return (
+	if (
 		!!error &&
 		typeof error === "object" &&
 		"message" in error &&
 		typeof (error as Record<string, unknown>).message === "string"
-	);
+	) {
+		return error.message;
+	}
+	if (typeof error === "string") return error;
+	return ErrorMessage.InternalServerError;
 };
 
 export const onAfterHandle: Handler = c => {
