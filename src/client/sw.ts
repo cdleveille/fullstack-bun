@@ -9,7 +9,7 @@ self.__WB_DISABLE_DEV_LOGS = true;
 const manifest = self.__WB_MANIFEST;
 
 // Add any additional URLs to precache here
-const urlsToPrecache = ["/api/hello", ...manifest.map(({ url }) => url)];
+const urlsToPrecache = ["/", "/api/hello", ...manifest.map(({ url }) => url)];
 
 const cacheName = "sw-cache";
 const cacheFirstWithoutHashFileTypes = [
@@ -35,10 +35,9 @@ const isCacheFirstRequest = (url: string) => {
 	return false;
 };
 
-const assertGetFromCache = async (request: Request) => {
+const getFromCache = async (request: Request) => {
 	const cache = await caches.open(cacheName);
 	const match = await cache.match(request, { ignoreVary: true });
-	if (!match) throw new Error(`Cache miss for ${request.url}`);
 	return match;
 };
 
@@ -53,7 +52,8 @@ const fetchFromNetworkAndCacheResponse = async (request: Request) => {
 
 const cacheFirstStrategy = async (request: Request) => {
 	try {
-		return await assertGetFromCache(request);
+		const res = await getFromCache(request);
+		return res ?? (await fetchFromNetworkAndCacheResponse(request));
 	} catch (error) {
 		return await fetchFromNetworkAndCacheResponse(request);
 	}
@@ -63,7 +63,7 @@ const networkFirstStrategy = async (request: Request) => {
 	try {
 		return await fetchFromNetworkAndCacheResponse(request);
 	} catch (error) {
-		return await assertGetFromCache(request);
+		return await getFromCache(request);
 	}
 };
 
@@ -87,14 +87,17 @@ const handleFetchRequest = async (request: Request) => {
 	// Only read/write cache for cross-origin requests from trusted domains
 	if (url.origin !== self.location.origin) {
 		if (TRUSTED_DOMAINS.includes(url.hostname)) {
-			return await networkFirstStrategy(request);
+			const res = await networkFirstStrategy(request);
+			if (res) return res;
 		}
 		return await fetch(request);
 	}
 
 	// Cache-first or network-first strategy for same-origin requests
 	if (isCacheFirstRequest(url.pathname)) return await cacheFirstStrategy(request);
-	return await networkFirstStrategy(request);
+	const res = await networkFirstStrategy(request);
+	if (!res || !res.ok) throw new Error(`Failed to fetch ${request.url}`);
+	return res;
 };
 
 self.addEventListener("install", event => {
