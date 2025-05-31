@@ -2,6 +2,7 @@ import type { IncomingMessage, ServerResponse } from "node:http";
 import { type ErrorHandler, type Handler, ValidationError } from "elysia";
 
 import { readFileSync } from "node:fs";
+import path from "node:path";
 import { ErrorMessage, Path } from "@shared/constants";
 
 export const onError: ErrorHandler = ({ error, set }) => {
@@ -62,8 +63,6 @@ export const createHttpAdapter = (app: { handle: (req: Request) => Promise<Respo
 	};
 };
 
-export const indexHtml = new Response(readFileSync(`${Path.Public}/index.html`, "utf-8"), {
-	headers: {
-		"Content-Type": "text/html; charset=utf-8"
-	}
+export const indexHtml = new Response(Bun.file(`${Path.Public}/index.html`), {
+	headers: { "Content-Type": "text/html" }
 });
