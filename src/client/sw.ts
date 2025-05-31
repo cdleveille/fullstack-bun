@@ -8,10 +8,10 @@ self.__WB_DISABLE_DEV_LOGS = true;
 
 const manifest = self.__WB_MANIFEST;
 
-// Add any additional URLs to precache here
 const urlsToPrecache = ["/", "/api/hello", ...manifest.map(({ url }) => url)];
 
 const cacheName = "sw-cache";
+
 const cacheFirstWithoutHashFileTypes = [
 	".ttf",
 	".woff",
@@ -29,7 +29,8 @@ const isCacheFirstWithoutHash = (filename: string) =>
 		filename.toLowerCase().endsWith(fileType.toLowerCase())
 	);
 
-const isCacheFirstRequest = (url: string) => {
+const isCacheFirstRequest = (request: Request) => {
+	const { url } = request;
 	if (isCacheFirstWithoutHash(url)) return true;
 	if (isCacheFirstWithHash(url)) return true;
 	return false;
@@ -79,24 +80,10 @@ const deleteOldCaches = async (newCacheName: string) => {
 	);
 };
 
-const TRUSTED_DOMAINS = ["https://fullstack-bun.fly.dev"];
-
 const handleFetchRequest = async (request: Request) => {
-	const url = new URL(request.url);
-
-	// Only read/write cache for cross-origin requests from trusted domains
-	if (url.origin !== self.location.origin) {
-		if (TRUSTED_DOMAINS.includes(url.hostname)) {
-			const res = await networkFirstStrategy(request);
-			if (res) return res;
-		}
-		return await fetch(request);
-	}
-
-	// Cache-first or network-first strategy for same-origin requests
-	if (isCacheFirstRequest(url.pathname)) return await cacheFirstStrategy(request);
+	if (isCacheFirstRequest(request)) return await cacheFirstStrategy(request);
 	const res = await networkFirstStrategy(request);
-	if (!res || !res.ok) throw new Error(`Failed to fetch ${request.url}`);
+	if (!res || !res.ok) throw new Error(`Failed to fetch ${request.url} and not in sw cache`);
 	return res;
 };
 
