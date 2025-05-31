@@ -41,7 +41,7 @@ const getFromCache = async (request: Request) => {
 	return await cache.match(request, { ignoreVary: true });
 };
 
-const fetchFromNetworkAndCacheResponse = async (request: Request) => {
+const fetchAndCacheResponse = async (request: Request) => {
 	const res = await fetch(request);
 	if (request.method !== "GET" || !res?.ok) return res;
 	const resClone = res.clone();
@@ -56,13 +56,13 @@ const cacheFirstStrategy = async (request: Request) => {
 		if (!res) throw new Error(`Cache miss for ${request.url}`);
 		return res;
 	} catch (error) {
-		return await fetchFromNetworkAndCacheResponse(request);
+		return await fetchAndCacheResponse(request);
 	}
 };
 
 const networkFirstStrategy = async (request: Request) => {
 	try {
-		return await fetchFromNetworkAndCacheResponse(request);
+		return await fetchAndCacheResponse(request);
 	} catch (error) {
 		return await getFromCache(request);
 	}
