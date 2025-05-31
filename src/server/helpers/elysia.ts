@@ -26,8 +26,8 @@ const getErrorMessage = (error: unknown) => {
 };
 
 export const onAfterHandle: Handler = c => {
-	// Needed to prevent service worker caching error
-	c.set.headers.vary = "Origin";
+	// Needed to allow service worker caching
+	c.set.headers.vary = undefined;
 };
 
 // Creates a Node-style HTTP adapter function (needed to attach Socket.IO to Elysia)
