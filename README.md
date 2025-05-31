@@ -4,7 +4,7 @@ Single-page web app project template curated for performance, developer experien
 
 ## Features
 
-- Server/client interaction is 100% type-safe. See [api.ts](https://github.com/cdleveille/fullstack-bun/blob/main/src/server/helpers/api.ts) and [useApi.ts](https://github.com/cdleveille/fullstack-bun/blob/main/src/client/hooks/useApi.ts) for simple HTTP and websocket examples.
+- Server/client interaction is 100% type-safe. See [api.ts](https://github.com/cdleveille/fullstack-bun/blob/main/src/server/helpers/api.ts) and [useApi.ts](https://github.com/cdleveille/fullstack-bun/blob/main/src/client/hooks/useApi.ts) for simple HTTP and WebSocket examples.
 
 - [Scalar](https://guides.scalar.com) documentation for API routes is served on [/api/reference](https://fullstack-bun.fly.dev/api/reference). [OpenAPI Specification](https://swagger.io/specification) raw .json data is served on [/api/reference/json](https://fullstack-bun.fly.dev/api/reference/json).
 

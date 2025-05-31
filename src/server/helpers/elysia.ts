@@ -1,13 +1,10 @@
 import type { IncomingMessage, ServerResponse } from "node:http";
 import { type ErrorHandler, type Handler, ValidationError } from "elysia";
 
-import { readFileSync } from "node:fs";
-import path from "node:path";
 import { ErrorMessage, Path } from "@shared/constants";
 
-export const onError: ErrorHandler = ({ error, set }) => {
+export const onError: ErrorHandler = ({ error }) => {
 	if (error instanceof ValidationError) {
-		set.status = 400;
 		const message = error.all.map(e => e.summary).join(", ");
 		return { message };
 	}
@@ -16,7 +13,7 @@ export const onError: ErrorHandler = ({ error, set }) => {
 };
 
 export const onAfterHandle: Handler = c => {
-	// Needed to prevent service worker error
+	// Needed to prevent service worker caching error
 	c.set.headers.vary = "Origin";
 };
 

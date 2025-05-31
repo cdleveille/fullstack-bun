@@ -37,7 +37,7 @@ export const api = new Elysia({ prefix: Route.Api })
 			body: t.Object({ name: t.String() }),
 			response: {
 				200: t.Object({ message: t.String() }),
-				400: t.Object({ message: t.String() }),
+				422: t.Object({ message: t.String() }),
 				500: t.Object({ message: t.String() })
 			}
 		}
