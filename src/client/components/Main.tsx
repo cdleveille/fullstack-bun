@@ -13,7 +13,7 @@ export const Main = () => {
 		<div className="flex-center-col">
 			<h1>{loaderData.message}</h1>
 			<button type="button" onClick={() => helloToServer()} className="bun-logo">
-				<Bun width={300} height={300} />
+				<Bun width={250} height={250} />
 			</button>
 			<button type="button" onClick={() => setCount(count => count + 1)}>
 				Count: {count}

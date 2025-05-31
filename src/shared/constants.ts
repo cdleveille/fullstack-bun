@@ -7,7 +7,7 @@ export const AppInfo = {
 	description,
 	author: {
 		name: author,
-		url: "https://www.cdleveille.net"
+		url: "https://cdleveille.net"
 	},
 	license,
 	url: "https://fullstack-bun.fly.dev"
