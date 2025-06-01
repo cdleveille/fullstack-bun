@@ -10,7 +10,10 @@ const manifest = self.__WB_MANIFEST;
 
 const urlsToPrecache = ["/", "/api/hello", ...manifest.map(({ url }) => url)];
 
-const cacheName = "sw-cache";
+// Increment this version to invalidate cache and force clients to refetch all assets
+const CACHE_VERSION = "v1";
+
+const cacheName = `sw-cache-${CACHE_VERSION}`;
 
 const cacheFirstWithoutHashFileTypes = [
 	".ttf",
