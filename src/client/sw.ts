@@ -83,7 +83,7 @@ const deleteOldCaches = async (newCacheName: string) => {
 const handleFetchRequest = async (request: Request) => {
 	if (isCacheFirstRequest(request)) return await cacheFirstStrategy(request);
 	const res = await networkFirstStrategy(request);
-	if (!res || !res.ok) throw new Error(`Failed to fetch ${request.url} and not in sw cache`);
+	if (!res || !res.ok) throw new Error(`Failed to fetch ${request.url}`);
 	return res;
 };
 
