@@ -4,15 +4,8 @@ import { swagger } from "@elysiajs/swagger";
 import { Elysia } from "elysia";
 import { helmet } from "elysia-helmet";
 
-import { Config, isCustomHost } from "@server/helpers/config";
 import { indexHtml } from "@server/helpers/elysia";
 import { AppInfo, Path, Route } from "@shared/constants";
-
-const { HOST, PORT } = Config;
-
-const WS_HOST = HOST.replace("http", "ws");
-
-const connectSrc = isCustomHost ? ["'self'", `${HOST}:${PORT}`, `${WS_HOST}:${PORT}`] : ["*"];
 
 export const plugins = new Elysia()
 	.use(cors())
@@ -22,7 +15,7 @@ export const plugins = new Elysia()
 				directives: {
 					baseUri: ["'self'"],
 					childSrc: ["'self'"],
-					connectSrc,
+					connectSrc: ["'self'"],
 					defaultSrc: ["'self'"],
 					fontSrc: ["'self'", "https:", "data:"],
 					formAction: ["'self'"],
