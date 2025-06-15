@@ -1,13 +1,11 @@
 import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
+import { RouterProvider, createRouter } from "@tanstack/react-router";
 import { StrictMode } from "react";
 import { createRoot } from "react-dom/client";
-import { RouterProvider, createBrowserRouter } from "react-router-dom";
 
 import { AppProvider } from "@client/components/AppProvider";
-import { ErrorBoundary } from "@client/components/ErrorBoundary";
-import { Main } from "@client/components/Main";
 import { assertGetElementById, registerServiceWorker } from "@client/helpers/browser";
-import { loader } from "@client/hooks/useApi";
+import { routeTree } from "@client/routes/routeTree.gen";
 
 window.addEventListener("load", () => {
 	registerServiceWorker().catch(error => {
@@ -15,24 +13,21 @@ window.addEventListener("load", () => {
 	});
 });
 
+const router = createRouter({ routeTree });
+
 const root = assertGetElementById("root");
 createRoot(root).render(
 	<StrictMode>
 		<QueryClientProvider client={new QueryClient()}>
 			<AppProvider>
-				<RouterProvider
-					router={createBrowserRouter([
-						{
-							errorElement: <ErrorBoundary />,
-							hydrateFallbackElement: <></>,
-							children: [
-								{ index: true, element: <Main />, loader }
-								// Add more routes here as needed
-							]
-						}
-					])}
-				/>
+				<RouterProvider router={createRouter({ routeTree })} />
 			</AppProvider>
 		</QueryClientProvider>
 	</StrictMode>
 );
+
+declare module "@tanstack/react-router" {
+	interface Register {
+		router: typeof router;
+	}
+}

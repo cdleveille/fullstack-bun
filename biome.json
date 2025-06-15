@@ -8,7 +8,8 @@
   },
   "linter": {
     "enabled": true,
-    "rules": { "recommended": true }
+    "rules": { "recommended": true },
+    "ignore": ["**/routeTree.gen.ts"]
   },
   "formatter": {
     "enabled": true,
@@ -19,7 +20,8 @@
     "indentWidth": 4,
     "lineEnding": "lf",
     "lineWidth": 100,
-    "useEditorconfig": false
+    "useEditorconfig": false,
+    "ignore": ["**/routeTree.gen.ts"]
   },
   "javascript": {
     "formatter": {
