@@ -39,13 +39,15 @@ Single-page web app project template curated for performance, developer experien
 
 ...but I may look into adding these in the future!
 
-## Development
+## Setup
 
 Install [Bun](https://bun.sh).
 
 Optionally create a `.env` file in the root directory to override default environment variables. See [.env.example](https://github.com/cdleveille/fullstack-bun/blob/main/.env.example) for available options.
 
-Install dependencies and launch:
+## Development
+
+Install dependencies and run:
 
 ```bash
 bun install
@@ -54,17 +56,12 @@ bun dev
 
 ## Production
 
-Build client and compile server to standalone binary:
+Build client, compile server to standalone binary, and run:
 
 ```bash
 bun run build
 bun run compile
-```
-
-Start server by executing the compiled `main` binary or by running:
-
-```bash
-bun start
+./main
 ```
 
 Alternatively, build and run in a Docker container:
