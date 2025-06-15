@@ -1,5 +1,5 @@
 import type { IncomingMessage, ServerResponse } from "node:http";
-import { type ErrorHandler, type Handler, ValidationError } from "elysia";
+import { type ErrorHandler, ValidationError } from "elysia";
 
 import { ErrorMessage, Path } from "@shared/constants";
 
@@ -23,11 +23,6 @@ const getErrorMessage = (error: unknown) => {
 	}
 	if (typeof error === "string") return error;
 	return ErrorMessage.InternalServerError;
-};
-
-export const onAfterHandle: Handler = c => {
-	// Needed to allow service worker caching
-	c.set.headers.vary = undefined;
 };
 
 // Creates a Node-style HTTP adapter function (needed to attach Socket.IO to Elysia)
