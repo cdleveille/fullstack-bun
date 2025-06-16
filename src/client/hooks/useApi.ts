@@ -1,5 +1,6 @@
 import { treaty } from "@elysiajs/eden";
 import { useMutation } from "@tanstack/react-query";
+import { toast } from "react-hot-toast";
 
 import { Config } from "@/client/helpers/config";
 import { useWs } from "@/client/hooks/useWs";
@@ -23,17 +24,20 @@ export const useApi = () => {
 	const useGetHello = () =>
 		useMutation({
 			mutationFn: () => httpApi.hello.get({ query: {} }),
-			onSuccess: ({ data }) => console.log(`get: ${data?.message}`)
+			onSuccess: ({ data }) => toast.success(`get: ${data?.message}`)
 		});
 
 	const usePostHello = (name: string) =>
 		useMutation({
 			mutationFn: () => httpApi.hello.post({ name }),
-			onSuccess: ({ data }) => console.log(`post: ${data?.message}`)
+			onSuccess: ({ data }) => toast.success(`post: ${data?.message}`)
 		});
 
 	const useWsHello = () =>
-		useWs({ handler: wsApi.hello, onMessage: ({ message }) => console.log(`ws: ${message}`) });
+		useWs({
+			handler: wsApi.hello,
+			onMessage: ({ message }) => toast.success(`ws: ${message}`)
+		});
 
 	return { useGetHello, usePostHello, useWsHello };
 };

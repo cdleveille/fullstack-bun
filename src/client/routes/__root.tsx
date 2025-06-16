@@ -1,5 +1,6 @@
 import { Outlet, createRootRoute } from "@tanstack/react-router";
 import { TanStackRouterDevtools } from "@tanstack/react-router-devtools";
+import { Toaster } from "react-hot-toast";
 
 import { ErrorBoundary } from "@/client/components/ErrorBoundary";
 import { loader, useApi } from "@/client/hooks/useApi";
@@ -10,6 +11,7 @@ export const Route = createRootRoute({
 		return (
 			<>
 				<Outlet />
+				<Toaster />
 				<TanStackRouterDevtools />
 			</>
 		);

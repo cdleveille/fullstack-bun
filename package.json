@@ -44,6 +44,7 @@
     "elysia": "^1.3.3",
     "elysia-helmet": "^3.0.0",
     "react": "^19.1.0",
-    "react-dom": "^19.1.0"
+    "react-dom": "^19.1.0",
+    "react-hot-toast": "^2.5.2"
   }
 }
