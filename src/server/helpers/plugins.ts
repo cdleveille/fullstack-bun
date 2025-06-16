@@ -1,9 +1,9 @@
+import { existsSync } from "node:fs";
 import { staticPlugin } from "@elysiajs/static";
 import { swagger } from "@elysiajs/swagger";
 import { Elysia } from "elysia";
 import { helmet } from "elysia-helmet";
 
-import { Config } from "@/server/helpers/config";
 import { indexHtml } from "@/server/helpers/elysia";
 import { AppInfo, Path, Route } from "@/shared/constants";
 
@@ -54,7 +54,7 @@ export const plugins = new Elysia()
 		})
 	);
 
-if (Config.SERVE_STATIC) {
+if (existsSync(Path.Public)) {
 	const serveStatic = new Elysia()
 		.use(
 			staticPlugin({

@@ -6,7 +6,6 @@
       "type": "bun",
       "request": "launch",
       "program": "${workspaceFolder}/src/server/index.ts",
-      "args": ["--no-serve-static"],
       "cwd": "${workspaceFolder}",
       "watchMode": "hot",
       "internalConsoleOptions": "neverOpen",

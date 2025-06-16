@@ -15,8 +15,7 @@ export const AppInfo = {
 
 export const DefaultConfig: TConfig = {
 	PORT: 3000,
-	HOST: "http://localhost",
-	SERVE_STATIC: true
+	HOST: "http://localhost"
 };
 
 export enum Env {
