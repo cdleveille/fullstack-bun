@@ -1,4 +1,4 @@
-export const ErrorDisplay = ({ error }: { error: Error }) => {
+export const ErrorBoundary = ({ error }: { error: Error }) => {
 	return (
 		<div
 			style={{

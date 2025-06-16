@@ -1,6 +1,6 @@
 import { type ErrorHandler, ValidationError } from "elysia";
 
-import { ErrorMessage, Path } from "@/shared/constants";
+import { ErrorMessage } from "@/shared/constants";
 
 export const onError: ErrorHandler = ({ error }) => {
 	if (error instanceof ValidationError) {
@@ -23,7 +23,3 @@ const getErrorMessage = (error: unknown) => {
 	if (typeof error === "string") return error;
 	return ErrorMessage.InternalServerError;
 };
-
-export const indexHtml = new Response(Bun.file(`${Path.Public}/index.html`), {
-	headers: { "Content-Type": "text/html; charset=utf-8" }
-});

@@ -4,7 +4,6 @@ import { swagger } from "@elysiajs/swagger";
 import { Elysia } from "elysia";
 import { helmet } from "elysia-helmet";
 
-import { indexHtml } from "@/server/helpers/elysia";
 import { AppInfo, Path, Route } from "@/shared/constants";
 
 export const plugins = new Elysia()
@@ -65,6 +64,10 @@ if (existsSync(Path.Public)) {
 				alwaysStatic: true
 			})
 		)
-		.get("/*", indexHtml);
+		// SPA fallback for client-side routing
+		.get("*", ({ path }) => {
+			const url = path.split("/").pop();
+			if (url && !url.includes(".")) return Bun.file(`${Path.Public}/index.html`);
+		});
 	plugins.use(serveStatic);
 }

@@ -7,7 +7,7 @@ export const api = new Elysia({ prefix: Route.Api })
 		Route.Hello,
 		c => {
 			const { name } = c.query;
-			return { message: `get: hello ${name || "from bun"}!` };
+			return { message: `hello ${name || "from bun"}!` };
 		},
 		{
 			query: t.Object({ name: t.Optional(t.String()) }),
@@ -21,7 +21,7 @@ export const api = new Elysia({ prefix: Route.Api })
 		Route.Hello,
 		c => {
 			const { name } = c.body;
-			return { message: `post: hello ${name}!` };
+			return { message: `hello ${name}!` };
 		},
 		{
 			body: t.Object({ name: t.String() }),
@@ -35,7 +35,7 @@ export const api = new Elysia({ prefix: Route.Api })
 	.ws(Route.Hello, {
 		message(ws, { message }) {
 			console.log(message);
-			ws.send({ message: "ws: hello from bun!" });
+			ws.send({ message: "hello from bun!" });
 		},
 		body: t.Object({ message: t.String() }),
 		response: t.Object({ message: t.String() })

@@ -60,3 +60,11 @@ h1 {
 	cursor: pointer;
 	text-decoration: underline;
 }
+
+.btn-row {
+	display: flex;
+	flex-direction: row;
+	justify-content: center;
+	align-items: center;
+	column-gap: 1rem;
+}
