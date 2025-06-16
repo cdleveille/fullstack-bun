@@ -14,7 +14,7 @@
     "tsc": "tsc -p tsconfig.json",
     "build": "bunx --bun vite build && bun run src/server/helpers/workbox.ts",
     "compile": "bun build --compile --minify --sourcemap --bytecode --target bun --outfile main src/server/index.ts ",
-    "dev": "concurrently --prefix \"[{name}]\" --names \"server,client\" -c \"bgBlue.bold,bgGreen.bold\" \"bun run --hot src/server/index.ts\" \"bunx --bun vite\"",
+    "dev": "concurrently --prefix \"[{name}]\" --names \"server,client\" -c \"bgBlue.bold,bgGreen.bold\" \"bun run --hot src/server/index.ts --no-serve-static\" \"bunx --bun vite\"",
     "start": "bun run src/server/index.ts"
   },
   "devDependencies": {

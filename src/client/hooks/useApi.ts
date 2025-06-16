@@ -7,12 +7,17 @@ import type { TApi } from "@/server/helpers/api";
 
 const { protocol, hostname } = window.location;
 
-export const api = treaty<TApi>(`${protocol}//${hostname}:${Config.PORT}`).api;
+const createTreaty = (url: string) => treaty<TApi>(url).api;
+
+export const api = createTreaty(`${protocol}//${hostname}:${Config.PORT}`);
+
+const loaderApi = createTreaty(window.location.origin);
 
 // For initial data fetching to be done via TanStack Router loader before React renders
 export const loader = async () => {
 	const { data, error } = await api.hello.get({ query: {} });
 	if (error) throw new Error(error.value.message);
+	console.log(data.message);
 	return data;
 };
 

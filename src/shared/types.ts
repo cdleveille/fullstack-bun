@@ -1,6 +1,7 @@
 export type TConfig = {
 	PORT: number;
 	HOST: string;
+	SERVE_STATIC: boolean;
 };
 
 export type TAppContext = {
