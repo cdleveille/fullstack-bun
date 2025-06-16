@@ -19,23 +19,22 @@ Single-page web app project template curated for performance, developer experien
 
 - [Scalar](https://guides.scalar.com) documentation for API routes is served on [/api/reference](https://fullstack-bun.fly.dev/api/reference). [OpenAPI Specification](https://swagger.io/specification) raw .json data is served on [/api/reference/json](https://fullstack-bun.fly.dev/api/reference/json).
 
-- The client meets [PWA](https://developer.mozilla.org/en-US/docs/Web/Progressive_web_apps) requirements for an installable, native app-like experience on a variety of platforms, and boasts a near-perfect [PageSpeed Insights](https://pagespeed.web.dev) score out of the box.
+- The client meets [PWA](https://developer.mozilla.org/en-US/docs/Web/Progressive_web_apps) requirements for an installable, native app-like experience on a variety of platforms. It scores a near-perfect [PageSpeed Insights](https://pagespeed.web.dev) report out of the box.
 
-- Installs a [service worker](https://developer.mozilla.org/en-US/docs/Web/API/Service_Worker_API/Using_Service_Workers) for caching static assets and API responses client-side, enabling offline functionality and faster subsequent loads with fewer requests to the server.
+- A [service worker](https://developer.mozilla.org/en-US/docs/Web/API/Service_Worker_API/Using_Service_Workers) is installed in the browser for caching static assets and API responses client-side, enabling offline functionality and faster subsequent loads with fewer requests to the server.
 
 - Includes a [Dockerfile](https://github.com/cdleveille/fullstack-bun/blob/main/Dockerfile), [fly.toml](https://github.com/cdleveille/fullstack-bun/blob/main/fly.toml), and [GitHub workflow](https://github.com/cdleveille/fullstack-bun/blob/main/.github/workflows/deploy.yml) for deploying to [fly.io](https://fly.io) on pushes to the `main` branch. The Dockerfile compiles the app into a standalone binary and runs it in a [distroless](https://github.com/GoogleContainerTools/distroless) image.
 
 ## Not Implemented
 
 - Server-side rendering
-
+- React server components
 - Database
-
 - Authentication
-
 - CSS Framework
-
 - Tests
+- Logging
+- Analytics
 
 ...but I may look into adding these in the future!
 

@@ -1,8 +1,11 @@
 import BunLogo from "@/client/assets/bun.svg";
+import { useApi } from "@/client/hooks/useApi";
 import { useApp } from "@/client/hooks/useApp";
 
 export const Main = () => {
 	const { count, setCount } = useApp();
+
+	useApi();
 
 	return (
 		<div className="center">

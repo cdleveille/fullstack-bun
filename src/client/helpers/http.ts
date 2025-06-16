@@ -1,35 +1,19 @@
-import { treaty } from "@elysiajs/eden";
-
-import type { TApi } from "@/server/helpers/api";
-
 export const httpClient = {
-	api: treaty<TApi>(window.location.origin).api,
-	GET: async <T>(url: string, { headers }: { headers?: Headers } = {}) =>
-		request<T>({ url, method: "GET", headers }),
-	POST: async <T>(url: string, { headers, body }: { headers?: Headers; body?: unknown } = {}) =>
-		request<T>({ url, method: "POST", headers, body }),
-	PUT: async <T>(url: string, { headers, body }: { headers?: Headers; body?: unknown } = {}) =>
-		request<T>({ url, method: "PUT", headers, body }),
-	DELETE: async <T>(url: string, { headers, body }: { headers?: Headers; body?: unknown } = {}) =>
-		request<T>({ url, method: "DELETE", headers, body })
+	get: async (url: string, init: RequestInit) => request(url, { method: "GET", ...init }),
+	post: async (url: string, init: RequestInit) => request(url, { method: "POST", ...init }),
+	patch: async (url: string, init: RequestInit) => request(url, { method: "DELETE", ...init }),
+	put: async (url: string, init: RequestInit) => request(url, { method: "PUT", ...init }),
+	delete: async (url: string, init: RequestInit) => request(url, { method: "DELETE", ...init })
 };
 
-const request = async <T>({
-	url,
-	method,
-	headers,
-	body
-}: { url: string; method: string; headers?: Headers; body?: unknown }) => {
-	const res = await fetch(url, {
-		method,
+const request = async (url: string, { headers, body, ...rest }: RequestInit) => {
+	return fetch(url, {
 		headers: {
 			"Content-Type": "application/json",
 			Accept: "application/json",
-			...(headers ?? [])
+			...headers
 		},
-		body: body ? JSON.stringify(body) : undefined
+		body: body ? JSON.stringify(body) : undefined,
+		...rest
 	});
-	const data = (await res.json()) as T;
-	if (!res.ok) throw data ?? new Error("Request failed", { cause: res });
-	return data;
 };
