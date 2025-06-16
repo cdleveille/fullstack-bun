@@ -25,7 +25,7 @@ const getErrorMessage = (error: unknown) => {
 	return ErrorMessage.InternalServerError;
 };
 
-// Creates a Node-style HTTP adapter function (needed to attach Socket.IO to Elysia)
+// Creates a Node-style HTTP adapter function
 export const createHttpAdapter = (app: { handle: (req: Request) => Promise<Response> }) => {
 	return async (req: IncomingMessage, res: ServerResponse) => {
 		try {

@@ -1,11 +1,12 @@
 import { treaty } from "@elysiajs/eden";
-import { useMutation } from "@tanstack/react-query";
 import { useEffect } from "react";
 
+import { Config } from "@/client/helpers/config";
 import type { TApi } from "@/server/helpers/api";
-import { SocketEvent } from "@/shared/constants";
 
-export const apiClient = treaty<TApi>(window.location.origin).api;
+const { protocol, hostname } = window.location;
+
+export const apiClient = treaty<TApi>(`${protocol}//${hostname}:${Config.PORT}`).api;
 
 // For initial data fetching to be done via TanStack Router loader before React renders
 export const loader = async () => {
@@ -18,16 +19,11 @@ export const loader = async () => {
 export const useApi = () => {
 	useEffect(() => {
 		const hello = apiClient.hello.subscribe();
-		hello.on("open", () => {
-			console.log("asdf");
-			hello.send({ message: "hello from client!" });
-		});
-		hello.on("message", message => {
-			console.log("Received message:", message);
-		});
+		hello.on("open", () => hello.send({ message: "hello from client!" }));
+		hello.on("message", ({ data }) => console.log(data.message));
 
 		return () => {
-			// hello.close();
+			hello.close();
 		};
 	}, []);
 };

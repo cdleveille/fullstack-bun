@@ -28,11 +28,6 @@ export enum Path {
 	ClientSrc = "src/client"
 }
 
-export enum SocketEvent {
-	Connect = "connect",
-	Hello = "hello"
-}
-
 export enum Route {
 	Api = "/api",
 	Hello = "/hello",

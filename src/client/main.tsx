@@ -1,6 +1,5 @@
 import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
 import { RouterProvider, createRouter } from "@tanstack/react-router";
-import { StrictMode } from "react";
 import { createRoot } from "react-dom/client";
 
 import { AppProvider } from "@/client/components/AppProvider";
@@ -17,13 +16,11 @@ const router = createRouter({ routeTree });
 
 const root = assertGetElementById("root");
 createRoot(root).render(
-	<StrictMode>
-		<QueryClientProvider client={new QueryClient()}>
-			<AppProvider>
-				<RouterProvider router={createRouter({ routeTree })} />
-			</AppProvider>
-		</QueryClientProvider>
-	</StrictMode>
+	<QueryClientProvider client={new QueryClient()}>
+		<AppProvider>
+			<RouterProvider router={createRouter({ routeTree })} />
+		</AppProvider>
+	</QueryClientProvider>
 );
 
 declare module "@tanstack/react-router" {
