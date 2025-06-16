@@ -66,5 +66,5 @@ h1 {
 	flex-direction: row;
 	justify-content: center;
 	align-items: center;
-	column-gap: 1rem;
+	column-gap: 2rem;
 }

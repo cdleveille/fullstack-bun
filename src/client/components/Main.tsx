@@ -27,18 +27,21 @@ export const Main = () => {
 		<div className="center">
 			<h1>{message}</h1>
 			<BunLogo width={250} height={250} />
-			<div className="btn-row">
-				<button type="button" onClick={() => setCount(0)} className="link-btn">
-					Reset
-				</button>
-				<span>Count: {count}</span>
-				<button
-					type="button"
-					onClick={() => setCount(count => count + 1)}
-					className="link-btn"
-				>
-					+1
-				</button>
+			<div>
+				<div>Persistent Count</div>
+				<div className="btn-row">
+					<button type="button" onClick={() => setCount(0)} className="link-btn">
+						↺
+					</button>
+					<span>{count}</span>
+					<button
+						type="button"
+						onClick={() => setCount(count => count + 1)}
+						className="link-btn"
+					>
+						+1
+					</button>
+				</div>
 			</div>
 			<div className="btn-row">
 				<button type="button" onClick={() => getHello()} className="link-btn">
