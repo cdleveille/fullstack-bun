@@ -21,7 +21,7 @@ export const api = new Elysia({ prefix: Route.Api })
 		Route.Hello,
 		c => {
 			const { name } = c.body;
-			return { message: `post: hello ${name || "from bun"}!` };
+			return { message: `post: hello ${name}!` };
 		},
 		{
 			body: t.Object({ name: t.String() }),
