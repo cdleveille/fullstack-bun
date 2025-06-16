@@ -1,4 +1,4 @@
-import { SocketEvent } from "@shared/constants";
+import { SocketEvent } from "@/shared/constants";
 
 export type TConfig = {
 	PORT: number;

@@ -1,8 +1,8 @@
 import { Elysia, t } from "elysia";
 
-import { io } from "@server/helpers/socket";
-import { SocketEvent } from "@shared/constants";
-import { Route } from "@shared/constants";
+import { io } from "@/server/helpers/socket";
+import { SocketEvent } from "@/shared/constants";
+import { Route } from "@/shared/constants";
 
 export type TApi = typeof api;
 

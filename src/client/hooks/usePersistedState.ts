@@ -1,8 +1,8 @@
 import { useEffect, useMemo, useState } from "react";
 
-import { storage } from "@client/helpers/browser";
-import { STORED_STATE_PREFIX } from "@shared/constants";
-import type { TReactStateSetter } from "@shared/types";
+import { storage } from "@/client/helpers/browser";
+import { STORED_STATE_PREFIX } from "@/shared/constants";
+import type { TReactStateSetter } from "@/shared/types";
 
 export const usePersistedState = <T>(
 	initialValue: T,

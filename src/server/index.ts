@@ -1,11 +1,11 @@
 import { createServer } from "node:http";
 import { Elysia } from "elysia";
 
-import { api } from "@server/helpers/api";
-import { Config } from "@server/helpers/config";
-import { createHttpAdapter, onError } from "@server/helpers/elysia";
-import { plugins } from "@server/helpers/plugins";
-import { io } from "@server/helpers/socket";
+import { api } from "@/server/helpers/api";
+import { Config } from "@/server/helpers/config";
+import { createHttpAdapter, onError } from "@/server/helpers/elysia";
+import { plugins } from "@/server/helpers/plugins";
+import { io } from "@/server/helpers/socket";
 
 const { PORT, HOST } = Config;
 

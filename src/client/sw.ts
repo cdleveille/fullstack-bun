@@ -1,4 +1,4 @@
-import { HASH_REGEX } from "@shared/constants";
+import { HASH_REGEX } from "@/shared/constants";
 
 declare const self: ServiceWorkerGlobalScope & {
 	__WB_DISABLE_DEV_LOGS: boolean;

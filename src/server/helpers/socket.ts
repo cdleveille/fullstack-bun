@@ -1,7 +1,7 @@
 import { Server } from "socket.io";
 
-import { Config, isCustomHost } from "@server/helpers/config";
-import type { TClientToServerSocketEvent, TServerToClientSocketEvent } from "@shared/types";
+import { Config, isCustomHost } from "@/server/helpers/config";
+import type { TClientToServerSocketEvent, TServerToClientSocketEvent } from "@/shared/types";
 
 const { HOST } = Config;
 

@@ -1,5 +1,5 @@
-import BunLogo from "@client/assets/bun.svg";
-import { useApp } from "@client/hooks/useApp";
+import BunLogo from "@/client/assets/bun.svg";
+import { useApp } from "@/client/hooks/useApp";
 
 export const Main = () => {
 	const { count, setCount } = useApp();

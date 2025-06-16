@@ -1,13 +1,13 @@
 import { type Socket, io as socketIo } from "socket.io-client";
 
-import { Config } from "@client/helpers/config";
-import { type SocketEvent, WS_TIMEOUT_MS } from "@shared/constants";
+import { Config } from "@/client/helpers/config";
+import { type SocketEvent, WS_TIMEOUT_MS } from "@/shared/constants";
 import type {
 	TClientToServerSocketEvent,
 	TServerToClientSocketEvent,
 	TSocketReqParams,
 	TSocketResArgs
-} from "@shared/types";
+} from "@/shared/types";
 
 const host = Config.IS_PROD
 	? window.location.origin

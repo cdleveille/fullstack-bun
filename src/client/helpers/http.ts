@@ -1,6 +1,6 @@
 import { treaty } from "@elysiajs/eden";
 
-import type { TApi } from "@server/helpers/api";
+import type { TApi } from "@/server/helpers/api";
 
 export const httpClient = {
 	api: treaty<TApi>(window.location.origin).api,

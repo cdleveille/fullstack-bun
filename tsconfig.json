@@ -20,7 +20,7 @@
     "baseUrl": ".",
     "incremental": false,
     "paths": {
-      "@*": ["src/*"]
+      "@/*": ["src/*"]
     }
   },
   "exclude": ["node_modules", "public"]

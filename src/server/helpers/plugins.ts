@@ -4,8 +4,8 @@ import { swagger } from "@elysiajs/swagger";
 import { Elysia } from "elysia";
 import { helmet } from "elysia-helmet";
 
-import { indexHtml } from "@server/helpers/elysia";
-import { AppInfo, Path, Route } from "@shared/constants";
+import { indexHtml } from "@/server/helpers/elysia";
+import { AppInfo, Path, Route } from "@/shared/constants";
 
 export const plugins = new Elysia()
 	.use(
