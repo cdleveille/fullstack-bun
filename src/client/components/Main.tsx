@@ -4,7 +4,6 @@ import { useCallback } from "react";
 import BunLogo from "@/client/assets/bun.svg";
 import { useApi } from "@/client/hooks/useApi";
 import { useApp } from "@/client/hooks/useApp";
-import { useSocket } from "@/client/hooks/useSocket";
 
 export const Main = () => {
 	const { count, setCount } = useApp();
@@ -13,10 +12,10 @@ export const Main = () => {
 		({ message }: { message: string }) => console.log(`ws: ${message}`),
 		[]
 	);
-	const { useWsHello } = useSocket();
-	useWsHello(onWsHelloMessage);
 
-	const { useGetHello, usePostHello } = useApi();
+	const { useWsHello, useGetHello, usePostHello } = useApi();
+
+	useWsHello(onWsHelloMessage);
 
 	const { mutate: getHello } = useGetHello();
 	const { mutate: postHello } = usePostHello("from bun");

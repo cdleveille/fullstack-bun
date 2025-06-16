@@ -37,6 +37,7 @@ export const api = new Elysia({ prefix: Route.Api })
 			console.log(message);
 			ws.send({ message: "hello from bun!" });
 		},
+		idleTimeout: 1000 * 60 * 5, // 5 minutes
 		body: t.Object({ message: t.String() }),
 		response: t.Object({ message: t.String() })
 	});
