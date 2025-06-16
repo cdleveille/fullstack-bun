@@ -1,8 +1,8 @@
 import { treaty } from "@elysiajs/eden";
 import { useMutation } from "@tanstack/react-query";
-import { useEffect } from "react";
 
 import { Config } from "@/client/helpers/config";
+import { useWs } from "@/client/hooks/useWs";
 import type { TApi } from "@/server/helpers/api";
 
 const { origin, protocol, hostname } = window.location;
@@ -32,16 +32,8 @@ export const useApi = () => {
 			onSuccess: ({ data }) => console.log(`post: ${data?.message}`)
 		});
 
-	const useWsHello = (onMessage: ({ message }: { message: string }) => unknown) => {
-		useEffect(() => {
-			const hello = wsApi.hello.subscribe();
-			hello.on("open", () => hello.send({ message: "hello from client!" }));
-			hello.on("message", ({ data }) => onMessage(data));
-			return () => {
-				hello.close();
-			};
-		}, [onMessage]);
-	};
+	const useWsHello = () =>
+		useWs({ handler: wsApi.hello, onMessage: ({ message }) => console.log(`ws: ${message}`) });
 
 	return { useGetHello, usePostHello, useWsHello };
 };

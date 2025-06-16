@@ -1,5 +1,4 @@
 import { getRouteApi } from "@tanstack/react-router";
-import { useCallback } from "react";
 
 import BunLogo from "@/client/assets/bun.svg";
 import { useApi } from "@/client/hooks/useApi";
@@ -8,14 +7,9 @@ import { useApp } from "@/client/hooks/useApp";
 export const Main = () => {
 	const { count, setCount } = useApp();
 
-	const onWsHelloMessage = useCallback(
-		({ message }: { message: string }) => console.log(`ws: ${message}`),
-		[]
-	);
-
 	const { useWsHello, useGetHello, usePostHello } = useApi();
 
-	useWsHello(onWsHelloMessage);
+	const { sendMessage: wsHello } = useWsHello();
 
 	const { mutate: getHello } = useGetHello();
 	const { mutate: postHello } = usePostHello("from bun");
@@ -27,21 +21,18 @@ export const Main = () => {
 		<div className="center">
 			<h1>{message}</h1>
 			<BunLogo width={250} height={250} />
-			<div>
-				<div>Persistent Count</div>
-				<div className="btn-row">
-					<button type="button" onClick={() => setCount(0)} className="link-btn">
-						↺
-					</button>
-					<span>{count}</span>
-					<button
-						type="button"
-						onClick={() => setCount(count => count + 1)}
-						className="link-btn"
-					>
-						+1
-					</button>
-				</div>
+			<div className="btn-row" style={{ scale: 1.5 }}>
+				<button type="button" onClick={() => setCount(0)} className="link-btn">
+					↺
+				</button>
+				<div>{count}</div>
+				<button
+					type="button"
+					onClick={() => setCount(count => count + 1)}
+					className="link-btn"
+				>
+					+
+				</button>
 			</div>
 			<div className="btn-row">
 				<button type="button" onClick={() => getHello()} className="link-btn">
@@ -49,6 +40,13 @@ export const Main = () => {
 				</button>
 				<button type="button" onClick={() => postHello()} className="link-btn">
 					POST
+				</button>
+				<button
+					type="button"
+					onClick={() => wsHello({ message: "ws: hello from client!" })}
+					className="link-btn"
+				>
+					WS
 				</button>
 			</div>
 		</div>

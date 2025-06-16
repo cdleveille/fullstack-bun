@@ -68,3 +68,7 @@ h1 {
 	align-items: center;
 	column-gap: 2rem;
 }
+
+.count {
+	font-size: 2rem;
+}

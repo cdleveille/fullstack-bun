@@ -6,6 +6,7 @@ Single-page web app project template curated for performance, developer experien
 
 - [Bun](https://bun.sh) - server runtime, package manager, script runner
 - [Elysia](https://elysiajs.com) - server framework
+- [Elysia Eden](https://elysiajs.com/eden/overview.html) - end-to-end type safety
 - [React](https://react.dev) - user interface
 - [TanStack Router](https://tanstack.com/router) - client-side routing
 - [TanStack Query](https://tanstack.com/query) - async state management
@@ -14,7 +15,7 @@ Single-page web app project template curated for performance, developer experien
 
 ## Features
 
-- Server/client interaction is 100% type-safe. See [api.ts](https://github.com/cdleveille/fullstack-bun/blob/main/src/server/helpers/api.ts) and [useApi.ts](https://github.com/cdleveille/fullstack-bun/blob/main/src/client/hooks/useApi.ts) for simple HTTP and WebSocket examples.
+- Server/client interaction is 100% type-safe. See [api.ts](https://github.com/cdleveille/fullstack-bun/blob/main/src/server/helpers/api.ts) and [useApi.ts](https://github.com/cdleveille/fullstack-bun/blob/main/src/client/hooks/useApi.ts) for HTTP and WebSocket examples.
 
 - [Scalar](https://guides.scalar.com) documentation for API routes is served on [/api/reference](https://fullstack-bun.fly.dev/api/reference). [OpenAPI Specification](https://swagger.io/specification) raw .json data is served on [/api/reference/json](https://fullstack-bun.fly.dev/api/reference/json).
 
