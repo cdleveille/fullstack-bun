@@ -65,6 +65,6 @@ if (Config.SERVE_STATIC) {
 				alwaysStatic: true
 			})
 		)
-		.get("*", indexHtml);
+		.get("/*", indexHtml);
 	plugins.use(serveStatic);
 }
