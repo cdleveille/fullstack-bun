@@ -31,7 +31,7 @@ Single-page web app project template curated for performance, developer experien
 - React server components
 - Database
 - Authentication
-- CSS Framework
+- CSS framework
 - Tests
 - Logging
 - Analytics

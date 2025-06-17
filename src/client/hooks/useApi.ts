@@ -4,7 +4,7 @@ import { toast } from "react-hot-toast";
 
 import { Config } from "@/client/helpers/config";
 import { useWs } from "@/client/hooks/useWs";
-import type { TApi } from "@/server/helpers/api";
+import type { TApi } from "@/shared/types";
 
 const { origin, protocol, hostname } = window.location;
 
@@ -20,10 +20,10 @@ export const loader = async () => {
 };
 
 // For API interactions to be used within React components
-export const useApi = () => {
+export const useApi = (name?: string) => {
 	const useGetHello = () =>
 		useMutation({
-			mutationFn: () => httpApi.hello.get({ query: {} }),
+			mutationFn: () => httpApi.hello.get({ query: { name } }),
 			onSuccess: ({ data }) => toast.success(`get: ${data?.message}`)
 		});
 
