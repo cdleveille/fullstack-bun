@@ -4,7 +4,7 @@ import BunLogo from "@/client/assets/bun.svg";
 import { useApi } from "@/client/hooks/useApi";
 import { useApp } from "@/client/hooks/useApp";
 
-export const Home = () => {
+export const Index = () => {
   const { count, minusCount, plusCount } = useApp();
 
   const { useWsHello, useGetHello, usePostHello } = useApi();

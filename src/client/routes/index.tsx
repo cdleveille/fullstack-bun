@@ -1,13 +1,13 @@
 import { createFileRoute } from "@tanstack/react-router";
 
-import { Home } from "@/client/components/Home";
+import { Index } from "@/client/components/Index";
 import { loader } from "@/client/hooks/useApi";
 
 export const Route = createFileRoute("/")({
-  component: Index,
+  component: IndexComponent,
   loader,
 });
 
-function Index() {
-  return <Home />;
+function IndexComponent() {
+  return <Index />;
 }

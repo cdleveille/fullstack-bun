@@ -16,3 +16,5 @@ export const ErrorBoundary = ({ error }: { error: Error }) => {
     </div>
   );
 };
+
+export const NotFound = () => <ErrorBoundary error={new Error("Not Found")} />;
