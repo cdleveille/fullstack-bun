@@ -29,6 +29,7 @@ body {
   color: var(--text-color);
   font-family: system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
   font-size: 1.2rem;
+  padding: 1rem 0;
 }
 
 main {
@@ -36,7 +37,7 @@ main {
   flex-direction: column;
   align-items: center;
   row-gap: 2rem;
-  padding: 0 1rem 1rem 1rem;
+  padding: 1rem;
 }
 
 a {
@@ -67,7 +68,7 @@ nav {
   flex-direction: row;
   justify-content: center;
   align-items: center;
-  height: 6rem;
+  height: 4rem;
   column-gap: 3rem;
 }
 
@@ -79,7 +80,7 @@ nav {
 }
 
 .gap {
-  column-gap: 2rem;
+  column-gap: 3rem;
 }
 
 .count {

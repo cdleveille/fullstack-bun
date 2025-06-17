@@ -20,7 +20,7 @@ export const Home = () => {
   return (
     <main>
       <h1>{message}</h1>
-      <BunLogo width={250} height={250} />
+      <BunLogo width={250} height={225} />
       <div className="row" style={{ scale: 1.5 }}>
         <button type="button" onClick={minusCount} className="link-btn">
           -
