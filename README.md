@@ -6,7 +6,7 @@ Single-page web app project template curated for performance, developer experien
 
 - [Bun](https://bun.sh) - server runtime, package manager, script runner
 - [Elysia](https://elysiajs.com) - server framework
-- [Elysia Eden](https://elysiajs.com/eden/overview.html) - end-to-end type safety
+- [Eden](https://elysiajs.com/eden/overview.html) - end-to-end type safety
 - [React](https://react.dev) - user interface
 - [TanStack Router](https://tanstack.com/router) - client-side routing
 - [TanStack Query](https://tanstack.com/query) - async state management
@@ -41,8 +41,6 @@ Single-page web app project template curated for performance, developer experien
 ## Setup
 
 Install [Bun](https://bun.sh).
-
-Optionally create a `.env` file in the root directory to override default environment variables. See [.env.example](https://github.com/cdleveille/fullstack-bun/blob/main/.env.example) for available options.
 
 ## Development
 

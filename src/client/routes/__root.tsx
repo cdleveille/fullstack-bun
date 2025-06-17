@@ -1,9 +1,7 @@
-import { Outlet, createRootRoute } from "@tanstack/react-router";
-import { TanStackRouterDevtools } from "@tanstack/react-router-devtools";
-import { Toaster } from "react-hot-toast";
+import { createRootRoute } from "@tanstack/react-router";
 
 import { ErrorBoundary, NotFound } from "@/client/components/Error";
-import { Header } from "@/client/components/Header";
+import { Root } from "@/client/components/Root";
 
 export const Route = createRootRoute({
   component: RootComponent,
@@ -12,12 +10,5 @@ export const Route = createRootRoute({
 });
 
 function RootComponent() {
-  return (
-    <>
-      <Header />
-      <Outlet />
-      <Toaster />
-      <TanStackRouterDevtools />
-    </>
-  );
+  return <Root />;
 }
