@@ -6,7 +6,7 @@ import { viteStaticCopy } from "vite-plugin-static-copy";
 import svgr from "vite-plugin-svgr";
 import tsconfigPaths from "vite-tsconfig-paths";
 
-import { Config } from "@/server/helpers/config";
+import { Config } from "@/server/config";
 import { AppInfo, Env, Path, Route } from "@/shared/constants";
 
 const root = Path.ClientSrc;

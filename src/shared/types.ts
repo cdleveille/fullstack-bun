@@ -1,4 +1,4 @@
-import type { api } from "@/server/helpers/api";
+import type { api } from "@/server/api";
 
 export type TConfig = {
   PORT: number;
