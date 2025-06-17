@@ -76,5 +76,13 @@ nav {
   flex-direction: row;
   justify-content: center;
   align-items: center;
+}
+
+.gap {
   column-gap: 2rem;
+}
+
+.count {
+  width: 3rem;
+  text-align: center;
 }

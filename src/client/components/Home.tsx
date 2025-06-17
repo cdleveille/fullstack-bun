@@ -5,7 +5,7 @@ import { useApi } from "@/client/hooks/useApi";
 import { useApp } from "@/client/hooks/useApp";
 
 export const Home = () => {
-  const { count, incrementCount, resetCount } = useApp();
+  const { count, minusCount, plusCount } = useApp();
 
   const { useWsHello, useGetHello, usePostHello } = useApi();
 
@@ -22,15 +22,15 @@ export const Home = () => {
       <h1>{message}</h1>
       <BunLogo width={250} height={250} />
       <div className="row" style={{ scale: 1.5 }}>
-        <button type="button" onClick={resetCount} className="link-btn">
-          ↺
+        <button type="button" onClick={minusCount} className="link-btn">
+          -
         </button>
-        <div>{count}</div>
-        <button type="button" onClick={incrementCount} className="link-btn">
+        <div className="count">{count}</div>
+        <button type="button" onClick={plusCount} className="link-btn">
           +
         </button>
       </div>
-      <div className="row">
+      <div className="row gap">
         <button type="button" onClick={() => getHello()} className="link-btn">
           GET
         </button>
