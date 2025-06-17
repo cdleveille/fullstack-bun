@@ -60,11 +60,11 @@ if (existsSync(Path.Public)) {
         prefix: "/",
         assets: Path.Public,
         indexHTML: true,
-        noCache: true,
         alwaysStatic: true,
+        noCache: true,
       }),
     )
-    // SPA fallback for client-side routing
+    // SPA index.html fallback to enable client-side routing
     .get("*", ({ path }) => {
       const url = path.split("/").pop();
       if (url && !url.includes(".")) return Bun.file(`${Path.Public}/index.html`);

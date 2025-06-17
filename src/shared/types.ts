@@ -8,7 +8,8 @@ export type TApi = typeof api;
 
 export type TAppContext = {
   count: number;
-  setCount: TReactStateSetter<number>;
+  incrementCount: () => void;
+  resetCount: () => void;
 };
 
 export type TReactStateSetter<T> = React.Dispatch<React.SetStateAction<T>>;

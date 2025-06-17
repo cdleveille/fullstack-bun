@@ -12,7 +12,7 @@
     --text-color: #14151a;
     --button-bg: #14151a;
     --button-text: #ffffff;
-    --shadow-color: #a7a497;
+    --shadow-color: #cfcbbc;
   }
 }
 
@@ -36,6 +36,18 @@ h1 {
   text-shadow: 0.5rem 0.5rem var(--shadow-color);
 }
 
+button {
+  background: none;
+  border: none;
+  color: var(--text-color);
+  font-size: 1.1rem;
+}
+
+button:hover {
+  cursor: pointer;
+  text-decoration: underline;
+}
+
 #root {
   height: 100%;
 }
@@ -47,18 +59,6 @@ h1 {
   justify-content: center;
   align-items: center;
   row-gap: 2rem;
-}
-
-.link-btn {
-  background: none;
-  border: none;
-  color: var(--text-color);
-  font-size: 1.1rem;
-}
-
-.link-btn:hover {
-  cursor: pointer;
-  text-decoration: underline;
 }
 
 .btn-row {
