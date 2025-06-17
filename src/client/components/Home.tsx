@@ -4,7 +4,7 @@ import BunLogo from "@/client/assets/bun.svg";
 import { useApi } from "@/client/hooks/useApi";
 import { useApp } from "@/client/hooks/useApp";
 
-export const Main = () => {
+export const Home = () => {
   const { count, incrementCount, resetCount } = useApp();
 
   const { useWsHello, useGetHello, usePostHello } = useApi();
@@ -14,14 +14,14 @@ export const Main = () => {
   const { mutate: getHello } = useGetHello();
   const { mutate: postHello } = usePostHello("from bun");
 
-  const rootRoute = getRouteApi("__root__");
-  const { message } = rootRoute.useLoaderData();
+  const home = getRouteApi("/");
+  const { message } = home.useLoaderData();
 
   return (
-    <div className="center">
+    <main>
       <h1>{message}</h1>
       <BunLogo width={250} height={250} />
-      <div className="btn-row" style={{ scale: 1.5 }}>
+      <div className="row" style={{ scale: 1.5 }}>
         <button type="button" onClick={resetCount} className="link-btn">
           ↺
         </button>
@@ -30,7 +30,7 @@ export const Main = () => {
           +
         </button>
       </div>
-      <div className="btn-row">
+      <div className="row">
         <button type="button" onClick={() => getHello()} className="link-btn">
           GET
         </button>
@@ -45,6 +45,6 @@ export const Main = () => {
           WS
         </button>
       </div>
-    </div>
+    </main>
   );
 };
