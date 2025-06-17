@@ -1,74 +1,74 @@
 :root {
-	--bg-color: #14151a;
-	--text-color: #fbf0df;
-	--button-bg: #fbf0df;
-	--button-text: #000000;
-	--shadow-color: #000000;
+  --bg-color: #14151a;
+  --text-color: #fbf0df;
+  --button-bg: #fbf0df;
+  --button-text: #000000;
+  --shadow-color: #000000;
 }
 
 @media (prefers-color-scheme: light) {
-	:root {
-		--bg-color: #fbf0df;
-		--text-color: #14151a;
-		--button-bg: #14151a;
-		--button-text: #ffffff;
-		--shadow-color: #a7a497;
-	}
+  :root {
+    --bg-color: #fbf0df;
+    --text-color: #14151a;
+    --button-bg: #14151a;
+    --button-text: #ffffff;
+    --shadow-color: #a7a497;
+  }
 }
 
 * {
-	box-sizing: border-box;
-	margin: 0;
-	padding: 0;
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
 }
 
 html,
 body {
-	background-color: var(--bg-color);
-	color: var(--text-color);
-	font-family: system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
-	font-size: 1.1rem;
-	height: 100%;
+  background-color: var(--bg-color);
+  color: var(--text-color);
+  font-family: system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+  font-size: 1.1rem;
+  height: 100%;
 }
 
 h1 {
-	font-size: 2.5rem;
-	text-shadow: 0.5rem 0.5rem var(--shadow-color);
+  font-size: 2.5rem;
+  text-shadow: 0.5rem 0.5rem var(--shadow-color);
 }
 
 #root {
-	height: 100%;
+  height: 100%;
 }
 
 .center {
-	height: 100%;
-	display: flex;
-	flex-direction: column;
-	justify-content: center;
-	align-items: center;
-	row-gap: 2rem;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  row-gap: 2rem;
 }
 
 .link-btn {
-	background: none;
-	border: none;
-	color: var(--text-color);
-	font-size: 1.1rem;
+  background: none;
+  border: none;
+  color: var(--text-color);
+  font-size: 1.1rem;
 }
 
 .link-btn:hover {
-	cursor: pointer;
-	text-decoration: underline;
+  cursor: pointer;
+  text-decoration: underline;
 }
 
 .btn-row {
-	display: flex;
-	flex-direction: row;
-	justify-content: center;
-	align-items: center;
-	column-gap: 2rem;
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+  column-gap: 2rem;
 }
 
 .count {
-	font-size: 2rem;
+  font-size: 2rem;
 }

@@ -7,24 +7,24 @@ import { assertGetElementById, registerServiceWorker } from "@/client/helpers/br
 import { routeTree } from "@/client/routes/routeTree.gen";
 
 window.addEventListener("load", () => {
-	registerServiceWorker().catch(error => {
-		console.error("Service worker registration failed:", error);
-	});
+  registerServiceWorker().catch(error => {
+    console.error("Service worker registration failed:", error);
+  });
 });
 
 const router = createRouter({ routeTree });
 
 const root = assertGetElementById("root");
 createRoot(root).render(
-	<QueryClientProvider client={new QueryClient()}>
-		<AppProvider>
-			<RouterProvider router={createRouter({ routeTree })} />
-		</AppProvider>
-	</QueryClientProvider>
+  <QueryClientProvider client={new QueryClient()}>
+    <AppProvider>
+      <RouterProvider router={createRouter({ routeTree })} />
+    </AppProvider>
+  </QueryClientProvider>,
 );
 
 declare module "@tanstack/react-router" {
-	interface Register {
-		router: typeof router;
-	}
+  interface Register {
+    router: typeof router;
+  }
 }

@@ -6,17 +6,17 @@ import { ErrorBoundary } from "@/client/components/ErrorBoundary";
 import { loader, useApi } from "@/client/hooks/useApi";
 
 export const Route = createRootRoute({
-	component: () => {
-		useApi();
-		return (
-			<>
-				<Outlet />
-				<Toaster />
-				<TanStackRouterDevtools />
-			</>
-		);
-	},
-	loader,
-	errorComponent: ErrorBoundary,
-	notFoundComponent: () => <ErrorBoundary error={new Error("Not Found")} />
+  component: () => {
+    useApi();
+    return (
+      <>
+        <Outlet />
+        <Toaster />
+        <TanStackRouterDevtools />
+      </>
+    );
+  },
+  loader,
+  errorComponent: ErrorBoundary,
+  notFoundComponent: () => <ErrorBoundary error={new Error("Not Found")} />,
 });

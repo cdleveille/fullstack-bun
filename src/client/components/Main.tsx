@@ -5,50 +5,46 @@ import { useApi } from "@/client/hooks/useApi";
 import { useApp } from "@/client/hooks/useApp";
 
 export const Main = () => {
-	const { count, setCount } = useApp();
+  const { count, setCount } = useApp();
 
-	const { useWsHello, useGetHello, usePostHello } = useApi();
+  const { useWsHello, useGetHello, usePostHello } = useApi();
 
-	const { sendMessage: wsHello } = useWsHello();
+  const { sendMessage: wsHello } = useWsHello();
 
-	const { mutate: getHello } = useGetHello();
-	const { mutate: postHello } = usePostHello("from bun");
+  const { mutate: getHello } = useGetHello();
+  const { mutate: postHello } = usePostHello("from bun");
 
-	const rootRoute = getRouteApi("__root__");
-	const { message } = rootRoute.useLoaderData();
+  const rootRoute = getRouteApi("__root__");
+  const { message } = rootRoute.useLoaderData();
 
-	return (
-		<div className="center">
-			<h1>{message}</h1>
-			<BunLogo width={250} height={250} />
-			<div className="btn-row" style={{ scale: 1.5 }}>
-				<button type="button" onClick={() => setCount(0)} className="link-btn">
-					↺
-				</button>
-				<div>{count}</div>
-				<button
-					type="button"
-					onClick={() => setCount(count => count + 1)}
-					className="link-btn"
-				>
-					+
-				</button>
-			</div>
-			<div className="btn-row">
-				<button type="button" onClick={() => getHello()} className="link-btn">
-					GET
-				</button>
-				<button type="button" onClick={() => postHello()} className="link-btn">
-					POST
-				</button>
-				<button
-					type="button"
-					onClick={() => wsHello({ message: "ws: hello from client!" })}
-					className="link-btn"
-				>
-					WS
-				</button>
-			</div>
-		</div>
-	);
+  return (
+    <div className="center">
+      <h1>{message}</h1>
+      <BunLogo width={250} height={250} />
+      <div className="btn-row" style={{ scale: 1.5 }}>
+        <button type="button" onClick={() => setCount(0)} className="link-btn">
+          ↺
+        </button>
+        <div>{count}</div>
+        <button type="button" onClick={() => setCount(count => count + 1)} className="link-btn">
+          +
+        </button>
+      </div>
+      <div className="btn-row">
+        <button type="button" onClick={() => getHello()} className="link-btn">
+          GET
+        </button>
+        <button type="button" onClick={() => postHello()} className="link-btn">
+          POST
+        </button>
+        <button
+          type="button"
+          onClick={() => wsHello({ message: "ws: hello from client!" })}
+          className="link-btn"
+        >
+          WS
+        </button>
+      </div>
+    </div>
+  );
 };

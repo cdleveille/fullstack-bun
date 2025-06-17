@@ -16,8 +16,8 @@
     "attributePosition": "auto",
     "bracketSpacing": true,
     "formatWithErrors": true,
-    "indentStyle": "tab",
-    "indentWidth": 4,
+    "indentStyle": "space",
+    "indentWidth": 2,
     "lineEnding": "lf",
     "lineWidth": 100,
     "useEditorconfig": false,
@@ -31,15 +31,9 @@
       "quoteStyle": "double",
       "quoteProperties": "asNeeded",
       "semicolons": "always",
-      "trailingCommas": "none"
+      "trailingCommas": "all"
     }
   },
-  "organizeImports": { "enabled": true },
-  "overrides": [
-    {
-      "include": ["*.json", "*.yml", "*.yaml", "*.toml"],
-      "formatter": { "indentStyle": "space", "indentWidth": 2 }
-    },
-    { "include": ["*.cmd", "*.bat"], "formatter": { "lineEnding": "crlf" } }
-  ]
+  "organizeImports": { "enabled": true, "ignore": ["**/routeTree.gen.ts"] },
+  "overrides": [{ "include": ["*.cmd", "*.bat"], "formatter": { "lineEnding": "crlf" } }]
 }

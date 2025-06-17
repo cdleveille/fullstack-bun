@@ -2,40 +2,39 @@ import type { TConfig } from "@/shared/types";
 import { author, description, license, version } from "package.json";
 
 export const AppInfo = {
-	name: "hello from bun!",
-	version,
-	description,
-	author: {
-		name: author,
-		url: "https://cdleveille.net"
-	},
-	license,
-	url: "https://fullstack-bun.fly.dev"
+  name: "hello from bun!",
+  version,
+  description,
+  author: {
+    name: author,
+    url: "https://cdleveille.net",
+  },
+  license,
+  url: "https://fullstack-bun.fly.dev",
 };
 
 export const DefaultConfig: TConfig = {
-	PORT: 3000,
-	HOST: "http://localhost"
+  PORT: 3000,
 };
 
 export enum Env {
-	Production = "production",
-	Development = "development"
+  Production = "production",
+  Development = "development",
 }
 
 export enum Path {
-	Public = "public",
-	ClientSrc = "src/client"
+  Public = "public",
+  ClientSrc = "src/client",
 }
 
 export enum Route {
-	Api = "/api",
-	Hello = "/hello",
-	Reference = "/reference"
+  Api = "/api",
+  Hello = "/hello",
+  Reference = "/reference",
 }
 
 export enum ErrorMessage {
-	InternalServerError = "Internal Server Error"
+  InternalServerError = "Internal Server Error",
 }
 
 export const STORED_STATE_PREFIX = "state";
