@@ -22,26 +22,22 @@ export const Home = () => {
       <h1>{message}</h1>
       <BunLogo width={250} height={225} />
       <div className="row" style={{ scale: 1.5 }}>
-        <button type="button" onClick={minusCount} className="link-btn">
+        <button type="button" onClick={minusCount}>
           -
         </button>
         <div className="count">{count}</div>
-        <button type="button" onClick={plusCount} className="link-btn">
+        <button type="button" onClick={plusCount}>
           +
         </button>
       </div>
       <div className="row gap">
-        <button type="button" onClick={() => getHello()} className="link-btn">
+        <button type="button" onClick={() => getHello()}>
           GET
         </button>
-        <button type="button" onClick={() => postHello()} className="link-btn">
+        <button type="button" onClick={() => postHello()}>
           POST
         </button>
-        <button
-          type="button"
-          onClick={() => wsHello({ message: "ws: hello from client!" })}
-          className="link-btn"
-        >
+        <button type="button" onClick={() => wsHello({ message: "ws: hello from client!" })}>
           WS
         </button>
       </div>

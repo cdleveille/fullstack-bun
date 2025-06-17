@@ -1,18 +1,15 @@
 :root {
   --bg-color: #14151a;
   --text-color: #fbf0df;
-  --button-bg: #fbf0df;
-  --button-text: #000000;
-  --shadow-color: #000000;
   --link-color: #0091ff;
+  --shadow-color: #000000;
 }
 
 @media (prefers-color-scheme: light) {
   :root {
     --bg-color: #fbf0df;
     --text-color: #14151a;
-    --button-bg: #14151a;
-    --button-text: #ffffff;
+    --link-color: #0091ff;
     --shadow-color: #cfcbbc;
   }
 }
@@ -43,14 +40,21 @@ main {
 a {
   color: var(--link-color);
   text-decoration: none;
+  padding: 0.25rem 0.5rem;
 }
 
 button {
+  color: var(--link-color);
   background: none;
   border: none;
   cursor: pointer;
   font-size: 1.2rem;
-  color: var(--link-color);
+  padding: 0.25rem 0.5rem;
+}
+
+a:active,
+button:active {
+  text-decoration: underline;
 }
 
 h1 {
@@ -84,6 +88,6 @@ nav {
 }
 
 .count {
-  width: 3rem;
   text-align: center;
+  width: 3rem;
 }
