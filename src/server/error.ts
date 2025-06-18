@@ -7,19 +7,8 @@ export const onError: ErrorHandler = ({ error }) => {
     const message = error.all.map(e => e.summary).join(", ");
     return { message };
   }
-  const message = getErrorMessage(error);
-  return { message };
-};
-
-const getErrorMessage = (error: unknown) => {
-  if (
-    !!error &&
-    typeof error === "object" &&
-    "message" in error &&
-    typeof (error as Record<string, unknown>).message === "string"
-  ) {
-    return error.message;
-  }
-  if (typeof error === "string") return error;
-  return ErrorMessage.InternalServerError;
+  if (typeof error === "string") return { message: error };
+  if ("message" in error) return { message: error.message };
+  if ("error" in error) return { message: error.error };
+  return { message: ErrorMessage.InternalServerError };
 };
