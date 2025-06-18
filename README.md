@@ -2,7 +2,7 @@
 
 Single-page web app project template curated for performance, developer experience, and type safety.
 
-### 🔧 Stack
+## 🔧 Stack
 
 - [Bun](https://bun.sh) - server runtime, package manager, script runner
 - [Elysia](https://elysiajs.com) - server framework
@@ -13,7 +13,7 @@ Single-page web app project template curated for performance, developer experien
 - [TypeScript](https://www.typescriptlang.org), [Biome](https://biomejs.dev), [Lefthook](https://lefthook.dev) - code quality/style
 - [Vite](https://vite.dev) - dev server, bundler
 
-### ✨ Features
+## ✨ Features
 
 - **100% Type-Safe API**: Full static type-safety between the server and client. See [api.ts](https://github.com/cdleveille/fullstack-bun/blob/main/src/server/api.ts) and [useApi.ts](https://github.com/cdleveille/fullstack-bun/blob/main/src/client/hooks/useApi.ts) for simple HTTP and WebSocket examples.
 
@@ -23,9 +23,9 @@ Single-page web app project template curated for performance, developer experien
 
 - **Offline Support**: A [service worker](https://developer.mozilla.org/en-US/docs/Web/API/Service_Worker_API) caches static assets and API responses, enabling offline functionality and faster subsequent loads with fewer requests to the server.
 
-- **Production Ready**: Includes a multi-stage `Dockerfile` that builds the app into a standalone binary and runs it in a minimal distroless image. Pre-configured GitHub workflows for continuous integration and deploying to [fly.io](https://fly.io) on pushes to the `main` branch.
+- **Production Ready**: Includes a multi-stage `Dockerfile` that compiles the app into a standalone binary and runs it in a minimal distroless image. Pre-configured GitHub workflows for continuous integration and deploying to [fly.io](https://fly.io) on pushes to the `main` branch.
 
-### 🚧 Scope
+## 🚧 Scope
 
 The following are not currently implemented, but may be added in the future:
 
@@ -36,9 +36,9 @@ The following are not currently implemented, but may be added in the future:
 - Unit / E2E Tests
 - Logging / Analytics
 
-### 🚀 Getting Started
+## 🚀 Getting Started
 
-**Setup:**
+### Setup:
 
 1. Install [Git](https://git-scm.com/downloads), [Bun](https://bun.sh/docs/installation), and [Docker](https://docs.docker.com/get-docker) (optional, but useful for locally testing production builds)
 
@@ -46,10 +46,11 @@ The following are not currently implemented, but may be added in the future:
 
 ```bash
 git clone https://github.com/cdleveille/fullstack-bun.git
+
 cd fullstack-bun
 ```
 
-**Local Development:**
+### Local Development:
 
 ```bash
 # Install dependencies
@@ -59,7 +60,7 @@ bun install
 bun dev
 ```
 
-**Production Build:**
+### Production Build:
 
 ```bash
 # Build client-side assets
@@ -72,9 +73,12 @@ bun run compile
 ./main
 ```
 
-Alternatively, build and run for production in a Docker container:
+...or...
 
 ```bash
+# Build image
 docker build -t fullstack-bun .
+
+# Run image in container
 docker run -p 3000:3000 fullstack-bun
 ```
