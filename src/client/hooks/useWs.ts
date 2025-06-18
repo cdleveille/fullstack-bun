@@ -1,4 +1,4 @@
-import { useCallback, useEffect, useRef } from "react";
+import { useEffect, useRef } from "react";
 
 import type { THandler } from "@/shared/types";
 
@@ -11,10 +11,10 @@ export const useWs = <TSend, TReceive>({
 }) => {
   const wsRef = useRef<ReturnType<typeof handler.subscribe> | null>(null);
 
-  const sendMessage = useCallback((data: TSend) => {
+  const sendMessage = (data: TSend) => {
     if (!wsRef?.current) return console.error("Send failed: WebSocket not connected");
     wsRef.current.send(data);
-  }, []);
+  };
 
   useEffect(() => {
     const connection = handler.subscribe();

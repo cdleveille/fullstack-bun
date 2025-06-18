@@ -4,18 +4,18 @@ import { storage } from "@/client/helpers/browser";
 import { STORED_STATE_PREFIX } from "@/shared/constants";
 import type { TReactStateSetter } from "@/shared/types";
 
-export const usePersistedState = <T>({
+export const usePersistedState = <T = unknown>({
   initialValue,
   id,
-  type = "session",
+  storageType = "session",
   isPersistDisabled = false,
 }: {
   initialValue: T;
   id: string;
-  type?: "session" | "local";
+  storageType?: "session" | "local";
   isPersistDisabled?: boolean;
 }): [T, TReactStateSetter<T>] => {
-  const browserStorage = type === "session" ? storage.session : storage.local;
+  const browserStorage = storageType === "session" ? storage.session : storage.local;
 
   const persistedInitialValue = useMemo(() => {
     if (isPersistDisabled) return initialValue;
