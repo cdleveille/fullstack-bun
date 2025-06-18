@@ -46,31 +46,37 @@ The following are not currently implemented, but may be added in the future:
 
 ```bash
 git clone https://github.com/cdleveille/fullstack-bun.git
-
 cd fullstack-bun
 ```
 
 ### Local Development
 
-```bash
-# Install dependencies and start development server:
+Install dependencies and start development server:
 
+```bash
 bun install
 bun dev
 ```
 
 ### Production Build
 
-```bash
-# Install dependencies and start development server:
+**Option 1:** Bundle client and start server:
 
+```bash
+bun bundle
+bun start
+```
+
+**Option 2:** Build app and run standalone binary:
+
+```bash
 bun run build
 ./main
 ```
 
-```bash
-# Alternatively, build Docker image and run in a container:
+**Option 3:** Build Docker image and run in container:
 
+```bash
 docker build -t fullstack-bun .
 docker run -p 3000:3000 fullstack-bun
 ```
