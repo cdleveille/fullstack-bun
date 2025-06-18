@@ -52,28 +52,25 @@ cd fullstack-bun
 
 ### Local Development
 
-Install dependencies and start development server:
-
 ```bash
-bun install
+# Install dependencies and start development server:
 
+bun install
 bun dev
 ```
 
 ### Production Build
 
-Compile standalone binary and run:
-
 ```bash
-bun run build
+# Install dependencies and start development server:
 
+bun run build
 ./main
 ```
 
-Alternatively, build Docker image and run in a container:
-
 ```bash
-docker build -t fullstack-bun .
+# Alternatively, build Docker image and run in a container:
 
+docker build -t fullstack-bun .
 docker run -p 3000:3000 fullstack-bun
 ```
