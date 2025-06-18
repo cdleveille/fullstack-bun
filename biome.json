@@ -1,5 +1,5 @@
 {
-  "$schema": "https://biomejs.dev/schemas/1.9.4/schema.json",
+  "$schema": "https://biomejs.dev/schemas/2.0.0/schema.json",
   "vcs": {
     "enabled": true,
     "clientKind": "git",
@@ -9,7 +9,7 @@
   "linter": {
     "enabled": true,
     "rules": { "recommended": true },
-    "ignore": ["**/routeTree.gen.ts"]
+    "includes": ["**", "!**/routeTree.gen.ts"]
   },
   "formatter": {
     "enabled": true,
@@ -21,7 +21,7 @@
     "lineEnding": "lf",
     "lineWidth": 100,
     "useEditorconfig": false,
-    "ignore": ["**/routeTree.gen.ts"]
+    "includes": ["**", "!**/routeTree.gen.ts"]
   },
   "javascript": {
     "formatter": {
@@ -34,6 +34,12 @@
       "trailingCommas": "all"
     }
   },
-  "organizeImports": { "enabled": true, "ignore": ["**/routeTree.gen.ts"] },
-  "overrides": [{ "include": ["*.cmd", "*.bat"], "formatter": { "lineEnding": "crlf" } }]
+  "assist": {
+    "actions": {
+      "source": {
+        "organizeImports": "on"
+      }
+    }
+  },
+  "overrides": [{ "includes": ["**/*.cmd", "**/*.bat"], "formatter": { "lineEnding": "crlf" } }]
 }

@@ -19,10 +19,10 @@
     "start": "bun run src/server/index.ts"
   },
   "devDependencies": {
-    "@biomejs/biome": "1.9.4",
+    "@biomejs/biome": "2.0.0",
     "@evilmartians/lefthook": "^1.11.14",
     "@tanstack/react-router-devtools": "^1.121.21",
-    "@tanstack/router-plugin": "^1.121.21",
+    "@tanstack/router-plugin": "^1.121.22",
     "@types/bun": "latest",
     "@types/react": "^19.1.8",
     "@types/react-dom": "^19.1.6",

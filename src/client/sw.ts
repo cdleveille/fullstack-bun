@@ -58,7 +58,7 @@ const cacheFirstStrategy = async (request: Request) => {
     const res = await getFromCache(request);
     if (!res) throw new Error(`Cache miss for ${request.url}`);
     return res;
-  } catch (error) {
+  } catch (_error) {
     return await fetchAndCacheResponse(request);
   }
 };
@@ -66,7 +66,7 @@ const cacheFirstStrategy = async (request: Request) => {
 const networkFirstStrategy = async (request: Request) => {
   try {
     return await fetchAndCacheResponse(request);
-  } catch (error) {
+  } catch (_error) {
     return await getFromCache(request);
   }
 };

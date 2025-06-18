@@ -1,5 +1,5 @@
-import type { TConfig } from "@/shared/types";
 import { author, description, license, version } from "package.json";
+import type { TConfig } from "@/shared/types";
 
 export const AppInfo = {
   name: "hello from bun!",
