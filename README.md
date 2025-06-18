@@ -6,7 +6,7 @@ Single-page web app project template curated for performance, developer experien
 
 - [Bun](https://bun.sh) - server runtime, package manager, script runner
 - [Elysia](https://elysiajs.com) - server framework
-- [Eden](https://elysiajs.com/eden/overview.html) - end-to-end type safety
+- [Eden](https://elysiajs.com/eden/overview) - end-to-end type safety
 - [React](https://react.dev) - user interface
 - [TanStack Router](https://tanstack.com/router) - client-side routing
 - [TanStack Query](https://tanstack.com/query) - async state management
@@ -28,7 +28,7 @@ Single-page web app project template curated for performance, developer experien
 ## Not Implemented
 
 - Server-side rendering
-- React server components
+- Server components
 - Database
 - Authentication
 - CSS framework
@@ -38,13 +38,9 @@ Single-page web app project template curated for performance, developer experien
 
 ...but I may look into adding these in the future!
 
-## Setup
-
-Install [Bun](https://bun.sh).
-
 ## Development
 
-Install dependencies and run:
+Install dependencies and start dev server:
 
 ```bash
 bun install
