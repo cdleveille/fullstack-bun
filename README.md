@@ -4,29 +4,18 @@ Single-page web app project template curated for performance, developer experien
 
 ### 🔧 Stack
 
-- **Runtime & Tooling**: [Bun](https://bun.sh) (server runtime, package manager, script runner)
-
-- **Server**: [Elysia](https://elysiajs.com) (server framework)
-
-- **Type Safety**: [Eden](https://elysiajs.com/eden/overview) (end-to-end type safety)
-
-- **Client**: [React](https://react.dev) (user interface) & [Vite](https://vitejs.dev) (dev server, bundler)
-
-- **Client-Side Tools**:
-
-  - [TanStack Router](https://tanstack.com/router/latest) (client-side routing)
-  - [TanStack Query](https://tanstack.com/query/latest) (async state management & caching)
-
-- **Code Quality**:
-
-  - [TypeScript](https://www.typescriptlang.org) (type checking & safety)
-  - [Biome](https://biomejs.dev) (linting, formatting)
-  - [Lefthook](https://github.com/evilmartians/lefthook) (git hooks)
+- [Bun](https://bun.sh) - server runtime, package manager, script runner
+- [Elysia](https://elysiajs.com) - server framework
+- [Eden](https://elysiajs.com/eden/overview) - end-to-end type safety
+- [React](https://react.dev) - user interface
+- [TanStack Router](https://tanstack.com/router) - client-side routing
+- [TanStack Query](https://tanstack.com/query) - async state management
+- [TypeScript](https://www.typescriptlang.org), [Biome](https://biomejs.dev), [Lefthook](https://lefthook.dev) - code quality/style
+- [Vite](https://vite.dev) - dev server, bundler
 
 ### ✨ Features
 
-- **100% Type-Safe API**: Full static type-safety between the server and client. See
-- Server/client interaction is 100% type-safe. See [api.ts](https://github.com/cdleveille/fullstack-bun/blob/main/src/server/api.ts) and [useApi.ts](https://github.com/cdleveille/fullstack-bun/blob/main/src/client/hooks/useApi.ts) for simple HTTP and WebSocket examples.
+- **100% Type-Safe API**: Full static type-safety between the server and client. See [api.ts](https://github.com/cdleveille/fullstack-bun/blob/main/src/server/api.ts) and [useApi.ts](https://github.com/cdleveille/fullstack-bun/blob/main/src/client/hooks/useApi.ts) for simple HTTP and WebSocket examples.
 
 - **Automatic API Documentation**: Interactive [Scalar](https://github.com/scalar/scalar) documentation is automatically generated and served at `/api/reference`. The raw OpenAPI JSON is available at `/api/reference/json`.
 
