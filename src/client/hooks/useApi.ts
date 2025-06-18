@@ -1,42 +1,26 @@
-import { treaty } from "@elysiajs/eden";
 import { useMutation } from "@tanstack/react-query";
 import { toast } from "react-hot-toast";
 
-import { Config } from "@/client/helpers/config";
+import { apiClient } from "@/client/helpers/network";
 import { useWs } from "@/client/hooks/useWs";
-import type { TApi } from "@/shared/types";
 
-const { origin, protocol, hostname } = window.location;
-
-const httpApi = treaty<TApi>(origin).api;
-
-const wsApi = treaty<TApi>(`${protocol}//${hostname}:${Config.PORT}`).api;
-
-// For initial data fetching to be done via TanStack Router loader before React renders
-export const loader = async () => {
-  const { data, error } = await httpApi.hello.get({ query: {} });
-  if (error) throw new Error(error.value.message);
-  return data;
-};
-
-// For API interactions to be used within React components
-export const useApi = (name?: string) => {
-  const useGetHello = () =>
+export const useApi = () => {
+  const useGetHello = (name?: string) =>
     useMutation({
-      mutationFn: () => httpApi.hello.get({ query: { name } }),
+      mutationFn: () => apiClient.http.hello.get({ query: { name } }),
       onSuccess: ({ data }) => toast.success(`get: ${data?.message}`),
     });
 
   const usePostHello = (name: string) =>
     useMutation({
-      mutationFn: () => httpApi.hello.post({ name }),
+      mutationFn: () => apiClient.http.hello.post({ name }),
       onSuccess: ({ data }) => toast.success(`post: ${data?.message}`),
     });
 
   const useWsHello = () =>
     useWs({
-      handler: wsApi.hello,
-      onMessage: ({ message }) => toast.success(`ws: ${message}`),
+      handler: apiClient.ws.hello,
+      onSuccess: ({ data }) => toast.success(`ws: ${data.message}`),
     });
 
   return { useGetHello, usePostHello, useWsHello };

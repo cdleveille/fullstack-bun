@@ -4,14 +4,14 @@ import type { THandler } from "@/shared/types";
 
 export const useWs = <TSend, TReceive>({
   handler,
-  onMessage,
+  onSuccess,
 }: {
   handler: THandler<TSend, TReceive>;
-  onMessage: (data: TReceive) => void;
+  onSuccess: ({ data }: { data: TReceive }) => void;
 }) => {
   const wsRef = useRef<ReturnType<typeof handler.subscribe> | null>(null);
 
-  const sendMessage = (data: TSend) => {
+  const emit = (data: TSend) => {
     if (!wsRef?.current) return console.error("Send failed: WebSocket not connected");
     wsRef.current.send(data);
   };
@@ -20,13 +20,13 @@ export const useWs = <TSend, TReceive>({
     const connection = handler.subscribe();
     wsRef.current = connection;
 
-    connection.on("message", ({ data }) => onMessage(data));
+    connection.on("message", ({ data }) => onSuccess({ data }));
 
     return () => {
       connection.close();
       wsRef.current = null;
     };
-  }, [handler, onMessage]);
+  }, [handler, onSuccess]);
 
-  return { sendMessage };
+  return { emit };
 };

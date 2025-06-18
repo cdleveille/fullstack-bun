@@ -9,8 +9,7 @@ export const Index = () => {
 
   const { useWsHello, useGetHello, usePostHello } = useApi();
 
-  const { sendMessage: wsHello } = useWsHello();
-
+  const { emit: wsHello } = useWsHello();
   const { mutate: getHello } = useGetHello();
   const { mutate: postHello } = usePostHello("from bun");
 
