@@ -18,7 +18,6 @@ RUN bun install --ignore-scripts --frozen-lockfile && \
 	bun run biome ci . && \
 	bun run tsc && \
 	bun run build && \
-	bun run compile && \
 	chmod +x ./main
 
 # minimalist final stage for app image

@@ -38,7 +38,7 @@ The following are not currently implemented, but may be added in the future:
 
 ## 🚀 Getting Started
 
-### Setup:
+### Setup
 
 1. Install [Git](https://git-scm.com/downloads), [Bun](https://bun.sh/docs/installation), and [Docker](https://docs.docker.com/get-docker) (optional, but useful for locally testing production builds)
 
@@ -50,35 +50,30 @@ git clone https://github.com/cdleveille/fullstack-bun.git
 cd fullstack-bun
 ```
 
-### Local Development:
+### Local Development
+
+Install dependencies and start development server:
 
 ```bash
-# Install dependencies
 bun install
 
-# Start dev server
 bun dev
 ```
 
-### Production Build:
+### Production Build
+
+Compile standalone binary and run:
 
 ```bash
-# Build client-side assets
 bun run build
 
-# Compile server into a standalone binary
-bun run compile
-
-# Run the compiled server
 ./main
 ```
 
-...or...
+Alternatively, build Docker image and run in a container:
 
 ```bash
-# Build image
 docker build -t fullstack-bun .
 
-# Run image in container
 docker run -p 3000:3000 fullstack-bun
 ```

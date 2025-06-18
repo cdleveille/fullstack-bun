@@ -18,4 +18,3 @@ jobs:
       - run: bun run biome ci .
       - run: bun run tsc
       - run: bun run build
-      - run: bun run compile
