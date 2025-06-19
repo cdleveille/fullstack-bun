@@ -1,4 +1,5 @@
 import { getRouteApi } from "@tanstack/react-router";
+import { toast } from "react-hot-toast";
 
 import BunLogo from "@/client/assets/bun.svg";
 import { useApi } from "@/client/hooks/useApi";
@@ -7,14 +8,28 @@ import { useCountStore } from "@/client/hooks/useCountStore";
 export const Index = () => {
   const { count, minusCount, plusCount } = useCountStore();
 
-  const { useWsHello, useGetHello, usePostHello } = useApi();
+  const { useGetHello, usePostHello, useWsHello } = useApi();
 
-  const { emit: wsHello } = useWsHello();
-  const { mutate: getHello } = useGetHello();
-  const { mutate: postHello } = usePostHello("from bun");
+  const { mutate: getHello } = useGetHello({
+    onSuccess: ({ message }) => {
+      toast.success(`get: ${message}`);
+    },
+  });
 
-  const home = getRouteApi("/");
-  const { message } = home.useLoaderData();
+  const { mutate: postHello } = usePostHello({
+    name: "from bun",
+    onSuccess: ({ message }) => {
+      toast.success(`post: ${message}`);
+    },
+  });
+
+  const { emit: wsHello } = useWsHello({
+    onSuccess: ({ message }) => {
+      toast.success(`ws: ${message}`);
+    },
+  });
+
+  const { message } = getRouteApi("/").useLoaderData();
 
   return (
     <main>

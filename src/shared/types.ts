@@ -21,4 +21,7 @@ export type TTreatyHandler<TSend, TReceive> = {
   };
 };
 
+export type TOnSuccess<TReceive> = (data: TReceive) => void;
+// export type TOnSuccess<TReceive> = ({ data }: { data: TReceive }) => void;
+
 export type TReactStateSetter<T> = React.Dispatch<React.SetStateAction<T>>;

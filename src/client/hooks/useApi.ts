@@ -1,26 +1,38 @@
 import { useMutation } from "@tanstack/react-query";
-import { toast } from "react-hot-toast";
 
 import { apiClient } from "@/client/helpers/network";
 import { useWs } from "@/client/hooks/useWs";
+import type { TOnSuccess } from "@/shared/types";
 
 export const useApi = () => {
-  const useGetHello = (name?: string) =>
+  const useGetHello = ({
+    name,
+    onSuccess,
+  }: {
+    name?: string;
+    onSuccess: TOnSuccess<{ message: string }>;
+  }) =>
     useMutation({
       mutationFn: () => apiClient.http.hello.get({ query: { name } }),
-      onSuccess: ({ data }) => toast.success(`get: ${data?.message}`),
+      onSuccess: ({ data }) => data && onSuccess(data),
     });
 
-  const usePostHello = (name: string) =>
+  const usePostHello = ({
+    name,
+    onSuccess,
+  }: {
+    name: string;
+    onSuccess: TOnSuccess<{ message: string }>;
+  }) =>
     useMutation({
       mutationFn: () => apiClient.http.hello.post({ name }),
-      onSuccess: ({ data }) => toast.success(`post: ${data?.message}`),
+      onSuccess: ({ data }) => data && onSuccess(data),
     });
 
-  const useWsHello = () =>
+  const useWsHello = ({ onSuccess }: { onSuccess: TOnSuccess<{ message: string }> }) =>
     useWs({
       handler: apiClient.ws.hello,
-      onSuccess: ({ data }) => toast.success(`ws: ${data.message}`),
+      onSuccess: ({ data }) => data && onSuccess(data),
     });
 
   return { useGetHello, usePostHello, useWsHello };
