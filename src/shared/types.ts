@@ -2,15 +2,15 @@ import type { api } from "@/server/api";
 
 export type TApi = typeof api;
 
-export type TAppContext = {
+export type TAppContext = null;
+
+export type TCountStore = {
   count: number;
   minusCount: () => void;
   plusCount: () => void;
 };
 
-export type TReactStateSetter<T> = React.Dispatch<React.SetStateAction<T>>;
-
-export type THandler<TSend, TReceive> = {
+export type TTreatyHandler<TSend, TReceive> = {
   subscribe: () => {
     send: (sendData: TSend) => void;
     on: (
@@ -20,3 +20,5 @@ export type THandler<TSend, TReceive> = {
     close: () => void;
   };
 };
+
+export type TReactStateSetter<T> = React.Dispatch<React.SetStateAction<T>>;

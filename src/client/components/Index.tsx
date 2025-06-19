@@ -2,10 +2,10 @@ import { getRouteApi } from "@tanstack/react-router";
 
 import BunLogo from "@/client/assets/bun.svg";
 import { useApi } from "@/client/hooks/useApi";
-import { useApp } from "@/client/hooks/useApp";
+import { useCountStore } from "@/client/hooks/useCountStore";
 
 export const Index = () => {
-  const { count, minusCount, plusCount } = useApp();
+  const { count, minusCount, plusCount } = useCountStore();
 
   const { useWsHello, useGetHello, usePostHello } = useApi();
 

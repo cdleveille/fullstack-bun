@@ -1,12 +1,12 @@
 import { useEffect, useRef } from "react";
 
-import type { THandler } from "@/shared/types";
+import type { TTreatyHandler } from "@/shared/types";
 
 export const useWs = <TSend, TReceive>({
   handler,
   onSuccess,
 }: {
-  handler: THandler<TSend, TReceive>;
+  handler: TTreatyHandler<TSend, TReceive>;
   onSuccess: ({ data }: { data: TReceive }) => void;
 }) => {
   const wsRef = useRef<ReturnType<typeof handler.subscribe> | null>(null);
