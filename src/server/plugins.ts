@@ -4,7 +4,7 @@ import { swagger } from "@elysiajs/swagger";
 import { Elysia } from "elysia";
 import { helmet } from "elysia-helmet";
 
-import { AppInfo, Path, Route } from "@/shared/constants";
+import { AppInfo, Path } from "@/shared/constants";
 
 export const plugins = new Elysia()
   .use(
@@ -40,7 +40,7 @@ export const plugins = new Elysia()
   )
   .use(
     swagger({
-      path: `${Route.Api}${Route.Reference}`,
+      path: "/api/reference",
       documentation: {
         info: {
           title: AppInfo.name,

@@ -1,5 +1,4 @@
 import { author, description, license, version } from "package.json";
-import type { TConfig } from "@/shared/types";
 
 export const AppInfo = {
   name: "hello from bun!",
@@ -11,10 +10,7 @@ export const AppInfo = {
   },
   license,
   url: "https://fullstack-bun.fly.dev",
-};
-
-export const DefaultConfig: TConfig = {
-  PORT: 3000,
+  themeColor: "#14151a",
 };
 
 export enum Env {
@@ -24,13 +20,7 @@ export enum Env {
 
 export enum Path {
   Public = "public",
-  ClientSrc = "src/client",
-}
-
-export enum Route {
-  Api = "/api",
-  Hello = "/hello",
-  Reference = "/reference",
+  Client = "src/client",
 }
 
 export enum ErrorMessage {
@@ -38,8 +28,6 @@ export enum ErrorMessage {
 }
 
 export const STORED_STATE_PREFIX = "state";
-
-export const WS_TIMEOUT_MS = 5000;
 
 export const HASH_PREFIX = "~";
 

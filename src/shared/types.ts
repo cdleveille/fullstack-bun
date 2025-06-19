@@ -1,9 +1,5 @@
 import type { api } from "@/server/api";
 
-export type TConfig = {
-  PORT: number;
-};
-
 export type TApi = typeof api;
 
 export type TAppContext = {

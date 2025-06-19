@@ -1,10 +1,8 @@
 import { Elysia, t } from "elysia";
 
-import { Route } from "@/shared/constants";
-
-export const api = new Elysia({ prefix: Route.Api })
+export const api = new Elysia({ prefix: "/api" })
   .get(
-    Route.Hello,
+    "/hello",
     c => {
       const { name } = c.query;
       return { message: `hello ${name || "from bun"}!` };
@@ -18,7 +16,7 @@ export const api = new Elysia({ prefix: Route.Api })
     },
   )
   .post(
-    Route.Hello,
+    "/hello",
     c => {
       const { name } = c.body;
       return { message: `hello ${name}!` };
@@ -32,7 +30,7 @@ export const api = new Elysia({ prefix: Route.Api })
       },
     },
   )
-  .ws(Route.Hello, {
+  .ws("/hello", {
     message(ws, { message }) {
       console.log(message);
       ws.send({ message: "hello from bun!" });

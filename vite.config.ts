@@ -7,9 +7,9 @@ import svgr from "vite-plugin-svgr";
 import tsconfigPaths from "vite-tsconfig-paths";
 
 import { Config } from "@/server/config";
-import { AppInfo, Env, Path, Route } from "@/shared/constants";
+import { AppInfo, Env, Path } from "@/shared/constants";
 
-const root = Path.ClientSrc;
+const root = Path.Client;
 const outDir = Path.Public;
 
 const toCopy = ["icons/", "favicon.ico", "robots.txt"];
@@ -25,7 +25,7 @@ export default defineConfig(({ mode }) => ({
     hmr: true,
     strictPort: false,
     proxy: {
-      [Route.Api]: {
+      "/api": {
         target: `http://localhost:${Config.PORT}`,
         changeOrigin: true,
       },
@@ -87,7 +87,8 @@ export default defineConfig(({ mode }) => ({
           .replace(/{{url}}/g, AppInfo.url)
           .replace(/{{description}}/g, AppInfo.description)
           .replace(/{{author.name}}/g, AppInfo.author.name)
-          .replace(/{{author.url}}/g, AppInfo.author.url);
+          .replace(/{{author.url}}/g, AppInfo.author.url)
+          .replace(/{{themeColor}}/g, AppInfo.themeColor);
       },
     },
     ...[

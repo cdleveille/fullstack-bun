@@ -13,8 +13,8 @@
     "check": "biome check .",
     "tsc": "tsc -p tsconfig.json",
     "dev": "concurrently --prefix \"[{name}]\" --names \"server,client\" -c \"bgBlue.bold,bgGreen.bold\" \"bun run --hot src/server/index.ts\" \"bunx --bun vite\"",
-    "compile": "bun build --compile --minify --sourcemap --bytecode --target bun --outfile main src/server/index.ts ",
-    "bundle": "bunx --bun vite build && bun run src/server/workbox.ts",
+    "compile": "bun build --compile --minify --sourcemap --bytecode --target bun --outfile main src/server/index.ts",
+    "bundle": "bunx --bun vite build && bun run src/client/helpers/workbox.ts",
     "build": "bun run compile && bun run bundle",
     "start": "bun run src/server/index.ts"
   },

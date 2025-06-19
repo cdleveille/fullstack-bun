@@ -8,7 +8,7 @@
         "run": "bunx biome lint --no-errors-on-unmatched --files-ignore-unknown=true {staged_files}"
       },
       "typecheck-staged": {
-        "run": "bun run tsc"
+        "run": "bunx tsc -p tsconfig.json"
       },
       "format-staged": {
         "run": "bunx biome format --write --no-errors-on-unmatched --files-ignore-unknown=true {staged_files}",

@@ -3,9 +3,5 @@ import { createFileRoute } from "@tanstack/react-router";
 import { About } from "@/client/components/About";
 
 export const Route = createFileRoute("/about")({
-  component: AboutComponent,
+  component: About,
 });
-
-function AboutComponent() {
-  return <About />;
-}
