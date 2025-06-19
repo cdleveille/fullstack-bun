@@ -1,5 +1,7 @@
 import { Elysia, t } from "elysia";
 
+import { WS_TIMEOUT } from "@/shared/constants";
+
 export const api = new Elysia({ prefix: "/api" })
   .get(
     "/hello",
@@ -35,7 +37,7 @@ export const api = new Elysia({ prefix: "/api" })
       console.log(message);
       ws.send({ message: "hello from bun!" });
     },
-    idleTimeout: 180, // 30 minutes
+    idleTimeout: WS_TIMEOUT,
     body: t.Object({ message: t.String() }),
     response: t.Object({ message: t.String() }),
   });

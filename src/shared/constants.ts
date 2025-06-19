@@ -32,3 +32,5 @@ export const STORED_STATE_PREFIX = "state";
 export const HASH_PREFIX = "~";
 
 export const HASH_REGEX = new RegExp(`${HASH_PREFIX}.{8}\\.[a-zA-Z0-9]+$`);
+
+export const WS_TIMEOUT = 600; // 10 minutes

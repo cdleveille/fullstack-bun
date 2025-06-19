@@ -20,7 +20,7 @@ Single-page web app project template curated for performance, developer experien
 
 - **Automatic API Documentation**: Interactive [Scalar](https://github.com/scalar/scalar) documentation is automatically generated and served at `/api/reference`. The raw OpenAPI JSON is available at `/api/reference/json`.
 
-- **Progressive Web App Capable**: Meets PWA requirements for an installable, native app-like experience. Scores a near-perfect [PageSpeed Insights](https://pagespeed.web.dev) report out of the box.
+- **Progressive Web App Capable**: Meets PWA requirements for an installable, native app-like experience. Scores a near-perfect [PageSpeed Insights](https://pagespeed.web.dev/analysis?url=https%3A%2F%2Ffullstack-bun.fly.dev&form_factor=desktop) report out of the box.
 
 - **Offline Support**: A [service worker](https://developer.mozilla.org/en-US/docs/Web/API/Service_Worker_API) caches static assets and API responses, enabling offline functionality and faster subsequent loads with fewer requests to the server.
 

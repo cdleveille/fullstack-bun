@@ -1,7 +1,7 @@
 :root {
   --bg-color: #14151a;
   --text-color: #fbf0df;
-  --link-color: #0091ff;
+  --link-color: #75c3ff;
   --shadow-color: #000000;
 }
 
@@ -9,7 +9,7 @@
   :root {
     --bg-color: #fbf0df;
     --text-color: #14151a;
-    --link-color: #0091ff;
+    --link-color: #75c3ff;
     --shadow-color: #cfcbbc;
   }
 }
