@@ -10,6 +10,7 @@ Single-page web app project template curated for performance, developer experien
 - [React](https://react.dev) - user interface
 - [TanStack Router](https://tanstack.com/router) - client-side routing
 - [TanStack Query](https://tanstack.com/query) - async state management
+- [Zustand](https://zustand-demo.pmnd.rs) - synchronous state management
 - [TypeScript](https://www.typescriptlang.org), [Biome](https://biomejs.dev), [Lefthook](https://lefthook.dev) - code quality/style
 - [Vite](https://vite.dev) - dev server, bundler
 
