@@ -1,43 +1,32 @@
 import { Elysia, t } from "elysia";
 
 import { WS_TIMEOUT } from "@/shared/constants";
+import { Schema } from "@/shared/schema";
 
 export const api = new Elysia({ prefix: "/api" })
   .get(
     "/hello",
     c => {
-      const { name } = c.query;
-      return { message: `hello ${name || "from bun"}!` };
+      const { message } = c.query;
+      console.log(`get /api/hello${message ? ` "${message}"` : ""}`);
+      return { message: "get: hello from bun!" };
     },
-    {
-      query: t.Object({ name: t.Optional(t.String()) }),
-      response: {
-        200: t.Object({ message: t.String() }),
-        500: t.Object({ message: t.String() }),
-      },
-    },
+    Schema.hello.get,
   )
   .post(
     "/hello",
     c => {
-      const { name } = c.body;
-      return { message: `hello ${name}!` };
+      const { message } = c.body;
+      console.log(`post /api/hello "${message}"`);
+      return { message: "post: hello from bun!" };
     },
-    {
-      body: t.Object({ name: t.String() }),
-      response: {
-        200: t.Object({ message: t.String() }),
-        422: t.Object({ message: t.String() }),
-        500: t.Object({ message: t.String() }),
-      },
-    },
+    Schema.hello.post,
   )
   .ws("/hello", {
     message(ws, { message }) {
-      console.log(message);
-      ws.send({ message: "hello from bun!" });
+      console.log(`ws /api/hello "${message}"`);
+      ws.send({ message: "ws: hello from bun!" });
     },
     idleTimeout: WS_TIMEOUT,
-    body: t.Object({ message: t.String() }),
-    response: t.Object({ message: t.String() }),
+    ...Schema.hello.ws,
   });

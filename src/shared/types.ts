@@ -1,3 +1,5 @@
+import type { Static, TSchema } from "elysia";
+
 import type { api } from "@/server/api";
 
 export type TApi = typeof api;
@@ -21,6 +23,6 @@ export type TTreatyHandler<TSend, TReceive> = {
   };
 };
 
-export type TOnSuccess<TReceive> = (data: TReceive) => void;
+export type TOnSuccess<TReceive extends TSchema> = (data: Static<TReceive>) => void;
 
 export type TReactStateSetter<T> = React.Dispatch<React.SetStateAction<T>>;
