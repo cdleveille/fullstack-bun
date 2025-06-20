@@ -1,4 +1,5 @@
 import { useMutation } from "@tanstack/react-query";
+import type { Static } from "elysia";
 
 import { apiClient } from "@/client/helpers/network";
 import { useWs } from "@/client/hooks/useWs";
@@ -9,35 +10,42 @@ export const useApi = () => api;
 
 const api = {
   useGetHello: ({
-    message,
+    query,
     onSuccess,
   }: {
-    message?: string;
+    query: Static<typeof schema.api.hello.get.query>;
     onSuccess: TOnSuccess<(typeof schema.api.hello.get.response)[200]>;
   }) => {
     return useMutation({
-      mutationFn: () => apiClient.http.hello.get({ query: { message } }),
+      mutationFn: () => apiClient.http.hello.get({ query }),
       onSuccess: ({ data }) => data && onSuccess(data),
     });
   },
 
   usePostHello: ({
-    message,
+    body,
     onSuccess,
   }: {
-    message: string;
+    body: Static<typeof schema.api.hello.post.body>;
     onSuccess: TOnSuccess<(typeof schema.api.hello.post.response)[200]>;
   }) => {
     return useMutation({
-      mutationFn: () => apiClient.http.hello.post({ message }),
+      mutationFn: () => apiClient.http.hello.post(body),
       onSuccess: ({ data }) => data && onSuccess(data),
     });
   },
 
-  useWsHello: ({ onSuccess }: { onSuccess: TOnSuccess<typeof schema.api.hello.ws.response> }) => {
+  useWsHello: ({
+    body,
+    onSuccess,
+  }: {
+    body: Static<typeof schema.api.hello.ws.body>;
+    onSuccess: TOnSuccess<typeof schema.api.hello.ws.response>;
+  }) => {
     return useWs({
       handler: apiClient.ws.hello,
       onSuccess: ({ data }) => data && onSuccess(data),
+      body,
     });
   },
 };

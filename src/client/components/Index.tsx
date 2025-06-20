@@ -15,16 +15,17 @@ export const Index = () => {
   const { useGetHello, usePostHello, useWsHello } = useApi();
 
   const { mutate: getHello } = useGetHello({
-    message: "hello from client!",
+    query: { message: "hello from client!" },
     onSuccess: ({ message }) => toast.success(message),
   });
 
   const { mutate: postHello } = usePostHello({
-    message: "hello from client!",
+    body: { message: "hello from client!" },
     onSuccess: ({ message }) => toast.success(message),
   });
 
   const { send: wsHello } = useWsHello({
+    body: { message: "hello from client!" },
     onSuccess: ({ message }) => toast.success(message),
   });
 
@@ -50,7 +51,7 @@ export const Index = () => {
         <button type="button" onClick={() => postHello()}>
           POST
         </button>
-        <button type="button" onClick={() => wsHello({ message: "hello from client!" })}>
+        <button type="button" onClick={() => wsHello()}>
           WS
         </button>
       </div>
