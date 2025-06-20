@@ -11,11 +11,12 @@ export const useApi = () => {
   }: {
     name?: string;
     onSuccess: TOnSuccess<{ message: string }>;
-  }) =>
-    useMutation({
+  }) => {
+    return useMutation({
       mutationFn: () => apiClient.http.hello.get({ query: { name } }),
       onSuccess: ({ data }) => data && onSuccess(data),
     });
+  };
 
   const usePostHello = ({
     name,
@@ -23,17 +24,19 @@ export const useApi = () => {
   }: {
     name: string;
     onSuccess: TOnSuccess<{ message: string }>;
-  }) =>
-    useMutation({
+  }) => {
+    return useMutation({
       mutationFn: () => apiClient.http.hello.post({ name }),
       onSuccess: ({ data }) => data && onSuccess(data),
     });
+  };
 
-  const useWsHello = ({ onSuccess }: { onSuccess: TOnSuccess<{ message: string }> }) =>
-    useWs({
+  const useWsHello = ({ onSuccess }: { onSuccess: TOnSuccess<{ message: string }> }) => {
+    return useWs({
       handler: apiClient.ws.hello,
       onSuccess: ({ data }) => data && onSuccess(data),
     });
+  };
 
   return { useGetHello, usePostHello, useWsHello };
 };

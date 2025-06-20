@@ -11,22 +11,16 @@ export const Index = () => {
   const { useGetHello, usePostHello, useWsHello } = useApi();
 
   const { mutate: getHello } = useGetHello({
-    onSuccess: ({ message }) => {
-      toast.success(`get: ${message}`);
-    },
+    onSuccess: ({ message }) => toast.success(`get: ${message}`),
   });
 
   const { mutate: postHello } = usePostHello({
     name: "from bun",
-    onSuccess: ({ message }) => {
-      toast.success(`post: ${message}`);
-    },
+    onSuccess: ({ message }) => toast.success(`post: ${message}`),
   });
 
   const { emit: wsHello } = useWsHello({
-    onSuccess: ({ message }) => {
-      toast.success(`ws: ${message}`);
-    },
+    onSuccess: ({ message }) => toast.success(`ws: ${message}`),
   });
 
   const { message } = getRouteApi("/").useLoaderData();
