@@ -4,8 +4,10 @@ import { apiClient } from "@/client/helpers/network";
 import { useWs } from "@/client/hooks/useWs";
 import type { TOnSuccess } from "@/shared/types";
 
-export const useApi = () => {
-  const useGetHello = ({
+export const useApi = () => api;
+
+const api = {
+  useGetHello: ({
     name,
     onSuccess,
   }: {
@@ -16,9 +18,8 @@ export const useApi = () => {
       mutationFn: () => apiClient.http.hello.get({ query: { name } }),
       onSuccess: ({ data }) => data && onSuccess(data),
     });
-  };
-
-  const usePostHello = ({
+  },
+  usePostHello: ({
     name,
     onSuccess,
   }: {
@@ -29,14 +30,11 @@ export const useApi = () => {
       mutationFn: () => apiClient.http.hello.post({ name }),
       onSuccess: ({ data }) => data && onSuccess(data),
     });
-  };
-
-  const useWsHello = ({ onSuccess }: { onSuccess: TOnSuccess<{ message: string }> }) => {
+  },
+  useWsHello: ({ onSuccess }: { onSuccess: TOnSuccess<{ message: string }> }) => {
     return useWs({
       handler: apiClient.ws.hello,
       onSuccess: ({ data }) => data && onSuccess(data),
     });
-  };
-
-  return { useGetHello, usePostHello, useWsHello };
+  },
 };
