@@ -19,7 +19,7 @@ export const Index = () => {
     onSuccess: ({ message }) => toast.success(`post: ${message}`),
   });
 
-  const { emit: wsHello } = useWsHello({
+  const { send: wsHello } = useWsHello({
     onSuccess: ({ message }) => toast.success(`ws: ${message}`),
   });
 

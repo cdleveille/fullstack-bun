@@ -10,23 +10,25 @@ export const useWs = <TSend, TReceive>({
   onSuccess: ({ data }: { data: TReceive | null }) => void;
 }) => {
   const wsRef = useRef<ReturnType<typeof handler.subscribe> | null>(null);
+  const handlerRef = useRef(handler);
+  const onSuccessRef = useRef(onSuccess);
 
-  const emit = (data: TSend) => {
+  const send = (data: TSend) => {
     if (!wsRef?.current) return console.error("Send failed: WebSocket not connected");
     wsRef.current.send(data);
   };
 
   useEffect(() => {
-    const connection = handler.subscribe();
+    const connection = handlerRef.current.subscribe();
     wsRef.current = connection;
 
-    connection.on("message", ({ data }) => onSuccess({ data }));
+    connection.on("message", res => onSuccessRef.current(res));
 
     return () => {
       connection.close();
       wsRef.current = null;
     };
-  }, [handler, onSuccess]);
+  }, []);
 
-  return { emit };
+  return { send };
 };
