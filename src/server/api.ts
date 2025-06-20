@@ -1,7 +1,7 @@
-import { Elysia, t } from "elysia";
+import { Elysia } from "elysia";
 
 import { WS_TIMEOUT } from "@/shared/constants";
-import { Schema } from "@/shared/schema";
+import { schema } from "@/shared/schema";
 
 export const api = new Elysia({ prefix: "/api" })
   .get(
@@ -11,7 +11,7 @@ export const api = new Elysia({ prefix: "/api" })
       console.log(`get /api/hello${message ? ` "${message}"` : ""}`);
       return { message: "get: hello from bun!" };
     },
-    Schema.hello.get,
+    schema.api.hello.get,
   )
   .post(
     "/hello",
@@ -20,7 +20,7 @@ export const api = new Elysia({ prefix: "/api" })
       console.log(`post /api/hello "${message}"`);
       return { message: "post: hello from bun!" };
     },
-    Schema.hello.post,
+    schema.api.hello.post,
   )
   .ws("/hello", {
     message(ws, { message }) {
@@ -28,5 +28,5 @@ export const api = new Elysia({ prefix: "/api" })
       ws.send({ message: "ws: hello from bun!" });
     },
     idleTimeout: WS_TIMEOUT,
-    ...Schema.hello.ws,
+    ...schema.api.hello.ws,
   });

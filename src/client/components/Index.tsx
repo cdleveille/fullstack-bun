@@ -1,4 +1,5 @@
 import { getRouteApi } from "@tanstack/react-router";
+import { useEffect } from "react";
 import { toast } from "react-hot-toast";
 
 import BunLogo from "@/client/assets/bun.svg";
@@ -6,11 +7,15 @@ import { useApi } from "@/client/hooks/useApi";
 import { useCountStore } from "@/client/hooks/useCountStore";
 
 export const Index = () => {
-  const { count, minusCount, plusCount } = useCountStore();
+  const loaderData = getRouteApi("/").useLoaderData();
+  useEffect(() => {
+    console.log("loader data:", loaderData);
+  }, [loaderData]);
 
   const { useGetHello, usePostHello, useWsHello } = useApi();
 
   const { mutate: getHello } = useGetHello({
+    message: "hello from client!",
     onSuccess: ({ message }) => toast.success(message),
   });
 
@@ -23,11 +28,11 @@ export const Index = () => {
     onSuccess: ({ message }) => toast.success(message),
   });
 
-  const { message } = getRouteApi("/").useLoaderData();
+  const { count, minusCount, plusCount } = useCountStore();
 
   return (
     <main>
-      <h1>{message}</h1>
+      <h1>hello from bun!</h1>
       <BunLogo width={250} height={225} />
       <div className="row" style={{ scale: 1.5 }}>
         <button type="button" onClick={minusCount}>
