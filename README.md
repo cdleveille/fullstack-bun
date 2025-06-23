@@ -1,4 +1,4 @@
-# ⚡ fresh-bun
+# <img src="https://raw.githubusercontent.com/cdleveille/fresh-bun/refs/heads/main/src/client/assets/bun.svg" alt="Bun" width="30"> fresh-bun
 
 Single-page web app project template curated for performance, developer experience, and type safety.
 
