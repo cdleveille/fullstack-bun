@@ -1,4 +1,4 @@
-# ⚡ fullstack-bun
+# ⚡ fresh-bun
 
 Single-page web app project template curated for performance, developer experience, and type safety.
 
@@ -15,11 +15,11 @@ Single-page web app project template curated for performance, developer experien
 
 ## ✨ Features
 
-- **100% Type-Safe API**: Full static type-safety between the server and client. See [api.ts](https://github.com/cdleveille/fullstack-bun/blob/main/src/server/api.ts) and [useApi.ts](https://github.com/cdleveille/fullstack-bun/blob/main/src/client/hooks/useApi.ts) for simple HTTP and WebSocket examples.
+- **100% Type-Safe API**: Full static type-safety between the server and client. See [api.ts](https://github.com/cdleveille/fresh-bun/blob/main/src/server/api.ts) and [useApi.ts](https://github.com/cdleveille/fresh-bun/blob/main/src/client/hooks/useApi.ts) for simple HTTP and WebSocket examples.
 
 - **Automatic API Documentation**: Interactive [Scalar](https://github.com/scalar/scalar) documentation is automatically generated and served at `/api/reference`. The raw OpenAPI JSON is available at `/api/reference/json`.
 
-- **Progressive Web App Capable**: Meets PWA requirements for an installable, native app-like experience. Scores a near-perfect [PageSpeed Insights](https://pagespeed.web.dev/analysis?url=https%3A%2F%2Ffullstack-bun.fly.dev&form_factor=desktop) report out of the box.
+- **Progressive Web App Capable**: Meets PWA requirements for an installable, native app-like experience. Scores a near-perfect [PageSpeed Insights](https://pagespeed.web.dev/analysis?url=https%3A%2F%2Ffresh-bun.fly.dev&form_factor=desktop) report out of the box.
 
 - **Offline Support**: A [service worker](https://developer.mozilla.org/en-US/docs/Web/API/Service_Worker_API) caches static assets and API responses, enabling offline functionality and faster subsequent loads with fewer requests to the server.
 
@@ -45,8 +45,8 @@ The following are not currently implemented, but may be added in the future:
 2. Clone this repository and install dependencies:
 
 ```bash
-git clone https://github.com/cdleveille/fullstack-bun.git
-cd fullstack-bun
+git clone https://github.com/cdleveille/fresh-bun.git
+cd fresh-bun
 bun install
 ```
 
@@ -77,6 +77,6 @@ bun run build
 **Option 3:** Build Docker image and run in container:
 
 ```bash
-docker build -t fullstack-bun .
-docker run -p 3000:3000 fullstack-bun
+docker build -t fresh-bun .
+docker run -p 3000:3000 fresh-bun
 ```

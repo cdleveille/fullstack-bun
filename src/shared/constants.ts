@@ -9,7 +9,7 @@ export const AppInfo = {
     url: "https://cdleveille.net",
   },
   license,
-  url: "https://fullstack-bun.fly.dev",
+  url: "https://fresh-bun.fly.dev",
   themeColor: "#14151a",
 };
 

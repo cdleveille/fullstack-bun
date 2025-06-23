@@ -1,4 +1,4 @@
-app = "fullstack-bun"
+app = "fresh-bun"
 primary_region = "bos"
 
 [[services]]
