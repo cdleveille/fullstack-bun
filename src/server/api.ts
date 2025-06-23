@@ -8,8 +8,9 @@ export const api = new Elysia({ prefix: "/api" })
     "/hello",
     c => {
       const { message } = c.query;
-      console.log(`get /api/hello${message ? ` "${message}"` : ""}`);
-      return { message: "get: hello from bun!" };
+      const { method } = c.request;
+      console.log(`${method} ${c.route}${message ? ` "${message}"` : ""}`);
+      return { message: `${method}: hello from bun!` };
     },
     schema.api.hello.get,
   )
@@ -17,15 +18,17 @@ export const api = new Elysia({ prefix: "/api" })
     "/hello",
     c => {
       const { message } = c.body;
-      console.log(`post /api/hello "${message}"`);
-      return { message: "post: hello from bun!" };
+      const { method } = c.request;
+      console.log(`${c.request.method} ${c.route} "${message}"`);
+      return { message: `${method}: hello from bun!` };
     },
     schema.api.hello.post,
   )
   .ws("/hello", {
     message(ws, { message }) {
-      console.log(`ws /api/hello "${message}"`);
-      ws.send({ message: "ws: hello from bun!" });
+      const method = "WS";
+      console.log(`${method} ${ws.data.path} "${message}"`);
+      ws.send({ message: `${method}: hello from bun!` });
     },
     idleTimeout: WS_TIMEOUT,
     ...schema.api.hello.ws,
