@@ -12,13 +12,18 @@ window.addEventListener("load", () => {
   });
 });
 
-const router = createRouter({ routeTree });
+const queryClient = new QueryClient();
+
+const router = createRouter({
+  routeTree,
+  context: { queryClient },
+});
 
 const root = assertGetElementById("root");
 createRoot(root).render(
-  <QueryClientProvider client={new QueryClient()}>
+  <QueryClientProvider client={queryClient}>
     <AppProvider>
-      <RouterProvider router={createRouter({ routeTree })} />
+      <RouterProvider router={router} />
     </AppProvider>
   </QueryClientProvider>,
 );
@@ -26,5 +31,8 @@ createRoot(root).render(
 declare module "@tanstack/react-router" {
   interface Register {
     router: typeof router;
+  }
+  interface RouterContext {
+    queryClient: QueryClient;
   }
 }
