@@ -12,5 +12,5 @@ export const onError: ErrorHandler = ({ error }) => {
     if ("error" in error) return { message: error.error };
   }
   if (typeof error === "string") return { message: error };
-  return { message: ErrorMessage.InternalServerError };
+  return { message: ErrorMessage._500 };
 };

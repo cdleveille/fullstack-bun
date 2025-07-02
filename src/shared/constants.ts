@@ -24,7 +24,7 @@ export enum Path {
 }
 
 export enum ErrorMessage {
-  InternalServerError = "Internal Server Error",
+  _500 = "Internal Server Error",
 }
 
 export const STORED_STATE_PREFIX = "state";
