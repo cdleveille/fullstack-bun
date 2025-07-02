@@ -3,16 +3,14 @@ import { useEffect } from "react";
 import { toast } from "react-hot-toast";
 
 import BunLogo from "@/client/assets/bun.svg";
-import { useApi } from "@/client/hooks/useApi";
+import { useGetHello, usePostHello, useWsHello } from "@/client/hooks/useApi";
 import { useCountStore } from "@/client/hooks/useCountStore";
 
-export const Index = () => {
+export const Home = () => {
   const loaderData = getRouteApi("/").useLoaderData();
   useEffect(() => {
     console.log("loader data:", loaderData);
   }, [loaderData]);
-
-  const { useGetHello, usePostHello, useWsHello } = useApi();
 
   const { mutate: getHello } = useGetHello({
     query: { message: "hello from client!" },
