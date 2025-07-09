@@ -34,4 +34,6 @@ report.[0-9]_.[0-9]_.[0-9]_.[0-9]_.json
 .DS_Store
 
 public/
+
+# Remove to commit built binaries to source control (i.e. release package)
 bin/
