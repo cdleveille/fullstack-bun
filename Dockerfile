@@ -16,14 +16,14 @@ COPY --link . .
 RUN bun run biome ci . && \
   bun run tsc && \
   bun run build && \
-  chmod +x ./main
+  chmod +x ./bin/main
 
 FROM gcr.io/distroless/base
 
-COPY --from=build /app/main /app/main
+COPY --from=build /app/bin /app/bin
 COPY --from=build /app/public /app/public
 
 WORKDIR /app
 
 EXPOSE 3000
-ENTRYPOINT ["./main"]
+ENTRYPOINT ["./bin/main"]

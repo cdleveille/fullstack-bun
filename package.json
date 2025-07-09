@@ -14,7 +14,7 @@
     "tsc": "tsc -p tsconfig.json",
     "concurrent": "concurrently --prefix \"[{name}]\" -c \"bgBlue.bold,bgGreen.bold\"",
     "dev": "bun run concurrent --names \"server,client\" \"bun run --hot src/server/index.ts\" \"bunx --bun vite\"",
-    "compile": "bun build --compile --minify --sourcemap --bytecode --target bun --outfile main src/server/index.ts",
+    "compile": "bun build --compile --minify --sourcemap --bytecode --target bun --outfile bin/main src/server/index.ts",
     "bundle": "bunx --bun vite build && bun run src/client/helpers/workbox.ts",
     "build": "bun run compile && bun run bundle",
     "start": "bun run src/server/index.ts"
