@@ -1,6 +1,8 @@
 **/*.DS_Store
 **/*.env*
-**/*.git*
+**/.git
+**/.git[a-zA-Z0-9]*
+!**/.gitignore
 **/.tsbuildinfo
 **/.vscode
 **/node_modules
