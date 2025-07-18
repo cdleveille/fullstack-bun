@@ -71,7 +71,7 @@ bun start
 
 ```bash
 bun run build
-./main
+./bin/main
 ```
 
 **Option 3:** Build Docker image and run in container:
