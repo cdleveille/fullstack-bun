@@ -1,4 +1,4 @@
-import { getRouteApi } from "@tanstack/react-router";
+import { useLoaderData } from "@tanstack/react-router";
 import { useEffect } from "react";
 import { toast } from "react-hot-toast";
 
@@ -7,7 +7,8 @@ import { useGetHello, usePostHello, useWsHello } from "@/client/hooks/useApi";
 import { useCountStore } from "@/client/hooks/useCountStore";
 
 export const Home = () => {
-  const loaderData = getRouteApi("/").useLoaderData();
+  const loaderData = useLoaderData({ from: "/" });
+
   useEffect(() => {
     console.log("loader data:", loaderData);
   }, [loaderData]);
